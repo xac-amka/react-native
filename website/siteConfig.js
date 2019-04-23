@@ -9,20 +9,19 @@ const RemarkablePlugins = require('./core/RemarkablePlugins');
 
 const users = require('./showcase.json');
 const defaultVersionShown = '0.59';
-const baseUrl = '/react-native-website/';
-const repoUrl = 'https://github.com/react-mongolia/react-native-website';
+const baseUrl = '/react-native/';
+const repoUrl = 'https://github.com/react-mongolia/react-native';
 const siteConfig = {
   title: 'React Native',
   tagline: 'A framework for building native apps using React',
   url: 'https://react-mongolia.github.io',
   baseUrl,
-  projectName: 'react-native-website',
+  projectName: 'react-native',
   organizationName: 'react-mongolia',
   repoUrl,
   defaultVersionShown,
   users,
-  editUrl:
-    'https://github.com/react-mongolia/react-native-website/blob/master/docs/',
+  editUrl: 'https://github.com/react-mongolia/react-native/blob/master/docs/',
   headerLinks: [
     {doc: 'getting-started', label: 'Docs'},
     {page: 'help', label: 'Community'},
