@@ -16,10 +16,10 @@ const siteConfig = {
   tagline: 'A framework for building native apps using React',
   url: 'https://react-mongolia.github.io',
   baseUrl,
-  projectName: 'react-native',
+  projectName: 'react-native-website',
+  organizationName: 'react-mongolia',
   repoUrl,
   defaultVersionShown,
-  organizationName: 'react-mongolia',
   users,
   editUrl:
     'https://github.com/react-mongolia/react-native-website/blob/master/docs/',
