@@ -10,17 +10,19 @@ const RemarkablePlugins = require('./core/RemarkablePlugins');
 const users = require('./showcase.json');
 const defaultVersionShown = '0.59';
 const baseUrl = '/react-native/';
-const repoUrl = 'https://github.com/facebook/react-native';
+const repoUrl = 'https://github.com/react-mongolia/react-native-website';
 const siteConfig = {
   title: 'React Native',
   tagline: 'A framework for building native apps using React',
-  url: 'https://facebook.github.io',
+  url: 'https://react-mongolia.github.io',
   baseUrl,
   projectName: 'react-native',
   repoUrl,
   defaultVersionShown,
+  organizationName: 'react-mongolia',
   users,
-  editUrl: 'https://github.com/facebook/react-native-website/blob/master/docs/',
+  editUrl:
+    'https://github.com/react-mongolia/react-native-website/blob/master/docs/',
   headerLinks: [
     {doc: 'getting-started', label: 'Docs'},
     {page: 'help', label: 'Community'},
@@ -46,8 +48,6 @@ const siteConfig = {
       hitsPerPage: 5,
     },
   },
-  facebookAppId: '1677033832619985',
-  twitter: 'reactnative',
   markdownPlugins: [
     RemarkablePlugins.SnackPlayer,
     RemarkablePlugins.ReactNativeWebPlayer,
@@ -56,7 +56,6 @@ const siteConfig = {
   highlight: {
     theme: 'solarized-dark',
   },
-  gaTrackingId: 'UA-41298772-2',
   scripts: ['https://snack.expo.io/embed.js', baseUrl + 'js/codeblocks.js'],
   cleanUrl: true,
 };
