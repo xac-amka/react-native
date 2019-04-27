@@ -1,16 +1,16 @@
 ---
 id: version-0.5-tutorial
-title: Learn the Basics
+title: Үндсэн аргаа сурах
 original_id: tutorial
 ---
 
-React Native is like React, but it uses native components instead of web components as building blocks. So to understand the basic structure of a React Native app, you need to understand some of the basic React concepts, like JSX, components, `state`, and `props`. If you already know React, you still need to learn some React-Native-specific stuff, like the native components. This tutorial is aimed at all audiences, whether you have React experience or not.
+React Native нь React-тай ижил боловч вэб компонентын оронд натив хэсгүүдийг ашиглаж апп бүтдэг. Тиймээс React Native дээр хийгдсэн аппын үндсэн бүтцийг ойлгохын тулд та JSX, `state`, `props` гэх мэтчилэн React-ийн талаар үндсэн ойлголттой байх хэрэгтэй. Хэрэв та React-ийг мэддэг бол натив компонент гэж юу болох вэ гэх мэт зөвхөн React Native-т хамаарах хэдэн зүйлийг сурах шаардлагатай. Энэхүү хичээлийг туршлагатай үгүйгээс үл хамааран бүх түвшний хүмүүст зориулан бэлтгэсэн болно.
 
-Let's do this thing.
+Ингээд сурцгаая.
 
-## Hello World
+## Сайн уу, эх дэлхий
 
-In accordance with the ancient traditions of our people, we must first build an app that does nothing except say "Hello, world!". Here it is:
+Хүн төрөлхтний эртний уламжлалаа даган апп хийхдээ нэн тэргүүнд "Сайн уу, эх дэлхий!" гэх үгтэй апп хийнэ. Үүний тулд:
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
@@ -20,27 +20,27 @@ export default class HelloWorldApp extends Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Hello, world!</Text>
+        <Text>Сайн уу, эх дэлхий!</Text>
       </View>
     );
   }
 }
 ```
 
-If you are feeling curious, you can play around with sample code directly in the web simulators. You can also paste it into your `App.js` file to create a real app on your local machine.
+Хэрэв та илүү ихийг мэдэхийг хүсэж байвал вэб симулятор доторх жишиг кодуудыг ашиглан янз бүрээр оролдож үзэх боломжтой. Мөн `App.js` файлыг хуулаад өөрийн төхөөрөмж дээрээ жинхэнэ апп бүтээж болно.
 
-## What's going on here?
+## Юу болоод байна?
 
-Some of the things in here might not look like JavaScript to you. Don't panic. _This is the future_.
+Энд байгаа зарим зүйлс танд JavaScript биш юм шиг харагдаж байгаа байх. Сандрах хэрэггүй. _Энэ бол ирээдүй_.
 
-First of all, ES2015 (also known as ES6) is a set of improvements to JavaScript that is now part of the official standard, but not yet supported by all browsers, so often it isn't used yet in web development. React Native ships with ES2015 support, so you can use this stuff without worrying about compatibility. `import`, `from`, `class`, and `extends` in the example above are all ES2015 features. If you aren't familiar with ES2015, you can probably pick it up just by reading through sample code like this tutorial has. If you want, [this page](https://babeljs.io/learn-es2015/) has a good overview of ES2015 features.
+Юуны түрүүнд ES2015 (эсвэл ES6) гэдэг нь Javascript-д хийгдсэн багц сайжруулалт бөгөөд албан ёсны стандартын нэг болсон. Гэхдээ бүх вэб хөтөч хараахан үүнийг дэмждэг болоогүй байгаа. Тиймдээ ч вэб хөгжүүлэлтэд түгээмэл ашиглагдахгүй байна. React Native нь ES2015-ийг дэмждэг тийм болохоор таарах эсэхэд санаа зовохгүйгээр ашиглаж болно.`import`, `from`, `class` болон `extends` зэрэг нь ES2015-ийн онцлог юм. Хэрэв та ES2015-ийн талаар мэдэхгүй бол энэхүү хичээлд заасан шиг жишиг кодыг сонгон авч ашиглах боломжтой. Хэрэв хүсвэл [энэ хуудас](https://babeljs.io/learn-es2015/) дээрээс ES2015-ийн онцлог давуу талын тухай ерөнхий мэдээллийг уншиж болно.
 
-The other unusual thing in this code example is `<View><Text>Hello world!</Text></View>`. This is JSX - a syntax for embedding XML within JavaScript. Many frameworks use a special templating language which lets you embed code inside markup language. In React, this is reversed. JSX lets you write your markup language inside code. It looks like HTML on the web, except instead of web things like `<div>` or `<span>`, you use React components. In this case, `<Text>` is a built-in component that just displays some text and `View` is like the `<div>` or `<span>`.
+Энэхүү кодын жишээн дээрх өөр нэг содон зүйл нь `<View><Text>Hello world!</Text></View>` юм. Энэ бол JSX – Javascript дотор XML байрлуулахыг хэлдэг нэршил юм. Олон фреймворкт тусгай жишиг хэлийг ашиглан тэмдэглэгээт хэл дотор код байрлуулдаг. Харин React-д энэ нь эсрэгээрээ байдаг. JSX-ийн тусламжтай та өөрийн тэмдэглэгээт хэлийг код дотор бичих боломжтой. Вэбийн HTML шиг л харагддаг. Ердөө `<div>` эсвэл `<span>` гэх мэт зүйлсийн оронд React-ийн компонентуудыг ашиглаж байна гэсэн үг. Энэ тохиолдолд, `<Text>` гэдэг ямарваа текстийг харуулж буй React Native-ийн өөрийн компонент бөгөөд `View` нь `<div>` эсвэл `<span>` шиг гэсэн үг юм.
 
-## Components
+## Компонентууд
 
-So this code is defining `HelloWorldApp`, a new `Component`. When you're building a React Native app, you'll be making new components a lot. Anything you see on the screen is some sort of component. A component can be pretty simple - the only thing that's required is a `render` function which returns some JSX to render.
+Энэхүү код нь `HelloWorldApp` буюу шинэ `Component`-ийг тодорхойлж байна. React Native апп хийх үед та шинээр компонент их үүсгэнэ. Дэлгэц дээр харж буй бүхэн тань л тодорхой нэг компонент гэсэн үг. Компонент гэдэг их энгийн зүйл юм. Энэ нь дэлгэцэнд харуулах JSX-үүдийг буцаах `render` функц агуулсан байхад хангалттай.
 
-## This app doesn't do very much
+## Энэ апп тийм ч олон зүйл хийсэнгүй
 
-Good point. To make components do more interesting things, you need to [learn about Props](props.md).
+Тийм ээ.Илүү сонирхолтой зүйл хийх компонент бий болгохын тулд та [Props-ийн талаар судлах](props.md) хэрэгтэй.
