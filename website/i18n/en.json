@@ -390,7 +390,7 @@
         "title": "Troubleshooting"
       },
       "tutorial": {
-        "title": "Learn the Basics"
+        "title": "Үндсэн аргаа сурах"
       },
       "upgrading": {
         "title": "Upgrading to new React Native versions"
@@ -2445,7 +2445,7 @@
         "title": "Troubleshooting"
       },
       "version-0.5/version-0.5-tutorial": {
-        "title": "Learn the Basics"
+        "title": "Үндсэн аргаа сурах"
       },
       "version-0.5/version-0.5-understanding-cli": {
         "title": "Understanding the CLI"
