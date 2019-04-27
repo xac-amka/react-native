@@ -1,6 +1,6 @@
 ---
 id: version-0.5-getting-started
-title: Getting Started
+title: Эхлэх
 original_id: getting-started
 ---
 
@@ -83,31 +83,31 @@ original_id: getting-started
   }
 </style>
 
-This page will help you install and build your first React Native app. If you already have React Native installed, you can skip ahead to the [Tutorial](tutorial.md).
+Энэ хуудас дээрх мэдээллийн тусламжтай та React Native дээр эхний аппаа хийж, суулгах болно. Хэрэв та аль хэдийн React Native суулгасан бол шууд [Tutorial](tutorial.md) хэсэг рүү шилжээрэй.
 
-<strong>If you are coming from a web background</strong>, the easiest way to get started with React Native is with Expo tools because they allow you to start a project without installing and configuring Xcode or Android Studio. Expo CLI sets up a development environment on your local machine and you can be writing a React Native app within minutes. For instant development, you can use [Snack](https://snack.expo.io/) to try React Native out directly in your web browser.
+<strong>Та вэб хийх талаар туршлагатай</strong> бол Expo tools-тэй React Native-ийг ашиглах нь зүйтэй. Учир нь та Xcode эвсэл Android Studio суулгаж, тохиргоо хийхгүйгээр ажлаа эхлүүлэх боломжтой юм. Expo CLI нь таны төхөөрөмж дээр хөгжүүлэлтийн орчныг бий болгож өгөх бөгөөд та React Native аппаа хэдхэн минутын дотор л бичих боломжтой. Даруй хөгжүүлэхийг хүсвэл та интернэт хөтчөөрөө [Snack](https://snack.expo.io/)-руу орж, React Native-ийг ашиглаж үзэх боломжтой.
 
-<strong>If you are familiar with native development</strong>, you will likely want to use React Native CLI. It requires Xcode or Android Studio to get started. If you already have one of these tools installed, you should be able to get up and running within a few minutes. If they are not installed, you should expect to spend about an hour installing and configuring them.
+<strong> Хэрэв та натив апп хөгжүүүлэлтийн талаар мэдлэгтэй бол</strong> та React Native CLI-ийг ашиглах нь зүйтэй, гэхдээ Xcode эсвэл Android Studio шаардлагатай. Эдгээрийн аль нэгийг нь суулгасан байгаа бол та хэдэн минутын дотор л аппаа ажиллуулах боломжтой. Хэрэв суулгаагүй бол суулгах, тохиргоо хийхэд нэг цаг орчим хугацаа шаардлагатай.
 
 <div class="toggler">
   <ul role="tablist" >
     <li id="quickstart" class="button-quickstart" aria-selected="false" role="tab" tabindex="0" aria-controls="quickstarttab" onclick="displayTab('guide', 'quickstart')">
-      Expo CLI Quickstart
+      Expo CLI Түргэн эхлэх
     </li>
     <li id="native" class="button-native" aria-selected="false" role="tab" tabindex="-1" aria-controls="nativetab" onclick="displayTab('guide', 'native')">
-      React Native CLI Quickstart
+      React Native CLI Түргэн эхлэх
     </li>
   </ul>
 </div>
 
 <block class="quickstart mac windows linux ios android" />
-Assuming that you have [Node 10+](https://nodejs.org/en/download/) installed, you can use npm to install the Expo CLI command line utility:
+Та [Node 10+](https://nodejs.org/en/download/) суулгасан бол  npm ашиглан  Expo CLI-ийг командын мөрт оруулан суулгах боломжтой :
 
 ```sh
 npm install -g expo-cli
 ```
 
-Then run the following commands to create a new React Native project called "AwesomeProject":
+Тэгээд доорх командыг өгч, "Awesomeproject" гэсэн нэртэй React Native дээрх шинэ аппаа бүтээнэ:
 
 ```sh
 expo init AwesomeProject
@@ -116,207 +116,207 @@ cd AwesomeProject
 npm start # you can also use: expo start
 ```
 
-This will start a development server for you.
+Ингэснээр та хөгжүүлэлтийн сервер асна.
 
-## Running your React Native application
+## React Native дээрх аппаа ажиллуулах
 
-Install the [Expo](https://expo.io) client app on your iOS or Android phone and connect to the same wireless network as your computer. On Android, use the Expo app to scan the QR code from your terminal to open your project. On iOS, follow on-screen instructions to get a link.
+Та iOS эсвэл Android утсан дээрээ [Expo](https://expo.io) суулгаад, өөрийн компьютер холбогдсонтой ижил wifi-гаар холбогдоно. Android дээр Expo аппыг ашиглан терминалаасаа QR код уншуулж, аппаа нээнэ. iOS дээр холбоос авахын тулд дэлгэц дээрх зааврыг дагана.
 
-### Modifying your app
+### Аппдаа өөрчлөлт оруулах
 
-Now that you have successfully run the app, let's modify it. Open `App.js` in your text editor of choice and edit some lines. The application should reload automatically once you save your changes.
+Апп тань амжилттай болсон болохоор одоо өөрчлөлт оруулая. Хүссэн текст янзлагч дээрээ `App.js` -ийг нээн зарим мөрийг өөрчлөөд хадгал, аппликейшн автоматаар дахин ачаалах учиртай.
 
-### That's it!
+### Ингээд боллоо!
 
-Congratulations! You've successfully run and modified your first React Native app.
+Танд баяр хүргэе! Та хамгийн анхны React Native аппаа ажиллуулж, өөрчлөлт хийж үзлээ.
 
 <center><img src="/react-native/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
 
-## Now what?
+## Одоо яах вэ?
 
-Expo also has [docs](https://docs.expo.io) you can reference if you have questions specific to the tool. You can also ask for help at [Expo forums](https://forums.expo.io).
+Хэрэв та Expo-той холбоотой асуух зүйл байвал [docs](https://docs.expo.io)-ээс харах боломжтой. Мөн [Expo forums](https://forums.expo.io) форумаас туслалцаа авч болно.
 
-These tools help you get started quickly, but before committing to building your app with Expo CLI, [read about the limitations](https://docs.expo.io/versions/latest/introduction/why-not-expo/).
+Эдгээр хэрэгсэл нь таныг ажлаа хурдан эхлүүлэхэд туслах болно. Expo CLI ашиглан апп хийхээсээ өмнө, [юу хийх боломжгүй](https://docs.expo.io/versions/latest/introduction/why-not-expo) тухай уншаарай.
 
-If you have a problem with Expo, before creating a new issue, please see if there's an existing issue about it:
+Хэрэв Expo-ийг ашиглах явцад ямар нэг асуудал гарвал дахин шинээр асуулт үүсгэхийн оронд энэ тухай өмнө асуусан эсэхийг хараарай:
 
-- in the [Expo CLI issues](https://github.com/expo/expo-cli/issues) (for issues related to Expo CLI), or
-- in the [Expo issues](https://github.com/expo/expo/issues) (for issues about the Expo client or SDK).
+- [Expo CLI асуулт](https://github.com/expo/expo-cli/issues) дотор ( Expo CLI-той холбоотой асуудлууд), эсвэл
+- [Expo асуудлууд](https://github.com/expo/expo/issues) гэсэн рүү орж (Expo client эсвэл SDK-тай холбоотой мэдээлэл харж болно).
 
-If you're curious to learn more about React Native, continue on to the [Tutorial](tutorial.md).
+React Native-ийн тухай илүү ихийг мэдэхийг хүсэж байвал [Хичээл](tutorial.md) гэсэн рүү ороорой.
 
-### Running your app on a simulator or virtual device
+### Аппаа симулятор эсвэл виртуал төхөөрөмж дээр ажиллуулах
 
-Expo CLI makes it really easy to run your React Native app on a physical device without setting up a development environment. If you want to run your app on the iOS Simulator or an Android Virtual Device, please refer to the instructions for building projects with native code to learn how to install Xcode or set up your Android development environment.
+Expo CLI-ийн тусламжтай та React Native аппаа биет төхөөрөмж дээр хөгжүүлэлтийн орчин үүсгэхгүйгээр хялбархан ажиллуулах боломжтой. Хэрэв та аппаа iOS симулятор эсвэл Android виртуал төхөөрөмж дээр ажиллуулахыг хүсвэл Xcode хэрхэн суулгах, Android хөгжүүлэлтийг орчинг хэрхэн үүсгэх тухай судлах зорилгоор натив код ашиглан апп хийх заавартай танилцаарай.
 
-Once you've set these up, you can launch your app on an Android Virtual Device by running `npm run android`, or on the iOS Simulator by running `npm run ios` (macOS only).
+Үүний дараа та `npm run android` командаар Android виртуал төхөөрөмж дээр аппаа нээх боломжтой. iOS симулятор дээр ажиллуулах бол `npm run ios` гэж бичнэ. (Зөвхөн macOS)
 
-### Caveats
+### Анхаарах зүйлс
 
-Because you don't build any native code when using Expo to create a project, it's not possible to include custom native modules beyond the React Native APIs and components that are available in the Expo client app.
+Expo ашиглах үед натив код үүсгэдэггүй тул React Native API, Expo апп дээрх компонентүүдаас өөр тусгай натив модуль багтаах боломжгүй.
 
-If you know that you'll eventually need to include your own native code, Expo is still a good way to get started. In that case you'll just need to "[eject](https://docs.expo.io/versions/latest/expokit/eject)" eventually to create your own native builds. If you do eject, the "Building Projects with Native Code" instructions will be required to continue working on your project.
+Та аяндаа өөрийн натив кодыг оруулах хэрэгтэй болсон ч энэ нь Expo ашиглахгүй байх шалтгаан биш юм. Энэ тохиолдолд та "[цуцалж](https://docs.expo.io/versions/latest/expokit/eject)" өөрийн натив кодоо оруулж хийх боломжтой. Хэрэв цуцалсан бол та "Натив код ашиглан апп хийх" заавартай танилцах шаардлагатай.
 
-Expo CLI configures your project to use the most recent React Native version that is supported by the Expo client app. The Expo client app usually gains support for a given React Native version about a week after the React Native version is released as stable. You can check [this document](https://docs.expo.io/versions/latest/sdk/#sdk-version) to find out what versions are supported.
+Expo CLI нь таны аппад Expo client аппыг дэмжих React Native-ийн хамгийн сүүлийн үеийн хувилбарыг ашиглах боломжийг бүрдүүлнэ. The Expo client апп нь React Native-ийн хувилбар байнгын тогтвортой гарсан үеэс долоо хоног орчмын дотор тухайн хувилбарыг дэмжих боломжтой болдог. Ямар хувилбаруудыг дэмждэгийг мэдэхийг хүсвэл [үүнийг](https://docs.expo.io/versions/latest/sdk/#sdk-version) уншаарай.
 
-If you're integrating React Native into an existing project, you'll want to skip Expo CLI and go directly to setting up the native build environment. Select "Building Projects with Native Code" above for instructions on configuring a native build environment for React Native.
+Хэрэв та React Native-ийг бэлэн байгаа төсөлдөө ашиглахыг хүсвэл Expo CLI ашиглахгүйгээр аппаа хийх тусгай орчныг нь тохируулж эхлэх боломжтой. "Натив кодоор апп хийх" гэснийг сонгон дээрх зааврыг даган React Native-т нийцсэн натив кодоор үүсгээрэй.
 
 <block class="native mac windows linux ios android" />
 
-<p>Follow these instructions if you need to build native code in your project. For example, if you are integrating React Native into an existing application, or if you "ejected" from <a href="getting-started.html" onclick="displayTab('guide', 'quickstart')">Expo</a> or Create React Native App, you'll need this section.</p>
+<p>Хэрэв та натив код бичих шаардлагатай бол энэ зааврыг дагана уу. Жишээ нь та React Native-ийг одоо байгаа апптай нэгтгэхийг хүсэх эсвэл <a href="getting-started.html" onclick="displayTab('guide', 'quickstart')">Expo</a> "салгасан" эсвэл React Native апп хийхийг хүсэж байгаа бол танд энэ хэсэг туслах болно.</p>
 
-The instructions are a bit different depending on your development operating system, and whether you want to start developing for iOS or Android. If you want to develop for both iOS and Android, that's fine - you just have to pick one to start with, since the setup is a bit different.
+Хөгжүүлэгчийн системээс шалтгаалан, мөн iOS эсвэл Android-д зориулж хийж байгаагаас шалтгаалан заавар нь бага зэрэг өөр байх боломжтой. Хэрэв та iOS, Android хоёрт хоёуланд нь зориулж апп хийхийг хүсэж байвал тэгсэн ч болно. Та зөвхөн аль нэгнээс нь эхлэхэд хангалттай бөгөөд тохируулах нь бага зэрэг өөр байна.
 
 <div class="toggler">
-  <span>Development OS:</span>
+  <span>Хөгжүүлэлтийн ҮС:</span>
   <a href="javascript:void(0);" class="button-mac" onclick="displayTab('os', 'mac')">macOS</a>
   <a href="javascript:void(0);" class="button-windows" onclick="displayTab('os', 'windows')">Windows</a>
   <a href="javascript:void(0);" class="button-linux" onclick="displayTab('os', 'linux')">Linux</a>
-  <span>Target OS:</span>
+  <span>Ашиглах ҮС:</span>
   <a href="javascript:void(0);" class="button-ios" onclick="displayTab('platform', 'ios')">iOS</a>
   <a href="javascript:void(0);" class="button-android" onclick="displayTab('platform', 'android')">Android</a>
 </div>
 
 <block class="native linux windows ios" />
 
-## Unsupported
+## Дэмжихгүй
 
-<blockquote><p>A Mac is required to build projects with native code for iOS. You can follow the <a href="getting-started.html" onclick="displayTab('guide', 'quickstart')">Quick Start</a> to learn how to build your app using Expo instead.</p></blockquote>
+<blockquote><p>iOS-т зориулсан натив код ашиглан апп хийхэд Mac компьютер шаардлагатай. Та <a href="getting-started.html" onclick="displayTab('guide', 'quickstart')">Түргэн Эхлэх</a> гэсэн рүү орж оронд нь Expo ашиглан хэрхэн аппаа хийх тухай мэдээлэлтэй танилцана уу.</p></blockquote>
 
 <block class="native mac ios" />
 
-## Installing dependencies
+## Хамаарал бүхий програмуудыг суулгах
 
-You will need Node, Watchman, the React Native command line interface, and Xcode.
+Танд Node, Watchman, React Native команд мөрийн интерфейс болон Xcode хэрэгтэй.
 
-While you can use any editor of your choice to develop your app, you will need to install Xcode in order to set up the necessary tooling to build your React Native app for iOS.
+Та аппаа хөгжүүлэхдээ хүссэн засварлах програмаа ашиглах боломжтой ч iOS-д зориулсан React Native апп хийхэд Xcode-ийг суулгаж, шаардлагатай програмуудаа тохируулах хэрэгтэй.
 
 <block class="native mac android" />
 
-## Installing dependencies
+## Хамаарал бүхий програмуудыг суулгах
 
-You will need Node, Watchman, the React Native command line interface, a JDK, and Android Studio.
+Танд Node, Watchman, React Native команд мөрийн интерфейс, JDK, болон Android Studio хэрэгтэй.
 
 <block class="native linux android" />
 
-## Installing dependencies
+## Хамаарал бүхий програмуудыг суулгах
 
-You will need Node, the React Native command line interface, a JDK, and Android Studio.
+Танд Node, React Native команд мөрийн интерфейс, JDK, болон Android Studio хэрэгтэй.
 
 <block class="native windows android" />
 
-## Installing dependencies
+## Хамаарал бүхий програмуудыг суулгах
 
-You will need Node, the React Native command line interface, Python2, a JDK, and Android Studio.
+Танд Node, React Native команд мөрийн интерфейс, Python2, JDK, болон Android Studio хэрэгтэй.
 
 <block class="native mac windows linux android" />
 
-While you can use any editor of your choice to develop your app, you will need to install Android Studio in order to set up the necessary tooling to build your React Native app for Android.
+Та аппаа хөгжүүлэхдээ хүссэн засварлах програмаа ашиглах боломжтой ч Аndroid-д зориулсан React Native апп хийхэд Android Studio-г суулгаж шаардлагатай програмуудаа тохируулах хэрэгтэй.
 
 <block class="native mac ios android" />
 
 ### Node, Watchman
 
-We recommend installing Node and Watchman using [Homebrew](http://brew.sh/). Run the following commands in a Terminal after installing Homebrew:
+Бид танд [Homebrew](http://brew.sh/) ашиглан Node, Watchman суулгахыг санал болгож байна. Терминал дотроо Homebrew суулгасны дараа доорх кодыг уншуулна уу:
 
 ```
 brew install node
 brew install watchman
 ```
 
-If you have already installed Node on your system, make sure it is Node 8.3 or newer.
+Хэрэв та аль хэдийн Node суулгасан бол Node 8.3 юм уу, сүүлийн хувилбар мөн эсэхийг шалгаарай.
 
-[Watchman](https://facebook.github.io/watchman) is a tool by Facebook for watching changes in the filesystem. It is highly recommended you install it for better performance.
+[Watchman](https://facebook.github.io/watchman) нь Facebook-ийн файлын систем дэх өөрчлөлтийг хянах зориулалттай юм. Ажиллагаагаа сайжруулахын тулд үүнийг суулгахыг танд зөвлөх байна.
 
 <block class="native linux android" />
 
 ### Node
 
-Follow the [installation instructions for your Linux distribution](https://nodejs.org/en/download/package-manager/) to install Node 8.3 or newer.
+Node 8.3 эсвэл сүүлийн үеийн хувилбарыг суулгах бол [installation instructions for your Linux distribution](https://nodejs.org/en/download/package-manager/) -рүү орно уу.
 
 <block class='native windows android' />
 
 ### Node, Python2, JDK
 
-We recommend installing Node and Python2 via [Chocolatey](https://chocolatey.org), a popular package manager for Windows.
+Node, Python2-ийг суулгахдаа Windows зориулсан, түгээмэл ашиглагддаг package manager-ээс татахыг танд зөвлөж байна. [Chocolatey](https://chocolatey.org)
 
-React Native also requires a recent version of the [Java SE Development Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html), as well as Python 2. Both can be installed using Chocolatey.
+React Native-т мөн [Java SE Development Kit (JDK)](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)-ийн сүүлийн үеийн хувилбар шаардлагатай. Мөн Python 2 ч бас. Аль алиныг нь Chocolatey ашиглан суулгаж болно..
 
-Open an Administrator Command Prompt (right click Command Prompt and select "Run as Administrator"), then run the following command:
+Administrator Command Prompt-ийг нээн (right click Command Prompt and select "Run as Administrator"), доорх командыг өгнө:
 
 ```powershell
 choco install -y nodejs.install python2 jdk8
 ```
 
-If you have already installed Node on your system, make sure it is Node 8.3 or newer. If you already have a JDK on your system, make sure it is version 8 or newer.
+Хэрэв та аль хэдийн Node-ийг суулгасан бол Node 8.3 юм уу, сүүлийн үеийн хувилбар эсэхийг шалгаарай. Хэрэв JDK суулгасан бол 8 юм уу сүүлийн шинэ хувилбар эсэхийг шалгаарай.
 
-> You can find additional installation options on [Node's Downloads page](https://nodejs.org/en/download/).
+> Програм суулгахтай холбоотой нэмэлт мэдээллийг та [Node's Downloads page](https://nodejs.org/en/download/) эндээс харж болно.
 
 <block class="native mac ios android" />
 
 ### The React Native CLI
 
-Node comes with npm, which lets you install the React Native command line interface.
+Node нь npm-тэй ирдэг бөгөөд үүнийг ашиглан React Native суулгах команд мөрийн интерфейс боломжтой.
 
-Run the following command in a Terminal:
+Терминал дотроо доорх командыг өгөөрэй:
 
 ```
 npm install -g react-native-cli
 ```
 
-> If you get an error like `Cannot find module 'npmlog'`, try installing npm directly: `curl -0 -L https://npmjs.org/install.sh | sudo sh`.
+> Хэрэв `Cannot find module 'npmlog'` алдаа зааж байвал шууд npm суулгаад үзээрэй : `curl -0 -L https://npmjs.org/install.sh | sudo sh`.
 
 <block class="native windows linux android" />
 
 ### The React Native CLI
 
-Node comes with npm, which lets you install the React Native command line interface.
+Node нь npm-тэй ирдэг бөгөөд үүнийг ашиглан React Native суулгах команд мөрийн интерфейс боломжтой.
 
-Run the following command in a Command Prompt or shell:
+Command Prompt эсвэл shell-д доорх командыг өгөөрэй:
 
 ```powershell
 npm install -g react-native-cli
 ```
 
-> If you get an error like `Cannot find module 'npmlog'`, try installing npm directly: `curl -0 -L https://npmjs.org/install.sh | sudo sh`.
+> Хэрэв`Cannot find module 'npmlog'` гэсэн алдаа өгч байвал npm-ийг шууд суулгаад үзээрэй: `curl -0 -L https://npmjs.org/install.sh | sudo sh`.
 
 <block class="native mac ios" />
 
 ### Xcode
 
-The easiest way to install Xcode is via the [Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12). Installing Xcode will also install the iOS Simulator and all the necessary tools to build your iOS app.
+Xcode суулгах хамгийн хялбар арга бол [Mac App Store](https://itunes.apple.com/us/app/xcode/id497799835?mt=12) ашиглах юм. Xcode суулгаснаар давхар iOS Simulator болон iOS апп хийхэд шаардлагатай бусад програмуудыг суулгах юм.
 
-If you have already installed Xcode on your system, make sure it is version 9.4 or newer.
+Хэрэв та аль хэдийн Xcode суулгасан бол 9.4 эсвэл үүнээс сүүлийн үеийн хувилбар мөн эсэхийг шалгаарай.
 
-#### Command Line Tools
+#### Команд мөрийн хэрэгслүүд
 
-You will also need to install the Xcode Command Line Tools. Open Xcode, then choose "Preferences..." from the Xcode menu. Go to the Locations panel and install the tools by selecting the most recent version in the Command Line Tools dropdown.
+Мөн та Xcode Command Line Tools-ийг суулгах шаардлагатай. Xcode-ийг нээгээд, Xcode цэсээс "Preferences..." гэснийг сонгоно. Locations panel гэсэн рүү очин хамгийн сүүлийн үеийн Command Line Tools-ийг сонгон суулгана.
 
 ![Xcode Command Line Tools](/react-native/docs/assets/GettingStartedXcodeCommandLineTools.png)
 
 <block class="native mac linux android" />
 
-### Java Development Kit
+### Java Хөгжүүлэлтийн багц
 
-React Native requires a recent version of the Java SE Development Kit (JDK). [Download and install Oracle JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html) if needed. You can also use [OpenJDK 8](http://openjdk.java.net/install/) as an alternative.
+React Native нь сүүлийн үеийн Java SE Development Kit (JDK)-ыг шаарддаг. [Download and install Oracle JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html). Мөн та [OpenJDK 8](http://openjdk.java.net/install/)-ийг ашиглах боломжтой.
 
 <block class="native mac linux windows android" />
 
-### Android development environment
+### Android хөгжүүлэлтийн орчин
 
-Setting up your development environment can be somewhat tedious if you're new to Android development. If you're already familiar with Android development, there are a few things you may need to configure. In either case, please make sure to carefully follow the next few steps.
+Хэрэв та анхлан Android апп хөгжүүлж байгаа бол хөгжүүлэлтийн орчноо тохируулах нь зарим талаараа уйтгартай мэт санагдаж магад. Харин Android хөгжүүлэлтийн талаар мэдлэгтэй бол цөөн хэдэн зүйлийг хангасан байх ёстой. Аль ч тохиолдолд доорх алхмуудыг нэг бүрчлэн дагахыг зөвлөе.
 
 <block class="native mac windows linux android" />
 
-#### 1. Install Android Studio
+#### 1. Android Studio суулгах
 
-[Download and install Android Studio](https://developer.android.com/studio/index.html). Choose a "Custom" setup when prompted to select an installation type. Make sure the boxes next to all of the following are checked:
+[Android Studio татах ба суулгах](https://developer.android.com/studio/index.html). Суулгах төрлөө сонгох хэрэгтэй болох үеэд "Custom" гэснийг сонгоорой. Доорх нэрсийн хажууд байгаа дөрвөлжин нүдийг зөвлөөрэй:
 
 <block class="native mac windows android" />
 
 - `Android SDK`
 - `Android SDK Platform`
-- `Performance (Intel ® HAXM)` ([See here for AMD](https://android-developers.googleblog.com/2018/07/android-emulator-amd-processor-hyper-v.html))
+- `Performance (Intel ® HAXM)` ([AMD CPU бол эндээс хар](https://android-developers.googleblog.com/2018/07/android-emulator-amd-processor-hyper-v.html))
 - `Android Virtual Device`
 
 <block class="native linux android" />
@@ -327,17 +327,17 @@ Setting up your development environment can be somewhat tedious if you're new to
 
 <block class="native mac windows linux android" />
 
-Then, click "Next" to install all of these components.
+Тэгээд "Next" гэсэн руу орж эдгээр компонентүүдийг суулгаарай.
 
-> If the checkboxes are grayed out, you will have a chance to install these components later on.
+> Хэрэв дөрвөлжин нүднүүд нь саарал өнгөтэй байвал та эдгээр бүрэлдэхүүн хэсгүүдийг дараа суулгах боломжтой гэсэн үг.
 
-Once setup has finalized and you're presented with the Welcome screen, proceed to the next step.
+Тохиргоо хийсний дараа Тавтай морилно уу гэсэн дэлгэц гарах бөгөөд дараагийн шат руу шилжиж болно.
 
-#### 2. Install the Android SDK
+#### 2. Android SDK суулгах
 
-Android Studio installs the latest Android SDK by default. Building a React Native app with native code, however, requires the `Android 9 (Pie)` SDK in particular. Additional Android SDKs can be installed through the SDK Manager in Android Studio.
+Android Studio нь Android SDK-ийн сүүлийн үеийн хувилбарыг автоматаар суулгадаг. Натив код ашиглан React Native апп хийж байгаа үед `Android 9 (Pie)` SDK тусгайлан хэрэг болдог. Android Studio дотор SDK Manager-ыг ашиглан нэмэлт Android SDKs суулгах боломжтой.
 
-The SDK Manager can be accessed from the "Welcome to Android Studio" screen. Click on "Configure", then select "SDK Manager".
+"Welcome to Android Studio" дэлгэц дээрээс SDK Manager -рүү хандаж болно. "Тохиргоо хийх" гэснийг дараад "SDK Manager" гэснийг сонгоорой.
 
 <block class="native mac android" />
 
@@ -349,24 +349,24 @@ The SDK Manager can be accessed from the "Welcome to Android Studio" screen. Cli
 
 <block class="native mac windows linux android" />
 
-> The SDK Manager can also be found within the Android Studio "Preferences" dialog, under **Appearance & Behavior** → **System Settings** → **Android SDK**.
+> Мөн Android Studio дотор "Preferences" гэсэн хэсгээс **Appearance & Behavior** → **System Settings** → **Android SDK** гэж орон SDK Manager -г олох боломжтой.
 
-Select the "SDK Platforms" tab from within the SDK Manager, then check the box next to "Show Package Details" in the bottom right corner. Look for and expand the `Android 9 (Pie)` entry, then make sure the following items are checked:
+SDK Manager дотроосоо "SDK Platforms" гэснийг сонгоно. Тэгээд баруун доод буланд байх "Show Package Details" гэсэн дээр дарна. `Android 9 (Pie)` гэснийг хайж, нээгээд доорх зүйлсийг зөвлөсөн эсэхийг шалгана:
 
 - `Android SDK Platform 28`
 - `Intel x86 Atom_64 System Image` or `Google APIs Intel x86 Atom System Image`
 
-Next, select the "SDK Tools" tab and check the box next to "Show Package Details" here as well. Look for and expand the "Android SDK Build-Tools" entry, then make sure that `28.0.3` is selected.
+Дараа нь "SDK Tools" гэсэн рүү орж "Show Package Details" гэснийг харна. "Android SDK Build-Tools" гэсэн хайж олон, дэлгэж хараад `28.0.3` гэснийг сонгосон эсэхийг шалгана.
 
-Finally, click "Apply" to download and install the Android SDK and related build tools.
+Эцэст нь "Apply" гэдгийг дарж, Android SDK болон бусад хэрэгслүүдээ татаж аван суулгана.
 
-#### 3. Configure the ANDROID_HOME environment variable
+#### 3. ANDROID_HOME орчны хувьсагч
 
-The React Native tools require some environment variables to be set up in order to build apps with native code.
+React Native нь натив код ашиглан апп хийхийн тулд орчны зарим хувьсагчийг тохируулахыг шаарддаг.
 
 <block class="native mac linux android" />
 
-Add the following lines to your `$HOME/.bash_profile` config file:
+Тохиргоо хийх файл дотор үүнийг нэмнэ үү `$HOME/.bash_profile` эсвэл `$HOME/.bashrc`:
 
 <block class="native mac android" />
 
@@ -390,33 +390,33 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 <block class="native mac linux android" />
 
-> `.bash_profile` is specific to `bash`. If you're using another shell, you will need to edit the appropriate shell-specific config file.
+> `.bash_profile` гэдэг нь тусгайлан `bash`-д зориулсан гэсэн үг. Хэрэв та өөр шэлл ашиглаж байгаа бол тохиргооны файл дээрээ тухайн шэллд засвар оруулах шаардлагатай.
 
-Type `source $HOME/.bash_profile` to load the config into your current shell. Verify that ANDROID_HOME has been added to your path by running `echo $PATH`.
+`source $HOME/.bash_profile` гэж бичээд одоогийн бүрхүүлдээ тохиргоогоо оруулна. `echo $PATH` гэж уншуулан ANDROID_HOME хувьсагч байгаа эсэхийг нягтална уу.
 
-> Please make sure you use the correct Android SDK path. You can find the actual location of the SDK in the Android Studio "Preferences" dialog, under **Appearance & Behavior** → **System Settings** → **Android SDK**.
+> Зөв Android SDK байршил ашиглаж байгаа эсэхээ шалгаарай. Android Studio дотор SDK-ийн бодит байршлыг олохын тулд "Preferences" гэж ороод **Appearance & Behavior** → **System Settings** → **Android SDK** гэсэн дарааллаар орно.
 
 <block class="native windows android" />
 
-Open the System pane under **System and Security** in the Windows Control Panel, then click on **Change settings...**. Open the **Advanced** tab and click on **Environment Variables...**. Click on **New...** to create a new `ANDROID_HOME` user variable that points to the path to your Android SDK:
+Windows Control Panel дотор **System and Security** гэсний доор System pane гэсэн руу орно. Тэгээд **Change settings...** гэснийг дараад **Advanced** гэснийг нээн **Environment Variables...** гэсэн дээр дарна. **New...** гэснийг дарж, Android SDK байршлыг заах `ANDROID_HOME` хэрэглэгчийн хувьсагчийг шинээр үүсгэнэ.
 
 ![ANDROID_HOME Environment Variable](/react-native/docs/assets/GettingStartedAndroidEnvironmentVariableANDROID_HOME.png)
 
-The SDK is installed, by default, at the following location:
+SDK нь автоматаар доорх байршилд суудаг:
 
 ```powershell
 c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk
 ```
 
-You can find the actual location of the SDK in the Android Studio "Preferences" dialog, under **Appearance & Behavior** → **System Settings** → **Android SDK**.
+Android Studio дотор SDK-ийн одоогийн байршлыг олохдоо "Preferences" гэдэг дээр дараад **Appearance & Behavior** → **System Settings** → **Android SDK** дарааллаар орно.
 
-Open a new Command Prompt window to ensure the new environment variable is loaded before proceeding to the next step.
+Шинээр Command Prompt цонхыг нээн дараагийн шатанд шилжихийн өмнө шинэ орчны хувьсагч уншиж байгаа эсэхийг шалгана.
 
-#### 4. Add platform-tools to Path
+#### 4. Замд платформ хэрэгслүүд нэмэх
 
-Open the System pane under **System and Security** in the Windows Control Panel, then click on **Change settings...**. Open the **Advanced** tab and click on **Environment Variables...**. Select the **Path** variable, then click **Edit**. Click **New** and add the path to platform-tools to the list.
+Windows Control Panel​ дотор **System and Security** гэсний доорх System pane гэсэн дээр дарна. Тэгээд **Change settings...** гэж дарна. **Advanced** гэснийг нээн and **Environment Variables...** гэснийг сонгоно. **Path** хувьсагч гэснийг нээн, **Edit** гэснийг дарна. **New** гэсэн дээр дарж платформ хэрэгслүүдийн жагсаалтыг харна.
 
-The default location for this folder is:
+Энэхүү хавтас нь автоматаар доорх байрлалд байдаг:
 
 ```powershell
 c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\platform-tools
@@ -426,25 +426,25 @@ c:\Users\YOUR_USERNAME\AppData\Local\Android\Sdk\platform-tools
 
 ### Watchman
 
-Follow the [Watchman installation guide](https://facebook.github.io/watchman/docs/install.html#buildinstall) to compile and install Watchman from source.
+Watchman суулгахыг хүсвэл [Watchman суулгах заавар](https://facebook.github.io/watchman/docs/install.html#buildinstall)-ыг дагана уу.
 
-> [Watchman](https://facebook.github.io/watchman/docs/install.html) is a tool by Facebook for watching changes in the filesystem. It is highly recommended you install it for better performance and increased compatibility in certain edge cases (translation: you may be able to get by without installing this, but your mileage may vary; installing this now may save you from a headache later).
+> [Watchman](https://facebook.github.io/watchman/docs/install.html) нь файл систем дэх өөрчлөлтийг харах зорилготой Facebook-ийн гаргасан хэрэгсэл юм. Ажиллагаагаа илүү сайжруулж, тодорхой асуудалтай хүнд үед илүү боломжтой байхыг хүсэж байгаа бол танд үүнийг суулгахыг зөвлөх байна. (Үүнийг суулгахгүй ч байсан болно. Хүртэх ашиг тус нь янз бүр байх боломжтой. Одоо суулгавал дараа нь төвөг учрах нь бага байна).
 
 <block class="native mac ios" />
 
-## Creating a new application
+## Шинэ аппликейшн бүтээх
 
-Use the React Native command line interface to generate a new React Native project called "AwesomeProject":
+React Native команд мөрийн интерфейсийг ашиглан "AwesomeProject" нэртэй шинэ апп үүсгэх:
 
 ```
 react-native init AwesomeProject
 ```
 
-This is not necessary if you are integrating React Native into an existing application, if you "ejected" from Expo (or Create React Native App), or if you're adding iOS support to an existing React Native project (see [Platform Specific Code](platform-specific-code.md)). You can also use a third-party CLI to init your React Native app, such as [Ignite CLI](https://github.com/infinitered/ignite).
+Хэрэв та одоо байгаа аппыг React Native-тай нэгтгэж байгаа бол ингэх шаардлагагүй. Хэрэв та Expo-гоос "ejected" болсон ( эсвэл React Native апп хийх), эсвэл одоо байгаа React Native төсөл дээрээ iOS дэмждэг болгох гэж байгаа бол (үүнийг харна уу [Platform Specific Code](platform-specific-code.md)). Мөн та гуравдагч CLI ашиглан React Native аппаа эхлүүлэх боломжтой, Тухайлбал, [Ignite CLI](https://github.com/infinitered/ignite).
 
-### [Optional] Using a specific version
+### [Нэмэлт] Онцгойлон аль нэг хувилбарыг ашиглах
 
-If you want to start a new project with a specifc React Native version, you can use the `--version` argument:
+Хэрэв та React Native-ийн аль нэг хувилбарыг ашиглан шинэ апп хийх гэж байгаа бол `--version` нэмэлтийг ашиглах боломжтой:
 
 ```
 react-native init AwesomeProject --version X.XX.X
@@ -456,19 +456,19 @@ react-native init AwesomeProject --version react-native@next
 
 <block class="native mac windows linux android" />
 
-## Creating a new application
+## Шинэ аппликейшн бүтээх
 
-Use the React Native command line interface to generate a new React Native project called "AwesomeProject":
+React Native командын мөрийн интерфейсийг ашиглан "AwesomeProject" нэртэй шинэ төслөө эхлүүлэх:
 
 ```
 react-native init AwesomeProject
 ```
 
-This is not necessary if you are integrating React Native into an existing application, if you "ejected" from Create React Native App, or if you're adding Android support to an existing React Native project (see [Platform Specific Code](platform-specific-code.md)). You can also use a third-party CLI to init your React Native app, such as [Ignite CLI](https://github.com/infinitered/ignite).
+Хэрэв та одоо байгаа аппыг React Native-тай нэгтгэж байгаа бол ингэх шаардлагагүй. Хэрэв та Create React Native App "ejected" болсон ( эсвэл React Native апп хийх), эсвэл одоо байгаа React Native төсөл дээрээ Android дэмждэг болгох гэж байгаа бол (үүнийг харна уу [Platform Specific Code](platform-specific-code.md)). Мөн та гуравдагч CLI ашиглан React Native аппаа эхлүүлэх боломжтой, Тухайлбал, [Ignite CLI](https://github.com/infinitered/ignite).
 
-### [Optional] Using a specific version
+### [Нэмэлт] Онцгойлон аль нэг хувилбарыг ашиглах
 
-If you want to start a new project with a specifc React Native version, you can use the `--version` argument:
+Хэрэв та React Native-ийн аль нэг хувилбарыг ашиглан шинэ апп хийх гэж байгаа бол `--version` нэмэлтийг ашиглах боломжтой:
 
 ```
 react-native init AwesomeProject --version X.XX.X
@@ -480,75 +480,73 @@ react-native init AwesomeProject --version react-native@next
 
 <block class="native mac windows linux android" />
 
-## Preparing the Android device
+## Android төхөөрөмжийг бэлдэх
 
-You will need an Android device to run your React Native Android app. This can be either a physical Android device, or more commonly, you can use an Android Virtual Device which allows you to emulate an Android device on your computer.
+React Native Android аппаа ашиглахын тулд танд Android төхөөрөмж хэрэг болно. Ингэхдээ бодит Android төхөөрөмж байж болохоос гадна Android төхөөрөмжийг компьютер дээр дуурайн ажилладаг виртуал Android төхөөрөмжийг ашиглах боломжтой. Аль нь ч бай та Android апп хөгжүүлж байгаа бол аппаа ажиллуулах төхөөрөмж хэрэгтэй.
 
-Either way, you will need to prepare the device to run Android apps for development.
+### Бодит төхөөрөмж ашиглах
 
-### Using a physical device
+Хэрэв танд Android-ийн төхөөрөмж биетээрээ байгаа бол Android виртуал төхөөрөмжийн оронд төхөөрөмжөө компьютертойгоо USB каблиар холбон доорх зааврыг дагахад болно. [энд](running-on-device.md).
 
-If you have a physical Android device, you can use it for development in place of an AVD by plugging it in to your computer using a USB cable and following the instructions [here](running-on-device.md).
+### Виртуал төхөөрөмж ашиглах
 
-### Using a virtual device
-
-If you use Android Studio to open `./AwesomeProject/android`, you can see the list of available Android Virtual Devices (AVDs) by opening the "AVD Manager" from within Android Studio. Look for an icon that looks like this:
+Хэрэв та Android Studio ашиглах бол `./AwesomeProject/android`-ийг нээгээд, Android Studio дотроо "AVD Manager" гэснийг нээн ашиглах боломжтой Android виртуал төхөөрөмжүүдийн жагсаалтыг харж болно. Үүн шиг тэмдэглэгээг олж харна уу:
 
 ![Android Studio AVD Manager](/react-native/docs/assets/GettingStartedAndroidStudioAVD.png)
 
-If you have just installed Android Studio, you will likely need to [create a new AVD](https://developer.android.com/studio/run/managing-avds.html). Select "Create Virtual Device...", then pick any Phone from the list and click "Next", then select the **Pie** API Level 28 image.
+Хэрэв та Android Studio-ийг дөнгөж суулгасан бол [Шинээр Android Виртуал Төхөөрөмж үүсгэх](https://developer.android.com/studio/run/managing-avds.html) хэрэгтэй. "Виртуал төхөөрөмж үүсгэх..." гэснийг сонгоод жагсаалт дундаас аль нэг утсыг сонгон "Дараа нь" гэснийг дарна. Ингээд **Pie** Аппликейшн програмчлалын интерфейс үе 28 гэснийг сонгоно.
 
 <block class="native linux android" />
 
-> We recommend configuring [VM acceleration](https://developer.android.com/studio/run/emulator-acceleration.html#vm-linux) on your system to improve performance. Once you've followed those instructions, go back to the AVD Manager.
+> Ажиллагааг сайжруулахын тулд [VM acceleration](https://developer.android.com/studio/run/emulator-acceleration.html#vm-linux)-ийг тохируулахыг бид зөвлөж байна. Зааврыг дагуу хийсний дараа AVD Manager гэсэн рүү эргээд очоорой.
 
 <block class="native windows android" />
 
-> If you don't have HAXM installed, click on "Install HAXM" or follow [these instructions](https://github.com/intel/haxm/wiki/Installation-Instructions-on-Windows) to set it up, then go back to the AVD Manager.
+> Хэрэв HAXM суулгаагүй байгаа бол,"Install HAXM" гэсэн дээр дарах эсвэл [энэхүү заавар](https://github.com/intel/haxm/wiki/Installation-Instructions-on-Windows)-ыг дагаарай. Тохиргоо хийсний дараа AVD Manager гэсэн рүү эргээд очоорой.
 
 <block class="native mac android" />
 
-> If you don't have HAXM installed, follow [these instructions](https://github.com/intel/haxm/wiki/Installation-Instructions-on-macOS) to set it up, then go back to the AVD Manager.
+> Хэрэв HAXM суулгаагүй бол [энэхүү заавар](https://github.com/intel/haxm/wiki/Installation-Instructions-on-macOS)-ыг дагаарай. Тохиргоо хийсний дараа AVD Manager рүү эргээд очоорой.
 
 <block class="native mac windows linux android" />
 
-Click "Next" then "Finish" to create your AVD. At this point you should be able to click on the green triangle button next to your AVD to launch it, then proceed to the next step.
+"Дараа нь" гэдгийг дараад "Дуусгах" гэснийг дарж Android виртуал төхөөрөмжөө үүсгээрэй. Одоо та Android виртуал төхөөрөмжийн дэргэдэх гурвалжин ногоон товч дээр дарж, ажиллуулах боломжтой болсон байна. Эндээс дараагийн алхам руу шилжээрэй.
 
 <block class="native mac ios" />
 
-## Running your React Native application
+## React Native аппликейшнаа ажиллуулах
 
-Run `react-native run-ios` inside your React Native project folder:
+React Native хавтас дотор `react-native run-ios` командыг уншуулах:
 
 ```
 cd AwesomeProject
 react-native run-ios
 ```
 
-You should see your new app running in the iOS Simulator shortly.
+Удахгүй та iOS Simulator дээр шинэ апп тань ажиллаж байгааг харах болно.
 
 ![AwesomeProject on iOS](/react-native/docs/assets/GettingStartediOSSuccess.png)
 
-`react-native run-ios` is just one way to run your app. You can also run it directly from within Xcode or [Nuclide](https://nuclide.io/).
+`react-native run-ios` команд нь аппаа ажиллуулах олон аргуудын нэг юм. Та Xcode-с шууд ажиллуулах эсвэл [Nuclide](https://nuclide.io/) ашиглах боломжтой.
 
-> If you can't get this to work, see the [Troubleshooting](troubleshooting.md#content) page.
+> Хэрэв болохгүй бол [Troubleshooting](troubleshooting.md#content) гэснийг уншина уу.
 
-### Running on a device
+### Төхөөрөмж дээр ажиллуулах
 
-The above command will automatically run your app on the iOS Simulator by default. If you want to run the app on an actual physical iOS device, please follow the instructions [here](running-on-device.md).
+Дээрх команд нь автоматаар таны аппыг iOS Simulator дээр ажиллуулна. Хэрэв та бодит iOS төхөөрөмж дээр ажиллуулахыг хүсвэл [энэ заавар](running-on-device.md)-ыг уншина уу.
 
 <block class="native mac windows linux android" />
 
-## Running your React Native application
+## React Native аппликейшнаа ажиллуулах
 
-Run `react-native run-android` inside your React Native project folder:
+React Native хавтас дотор `react-native run-android` командыг уншуулах:
 
 ```
 cd AwesomeProject
 react-native run-android
 ```
 
-If everything is set up correctly, you should see your new app running in your Android emulator shortly.
+Хэрэв бүх тохиргоо зөв бол таны апп удахгүй Android emulator дээр ажиллана.
 
 <block class="native mac android" />
 
@@ -560,40 +558,40 @@ If everything is set up correctly, you should see your new app running in your A
 
 <block class="native mac windows linux android" />
 
-`react-native run-android` is just one way to run your app - you can also run it directly from within Android Studio or [Nuclide](https://nuclide.io/).
+`react-native run-android` команд нь аппаа ажиллуулах олон аргуудын нэг юм. Та Android Studio-с шууд ажиллуулах эсвэл [Nuclide](https://nuclide.io/) ашиглах боломжтой.
 
-> If you can't get this to work, see the [Troubleshooting](troubleshooting.md#content) page.
+> Хэрэв болохгүй бол [Troubleshooting](troubleshooting.md#content) гэснийг уншина уу.
 
 <block class="native mac ios android" />
 
-### Modifying your app
+### Аппдаа өөрчлөлт оруулах
 
-Now that you have successfully run the app, let's modify it.
+Апп тань амжилттай ажиллаж байгаа тул хэрхэн өөрчлөлт оруулахыг харцгаая.
 
 <block class="native mac ios" />
 
-- Open `App.js` in your text editor of choice and edit some lines.
-- Hit `⌘R` in your iOS Simulator to reload the app and see your changes!
+- Хүссэн текст засварлагч дотроо `App.js` гэснийг нээн зарим мөрөнд өөрчлөлт оруулна.
+- iOS Simulator дотор `⌘R` гэснийг даран аппаа дахин уншуулаад өөрчлөгдсөн эсэхийг харна уу!
 
 <block class="native mac android" />
 
-- Open `App.js` in your text editor of choice and edit some lines.
-- Press the `R` key twice or select `Reload` from the Developer Menu (`⌘M`) to see your changes!
+- Хүссэн текст засварлагч дотроо `App.js` гэснийг нээн зарим мөрөнд өөрчлөлт оруулна.
+- `R` товчийг хоёр дарах эсвэл хөгжүүлэгчийн цэсээс (`⌘M`) дахин уншуулах гэснийг даран хийсэн өөрчлөлтөө харна уу!
 
 <block class="native windows linux android" />
 
-### Modifying your app
+### Аппдаа өөрчлөлт оруулах
 
-Now that you have successfully run the app, let's modify it.
+Апп тань амжилттай ажиллаж байгаа тул хэрхэн өөрчлөлт оруулахыг харцгаая.
 
-- Open `App.js` in your text editor of choice and edit some lines.
-- Press the `R` key twice or select `Reload` from the Developer Menu (`Ctrl + M`) to see your changes!
+- Хүссэн текст засварлагч дотроо `App.js` гэснийг нээн зарим мөрөнд өөрчлөлт оруулна.
+- `R` товчийг хоёр дарах эсвэл хөгжүүлэгчийн цэсээс (`⌘M`) дахин уншуулах гэснийг даран хийсэн өөрчлөлтөө харна уу!
 
 <block class="native mac ios android" />
 
 ### That's it!
 
-Congratulations! You've successfully run and modified your first React Native app.
+Баяр хүргэе! Та анхны React Native аппаа амжилттай хийж, өөрчлөлт оруулж чадлаа.
 
 <center><img src="/react-native/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
 
@@ -601,29 +599,29 @@ Congratulations! You've successfully run and modified your first React Native ap
 
 ### That's it!
 
-Congratulations! You've successfully run and modified your first React Native app.
+Баяр хүргэе! Та анхны React Native аппаа амжилттай хийж, өөрчлөлт оруулж чадлаа.
 
 <center><img src="/react-native/docs/assets/GettingStartedCongratulations.png" width="150"></img></center>
 
 <block class="native mac ios" />
 
-## Now what?
+## Одоо яах вэ?
 
-- Turn on [Live Reload](debugging.md#reloading-javascript) in the Developer Menu. Your app will now reload automatically whenever you save any changes!
+- Хөгжүүлэгчийн цэс доторх [Live Reload](debugging.md#reloading-javascript) гэснийг дарна. Та ямар нэг өөрчлөлт оруулсан тухай бүрт апп тань автоматаар шинэчлэгдэх болно!
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](integration-with-existing-apps.md).
+- Хэрэв та React Native дээрх шинэ кодоо одоо байгаа аппликейшнд хуулахыг хүсвэл [Нэгтгэх заавар](integration-with-existing-apps.md) уншина уу.
 
-If you're curious to learn more about React Native, continue on to the [Tutorial](tutorial.md).
+React Native-ийн тухай илүү ихийг сурахыг хүсэж байвал [Хичээл](tutorial.md) гэсэн дээр дараарай.
 
 <block class="native windows linux mac android" />
 
-## Now what?
+## Одоо яах вэ?
 
-- Turn on [Live Reload](debugging.md#reloading-javascript) in the Developer Menu. Your app will now reload automatically whenever you save any changes!
+- Хөгжүүлэгчийн цэс доторх [Live Reload](debugging.md#reloading-javascript) гэснийг дарна. Та ямар нэг өөрчлөлт оруулсан тухай бүрт апп тань автоматаар шинэчлэгдэх болно!
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](integration-with-existing-apps.md).
+- Хэрэв та React Native дээрх шинэ кодоо одоо байгаа аппликейшнд хуулахыг хүсвэл [Нэгтгэх заавар](integration-with-existing-apps.md) уншина уу.
 
-If you're curious to learn more about React Native, continue on to the [Tutorial](tutorial.md).
+React Native-ийн тухай илүү ихийг сурахыг хүсэж байвал [Хичээл](tutorial.md) гэсэн дээр дараарай.
 
 <script>
   function displayTab(type, value) {
