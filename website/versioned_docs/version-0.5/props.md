@@ -1,12 +1,12 @@
 ---
 id: version-0.5-props
-title: Props
+title: Пропс
 original_id: props
 ---
 
-Most components can be customized when they are created, with different parameters. These creation parameters are called `props`.
+Ихэнх компонентүүд үүсэхдээ өөр өөр параметрын утга авснаар өөр байх боломжтой болдог. Эдгээр параметрүүдийг `props` гэж нэрлэдэг.
 
-For example, one basic React Native component is the `Image`. When you create an image, you can use a prop named `source` to control what image it shows.
+Жишээ нь, React Native-ийн нэг үндсэн компонент бол `Image`. Зураг харуулая гэж бодоход та `source` гэдэг нэртэй проп үүсгэн тухайн зураг юу харуулах гэж буйг удирдаж болно.
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
@@ -23,13 +23,13 @@ export default class Bananas extends Component {
   }
 }
 
-// skip this line if using Create React Native App
+// Create React Native App ашиглаж байвал доорх мөрийг алгас
 AppRegistry.registerComponent('AwesomeProject', () => Bananas);
 ```
 
-Notice the braces surrounding `{pic}` - these embed the variable `pic` into JSX. You can put any JavaScript expression inside braces in JSX.
+`{pic}` гэсэн нь хаалтанд байгааг анзаарна уу – `pic` хувьсагчийг JSX руу оруулсан байгаа. Та JavaScript-ийн ямар ч илэрхийллийг JSX-т хаалтанд хийж болно.
 
-Your own components can also use `props`. This lets you make a single component that is used in many different places in your app, with slightly different properties in each place. Just refer to `this.props` in your `render` function. Here's an example:
+Таны өөрийн оруулсан компонент нь `props` байж болно. Ингэснээр танд нэг компонентийг аппынхаа олон газарт ашиглах боломж олгоно. Ингэхдээ ашигласан газар бүртээ арай өөр пропстой ашиглаж болно. `render` функц дотроо `this.props` гэснийг ашиглахад болно. Жишээ нь:
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
@@ -57,12 +57,12 @@ export default class LotsOfGreetings extends Component {
   }
 }
 
-// skip this line if using Create React Native App
+// Create React Native App ашиглаж байвал доорх мөрийг алгас
 AppRegistry.registerComponent('AwesomeProject', () => LotsOfGreetings);
 ```
 
-Using `name` as a prop lets us customize the `Greeting` component, so we can reuse that component for each of our greetings. This example also uses the `Greeting` component in JSX, just like the built-in components. The power to do this is what makes React so cool - if you find yourself wishing that you had a different set of UI primitives to work with, you just invent new ones.
+`name`-ийг проп болгосноор `Greeting` компонентийг өөрчлөх боломжтой болгож байна. Тэгэхээр бид энэ компонентийг мэндчилгээ тус бүртээ дахин ашиглаж болно. Энэхүү жишээн дээр төрөлх компонент мэтээр JSX-д `Greeting` хэсгийг ашигласан байна. Үүнийг хийх боломж нь React-ийг илүү догь болгож байгаа юм. Хэрэв та хэрэглэгчтэй харилцах интерфейсээ өөрчлөхийг хүсвэл өөрөө шинээр зохион гаргаж болно.
 
-The other new thing going on here is the [`View`](view.md) component. A [`View`](view.md) is useful as a container for other components, to help control style and layout.
+Өөр нэг зүйл нь [`View`](view.md) компонент юм. [`View`](view.md) нь бусад компонентүүдийг агуулах компонент болгон ашиглах давуу талтай бөгөөд style болон layout-ийг удирдахад тусалдаг.
 
-With `props` and the basic [`Text`](text.md), [`Image`](image.md), and [`View`](view.md) components, you can build a wide variety of static screens. To learn how to make your app change over time, you need to [learn about State](state.md).
+`props` болон [`Text`](text.md), [`Image`](image.md), ба [`View`](view.md) компонентүүдийн тусламжтай та олон төрлийн статик дэлгэц хийх боломжтой. Аппаа хэрхэн өөрчлөгддөг байхаар хийх тухай мэдэхийг хүсвэл [State-ын тухай уншаарай](state.md).
