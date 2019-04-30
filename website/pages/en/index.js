@@ -35,7 +35,7 @@ class HomeCallToAction extends React.Component {
         <Button
           href={siteConfig.baseUrl + 'docs/getting-started'}
           target="_self">
-          Get Started
+          Эхэлцгээе
         </Button>
         <Button href={siteConfig.baseUrl + 'docs/tutorial'} target="_self">
           Learn the Basics
