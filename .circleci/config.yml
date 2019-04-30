@@ -5,6 +5,7 @@ aliases:
         - master
 
 version: 2
+
 jobs:
   deploy-website:
     docker:
@@ -16,14 +17,14 @@ jobs:
       - run:
           name: Deploying to GitHub Pages
           command: |
-            git config --global user.email "zorig@users.noreply.github.com"
-            git config --global user.name "zorig"
-            echo "machine github.com login zorig password $GITHUB_TOKEN" > ~/.netrc
-            cd website && yarn install && GIT_USER=zorig yarn run publish-gh-pages
+            git config --global user.email "<GITHUB_USERNAME>@users.noreply.github.com"
+            git config --global user.name "<GITHUB_USERNAME>"
+            echo "machine github.com login <GITHUB_USERNAME> password $GITHUB_TOKEN" > ~/.netrc
+            cd website && yarn install && GIT_USER=<GIT_USERNAME> yarn run publish-gh-pages
 
 workflows:
   version: 2
   build_and_deploy:
     jobs:
       - deploy-website:
-        filters: *filter-only-master
+          filters: *filter-only-master
