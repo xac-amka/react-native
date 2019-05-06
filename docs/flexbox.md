@@ -1,19 +1,17 @@
 ---
 id: flexbox
-title: Layout with Flexbox
+гарчиг: Layout with Flexbox
 ---
 
-A component can specify the layout of its children using the flexbox algorithm. Flexbox is designed to provide a consistent layout on different screen sizes.
+Компонент нь flexbox алгоритм ашиглан дагавруудынхаа харагдах байдлыг нарийн тодорхойлдог. Flexbox нь өөр өөр дэлгэцийн хэмжээнд тогтсон харагдах зориулалттай. 
 
-You will normally use a combination of `flexDirection`, `alignItems`, and `justifyContent` to achieve the right layout.
+Та өөрийн хүссэн харагдах байдлыгййййййжооююв бий болгохын тулд `flexDirection`, `alignItems`,`justifyContent` нарыг хослуулан ашиглана.
 
-> Flexbox works the same way in React Native as it does in CSS on the web, with a few exceptions. The defaults are different, with `flexDirection` defaulting to `column` instead of `row`, and the `flex` parameter only supporting a single number.
+> Flexbox нь веб дээр CSS-д ажилладагтайгаа ижилхэн  React Native дотор ажиллана. Цөөн хэдэн ялгаа бий. Эхний өгөгдмөл нь өөр байдаг.  `flexDirection` ашиглахад `row` биш `column`-руу шилжих бөгөөд `flex` параметр нь зөвхөн нэг л тоо байх боломжтой.
 
-#### Flex Direction
+#### Flex чилгэл
+Компонентийн `style`-д `flexDirection` нэмвэл харагдах төлвийн  **анхдагч тэнхлэгийг** тодорхойлдог. Дагаврууд нь хөндлөнгөөр (`row`) эсвэл босоогоор (`column`) байх уу? Өгөгдмөл тохиргоо нь `column` байх юм. 
 
-Adding `flexDirection` to a component's `style` determines the **primary axis** of its layout. Should the children be organized horizontally (`row`) or vertically (`column`)? The default is `column`.
-
-```ReactNativeWebPlayer
 import React, { Component } from 'react';
 import { AppRegistry, View } from 'react-native';
 
@@ -34,9 +32,10 @@ export default class FlexDirectionBasics extends Component {
 AppRegistry.registerComponent('AwesomeProject', () => FlexDirectionBasics);
 ```
 
-#### Justify Content
+#### Контентийг энэ тэнцүү тараах
 
-Adding `justifyContent` to a component's style determines the **distribution** of children along the **primary axis**. Should children be distributed at the start, the center, the end, or spaced evenly? Available options are `flex-start`, `center`, `flex-end`, `space-around`, `space-between` and `space-evenly`.
+Компонентын хэв маяг дээр `justifyContent` гэж нэмвэл дагавруудын **тархалт** нь **анхдагч тэнхлэг** дагуу байна. 
+Дагаврууд нь эхлэл, төв, төгсгөл хэсэгт байрласан байх уу эсвэл хоорондын зай нь тэгш байх уу? `flex-start`, `center`, `flex-end`, `space-around`, `space-between`, `space-evenly` гэсэн боломжит хувилбарууд байна.
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
@@ -64,11 +63,11 @@ export default class JustifyContentBasics extends Component {
 AppRegistry.registerComponent('AwesomeProject', () => JustifyContentBasics);
 ```
 
-#### Align Items
+#### Байрлуулах
 
-Adding `alignItems` to a component's style determines the **alignment** of children along the **secondary axis** (if the primary axis is `row`, then the secondary is `column`, and vice versa). Should children be aligned at the start, the center, the end, or stretched to fill? Available options are `flex-start`, `center`, `flex-end`, and `stretch`.
+Компонентийн хэв маягт `alignItems` нэмснээр дагавруудыг **хоёрдогч тэнхлэг** дагуу  **зэрэгцээ байрлал**-д байлгадаг. Хэрэв анхдагч тэнхлэг нь `row` байвал хоёрдогч тэнхлэг нь `column` байна. `column` байвал `row` байна. Дагаврууд нь эхлэл, төв, төсгөл хэсэгт байрлана. Эсвэл дэлгэцийг дүүргэхээр сунаж байрлана. `flex-start`, `center`, `flex-end`, `stretch` гэсэн боломжит хувилбарууд байна.
 
-> For `stretch` to have an effect, children must not have a fixed dimension along the secondary axis. In the following example, setting `alignItems: stretch` does nothing until the `width: 50` is removed from the children.
+> `stretch` болгоход дагаврууд нь хоёрдогч тэнхлэгийн дагуу тогтсон хэмжээсгүй байх ёстой. Дараах жишээнээс `alignItems: stretch` гэж тохируулад дагавруудын `width: 50` гэснийг арилгахаас нааш ямар ч өөрчлөлт орохгүй байгааг харж болно. 
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
@@ -98,8 +97,8 @@ export default class AlignItemsBasics extends Component {
 AppRegistry.registerComponent('AwesomeProject', () => AlignItemsBasics);
 ```
 
-#### Going Deeper
+#### Илүү ихийг судлах
 
-We've covered the basics, but there are many other styles you may need for layouts. The full list of props that control layout is documented [here](./layout-props.md).
+Бид үндсэн ойлголттой боллоо. Харагдах байдлыг тодорхойлох өөр олон хэв маяг байдаг. Харагдах байдлыг удирддаг пропсийн бүрэн жагсаалтыг [эндээс](./layout-props.md) харна уу.
 
-We're getting close to being able to build a real application. One thing we are still missing is a way to take user input, so let's move on to [learn how to handle text input with the TextInput component](handling-text-input.md).
+Бид жинхэнэ аппликейшн хийж чаддаг болоход тун ойрхон байна. Одоо дутуу байгаа нэг зүйл нь хэрэглэгчийн оруулсан мэдээллийг хэрхэн авах вэ гэдэг байна. Тиймээс  [Текст оруулах компонентийг ашиглан текст хэрхэн оруулах вэ](handling-text-input.md) гэдгийг сурцгаая.
