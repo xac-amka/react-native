@@ -1,13 +1,13 @@
 ---
 id: height-and-width
-title: Height and Width
+гарчиг: Өндөр ба өргөн
 ---
+Компонентийн өндөр болон өргөн нь дэлгэц дээрх хэмжээг тодорхойлно. 
 
-A component's height and width determine its size on the screen.
 
-## Fixed Dimensions
+## Тогтмол хэмжээс
 
-The simplest way to set the dimensions of a component is by adding a fixed `width` and `height` to style. All dimensions in React Native are unitless, and represent density-independent pixels.
+Компонентийн хэмжээсийг тогтоох хамгийн энгийн арга бол тогтмол `width`, `height`-ийг нэмэх юм. React Native  доторх бүх хэмжээс нь  нэгжгүй байх бөгөөд тусгай нягтралын пикселийг (dips) илэрхийлнэ.
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
@@ -28,14 +28,16 @@ export default class FixedDimensionsBasics extends Component {
 // skip this line if using Create React Native App
 AppRegistry.registerComponent('AwesomeProject', () => FixedDimensionsBasics);
 ```
+Энэхүү хэмжээсийг тогтоох аргыг дэлгэцийн хэмжээсээс үл хамааран үргэлж ижил хэмжээст байдаг компонентуудад ашиглах түгээмэл байдаг.
 
-Setting dimensions this way is common for components that should always render at exactly the same size, regardless of screen dimensions.
 
-## Flex Dimensions
+## Уян хатан хэмжээ
 
-Use `flex` in a component's style to have the component expand and shrink dynamically based on available space. Normally you will use `flex: 1`, which tells a component to fill all available space, shared evenly amongst other components with the same parent. The larger the `flex` given, the higher the ratio of space a component will take compared to its siblings.
+Боломжит зайнд сунаж, агшин динамик хөдөлдөг компонентийн хэв маягийг тогтоохдоо `flex` ашиглана. Энгийнээр та
+`flex: 1`-ийг ашиглахад ижил эхтэй бусад компонентуудын энэ тэнцүү эзэлж байсан боломжит бүх зайг дүүргэнэ.  `flex` том өгөх тусам бусад хамаарал бүхий компонентуудтай харьцуулахад эзлэх харьцаа нь илүү өндөр байна.
 
-> A component can only expand to fill available space if its parent has dimensions greater than 0. If a parent does not have either a fixed `width` and `height` or `flex`, the parent will have dimensions of 0 and the `flex` children will not be visible.
+> Зөвхөн эхийн хэмжээс нь 0-ээс их байвал компонент боломжит зайг дүүргэн сунана. Хэрэв эх нь тогтмол `width` болон `height` эсвэл `flex`-гүй бол  эхийн хэмжээс нь 0 байх бөгөөд `flex`-ийн дагаврууд нь үл харагдана.
+
 
 ```ReactNativeWebPlayer
 import React, { Component } from 'react';
@@ -60,4 +62,4 @@ export default class FlexDimensionsBasics extends Component {
 AppRegistry.registerComponent('AwesomeProject', () => FlexDimensionsBasics);
 ```
 
-After you can control a component's size, the next step is to [learn how to lay it out on the screen](flexbox.md).
+Компонентийн хэмжээг тогтоосны дараа [дэлгэц дээр хэрхэн гаргах тухай ](flexbox.md) үзээрэй.
