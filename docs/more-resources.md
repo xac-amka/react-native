@@ -1,43 +1,86 @@
 ---
+
 id: more-resources
-title: More Resources
+
+Гарчиг: Нэмэлт мэдээлэл
+
 ---
 
-If you just read through this website, you should be able to build a pretty cool React Native app. But React Native isn't just a product made by one company - it's a community of thousands of developers. So if you're interested in React Native, here's some related stuff you might want to check out.
 
-## Popular Libraries
 
-If you're using React Native, you probably already know about [React](https://facebook.github.io/react/). So I feel a bit silly mentioning this. But if you haven't, check out React - it's the best way to build a modern website.
+Хэрэв та энэ вэбсайтыг бүрэн уншиж судалсан бол дажгүй React Native апп хийж чадахаар боллоо. React Native нь ганц компаниас гаргасан бүтээгдэхүүн биш. Олон мянган хөгжүүлэгчид нийлж байж үүнийг бүтээсэн.  React Native-ийг сонирхож байгаа танд хэрэг болж болох зүйлсийг энд багтаав. 
 
-One common question is how to handle the "state" of your React Native application. The most popular library for this is [Redux](http://redux.js.org/). Don't be afraid of how often Redux uses the word "reducer" - it's a pretty simple library, and there's also a nice [series of videos](https://egghead.io/courses/getting-started-with-redux) explaining it.
 
-If you're looking for a library that does a specific thing, check out [Awesome React Native](http://www.awesome-react-native.com/), a curated list of components that also has demos, articles, and other stuff.
 
-## Examples
+## Түгээмэл сангууд 
 
-Try out apps from the [Showcase](/react-native/showcase.html) to see what React Native is capable of! There are also some [example apps on GitHub](https://github.com/ReactNativeNews/React-Native-Apps). You can run the apps on a simulator or device, and you can see the source code for these apps, which is neat.
 
-The folks who built the app for Facebook's F8 conference also [open-sourced the code](https://github.com/fbsamples/f8app) and wrote up a [detailed series of tutorials](http://makeitopen.com/). This is useful if you want a more in-depth example that's more realistic than most sample apps out there.
 
-## Extending React Native
+Та React Native ашигладаг бол [React](https://facebook.github.io/react/)-ийн талаар ч аль хэдийн мэддэг болсон байж таараа. Тиймээс энэ талаар дурдах нь илүүц биз. Гэхдээ сайн мэдэхгүй бол React-ийг нэг сонирхоод үзээрэй. Энэ бол орчин үеийн вэбсайт хийх хамгийн шилдэг арга шүү. 
 
-- Fellow developers write and publish React Native modules to npm and open source them on GitHub.
-- Making modules helps grow the React Native ecosystem and community. We recommend writing modules for your use cases and sharing them on npm.
-- Read the guides on Native Modules ([iOS](native-modules-ios.md), [Android](native-modules-android.md)) and Native UI Components ([iOS](native-components-ios.md), [Android](native-components-android.md)) if you are interested in extending native functionality.
-- Looking for a pre-built component? Check [JS.coach](https://js.coach/react-native) or [Native Directory](https://native.directory/) to find what the community has been creating.
 
-## Development Tools
 
-[Nuclide](https://nuclide.io/) is the IDE that Facebook uses internally for JavaScript development. The killer feature of Nuclide is its debugging ability. It also has great inline Flow support. [VS Code](https://code.visualstudio.com/) is another IDE that is popular with JavaScript developers.
+Хүмүүсийн түгээмэл асуудаг нэг асуулт бол React Native аппликейшныхаа "төлөв"-ийг хэрхэн зохицуулах вэ гэдэг. Үүнд тус болох хамгийн олонд хүрсэн сан бол [Redux](http://redux.js.org/) юм. Redux хичнээн удаа "reducer" гэдэг үгийг ашиглаж байгааг бүү тоо. Ашиглахад их энгийн сан бөгөөд тайлбар бүхий [цуврал видеонууд](https://egghead.io/courses/getting-started-with-redux)-тай.
 
-[Ignite](https://github.com/infinitered/ignite) is a starter kit that uses Redux and a few different common UI libraries. It has a CLI to generate apps, components, and containers. If you like all of the individual tech choices, Ignite could be perfect for you.
 
-[App Center](https://appcenter.ms/) is a service from Microsoft that makes it easy to deploy live updates to your React Native app. If you don't like going through the app store process to deploy little tweaks, and you also don't like setting up your own backend, give App Center a try.
 
-[Expo](https://docs.expo.io) is a development environment plus application that focuses on letting you build React Native apps in the Expo development environment, without ever touching Xcode or Android Studio. If you wish React Native was even more JavaScripty and webby, check out Expo.
+Хэрэв танд ямар зүйлийг онцлон хийж болдог сан хэрэгтэй бол [Awesome React Native](http://www.awesome-react-native.com/)-ыг сонирхоод үзээрэй. Компонентуудын цэгцтэй жагсаалт, мөн демо, нийтлэл болон бусад зүйлс энд багтсан.
 
-[Yoga](https://yogalayout.com/) is a stand-alone layout engine that extends beyond React Native and allows product engineers to build layouts quickly for multiple platforms with a highly optimized open source layout engine designed with speed, size, and ease of use in mind.
 
-[Bugsnag](https://www.bugsnag.com/), [Microsoft App Center](https://appcenter.ms/), and [Sentry](https://sentry.io/welcome/) all provide excellent crash and error monitoring services for React and React Native apps. These services allow you to proactively monitor crashes and issues occuring on your apps in real time so you can fix them quickly and improve user experience.
 
-The [React Developer Tools](debugging.md#react-developer-tools) are great for debugging React and React Native apps.
+## Жишээ
+
+
+
+[Showcase](/react-native/showcase.html) аппыг сонирхоод үзээрэй. React Native-аар юу хийж болохыг хар! Мөн [GitHub дээр жишээ апп](https://github.com/ReactNativeNews/React-Native-Apps) байдаг.  Та симулятор дээр эсвэл төхөөрөмж дээр тэдгээр аппуудыг ажиллуулж болно. Эх кодууд нь эмх цэгцтэй бичигдсэн байгаа. 
+
+
+
+Facebook-ийн F8 бага хуралд зориулж апп хийсэн нөхдүүд [кодоо нээлттэй эх сурвалжид байршуулсан](https://github.com/fbsamples/f8app) ба [дэлгэрэнгүй заасан цуврал хичээл](http://makeitopen.com/) бас гаргасан. Түгээмэл байдаг жишиг аппаас илүү бодитой, нарийн жишээ харъя гэвэл үүнийг сонирхоод үзээрэй. 
+
+
+
+## React Native-ийг өргөжүүлэх
+
+
+
+- Хөгжүүлэгч нар npm дээр React Native-ийн модуль бичиж, гаргаад GitHub дээр нээлттэй хийдэг.
+
+- Модуль гаргах нь React Native-ийн экосистем, хамт олныг өргөжин тэлэхэд тусалдаг. Та модуль бичвэл түүнийгээ npm дээр хуваалцахыг хүсье.
+
+- Хэрэв та натив ажиллагааг нь илүү Native Modules ([iOS](native-modules-ios.md) [Android](native-modules-android.md)) тухай зааврыг уншаарай.  Натив ажиллагааг өргөжүүлэх талаар сонирхож байгаа бол Native UI Components ([iOS](native-components-ios.md), [Android](native-components-android.md))-ийн тухай уншаарай.
+
+- Бэлэн компонент хайж байна уу? [JS.coach](https://js.coach/react-native) эсвэл [Native Directory](https://native.directory/) руу орж, юу хийснийг нь хараарай.
+
+
+
+## Хөгжүүлэлтийн хэрэгслүүд 
+
+
+
+[Nuclide](https://nuclide.io/) нь Facebook компани Javascript хөгжүүлэлт хийхдээ дотооддоо ашигладаг IDE юм. Nuclide-ийн хамгийн гол онцлог нь алдаа засах чадвар юм.  Мөн Flow дэмжлэг сайнтай. Javascipt хөгжүүлэгчдэд түгээмэл ашиглагддаг өөр нэг IDE нь [VS Code](https://code.visualstudio.com/) юм.л
+
+
+
+[Ignite](https://github.com/infinitered/ignite) нь  Redux болон цөөн тооны өөр өөр энгийн UI сан ашигладаг анхлан хийж байгаа хүмүүст зориулсан багц юм. Аппууд, компонентууд, контайнерууд үүсгэх CLI (Командын интерфэйс)-тэй. Хэрэв танд тус бурийг өөрийн сонголтоор хийхийг хүсэж байвал Ignite танд яг тохирно. 
+
+
+
+[App Center](https://appcenter.ms/) нь Microsoft-оос гаргасан үйлчилгээ бөгөөд React Native аппдаа хялбараар шууд шинэчлэл хийх боломж олгодог. Хэрэв та жижиг сажиг өөрчлөлт хийх гээд app store-ийн шат дараалсан ажиллагаанд дургүй бол, өөрийн backend-ийг үүсгэх дургүй бол App Center-ийг оролдоод үзээрэй. 
+
+
+
+[Expo](https://docs.expo.io) нь хөгжүүлэлтийн орчноос гадна, өөрийн орчиндоо React Native апп бүтээх боломж олгодог аппликейшн бөгөөд Xcode эсвэл Android Studio ашиглах огт шаардлагагүй. Хэрэв та React Native-ийг илүү JavaScript шиг, веб шиг байгаасай гэж хүсдэг бол Expo-г сонирхоод үзээрэй. 
+
+
+
+[Yoga](https://yogalayout.com/) нь бие даасан layout гаргах програм бөгөөд React Native-аас илүү өргөн ашиглагддаг. Инженерүүд хурдан, хялбар, хэмжээний сонголттой маш оновчтой нээлттэй сурвалжийг ашиглан олон платформд зориулсан layout-ийг богино хугацаанд хийх боломжтой. 
+
+
+
+[Bugsnag](https://www.bugsnag.com/), [Microsoft App Center](https://appcenter.ms/), болон [Sentry](https://sentry.io/welcome/) нар бүгдээрээ React болон React Native апп-д зориулсан алдаа, гацах процессод хяналт тавих чанартай үйлчилгээтэй. Эдгээр үйлчилгээний тусламжтай та аппдаа гарсан асуудал, гэмтлийн тухай цаг тухайд нь мэдэж, яаралтай засаж, хэрэглэгчийн таатай байдлыг хангаж чадах юм. 
+
+
+
+[React Хөгжүүлэгчийн Хэрэгслүүд](debugging.md#react-developer-tools) нь React болон React Native аппыг засахад тун тохиромжтой.
+
