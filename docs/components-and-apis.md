@@ -1,22 +1,23 @@
 ---
 id: components-and-apis
-title: Components and APIs
+гарчиг: Компонент ба API
 ---
 
-React Native provides a number of built-in components. You will find a full list of components and APIs on the sidebar to the left. If you're not sure where to get started, take a look at the following categories:
+React Native-т өөрийнх нь хэд хэдэн компонент байдаг. Дэлгэцийн зүүн гар талаас та компонент болон API-ийн бүрэн жагсаалтыг харж болно. Хэрэв хаанаас эхлэхээ мэдэхгүй бол доорх ангилсан хэсгүүдийг нэг хараарай:
 
-- [Basic Components](components-and-apis.md#basic-components)
-- [User Interface](components-and-apis.md#user-interface)
-- [List Views](components-and-apis.md#list-views)
-- [iOS-specific](components-and-apis.md#ios-components-and-apis)
-- [Android-specific](components-and-apis.md#android-components-and-apis)
-- [Others](components-and-apis.md#others)
+- [Үндсэн компонентүүд](components-and-apis.md#basic-components)
+- [Хэрэглэгчийн интерфэйс](components-and-apis.md#user-interface)
+- [Жагсаалт харах](components-and-apis.md#list-views)
+- [iOS-д зориулсан](components-and-apis.md#ios-components-and-apis)
+- [Android-д зориулсан](components-and-apis.md#android-components-and-apis)
+- [Бусад](components-and-apis.md#others)
 
-You're not limited to the components and APIs bundled with React Native. React Native is a community of thousands of developers. If you're looking for a library that does something specific, search the npm registry for packages mentioning [react-native](https://www.npmjs.com/search?q=react-native&page=1&ranking=optimal), or check out [Awesome React Native](http://www.awesome-react-native.com/) for a curated list.
+React Native-т өгөгдсөн байх компонент болон API-нуудад заавал баригдах хэрэггүй. React Native бол олон мянган хөгжүүлэгчийн нэгдэл юм. Хэрэв танд ямар нэг зүйл хэрэгтэй байгаад түүнийг агуулсан сан хайж байгаа бол npm бүртгэлээс 
+[react-native](https://www.npmjs.com/search?q=react-native&page=1&ranking=optimal) гэсэн package-ийг хайх эсвэл [Awesome React Native](http://www.awesome-react-native.com/)-ээс цэгцтэй жагсаалтыг хараарай. 
 
-## Basic Components
+## Үндсэн компонент
 
-Most apps will end up using one of these basic components. You'll want to get yourself familiarized with all of these if you're new to React Native.
+Ихэнх аппууд эдгээр үндсэн компонентуудаас аль нэгийг ашигласан байдаг. Хэрэв та React Native-ийг дөнгөж ашиглаж эхэлж байгаа бол эдгээрийг нэг бүрчлэн уншиж танилцах нь зүйтэй. 
 
 <div class="component-grid component-grid-border">
   <div class="component">
@@ -45,9 +46,9 @@ Most apps will end up using one of these basic components. You'll want to get yo
   </div>
 </div>
 
-## User Interface
+## Хэрэглэгчийн интерфейс
 
-Render common user interface controls on any platform using the following components. For platform specific components, keep reading.
+Доорх компонентуудыг ашиглан ямар ч платформ дээр түгээмэл ашиглагддаг хэрэглэгчийн интерфэйс удирдлагыг үүсгэж болно. Тодорхой платформ дээр ажилладаг компонентийн тухай мэдэхийг хүсвэл цааш үргэлжлүүлэн уншина уу. 
 
 <div class="component-grid component-grid-border">
   <div class="component">
@@ -68,9 +69,9 @@ Render common user interface controls on any platform using the following compon
   </div>
 </div>
 
-## List Views
+## Жагсаалт харах
 
-Unlike the more generic `ScrollView`, the following list view components only render elements that are currently showing on the screen. This makes them a great choice for displaying long lists of data.
+Ерөнхий агуулгатай ScrollView-ийг бодвол доорх жагсаалт нь зөвхөн одоо дэлгэц дээр харагдаж байгаа зүйлсийг л ажиллуулдаг. Тиймээс урт жагсаалт бүхийг өгөгдлийг харуулахад тун тохиромжтой. 
 
 <div class="component-grid component-grid-border">
   <div class="component">
@@ -83,9 +84,9 @@ Unlike the more generic `ScrollView`, the following list view components only re
   </div>
 </div>
 
-## iOS Components and APIs
+## iOS компонент болон API
 
-Many of the following components provide wrappers for commonly used UIKit classes.
+Доорх компонентуудын ихэнх нь түгээмэл ашиглагддаг UIKit классуудад зориулсан wrapper-тай байдаг. 
 
 <div class="component-grid component-grid-border">
   <div class="component">
@@ -126,9 +127,9 @@ Many of the following components provide wrappers for commonly used UIKit classe
   </div>
 </div>
 
-## Android Components and APIs
+## Android компонент ба API
 
-Many of the following components provide wrappers for commonly used Android classes.
+Доорх компонентуудын инэнх нь түгээмэл ашиглагддаг Android классуудад зориулсан wrapper-тай байдаг. 
 
 <div class="component-grid component-grid-border">
   <div class="component">
@@ -169,9 +170,9 @@ Many of the following components provide wrappers for commonly used Android clas
   </div>
 </div>
 
-## Others
+## Бусад
 
-These components may come in handy for certain applications. For an exhaustive list of components and APIs, check out the sidebar to the left.
+Тодорхой аппликейшнуудад эдгээр компонентууд хэрэг болно. Компонент болон API-гийн бүрэн жагсаалтыг харах бол дэлгэцийн зүүн хэсгийг харна уу. 
 
 <div class="component-grid">
   <div class="component">
