@@ -1,20 +1,21 @@
 ---
 id: platform-specific-code
-title: Platform Specific Code
+гарчиг: Тухайн платформд зориулсан код
 ---
 
-When building a cross-platform app, you'll want to re-use as much code as possible. Scenarios may arise where it makes sense for the code to be different, for example you may want to implement separate visual components for iOS and Android.
+Платформ дамжин ажиллаж чадах апп хийх үед та бичсэн кодоо аль болох дахин ашиглахыг хүсэх нь лавтай. Гэхдээ кодыг заавал өөрөөр хийх шаардлагатай  нөхцөл байдал мөн үүсэх магадлалтай . Тухайлбал та харагдах байдлын компонентыг iOS болон Android-д тус тусад нь хийхийг хүсэж болно. 
 
-React Native provides two ways to easily organize your code and separate it by platform:
 
-- Using the [`Platform` module](platform-specific-code.md#platform-module).
-- Using [platform-specific file extensions](platform-specific-code.md#platform-specific-extensions).
+React Native нь кодоо хялбар зохицуулж, платформд зориулан тусгаарлах хоёр арга санал болгодог.
 
-Certain components may have properties that work on one platform only. All of these props are annotated with `@platform` and have a small badge next to them on the website.
+- [`Platform` модуль](platform-specific-code.md#platform-module) ашиглах.
+- [platform-specific file extensions](platform-specific-code.md#platform-specific-extensions) ашиглах.
 
-## Platform module
+Зарим нэг компонентууд нь зөвхөн тухайн нэг платформ дээр ажиллах хэсэгтэй байж болно. Эдгээр бүх проп нь `@platform` гэсэн тэмдэглэгээтэй байх ба вэбсайт дээр хажуудаа жижиг ялгах тэмдэгтэй байдаг. 
 
-React Native provides a module that detects the platform in which the app is running. You can use the detection logic to implement platform-specific code. Use this option when only small parts of a component are platform-specific.
+## Платформ модуль
+
+React Native-т тухайн апп ажиллаж байгаа платформыг таних модуль байдаг. Энэхүү таних функцийг ашиглан тухайн платформд зориулсан код ажиллуулах боломжтой. Компонентийн багахан хэсэг нь ямар нэг платформд зориулсан байх шаардлагатай бол энэ аргыг ашиглаарай. 
 
 ```javascript
 import {Platform, StyleSheet} from 'react-native';
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
 
 `Platform.OS` will be `ios` when running on iOS and `android` when running on Android.
 
-There is also a `Platform.select` method available, that given an object containing Platform.OS as keys, returns the value for the platform you are currently running on.
+Мөн `Platform.select` арга бий. Platform.OS-ыг түлхүүр хэлбэрээр агуулсан объект байгаа үед одоо ашиглаж байгаа платформ дээрээс утгыг авдаг. 
 
 ```javascript
 import {Platform, StyleSheet} from 'react-native';
@@ -46,9 +47,9 @@ const styles = StyleSheet.create({
 });
 ```
 
-This will result in a container having `flex: 1` on both platforms, a red background color on iOS, and a blue background color on Android.
+Үүний дүнд хоёр платформ дээр `flex: 1`-тэй контейнер дотор үүснэ. iOS дээр улаан суурь өнгөтэй,  Android дээр цэнхэр суурь өнгөтэй байна.
 
-Since it accepts `any` value, you can also use it to return platform specific component, like below:
+ `ямар ч` утга оруулж болох тул та доорх шиг тодорхой платформд зориулсан компонент буцаахад ашиглаж болно:
 
 ```javascript
 const Component = Platform.select({
@@ -59,9 +60,9 @@ const Component = Platform.select({
 <Component />;
 ```
 
-### Detecting the Android version
+### Android хувилбарыг таних
 
-On Android, the `Platform` module can also be used to detect the version of the Android Platform in which the app is running:
+Android дээр `Platform` модулийг апп ажиллаж байгаа Android платформын нь хувилбарыг танихад ашиглаж болно:
 
 ```javascript
 import {Platform} from 'react-native';
@@ -71,9 +72,9 @@ if (Platform.Version === 25) {
 }
 ```
 
-### Detecting the iOS version
+### iOS хувилбарыг таних
 
-On iOS, the `Version` is a result of `-[UIDevice systemVersion]`, which is a string with the current version of the operating system. An example of the system version is "10.3". For example, to detect the major version number on iOS:
+iOS дээр `Version` гэдэг `-[UIDevice systemVersion]`-ын үр дүн юм. Энэ нь одоогийн үйлдлийн системийн string юм. Энэхүү системийн хувилбарын нэг жишээ бол "10.3". Жишээ нь iOS дээр их хувилбарын дугаарыг танихад:
 
 ```javascript
 import {Platform} from 'react-native';
@@ -84,40 +85,42 @@ if (majorVersionIOS <= 9) {
 }
 ```
 
-## Platform-specific extensions
+## Тухайн платформд зориулсан өргөтгөл
 
-When your platform-specific code is more complex, you should consider splitting the code out into separate files. React Native will detect when a file has a `.ios.` or `.android.` extension and load the relevant platform file when required from other components.
+Тухайн платформд зориулсан код нь их нарийн бол та кодоо тусдаа файлууд болгож хуваах нь зүйтэй. React Native нь 
+файлыг `.ios.` эсвэл `.android.` гэж таньдаг бөгөөд бусад компонентуудаас шаардлагатай үед холбогдох платформыг ажиллуулдаг. 
 
-For example, say you have the following files in your project:
+Жишээ нь, танд доорх файлууд байлаа гэж бодъё:
 
 ```sh
 BigButton.ios.js
 BigButton.android.js
 ```
 
-You can then require the component as follows:
+Та доорх маягаар компонентоо дуудаж болно: 
 
 ```javascript
 import BigButton from './BigButton';
 ```
 
-React Native will automatically pick up the right file based on the running platform.
+React Native ачаалж байгаа платформ дээр үндэслэн зөв файлыг сонгодог. 
 
-## Native-specific extensions (i.e. sharing code with NodeJS and Web)
+## Тухайн нативт зориулсан өргөтгөл ( NodeJS болон Web-д код хуваалцах)
 
-You can also use the `.native.js` extension when a module needs to be shared between NodeJS/Web and React Native but it has no Android/iOS differences. This is specially useful for projects that has common code shared among React Native and ReactJS.
+Модуль NodeJS/Web болон React Native-ын хооронд хорших хэрэгтэй агаад  Android/iOS-т ялгаагүй байх бол та `.native.js` гэсэн өргөтгөлийг ашиглах боломжтой. React Native болон ReactJS-ын дунд хуваалцах түгээмэл кодтой юм дээр ажиллаж байгаа бол энэ танд илүү хэрэг болно. 
 
-For example, say you have the following files in your project:
+Жишээ нь, танд доорх файлууд байлаа гэж бодъё:
 
 ```sh
 Container.js # picked up by Webpack, Rollup or any other Web bundler
 Container.native.js # picked up by the React Native bundler for both Android and iOS (Metro)
 ```
 
-You can still require it without the `.native` extension, as follows:
+Та `.native`  өргөтгөлгүйгээр доорх байдлаар дуудаж болно:
 
 ```javascript
 import Container from './Container';
 ```
 
-**Pro tip:** Configure your Web bundler to ignore `.native.js` extensions in order to avoid having unused code in your production bundle, thus reducing the final bundle size.
+**Мэргэжлийн зөвлөгөө:** Хэрэглэхгүй кодтой байхаас сэргийлж, bundle-ийн сүүлийн хэмжээг багасгахын тулд вэб багцлагч (bundler)-аа тохируулахдаа `.native.js` өргөтгөлийг хэрэгсэхгүй орхих хэрэгтэй. 
+
