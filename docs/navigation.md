@@ -1,35 +1,36 @@
 ---
 id: navigation
-title: Navigating Between Screens
+title: Дэлгэц хооронд шилжих
 ---
 
-Mobile apps are rarely made up of a single screen. Managing the presentation of, and transition between, multiple screens is typically handled by what is known as a navigator.
+Ганц нүүр дэлгэцтэй гар утасны апп байх нь ховор. Олон нүүрийг харуулах, хооронд шилжих үйлдэл нь навигатор гэх зүйлээр зохицуулагддаг. 
 
-This guide covers the various navigation components available in React Native. If you are just getting started with navigation, you will probably want to use [React Navigation](navigation.md#react-navigation). React Navigation provides an easy to use navigation solution, with the ability to present common stack navigation and tabbed navigation patterns on both iOS and Android.
+React Native-т байдаг шилжих үйлдлийн төрөл бүрийн компонентуудын тухай мэдээллийг та эндээс харж болно. Хэрэв та дөнгөж шилжилт хэрхэн хийх тухай судалж эхэлж байгаа бол [React Navigation](navigation.md#react-navigation)-ийг ашиглаж эхлэх байх. React Navigation нь шилжилт хийх процессийг хялбар болгосон ба iOS болон Android дээр түгээмэл ашиглагддаг стекийн шилжилт, таб үүсгэх шилжилтийг хийдэг. 
 
-If you'd like to achieve a native look and feel on both iOS and Android, or you're integrating React Native into an app that already manages navigation natively, the following library provides native navigation on both platforms: [react-native-navigation](https://github.com/wix/react-native-navigation).
+Хэрэв та iOS, Android аль алин дээр натив харагдуулах эсвэл шилжилтийг натив болгож харагдуулдаг апптай React Native-ыг холбох гэж байгаа бол хоёр платформ дээр натив шилжилт хийхэд энэ сан танд тусална: [react-native-navigation](https://github.com/wix/react-native-navigation).
 
 ## React Navigation
 
-The community solution to navigation is a standalone library that allows developers to set up the screens of an app with just a few lines of code.
+Шилжилт хийхэд зориулсан олны оролцоотой нэг шийдэл нь хөгжүүлэгчид цөөн хэдэн мөр код ашиглан дэлгэцүүдийг тохируулах боломжийг олгодог бие даасан сан юм.
 
-The first step is to install in your project:
+Эхний алхам нь суулгах:
 
 ```
 npm install --save react-navigation
 ```
-The second step is to install react-native-gesture-handler
+Хоёр дахь алхам нь react-native-gesture-handler суулгах:
 ```
 yarn add react-native-gesture-handler
 # or with npm
 # npm install --save react-native-gesture-handler
 ```
-Now we need to link our react-native to react-native-gesture-handler
+Одоо бид react-native-ийг react-native-gesture-handler-тай холбох хэрэгтэй
+
 ```
 react-native link react-native-gesture-handler
 ```
 
-Then you can quickly create an app with a home screen and a profile screen:
+Тэгээд үндсэн дэлгэц болон профайл дэлгэц бүхий аппыг богино хугацаанд хийх боломжтой:
 
 ```javascript
 import {createStackNavigator, createAppContainer} from 'react-navigation';
@@ -44,7 +45,7 @@ const App = createAppContainer(MainNavigator);
 export default App;
 ```
 
-Each screen component can set navigation options such as the header title. It can use action creators on the `navigation` prop to link to other screens:
+Нүүр бүрийн компонент нь толгой гарчиг гэхчлэн шилжилт хийх сонголтыг тохируулж болдог. `navigation' проп дээрх үйлдэл үүсгэгчийг ашиглан бусад нүүртэй холбож өгдөг:
 
 ```javascript
 class HomeScreen extends React.Component {
@@ -63,8 +64,8 @@ class HomeScreen extends React.Component {
 }
 ```
 
-React Navigation routers make it easy to override navigation logic. Because routers can be nested inside each other, developers can override navigation logic for one area of the app without making widespread changes.
+React Navigation чиглүүлэгчид нь шилжилт хийх логикийг дахин тодорхойлох явцыг хялбар болгож өгдөг. Чиглүүлэгчид нь нэг нэгнийхээ дотор үүрлэх боломжтой байдаг тул хөгжүүлэгчид өргөн хүрээг хамрахгүйгээр аппын нэг хэсгийн шилжилт хийх логикийг дахин тодорхойлж болдог. 
 
-The views in React Navigation use native components and the [`Animated`](animated.md) library to deliver 60fps animations that are run on the native thread. Plus, the animations and gestures can be easily customized.
+React Navigation доторх харагдац нь натив компонент болон [`Animated`](animated.md) сан ашиглаж байж натив thread дээр ажиллах 60fps анимейшн гаргадаг. Мөн анимейшн, дохио хөдлөлийг хүссэнээрээ хялбархан өөрчлөх боломжтой.  
 
-For a complete intro to React Navigation, follow the [React Navigation Getting Started Guide](https://reactnavigation.org/docs/getting-started.html), or browse other docs such as the [Intro to Navigators](https://expo.io/@react-navigation/NavigationPlayground).
+React Navigation-ын талаар бүрэн ойлголттой болохыг хүсвэл [React Navigation Getting Started Guide](https://reactnavigation.org/docs/getting-started.html)-ыг унших эсвэл [Intro to Navigators](https://expo.io/@react-navigation/NavigationPlayground) гэх мэт бусад хэсэгтэй танилцаарай. 
