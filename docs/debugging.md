@@ -1,100 +1,105 @@
 ---
 id: debugging
-title: Debugging
+title: Алдаа засах
+
 ---
 
-## Enabling Keyboard Shortcuts
+## Keyboard shortcut-ыг идэвхжүүлэх
 
-React Native supports a few keyboard shortcuts in the iOS Simulator. They are described below. To enable them, open the Hardware menu, select Keyboard, and make sure that "Connect Hardware Keyboard" is checked.
+iOS Симулятор дээр React Native нь цөөн хэдэн keyboard shortcut дэмждэг. Энэ тухай доор тайлбарласан болно. Идэвхжүүлэхийн тулд, Hardware цэсийг нээн Keyboard-г сонгоно. “Contact Hardware Keyboard” гэсэн нь зөвлөгдсөн байх ёстойг анхаарна уу. 
 
-## Accessing the In-App Developer Menu
+## App доторх Хөгжүүлэгчийн цэст хандах
 
-You can access the developer menu by shaking your device or by selecting "Shake Gesture" inside the Hardware menu in the iOS Simulator. You can also use the `⌘D` keyboard shortcut when your app is running in the iOS Simulator, or `⌘M` when running in an Android emulator on Mac OS and `Ctrl+M` on Windows and Linux. Alternatively for Android, you can run the command `adb shell input keyevent 82` to open the dev menu (82 being the Menu key code).
+Та iOS  төхөөрөмжөө сэгсэрснээр эсвэл Hardware цэс дотроос “Shake Gesture”-ыг сонгон Хөгжүүлэгчийн цэст хандах боломжтой. Мөн апп тань iOS cимулятор дээр ажиллаж байгаа бол `⌘D`  гэсэн товчлолыг ашиглах эсвэл МАК үйлдлийн систем дээр Android эмулятор дээр ажиллаж байгаа бол `⌘M` гэсэн товчлолыг, Windows болон Linux дээр `Ctrl+M` дарж хандаж болно. Эсвэл Android дээр хөгжүүлэгчийн цэсийг нээхийн тулд `adb shell input keyevent 82` гэсэн команд өгөх боломжтой (82 гэдэг нь цэсний түлхүүр код нь юм).
 
 ![](/react-native/docs/assets/DeveloperMenu.png)
 
-> The Developer Menu is disabled in release (production) builds.
+> Шинээр гаргах (хийх явцад) хөгжүүлэгчийн цэс нь идэвхгүй байдаг. 
 
-## Reloading JavaScript
+## JavaScript дахин ачаалах
 
-Instead of recompiling your app every time you make a change, you can reload your app's JavaScript code instantly. To do so, select "Reload" from the Developer Menu. You can also press `⌘R` in the iOS Simulator, or tap `R` twice on Android emulators.
+Аппдаа өөрчлөлт хийх болгондоо дахин хөрвүүлж байхын оронд та JavaScript кодыг шууд дахин ачаалж болно. Ингэхийн тулд
+Хөгжүүлэгчийн цэсээс "Reload" гэснийг сонгоно. Мөн iOS Симулятор дээр `⌘R` гэснийг дарах эсвэл Android эмулятор дээр хоёр удаа `R` дарж дахин ачаалж болно.
 
-### Automatic reloading
+### Автоматаар дахин ачаалах
 
-You can speed up your development times by having your app reload automatically any time your code changes. Automatic reloading can be enabled by selecting "Enable Live Reload" from the Developer Menu.
+Таны код өөрчлөгдөх тутамд автоматаар дахин ачаалах тохиргоо байдаг бөгөөд үүнийг идэвхжүүлснээр хөгжүүлэлтийг хурдан хийх боломжтой болно. Идэвхжүүлэхийн тулд Хөгжүүлэгчийн цэсээс “Enable Live Reload" гэснийг сонгоно.
 
-You may even go a step further and keep your app running as new versions of your files are injected into the JavaScript bundle automatically by enabling [Hot Reloading](https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html) from the Developer Menu. This will allow you to persist the app's state through reloads.
+Бүр цаашлаад аппаа ажиллаж байх үед JavaScript bundle дахь файлуудаа автоматаар шинэчилж байхаар тохируулах бол Хөгжүүлэгчийн цэсээс [Hot Reloading](https://facebook.github.io/react-native/blog/2016/03/24/introducing-hot-reloading.html) гэдгийг идэвхжүүлнэ. Ингэснээр дахин ачаалсан ч аппын төлөвийг хадгалахад туслах юм.
 
-> There are some instances where hot reloading cannot be implemented perfectly. If you run into any issues, use a full reload to reset your app.
+> Зарим үед hot reloading төгс ажиллахгүй байх тохиолдол гардаг . Ямар нэг асуудал гарвал full reload хийн аппаа шинээр ажиллуулах хэрэгтэй.
 
-You will need to rebuild your app for changes to take effect in certain situations:
+Тодорхой нөхцөлд та хийсэн өөрчлөлтөө хадгалахын тулд аппаа rebuild хийх хэрэгтэй болдог:
 
-- You have added new resources to your native app's bundle, such as an image in `Images.xcassets` on iOS or the `res/drawable` folder on Android.
-- You have modified native code (Objective-C/Swift on iOS or Java/C++ on Android).
+-  iOS дээр `Images.xcassets`-д зураг нэмэх эсвэл Android дээр `res/drawable` хавтас нэмэх гэх мэт натив аппдаа шинэ нөөц нэмсэн бол,
 
-## In-app Errors and Warnings
+- Натив кодыг өөрчилсөн бол (iOS дээр Objective-C/Swift эсвэл Android дээр Java/C++).
 
-Errors and warnings are displayed inside your app in development builds.
+## Апп доторх алдаа болон анхааруулга
 
-### Errors
+Апп хөгжүүлэлт хийгдэж байх үед алдаа, анхааруулга дэлгэц дээр гарч ирнэ.
 
-In-app errors are displayed in a full screen alert with a red background inside your app. This screen is known as a RedBox. You can use `console.error()` to manually trigger one.
+### Алдаанууд
 
-### Warnings
+Апп доторх алдаануудын тухай мэдээлэл улаан өнгийн суурьтайгаар, дэлгэц дүүрэн гарч ирдэг. Энэ дэлгэцийг RedBox гэж нэрлэдэг. `console.error()` гэснийг ашиглан туршиж үзэж болно.
 
-Warnings will be displayed on screen with a yellow background. These alerts are known as YellowBoxes. Click on the alerts to show more information or to dismiss them.
+### Анхааруулга
 
-As with a RedBox, you can use `console.warn()` to trigger a YellowBox.
+Анхааруулга нь дэлгэц дээр шар өнгийн суурьтай харагддаг. Эдгээр анхааруулгыг YellowBoxes гэж нэрлэдэг. Анхааруулга дээр дарж дэлгэрэнгүй мэдээлэл харж болно. Эсвэл тоохгүй орхиж болно.
 
-YellowBoxes can be disabled during development by using `console.disableYellowBox = true;`. Specific warnings can be ignored programmatically by setting an array of prefixes that should be ignored:
+RedBox-ийн нэгэн адил та `console.warn()` ашиглан YellowBox-ыг гаргаж туршиж боломжтой.
+
+Хөгжүүлэлтийн явцад `console.disableYellowBox = true;` гэдгийг ашиглан YellowBox-ыг идэвхгүй болгож болно. 
+
+Тодорхой анхааруулгыг програмчлан тоохгүй орхидог болгож болно. Ингэхдээ тоолгүй орхих prefix-ийн массивийг тохируулна:
 
 ```javascript
 import {YellowBox} from 'react-native';
 YellowBox.ignoreWarnings(['Warning: ...']);
 ```
 
-In CI/Xcode, YellowBoxes can also be disabled by setting the `IS_TESTING` environment variable.
+`IS_TESTING`  орчны хувьсагчийн тохируулан CI/Xcode, YellowBoxes-ыг идэвхгүй болгож болно.
 
-> RedBoxes and YellowBoxes are automatically disabled in release (production) builds.
+> RedBoxes болон YellowBoxes нь апп бэлэн болох үед автоматаар идэвхгүй болдог. 
 
 ## Chrome Developer Tools
 
-To debug the JavaScript code in Chrome, select "Debug JS Remotely" from the Developer Menu. This will open a new tab at [http://localhost:8081/debugger-ui](http://localhost:8081/debugger-ui).
+Chrome-д JavaScript-ын кодын алдааг засахдаа Хөгжүүлэгчийн Цэсээс "Debug JS Remotely" гэдгийг сонгоно. Ингэснээр  [http://localhost:8081/debugger-ui](http://localhost:8081/debugger-ui) гэсэн шинэ цонх нээгдэнэ.
 
-Select `Tools → Developer Tools` from the Chrome Menu to open the [Developer Tools](https://developer.chrome.com/devtools). You may also access the DevTools using keyboard shortcuts (`⌘⌥I` on macOS, `Ctrl` `Shift` `I` on Windows). You may also want to enable [Pause On Caught Exceptions](http://stackoverflow.com/questions/2233339/javascript-is-there-a-way-to-get-chrome-to-break-on-all-errors/17324511#17324511) for a better debugging experience.
+[Developer Tools](https://developer.chrome.com/devtools) нээхдээ Chrome Menu-гээс `Tools → Developer Tools`  гэдгийг сонгоно. 
+Мөн гар товчлуур ашиглан (macOS дээр `⌘⌥I` , Windows дээр `Ctrl` `Shift` `I` ) DevTools-руу нэвтрэх боломжтой. Алдаа засах явцыг илүү үр дүнтэй болгохыг хүсвэл [Pause On Caught Exceptions](http://stackoverflow.com/questions/2233339/javascript-is-there-a-way-to-get-chrome-to-break-on-all-errors/17324511#17324511) гэдгийг ашиглах нь зүйтэй.
 
-> Note: the React Developer Tools Chrome extension does not work with React Native, but you can use its standalone version instead. Read [this section](debugging.md#react-developer-tools) to learn how.
+> Тэмдэглэл: React Developer Tools Chrome өргөтгөл нь React Native-т ажилладаггүй, гэхдээ та оронд нь дангаар ажилладаг хувилбарыг нь ашиглах боломжтой. Хэрхэн ашиглах тухай[эндээс](debugging.md#react-developer-tools) уншина уу.
 
-### Debugging using a custom JavaScript debugger
+### JavaScript тусгай алдаа засагчийг ашиглан алдаа засах
 
-To use a custom JavaScript debugger in place of Chrome Developer Tools, set the `REACT_DEBUGGER` environment variable to a command that will start your custom debugger. You can then select "Debug JS Remotely" from the Developer Menu to start debugging.
+Chrome Developer Tools-ын оронд JavaScript-ын тусгай алдаа засагчийг ашиглахын тулд `REACT_DEBUGGER` орчны хувьсагчийг тохируулах команд өгвөл тусгаа алдаа засагч ажиллаж эхэлнэ. Тэгээд алдаа засах ажлыг эхлүүлэхдээ Хөгжүүлэгчийн Цэсээс "Debug JS Remotely"  гэдгийг сонгоно. 
 
-The debugger will receive a list of all project roots, separated by a space. For example, if you set `REACT_DEBUGGER="node /path/to/launchDebugger.js --port 2345 --type ReactNative"`, then the command `node /path/to/launchDebugger.js --port 2345 --type ReactNative /path/to/reactNative/app` will be used to start your debugger.
+Алдаа засаг нь бүх жагсаалтыг үндсээр нь зайгаар тусгаарласан байдлаар хүлээн авдаг. Жишээ нь алдаа засагчийг ажиллуулж эхлэхийн тулд та `REACT_DEBUGGER="node /path/to/launchDebugger.js --port 2345 --type ReactNative"` гээд дараа нь `node /path/to/launchDebugger.js --port 2345 --type ReactNative /path/to/reactNative/app` гэсэн команд өгнө.
 
-> Custom debugger commands executed this way should be short-lived processes, and they shouldn't produce more than 200 kilobytes of output.
+> Энэ маягаар хийгдсэн тусгай алдаа засагчийн команд нь богино хугацааных байх ёстой бөгөөд гаралт нь 200 килобайтаас илүүгүй байх хэрэгтэй. 
 
 ## Safari Developer Tools
 
-You can use Safari to debug the iOS version of your app without having to enable "Debug JS Remotely".
+Та аппынхаа iOS хувилбарын алдааг засахдаа "Debug JS Remotely"-ыг идэвхжүүлэхгүйгээр Safari ашиглаж болно.
 
-- Enable Develop menu in Safari: `Preferences → Advanced → Select "Show Develop menu in menu bar"`
-- Select your app's JSContext: `Develop → Simulator → JSContext`
-- Safari's Web Inspector should open which has a Console and a Debugger
+- Safari дотор Develop menu-ыг идэвхжүүлэх: `Preferences → Advanced → Select "Show Develop menu in menu bar"`
+- Аппын JSContext-ыг сонгох: `Develop → Simulator → JSContext`
+- Safari's Web Inspector нээгдэнэ. Энэ нь консол болон алдаа засагчтай. 
 
-However, there are some disadvantages:
+Гэхдээ хэдэн сул тал бий:
 
-1. No sourcemaps when debugging
-2. Every time the app is reloaded (using live reload, or by manually reloading), a new JSContext is created. Choosing "Automatically Show Web Inspectors for JSContexts" saves you from having to select the latest JSContext manually.
-
+1. Алдаа засах үед эх байршлыг нь заадаггүй.
+2. Апп дахин ачаалах үед (live reload ашиглах эсвэл гар аргаар ачаалах) JSContext шинээр үүснэ. "Automatically Show Web Inspectors for JSContexts" гэдгийг сонговол сүүлийн JSContext  хувилбарыг сонгох шаардлагагүй болно.
 ## React Developer Tools
 
-You can use [the standalone version of React Developer Tools](https://github.com/facebook/react-devtools/tree/master/packages/react-devtools) to debug the React component hierarchy. To use it, install the `react-devtools` package globally:
+Та [React Developer Tools-ын бие даасан хувилбар](https://github.com/facebook/react-devtools/tree/master/packages/react-devtools)-ыг ашиглан React компонентийн шатлалын алдааг засаж болно. Ашиглахын тулд `react-devtools` багцыг ил суулгана:
 
 ```
 npm install -g react-devtools
 ```
 
-Now run `react-devtools` from the terminal to launch the standalone DevTools app:
+Одоо терминалаас `react-devtools` ажиллуулж, бие даасан DevTools аппыг ажиллуулж эхлүүлнэ:
 
 ```
 react-devtools
@@ -102,80 +107,77 @@ react-devtools
 
 ![React DevTools](/react-native/docs/assets/ReactDevTools.png)
 
-It should connect to your simulator within a few seconds.
+Хэдэн секундийн дотор симулятортай холбогдоно.
 
-> Note: if you prefer to avoid global installations, you can add `react-devtools` as a project dependency. Add the `react-devtools` package to your project using `npm install --save-dev react-devtools`, then add `"react-devtools": "react-devtools"` to the `scripts` section in your `package.json`, and then run `npm run react-devtools` from your project folder to open the DevTools.
+> Тэмдэглэл: хэрэв та ил суулгахыг хүсэхгүй байгаа бол `react-devtools`-ыг харьяа болгон нэмэх боломжтой. `react-devtools` багцыг  `npm install --save-dev react-devtools` ашиглан нэмээд тэгээд `package.json` доторх `scripts` хэсэгт `"react-devtools": "react-devtools"` нэмнэ.  DevTools-ээ нээхийн тулд өөрийн фолдероос `npm run react-devtools` гэснийг ажиллуулна.
 
-### Integration with React Native Inspector
+### React Native Inspector-тэй нэгтгэх
 
-Open the in-app developer menu and choose "Toggle Inspector". It will bring up an overlay that lets you tap on any UI element and see information about it:
+Апп доторх хөгжүүлэгчийн цэсийг нээн "Toggle Inspector" гэснийг сонгоно. Ингэснээр давхар цонх үүсч та хэрэглэгчийн интерфэйсийн хүссэн элемент руу орж, мэдээлэл харах боломжтой:
 
 ![React Native Inspector](/react-native/docs/assets/Inspector.gif)
 
-However, when `react-devtools` is running, Inspector will enter a special collapsed mode, and instead use the DevTools as primary UI. In this mode, clicking on something in the simulator will bring up the relevant components in the DevTools:
+Гэхдээ `react-devtools` ажиллаж байгаа үед Inspector уналтын горимд шилжих бөгөөд DevTools-ыг хэрэглэгчийн гол интерфэйс болгон ашигладаг. Энэ горимд байгаа үед симулятор доторх ямар нэг зүйл дээр дарвал DevTools доторх холбогдох компонентийг гаргаж ирдэг:
 
 ![React DevTools Inspector Integration](/react-native/docs/assets/ReactDevToolsInspector.gif)
 
-You can choose "Toggle Inspector" in the same menu to exit this mode.
+Энэхүү горимоос гарахын тулд цэс доторх "Toggle Inspector" гэснийг сонгоно.
 
-### Inspecting Component Instances
+### Сomponent Instances шалгах
 
-When debugging JavaScript in Chrome, you can inspect the props and state of the React components in the browser console.
+Chrome-д JavaScript-ын алдаа засаж байгаа үед та хөтчийн консол дотор React компонентуудын пропс болон төлөвийг шалгах боломжтой. 
 
-First, follow the instructions for debugging in Chrome to open the Chrome console.
+Эхлээд Chrome-ийн алдаа засах зааврыг даган Chrome консолыг нээнэ үү.
 
-Make sure that the dropdown in the top left corner of the Chrome console says `debuggerWorker.js`. **This step is essential.**
+Chrome консолын зүүн дээд буланд `debuggerWorker.js` гэсэн байгаа эсэхийг харна уу.  **Энэ алхам их чухал.**
 
-Then select a React component in React DevTools. There is a search box at the top that helps you find one by name. As soon as you select it, it will be available as `$r` in the Chrome console, letting you inspect its props, state, and instance properties.
+Тэгээд React DevTools дотор React компонент сонгоно. Дээд хэсэг дэх хайлтын хэсгийг ашиглан нэрээр хайн олох боломжтой. Сонгонгуут Chrome консол дотор `$r` гэж гарах бөгөөд та пропс, төлөв, instance-ын тухай мэдээллийг шалгах боломжтой болно. 
 
 ![React DevTools Chrome Console Integration](/react-native/docs/assets/ReactDevToolsDollarR.gif)
 
-## Performance Monitor
+## Ажиллагааг хянагч
 
-You can enable a performance overlay to help you debug performance problems by selecting "Perf Monitor" in the Developer Menu.
+Хөгжүүлэгчийн цэс дотроос "Perf Monitor" гэснийг сонгон ажиллагаанд тулгарсан асуудлыг засахад туслах ажиллагааны давхар цонхыг идэвхжүүлж болно.
 
 <hr style="margin-top:25px; margin-bottom:25px;"/>
 
-# Debugging in Ejected Apps
+#  Ejected аппын алдааг засах 
 
 <div class="banner-crna-ejected" style="margin-top:25px">
   <h3>Projects with Native Code Only</h3>
   <p>
-    The remainder of this guide only applies to projects made with <code>react-native init</code>
-    or to those made with <code>expo init</code> or Create React Native App which have since ejected. For
-    more information about ejecting, please see
-    the <a href="https://github.com/react-community/create-react-native-app/blob/master/EJECTING.md" target="_blank">guide</a> on
-    the Create React Native App repository.
+    Үлдсэн хэсэгт <code>react-native init</code> эсвэл <code>expo init</code> эсвэл ejected болсон Create React Native App ашиглан хийсэн апп-д хамаарах мэдээлэл байгааг анхаарна уу.
+Ejecting гэж юу болох талаар мэдэхийг хүсвэл Create React Native App repository-ын <a href="https://github.com/react-community/create-react-native-app/blob/master/EJECTING.md" target="_blank">заавар</a>-тай танилцана уу.
   </p>
 </div>
 
-## Accessing console logs
+## Console logs-т хандах
 
-You can display the console logs for an iOS or Android app by using the following commands in a terminal while the app is running:
+Апп ажиллаж байх үед та терминал дотор доорх командыг өгч iOS болон Android-ын console logs-ыг гаргаж ирнэ:
 
 ```
 $ react-native log-ios
 $ react-native log-android
 ```
 
-You may also access these through `Debug → Open System Log...` in the iOS Simulator or by running `adb logcat *:S ReactNative:V ReactNativeJS:V` in a terminal while an Android app is running on a device or emulator.
+Мөн та iOS симулятор дотор `Debug → Open System Log...`  гэж орох эсвэл  Android апп төхөөрөмж дээр, эмулятор дээр ажиллаж байх үед терминалд `adb logcat *:S ReactNative:V ReactNativeJS:V`  гэдгийг ажиллуулан орж болно. 
 
-> If you're using Create React Native App or Expo CLI, console logs already appear in the same terminal output as the packager.
+> Хэрэв та Create React Native App эсвэл Expo CLI ашиглаж байгаа бол console logs нь тухайн ижил терминал дээр багцлагч хэлбэрээр харагдаж байгаа. 
 
-## Debugging on a device with Chrome Developer Tools
+## Chrome Developer Tools ашиглан төхөөрөмжийн алдааг засах
 
-> If you're using Create React Native App or Expo CLI, this is configured for you already.
+> Хэрэв та Create React Native App эсвэл Expo CLI ашиглаж байгаа бол энэ тохиргоо нь аль хэдийн хийгдсэн байна. 
 
-On iOS devices, open the file [`RCTWebSocketExecutor.m`](https://github.com/facebook/react-native/blob/master/Libraries/WebSocket/RCTWebSocketExecutor.m) and change "localhost" to the IP address of your computer, then select "Debug JS Remotely" from the Developer Menu.
+iOS төхөөрөмж дээр [`RCTWebSocketExecutor.m`](https://github.com/facebook/react-native/blob/master/Libraries/WebSocket/RCTWebSocketExecutor.m) гэсэн файлыг нээн компьютерынхоо IP хаягт "localhost"-ыг өөрчилнө. Тэгээд Хөгжүүлэгчийн цэсээс "Debug JS Remotely" гэснийг сонгоно.
 
-On Android 5.0+ devices connected via USB, you can use the [`adb` command line tool](http://developer.android.com/tools/help/adb.html) to setup port forwarding from the device to your computer:
 
+USB холбогдсон Android 5.0+ төхөөрөмж дээр та  [`adb` command line tool](http://developer.android.com/tools/help/adb.html)-ыг ашиглан уг төхөөрөмжөөс компьютер руугаа шилжүүлэх тохиргоог хийж болно:
 `adb reverse tcp:8081 tcp:8081`
 
-Alternatively, select "Dev Settings" from the Developer Menu, then update the "Debug server host for device" setting to match the IP address of your computer.
+Эсвэл Хөгжүүлэгчийн цэсээс "Dev Settings" гэдгийг сонгон өөрийн компьютерын  IP хаягтай адилхан байхаар "Debug server host for device" гэдгийг тохируулна. 
 
-> If you run into any issues, it may be possible that one of your Chrome extensions is interacting in unexpected ways with the debugger. Try disabling all of your extensions and re-enabling them one-by-one until you find the problematic extension.
+> Хэрэв ямар нэг асуудал гарвал Chrome өргөтгөлийн аль нэг нь алдаа засагчид тодорхой бус шалтгаанаар нөлөөлөөд байх боломжтой. Бүх өргөтгөлүүдээ идэвхгүй болгож байгаад асуудалтай байгаа өргөтгөлийг олох хүртэл нэг нэгээр нь идэвхжүүлээрэй. 
 
-## Debugging native code
+## Натив кодын алдааг засах
 
-When working with native code, such as when writing native modules, you can launch the app from Android Studio or Xcode and take advantage of the native debugging features (setting up breakpoints, etc.) as you would in case of building a standard native app.
+Натив модуль бичих гэхчлэн натив кодтой ажиллаж байгаа үед та Android Studio эсвэл  Xcode-оос аппаа эхлүүлэн, натив апп хэрхэн хийдэг шигээ хийгээд натив алдаа засагчийг ашиглах боломжтой (зогсоох үеийг тохируулах г.м).
