@@ -1,19 +1,19 @@
 ---
 id: images
-title: Images
+title: Зураг
 ---
 
-## Static Image Resources
+## Статик зургийн нөөц
 
-React Native provides a unified way of managing images and other media assets in your iOS and Android apps. To add a static image to your app, place it somewhere in your source code tree and reference it like this:
+iOS, Android апп доторх зураг болон бусад медиаг удирдаж зохицуулах нэгдсэн арга React Native-т байдаг. Аппдаа байнгын хөдөлгөөнгүй зураг нэмэх бол эх кодын хаа нэгтэй байрлуулан доорх байдлаар зааж өгнө:
 
 ```javascript
 <Image source={require('./my-icon.png')} />
 ```
 
-The image name is resolved the same way JS modules are resolved. In the example above, the packager will look for `my-icon.png` in the same folder as the component that requires it. Also, if you have `my-icon.ios.png` and `my-icon.android.png`, the packager will pick the correct file for the platform.
+Зургийн нэр нь JS modules шиг зохицуулагддаг. Дээрх жишээ дээр packager нь шаардаж байгаа компоненттойгоо адилхан фолдероос `my-icon.png` гэж хайна. Мөн `my-icon.ios.png` болон `my-icon.android.png`-тай бол packager нь уг платформд тохирох зөв файлыг сонгоно. 
 
-You can also use the `@2x` and `@3x` suffixes to provide images for different screen densities. If you have the following file structure:
+Та мөн өөр өөр дэлгэцийн нягтаршилд зориулсан зургийг сонгохдоо `@2x` болон `@3x` гэсэн дагаврыг ашиглах боломжтой. Хэрэв танд доорх файл бүтэц байгаа бол:
 
 ```
 .
@@ -24,27 +24,27 @@ You can also use the `@2x` and `@3x` suffixes to provide images for different sc
     └── check@3x.png
 ```
 
-...and `button.js` code contains:
+...`button.js` код нь:
 
 ```javascript
 <Image source={require('./img/check.png')} />
 ```
 
-...the packager will bundle and serve the image corresponding to device's screen density. For example, `check@2x.png`, will be used on an iPhone 7, while`check@3x.png` will be used on an iPhone 7 Plus or a Nexus 5. If there is no image matching the screen density, the closest best option will be selected.
+...packager нь төхөөрөмжийн дэлгэцийн нягтралд тохируулан зургийг нэгтгэж гаргана. Жишээ нь `check@2x.png` нь iPhone 7 дээр ашиглагдах бол `check@3x.png` нь iPhone 7 Plus эсвэл Nexus 5 дээр ашиглагдана. Хэрэв дэлгэцийн нягтралд таарах зураг байхгүй бол хамгийн ойролцоо боломжит хувилбарыг сонгодог. 
 
-On Windows, you might need to restart the packager if you add new images to your project.
+Windows дээр шинэ зургууд нэмсэн бол packager-аа дахин эхлүүлэх шаардлагатай болно. 
 
-Here are some benefits that you get:
+Хэдэн давуу талыг дурдвал:
 
-1. Same system on iOS and Android.
-2. Images live in the same folder as your JavaScript code. Components are self-contained.
-3. No global namespace, i.e. you don't have to worry about name collisions.
-4. Only the images that are actually used will be packaged into your app.
-5. Adding and changing images doesn't require app recompilation, just refresh the simulator as you normally do.
-6. The packager knows the image dimensions, no need to duplicate it in the code.
-7. Images can be distributed via [npm](https://www.npmjs.com/) packages.
+1. iOS болон Android дээр ижил системтэй.
+2. Зургууд нь JavaScript кодтой адилхан фолдерт байна. Компонентууд нь бие даасан. 
+3. Нэгдсэн нэрийн орон зай (Global namespace) байхгүй. Нэр зөрчилдөнө гэж санаа зовох хэрэггүй.
+4. Үнэхээр ашиглагдах зургууд л апп-т орох болно. 
+5. Зураг нэмж, өөрчлөх бүртээ дахин хөрвүүлэх шаардлагагүй. Зүгээр л симялатороо refresh хийхэд л хангалттай.
+6. Packager нь зургийн харьцааг мэдэх бөгөөд код дотор дахин оруулах шаардлагагүй. 
+7. Зургууд нь [npm](https://www.npmjs.com/) package-аар дамжин хүргэгдэнэ.
 
-In order for this to work, the image name in `require` has to be known statically.
+Зөв ажиллуулахын тулд `require` гэсэн доторх зургийн нэр өөрчлөгдөхгүй байх ёстой.
 
 ```javascript
 // GOOD
@@ -61,37 +61,35 @@ var icon = this.props.active
 <Image source={icon} />;
 ```
 
-Note that image sources required this way include size (width, height) info for the Image. If you need to scale the image dynamically (i.e. via flex), you may need to manually set `{ width: undefined, height: undefined }` on the style attribute.
+Зургийн эх сурвалж бүхий мэдээлэлд өргөн өндөр хэмжээ байх шаардлагатайг анхаарна уу. Хэрэв та зургийн харьцааг динамикаар тохируулах гэж байгаа бол (жишээ нь flex ашиглан)  style атрибут дотор тохируулж өгөх `{ width: undefined, height: undefined }` хэрэгтэй. 
 
-## Static Non-Image Resources
+## Статик, зургийн бус эх үүсвэр
 
-The `require` syntax described above can be used to statically include audio, video or document files in your project as well. Most common file types are supported including `.mp3`, `.wav`, `.mp4`, `.mov`, `.html` and `.pdf`. See [packager defaults](https://github.com/facebook/metro/blob/master/packages/metro-config/src/defaults/defaults.js#L14-L44) for the full list.
+Дээр дурдсан `require` синтакс нь аудио, видео эсвэл файлыг агуулж байж болно. `.mp3`, `.wav`, `.mp4`, `.mov`, `.html`, `.pdf` нь түгээмэл файлын төрлүүд юм. Бүрэн жагсаалтыг [packager defaults](https://github.com/facebook/metro/blob/master/packages/metro-config/src/defaults/defaults.js#L14-L44) гэснээс харна уу.
 
-You can add support for other types by creating a packager config file (see the [packager config file](https://github.com/facebook/react-native/blob/master/local-cli/util/Config.js#L68) for the full list of configuration options).
+Та өөр төрлийн файлын төрлийг дэмждэг болгохыг хүсвэл packager config файл үүсгэх хэрэгтэй.([packager config file](https://github.com/facebook/react-native/blob/master/local-cli/util/Config.js#L68) гэсэн рүү орж хэрхэн тохируулах тухай бүрэн жагсаалт бүхий мэдээллийг харна уу). 
+Анхаарах нэг зүйл нь видеонд 'flexGrow'-ын оронд бүрэн байрлалыг тогтоож өгөх хэрэгтэй. Учир нь зурган бус asset байвал хэмжээний мэдээлэл дамжуулагдахгүй.  Android-ын Xcode эвсэл Assets фолдерт шууд холбогдсон видеонд энэ хязгаарлалт хамаарахгүй.
 
-A caveat is that videos must use absolute positioning instead of `flexGrow`, since size info is not currently passed for non-image assets. This limitation doesn't occur for videos that are linked directly into Xcode or the Assets folder for Android.
+## Холимог аппын зураг
 
-## Images From Hybrid App's Resources
+Хэрэв та зарим UI нь React Native дээр зарим нь платформ кодоор хийгдсэн холимог апп хийж байгаа бол аппд багтсан байгаа зургуудыг ашиглах бүрэн боломжтой. 
 
-If you are building a hybrid app (some UIs in React Native, some UIs in platform code) you can still use images that are already bundled into the app.
-
-For images included via Xcode asset catalogs or in the Android drawable folder, use the image name without the extension:
+ Xcode asset catalogs-оор орсон зургууд эсвэл Android drawable  фолдерт байгаа зургуудын хувьд өргөтгөлгүй нэрийг нь ашиглаарай:
 
 ```javascript
 <Image source={{uri: 'app_icon'}} style={{width: 40, height: 40}} />
 ```
 
-For images in the Android assets folder, use the `asset:/` scheme:
+Android assets доторх зургуудад `asset:/`-ыг ашиглана уу:
 
 ```javascript
 <Image source={{uri: 'asset:/app_icon.png'}} style={{width: 40, height: 40}} />
 ```
+Эдгээр арга нь бүрэн баталгаатай гэх зүйлгүй. Аппликейшн дотор зургууд баталгаатай орох эсэх нь танаас шалтгаална. Мөн та зургийн харьцааг өөрөө тодорхойлж өгөх ёстой. 
 
-These approaches provide no safety checks. It's up to you to guarantee that those images are available in the application. Also you have to specify image dimensions manually.
+## Network images
 
-## Network Images
-
-Many of the images you will display in your app will not be available at compile time, or you will want to load some dynamically to keep the binary size down. Unlike with static resources, _you will need to manually specify the dimensions of your image_. It's highly recommended that you use https as well in order to satisfy [App Transport Security](running-on-device.md#app-transport-security) requirements on iOS.
+Апп дээр дэлгэц дээр гарч байгаа олон зураг хөрвүүлэх үед харагдахгүй байх, эсвэл хоёртын хэмжээг бага байлгахын тулд та заримыг нь динамикаар ачаалахыг хүсэж болох юм. Статик зургийг бодвол, _та зургийнхаа хэмжээсийг өөрөө тодорхойлж өгөх хэрэгтэйгээрээ ялгаатай_.[App Transport Security](running-on-device.md#app-transport-security) -ын iOS дээрх шаардлагад нийцүүлэхийн тулд http ашиглахыг танд зөвлөх байна. 
 
 ```javascript
 // GOOD
@@ -104,7 +102,7 @@ Many of the images you will display in your app will not be available at compile
 
 ### Network Requests for Images
 
-If you would like to set such things as the HTTP-Verb, Headers or a Body along with the image request, you may do this by defining these properties on the source object:
+Хэрэв та зургаас гадна HTTP-Verb, Толгой, Их бие зэргийг тохируулах гэж байгаа бол эх объект дээр эдгээр зүйлсийг тодорхойлж өгч хийж болно:
 
 ```javascript
 <Image
@@ -122,9 +120,9 @@ If you would like to set such things as the HTTP-Verb, Headers or a Body along w
 
 ## Uri Data Images
 
-Sometimes, you might be getting encoded image data from a REST API call. You can use the `'data:'` uri scheme to use these images. Same as for network resources, _you will need to manually specify the dimensions of your image_.
+Заримдаа та REST API-аас зургийн кодолсон мэдээлэл хүлээн аваад байж магадгүй. Эдгээр зургийг ашиглахын тулд `'data:'` uri ашиглаж болно. Network resources-ын нэгэн адил _та зургийн хэмжээсийг өөрөө тогтоож өгөх хэрэгтэй_.
 
-> This is recommended for very small and dynamic images only, like icons in a list from a DB.
+> Өгөгдлийн сангаас жагсаалт доторх дүрс гэх мэт маш жижиг, динамик зурагт энэ аргыг ашиглахыг зөвлөе.
 
 ```javascript
 // include at least width and height!
@@ -141,14 +139,14 @@ Sometimes, you might be getting encoded image data from a REST API call. You can
 />
 ```
 
-### Cache Control (iOS Only)
+### Cache Control (iOS)
 
-In some cases you might only want to display an image if it is already in the local cache, i.e. a low resolution placeholder until a higher resolution is available. In other cases you do not care if the image is outdated and are willing to display an outdated image to save bandwidth. The `cache` source property gives you control over how the network layer interacts with the cache.
+Зарим тохиолдолд зөвхөн local кэш дотор байгаа зургийг дэлгэц дээр харуулах хэрэг гарч магадгүй. Жишээ нь өндөр нягтаршилтайг олох хүртэл бага нягтаршилтайн зайг хадгалах гэх мэт. Зарим үед та цаг хэмнэхийн тулд зураг хуучирсан эсэхийг үл тоон хуучин зураг харуулах үе байна. `cache` эх үүсвэрийн тусламжтай та сүлжээний layer нь кэштэй хэрхэн харилцах үйлчлэхийг удирдана. 
 
-- `default`: Use the native platforms default strategy.
-- `reload`: The data for the URL will be loaded from the originating source. No existing cache data should be used to satisfy a URL load request.
-- `force-cache`: The existing cached data will be used to satisfy the request, regardless of its age or expiration date. If there is no existing data in the cache corresponding the request, the data is loaded from the originating source.
-- `only-if-cached`: The existing cache data will be used to satisfy a request, regardless of its age or expiration date. If there is no existing data in the cache corresponding to a URL load request, no attempt is made to load the data from the originating source, and the load is considered to have failed.
+- `default`: Натив платформын үндсэн аргыг ашиглах.
+- `reload`: URL дахь өгөгдөл нь анхны эх үүсвэрээс ачаална. URL ачаалах хүсэлтийг биелүүлэхийн тулд бэлэн кэш өгөгдөл ашиглах учиргүй.
+- `force-cache`: Хүсэлтийг биелүүлэхийн тулд бэлэн кэш өгөгдөл нь ашиглалтын хугацаа, хэзээ дуусгавар болохоос үл хамааран ашиглагдана. Хэрэв тухайн хүсэлтэд таарах бэлэн өгөгдөл кэш дотор байхгүй бол анхны эх үүсвэрээс өгөгдлийг ачаална. 
+- `only-if-cached`: Хүсэлтийг биелүүлэхийн тулд бэлэн кэш өгөгдөл нь ашиглалтын хугацаа, хэзээ дуусгавар болохоос үл хамааран ашиглагдана.Хэрэв URL ачаалах хүсэлтэд нийцэх бэлэн өгөгдөл кэш дотор байхгүй бол анхны эх үүсвэрээс өгөгдлийг ачаалах гэж оролдохгүй ба ачаалах процесс амжилтгүй боллоо гэж үзнэ.
 
 ```javascript
 <Image
@@ -161,42 +159,43 @@ In some cases you might only want to display an image if it is already in the lo
 ```
 
 ## Local Filesystem Images
+`Images.xcassets`-ын гаднах local resources-ын жишээг [CameraRoll](cameraroll.md)-оос харна уу.
 
-See [CameraRoll](cameraroll.md) for an example of using local resources that are outside of `Images.xcassets`.
+### Camera Roll-ын шилдэг зураг
 
-### Best Camera Roll Image
+iOS нь нэг зургийн олон хэмжээтэй хувилбарыг Camera Roll дотор хадгалдаг. Ажиллагааг бодолцон аль болох ойролцоо хэмжээний зургийг сонгох нь чухал. 200x200 харьцаатай thumbnail харуулах гэж байж 3264x2448 чанартай бүтэн зураг ашиглах шаардлагагүй. Яг таарсан зураг байвал React Native сонгон авна. Эс бөгөөс хэмжээг нь өөрчилсний улмаас бүрсийхээс сэргийлэн дор хаяж 50% том байх зургийг ойролцоо хэмжээтэй зургуудаас хайн эхний зургийг сонгодог. Анхнаасаа ингэж сонгох тохиргоотой байдаг тул та өөрөө нарийн, алдаагүй код бичих гэж санаагаа чилээх хэрэггүй.
 
-iOS saves multiple sizes for the same image in your Camera Roll, it is very important to pick the one that's as close as possible for performance reasons. You wouldn't want to use the full quality 3264x2448 image as source when displaying a 200x200 thumbnail. If there's an exact match, React Native will pick it, otherwise it's going to use the first one that's at least 50% bigger in order to avoid blur when resizing from a close size. All of this is done by default so you don't have to worry about writing the tedious (and error prone) code to do it yourself.
 
-## Why Not Automatically Size Everything?
+## Яагаад автоматаар бүгдийнх нь хэмжээг өөрчилж болохгүй гэж?
 
-_In the browser_ if you don't give a size to an image, the browser is going to render a 0x0 element, download the image, and then render the image based with the correct size. The big issue with this behavior is that your UI is going to jump all around as images load, this makes for a very bad user experience.
+_Хөтөч дотор_ та зургийн хэмжээг зааж өгөхгүй бол хөтөч нь 0x0 элемент бүхий зургийг авч татан, зөв хэмжээ дээр үндэслэн зургийг хуруулдаг. Үүний нэг асуудал нь зургууд ачаалж байх үед UI нь эмх замбараагүй болох ба хэрэглэгчийн өнцгөөс бол энэ нь тун таагүй явдал юм.  
 
-_In React Native_ this behavior is intentionally not implemented. It is more work for the developer to know the dimensions (or aspect ratio) of the remote image in advance, but we believe that it leads to a better user experience. Static images loaded from the app bundle via the `require('./my-icon.png')` syntax _can be automatically sized_ because their dimensions are available immediately at the time of mounting.
+_React Native дотор_ энэ төрлийн асуудал угийн байдаггүй. Зургийн хэмжээс эсвэл харьцааг урьдаар мэдэж байх нь хөгжүүлэгчийн ажил бөгөөд энэ нь хэрэглэгчийн талаас харвал илүү дээр гэж үздэг. Статик зургууд `require('./my-icon.png')` дагуу татагдах бөгөөд синтакс__хэмжээ нь автоматаар өгөгдөнө. Учир нь хэрэглэгч хандахад бэлэн болох үед хэмжээс нь бэлэн байна. 
 
-For example, the result of `require('./my-icon.png')` might be:
+Жишээ нь, `require('./my-icon.png')`-ын үр дүн нь иймэрхүү:
 
 ```javascript
 {"__packager_asset":true,"uri":"my-icon.png","width":591,"height":573}
 ```
 
-## Source as an object
+## Объектоор авах 
 
-In React Native, one interesting decision is that the `src` attribute is named `source` and doesn't take a string but an object with a `uri` attribute.
+React Native дахь нэгэн сонирхолтой шийдвэр нь `src` атрибут нь `source` гэж нэрлэгдсэн явдал юм. String авахгүй ба  `uri` атрибуттай объект хүлээн авдаг.
 
 ```javascript
 <Image source={{uri: 'something.jpg'}} />
 ```
 
-On the infrastructure side, the reason is that it allows us to attach metadata to this object. For example if you are using `require('./my-icon.png')`, then we add information about its actual location and size (don't rely on this fact, it might change in the future!). This is also future proofing, for example we may want to support sprites at some point, instead of outputting `{uri: ...}`, we can output `{uri: ..., crop: {left: 10, top: 50, width: 20, height: 40}}` and transparently support spriting on all the existing call sites.
+Дэд бүтцийн талаас харвал тухайн объектод метадата хавсаргах боломж бидэнд олгож байгаа юм. Жишээ нь та `require('./my-icon.png')` ашиглаж байгаад байрлал, хэмжээний тухай бодит мэдээллийг нэмэх боломжтой (Их найдаад хэрэггүй. Цаашид өөрчлөгдөх магадлалтай!). Мөн ирээдүйд гарч болзошгүй элдэв эрсдлээс сэргийлэх юм. Жишээ нь бид sprite зураг дэмждэг болгохыг хүслээ гэж бодоход `{uri: ...}` гэж гаргахын оронд `{uri: ..., crop: {left: 10, top: 50, width: 20, height: 40}}` гэж зааж өгөх бөгөөд бүх бэлэн сайтуудад илээр sprite дэмждэг болгох юм.
 
-On the user side, this lets you annotate the object with useful attributes such as the dimension of the image in order to compute the size it's going to be displayed in. Feel free to use it as your data structure to store more information about your image.
+Хэрэглэгчийн талаас бол дэлгэц дээр харагдах хэмжээг тооцоолохын тулд зургийн хэмжээс гэхчлэн хэрэг болох шинж бүхий объектийг онцолж харахад тусалдаг. Зургийн талаар илүү дэлгэрэнгүй мэдээлэл хадгалах өгөгдлийн бүтэц хэлбэрээр ашиглах боломжтой. 
+
 
 ## Background Image via Nesting
 
-A common feature request from developers familiar with the web is `background-image`. To handle this use case, you can use the `<ImageBackground>` component, which has the same props as `<Image>`, and add whatever children to it you would like to layer on top of it.
+Вэбийн нэгэн адил хөгжүүлэгчдээс түгээмэл ирдэг нэг хүсэлт нь `background-image`. Үүнийг шийдэхийн тулд та `<ImageBackground>`  гэсэн компонент ашиглаж болох ба энэ нь `<Image>`-тай адилхан проптой. Дээрээс нь layer үүсгэхээр хүссэн дагавраа нэмэх боломжтой. 
 
-You might not want to use `<ImageBackground>` in some cases, since the implementation is very simple. Refer to `<ImageBackground>`'s [documentation](imagebackground.md) for more insight, and create your own custom component when needed.
+Зарим тохиолдолд  ажиллуулахад энгийн болохоор та `<ImageBackground>`-ыг хэрэглэхийг хүсэхгүй ч байж болох юм. `<ImageBackground>`-ын [мэдээлэл](imagebackground.md)-тэй танилцаж, шаардлагатай үед өөрийн хүссэн компонентоо хэрхэн бүтээх тухай уншаарай.
 
 ```javascript
 return (
@@ -205,18 +204,17 @@ return (
   </ImageBackground>
 );
 ```
+Та өргөн, өндөр гэсэн хэв маягийг нь тодорхойлж өгөх ёстой гэдгийг анхаарна уу. 
 
-Note that you must specify some width and height style attributes.
+## iOS Хүрээний радиусын хэв маяг
 
-## iOS Border Radius Styles
-
-Please note that the following corner specific, border radius style properties are currently ignored by iOS's image component:
+Доорх булан, хүрээний хэв маягийг iOS зургийн компонентод дэмждэггүй болохыг анхаарна уу:
 
 - `borderTopLeftRadius`
 - `borderTopRightRadius`
 - `borderBottomLeftRadius`
 - `borderBottomRightRadius`
 
-## Off-thread Decoding
+## Off-Thread Image Decoding
 
-Image decoding can take more than a frame-worth of time. This is one of the major sources of frame drops on the web because decoding is done in the main thread. In React Native, image decoding is done in a different thread. In practice, you already need to handle the case when the image is not downloaded yet, so displaying the placeholder for a few more frames while it is decoding does not require any code change.
+Зургийг decode хийх нь хугацаа шаардсан ажил. Decoding нь гол thread дээр хийгддэг тул энэ нь вэб дээрх фрэйм унах гол шалтгаануудын нэг болдог. React Native-т  зургийн decode нь өөр thread дээр хийгддэг. Бодит туршлага дээр бол зураг хараахан татагдаагүй үед асуудлыг шийдэх хэрэгтэй. Тэгвэл илүү хэдэн фрэймийн зайг гаргаж, decode хийхэд код өөрчлөх шаардлагагүй байна. 
