@@ -1,19 +1,19 @@
 ---
 id: animations
-title: Animations
+title: Анимейшн 
 ---
 
-Animations are very important to create a great user experience. Stationary objects must overcome inertia as they start moving. Objects in motion have momentum and rarely come to a stop immediately. Animations allow you to convey physically believable motion in your interface.
+Анемейшн нь хэрэглэгчийн сэтгэл хүрч чаддаг. Хөдөлгөөнгүй зүйлс хөдөлж эхлэхэд нэгэн хэвийн байдал арилдаг. Хөдөлж байгаа зүйлс өөрийн гэсэн хэмнэлтэй байх бөгөөд гэнэт шууд зогсчихдоггүй. Анимейшны тусламжтай та итгэл төрөх, жинхэнэ мэт хэмнэлийг бий болгох боломжтой.
 
-React Native provides two complementary animation systems: [`Animated`](animations.md#animated-api) for granular and interactive control of specific values, and [`LayoutAnimation`](animations.md#layoutanimation-api) for animated global layout transactions.
+React Native-т хоёр төрлийн нэмэлт анимейшн систем байдаг. [`Animated`](animations.md#animated-api) нь нарийн ширхэгтэй, онцгой тэмдэгтийн интерактив удирдлага бүхий систем бол [`LayoutAnimation`](animations.md#layoutanimation-api) нь хөдөлгөөнт global layout-тай.
 
 ## `Animated` API
 
-The [`Animated`](animated.md) API is designed to make it very easy to concisely express a wide variety of interesting animation and interaction patterns in a very performant way. `Animated` focuses on declarative relationships between inputs and outputs, with configurable transforms in between, and simple `start`/`stop` methods to control time-based animation execution.
+[`Animated`](animated.md) API нь олон төрлийн сонирхолтой анимейшныг маш хялбархнаар товч тодорхой харуулах зорилготой бөгөөд харилцан үйлчлэл нь их сайн ажиллаж чаддаг. `Animated` оролт, гаралтын харилцааг сайтар тусгаж, хоорондын шилжилтийг тохируулдаг ба хугацаа заасан анимейшныг удирдах `start`/`stop` гэсэн энгийн хэрэглүүртэй.
 
-`Animated` exports four animatable component types: `View`, `Text`, `Image`, and `ScrollView`, but you can also create your own using `Animated.createAnimatedComponent()`.
+`Animated` нь  `View`, `Text`, `Image`, `ScrollView` гэсэн дөрвөн төрлийн хөдөлгөөнд оруулж болох компонентуудыг экспорт хийдэг. Гэхдээ та  `Animated.createAnimatedComponent()` ашиглан өөрөө бас хийх боломжтой.
 
-For example, a container view that fades in when it is mounted may look like this:
+Жишээ нь, контейнерт хандах үед уусан алга болдог байхаар хийвэл үүн шиг харагдана:
 
 ```SnackPlayer
 import React from 'react';
@@ -64,21 +64,22 @@ export default class App extends React.Component {
 }
 ```
 
-Let's break down what's happening here. In the `FadeInView` constructor, a new `Animated.Value` called `fadeAnim` is initialized as part of `state`. The opacity property on the `View` is mapped to this animated value. Behind the scenes, the numeric value is extracted and used to set opacity.
+Энд яг юу болж байгааг дэлгэрэнгүй харъя. `FadeInView` дотор `fadeAnim` нэртэй шинэ  `Animated.Value` үүссэн ба `state`-ын нэг хэсэг болж ажиллаж эхэлсэн байна. `View`-ын бүдгэрлийн хэмжээ нь энэхүү хөдөлгөөнт утгатай холбогдсон байна. Цаанаа бол тоон утга бүдгэрлийн хэмжээг тодорхойлж байгаа.
 
-When the component mounts, the opacity is set to 0. Then, an easing animation is started on the `fadeAnim` animated value, which will update all of its dependent mappings (in this case, just the opacity) on each frame as the value animates to the final value of 1.
+Компонент дуудах үед бүдгэрэл нь 0 байна. Тэгээд хөдөлгөөнт утга `fadeAnim`дээр анимейшн эхлэх ба утга нь эцэстээ 1 болох хүртэл хамаарал бүхий mapping-уудыг бүгдийг шинэчилнэ (Энэ жишээ дээр бол зөвхөн бүдгэрэл нь).
 
-This is done in an optimized way that is faster than calling `setState` and re-rendering. Because the entire configuration is declarative, we will be able to implement further optimizations that serialize the configuration and runs the animation on a high-priority thread.
+Энэ арга нь `setState`  дуудаж, дахин рендэр хийснээс хамаагүй хурдан, үр дүнтэй арга юм. Яагаад гэвэл бүх тохиргоо нь ерөнхий байх ба хожим тохиргоогоо цувуулан гаргаж, хамгийн эхэнд анимейшн ажиллуулахад туслахаар тохируулах боломжтой.
 
-### Configuring animations
 
-Animations are heavily configurable. Custom and predefined easing functions, delays, durations, decay factors, spring constants, and more can all be tweaked depending on the type of animation.
+### Анимейшны тохиргоо хийх
 
-`Animated` provides several animation types, the most commonly used one being [`Animated.timing()`](animated.md#timing). It supports animating a value over time using one of various predefined easing functions, or you can use your own. Easing functions are typically used in animation to convey gradual acceleration and deceleration of objects.
+Анимейшн нь маш нарийн тохиргоо шаарддаг. Хувирах хөдөлгөөнийг өөрийнхөөрөө гаргах,  өмнө нь тохируулах, удаашруулах, хугацаа өгөх, задрах коэффициент (decay factor),  үсрэх тогтмол (spring constant) гэх мэт олон зүйлийг анимейшны төрлөөс хамааран тохируулж болно. 
 
-By default, `timing` will use a easeInOut curve that conveys gradual acceleration to full speed and concludes by gradually decelerating to a stop. You can specify a different easing function by passing a `easing` parameter. Custom `duration` or even a `delay` before the animation starts is also supported.
+`Animated` нь хэд хэдэн анимейшны төрөлтэй бөгөөд хамгийн түгээмэл ашиглагддаг нь [`Animated.timing()`](animated.md#timing) юм. 
+Үүнийг ашиглан та өмнө тохируулах боломжтой хөдөлгөөнийг ашиглан нэг утгыг олон дахин анимейшн хийж боломжтой ба хүсвэл өөрөө ч хүссэнээрээ зохион хийх боломжтой. Анимейшнд ашиглагддаг хөдөлгөөний функц нь объектыг аажмаар хурдсах, удаашрах хөдөлгөөний зохицуулахад ерөнхийдөө тусалдаг.
 
-For example, if we want to create a 2-second long animation of an object that slightly backs up before moving to its final position:
+`timing` нь цаанаасаа бүрэн хурдад хүрэх хүртлээ аажмаар нэмэгдэх муруйг ашигладаг ба аажмаар бууран зогсдог. Та налуу үүсэх өөр функцийг`easing` параметр ашиглан тодорхойлж өгөх боломжтой. Анимейшн эхлэхийн өмнө `duration` эсвэл `delay`-ыг өөрийнхөөрөө тохируулж мөн болно.
+Жишээ нь бид нэг объектын 2 секундийн урттай, эцсийн байрлалдаа очихын өмнө бага зэрэг буцаж хөдөлдөг анимейшн хийе гэвэл:
 
 ```javascript
 Animated.timing(this.state.xPosition, {
@@ -88,13 +89,13 @@ Animated.timing(this.state.xPosition, {
 }).start();
 ```
 
-Take a look at the [Configuring animations](animated.md#configuring-animations) section of the `Animated` API reference to learn more about all the config parameters supported by the built-in animations.
+`Animated` API хэсгийн [Configuring animations](animated.md#configuring-animations) гэснээс анимейшн хийхэд туслах тохиргооны параметрийн тухай уншиж судлаарай. 
 
-### Composing animations
+### Анимейшн найруулан бичих
 
-Animations can be combined and played in sequence or in parallel. Sequential animations can play immediately after the previous animation has finished, or they can start after a specified delay. The `Animated` API provides several methods, such as `sequence()` and `delay()`, each of which simply take an array of animations to execute and automatically calls `start()`/`stop()` as needed.
+Анимейшн нь дэс дараатай эсвэл нэгэн зэрэг үйлдлийг хослуулсан байж болно. Дэс дараатай анимейшн нь өмнөх анимейшн дуусах үед шууд араас нь эхэлдэг эсвэл тодорхой хугацаанд түр зогссоны дараа эхэлдэг. `Animated` API нь `sequence()` болон `delay()` гэх мэт хэд хэдэн аргатай ба тэс бүр нь анимейшны массивыг авч ажиллуулан, хэрэгтэй үед `start()`/`stop()`-ыг дууддаг.
 
-For example, the following animation coasts to a stop, then it springs back while twirling in parallel:
+Жишээ нь, доорх анимейшн нь дорхноо зогсоод эн зэрэгцэн эргэх зуураа буцаж байна: 
 
 ```javascript
 Animated.sequence([
@@ -117,15 +118,15 @@ Animated.sequence([
 ]).start(); // start the sequence group
 ```
 
-If one animation is stopped or interrupted, then all other animations in the group are also stopped. `Animated.parallel` has a `stopTogether` option that can be set to `false` to disable this.
+Хэрэв нэг анимейшн зогсох юм уу, гацвал тухайн группд байгаа бусад анимейшн ч мөн зогсоно. `Animated.parallel` нь `stopTogether` гэх сонголттой ба `false` гэдэг дээр тохируулж үүнийг идэвхгүй болгож болно.
 
-You can find a full list of composition methods in the [Composing animations](animated.md#composing-animations) section of the `Animated` API reference.
+Та `Animated` API-ын [Composing animations](animated.md#composing-animations)  хэсгээс найруулах арга техникийн тухай бүрэн жагсаалтыг хараарай.
 
-### Combining animated values
+### Хөдөлгөөнт утгыг нэгтгэх нь
 
-You can [combine two animated values](animated.md#combining-animated-values) via addition, multiplication, division, or modulo to make a new animated value.
+Та [хөдөлгөөнт хоёр утгыг нэгтгэх](animated.md#combining-animated-values) боломжтой. Ингэхдээ нэмэх, үржүүлэх, хуваах үйлдэл эсвэл модуль ашиглан шинэ хөдөлгөөнт утга үүсгэдэг. 
 
-There are some cases where an animated value needs to invert another animated value for calculation. An example is inverting a scale (2x --> 0.5x):
+Зарим тохиолдолд хөдөлгөөнт утга нь тооцогдохдоо өөр нэг хөдөлгөөнт утгад солигдох үе байна. Жишээ нь (2x --> 0.5x):
 
 ```javascript
 const a = new Animated.Value(1);
@@ -136,11 +137,11 @@ Animated.spring(a, {
 }).start();
 ```
 
-### Interpolation
+### Интерполяц
 
-Each property can be run through an interpolation first. An interpolation maps input ranges to output ranges, typically using a linear interpolation but also supports easing functions. By default, it will extrapolate the curve beyond the ranges given, but you can also have it clamp the output value.
+Утга бүр интерполяцаар эхлээд дамжин өнгөрдөг. Интерполяц нь оролт, гаралтын цар хүрээг тодорхойлдог ба ингэхдээ шугаман интерполяц ашигладаг. Гэхдээ бас налуу функцыг дэмждэг. Анхны тохиргоогоор бол энэ нь муруйг тодорхойлсон цар хүрээг давж шилжүүлдэг. Гэхдээ тэ хүсвэл гаралтыг ямар нэг утга дээр барин тогтоож болно.
 
-A simple mapping to convert a 0-1 range to a 0-100 range would be:
+0-1 хүртэлх хүрээг 0-100 хүрээд хувиргах энгийн арга нь:
 
 ```javascript
 value.interpolate({
@@ -149,7 +150,7 @@ value.interpolate({
 });
 ```
 
-For example, you may want to think about your `Animated.Value` as going from 0 to 1, but animate the position from 150px to 0px and the opacity from 0 to 1. This can easily be done by modifying `style` from the example above like so:
+Жишээ нь та `Animated.Value`-гаа 0-ээс 1 хүртэл явна гэж үзсэн ч байрлалыг нь 150 px-ээс 0px хүргэж хөдөлгөөнд оруулахыг хүссэн ч бүдгэрлийг нь 0-ээс 1 байхаар тохируулж болно. Үүнийг хийхдээ дээрх жишээ шиг хэрнээ `style` -ыг өөрчлөн хялбархан хийх боломжтой.
 
 ```javascript
   style={{
@@ -163,7 +164,7 @@ For example, you may want to think about your `Animated.Value` as going from 0 t
   }}
 ```
 
-[`interpolate()`](animated.md#interpolate) supports multiple range segments as well, which is handy for defining dead zones and other handy tricks. For example, to get a negation relationship at -300 that goes to 0 at -100, then back up to 1 at 0, and then back down to zero at 100 followed by a dead-zone that remains at 0 for everything beyond that, you could do:
+[`Интерполяц()`](animated.md#interpolate) нь олон төрлийн хүрээний сегментийг мөн дэмждэг ба хязгаарын бүсийг тодорхойлох болон хялбар арга ашиглахад тусалдаг. Жишээ нь -100 дээр 0 болдог, тэгээд 0 дээр 1 эргэж болоод буцаад 100 дээр тэг болон хязгаарын бүсэд хүрч цаашид 0 хэвээрээ байх харилцан хамаарлыг тогтоохын тулд:
 
 ```javascript
 value.interpolate({
@@ -172,7 +173,7 @@ value.interpolate({
 });
 ```
 
-Which would map like so:
+Ингээд үүн шиг зураглал үүснэ:
 
 ```
 Input | Output
@@ -189,7 +190,7 @@ Input | Output
    200|      0
 ```
 
-`interpolate()` also supports mapping to strings, allowing you to animate colors as well as values with units. For example, if you wanted to animate a rotation you could do:
+`interpolate()` мөн spring зураглахыг дэмждэг. Ингэснээр та нэгж бүхий утгыг, мөн өнгийг анимейшнд ашиглаж болно. Жишээ нь та эргэлтийг хөдөлгөөнд оруулъя гэвэл:
 
 ```javascript
 value.interpolate({
@@ -198,11 +199,12 @@ value.interpolate({
 });
 ```
 
-`interpolate()` also supports arbitrary easing functions, many of which are already implemented in the [`Easing`](easing.md) module. `interpolate()` also has configurable behavior for extrapolating the `outputRange`. You can set the extrapolation by setting the `extrapolate`, `extrapolateLeft`, or `extrapolateRight` options. The default value is `extend` but you can use `clamp` to prevent the output value from exceeding `outputRange`.
+`интерполяц()` нь дурын муруйх функцтэй ба дийлэнх нь [`Easing`](easing.md) модульд аль хэдийн багтсан. 
+`интерполяц()` нь мөн `outputRange` шилжихэд тохиргоо хийдэг. Та `extrapolate`, `extrapolateLeft`, эсвэл `extrapolateRight` гэснээс сонгож тохируулж болно. Анхны утга дээр `extend` гэж байгаа. Гэхдээ та гаралтын утга нь `outputRange`-ээс хэтрэхээс сэргийлэн `clamp` функцийг ашиглах боломжтой.
 
-### Tracking dynamic values
+### Динамик утгыг дагах
 
-Animated values can also track other values. Just set the `toValue` of an animation to another animated value instead of a plain number. For example, a "Chat Heads" animation like the one used by Messenger on Android could be implemented with a `spring()` pinned on another animated value, or with `timing()` and a `duration` of 0 for rigid tracking. They can also be composed with interpolations:
+Хөдөлгөөнт утга нь өөр утгыг дагаж болдог. Анимейшны өөр хөдөлгөөнт утгад  зүгээр тоо өгөхийн оронд `toValue`-ыг тохируулах нь зүйтэй. Жишээ нь Android-ын Messenger апп дээр ашиглагддаг "Chat Heads"  анимейшн нь өөр нэг хөдөлгөөнт утгын `spring()`-ээр эсвэл шууд дагах бол `timing()` болон `duration`-ыг ашиглан хийж болно. Мөн интерполяц ашиглан хийх боломжтой:
 
 ```javascript
 Animated.spring(follower, {toValue: leader}).start();
@@ -214,13 +216,13 @@ Animated.timing(opacity, {
 }).start();
 ```
 
-The `leader` and `follower` animated values would be implemented using `Animated.ValueXY()`. `ValueXY` is a handy way to deal with 2D interactions, such as panning or dragging. It is a simple wrapper that basically contains two `Animated.Value` instances and some helper functions that call through to them, making `ValueXY` a drop-in replacement for `Value` in many cases. It allows us to track both x and y values in the example above.
+ `Leader`, `follower` хөдөлгөөнт утгыг `Animated.ValueXY()` ашиглан хийнэ. `ValueXY` нь дүрсийг хөдөлгөх,чирэх гэх мэт 2D-тэй харилцан үйлчлэлийг хялбар болгодог. Хоёр янзын `Animated.Value` агуулдаг ба зарим туслах функцүүд тэднийг ашиглан дуудаж, ихэнх тохиолдолд `Value`-ын оронд `ValueXY`-ыг ашиглахад хүргэдэг. Ингэснээр дээрх жишээ дэх x болон y утгыг дагах боломжтой болно.
 
-### Tracking gestures
+### Дохио дагах
 
-Gestures, like panning or scrolling, and other events can map directly to animated values using [`Animated.event`](animated.md#event). This is done with a structured map syntax so that values can be extracted from complex event objects. The first level is an array to allow mapping across multiple args, and that array contains nested objects.
+Дүрс хөдөлгөх, гүйлгэх гэм мэт дохио болон бусад үйлдлийг [`Animated.event`] (animated.md#event) ашиглан шууд хөдөлгөөнт утгад шилжүүлэх боломжтой. Ингэхдээ нарийн бүтэцтэй синтакс зураглал ашигладаг ба утга нь үйл явдлын цогц объектоос гарна. Эхний шат нь массивыг олон параметр хөндлөн зураглах боломж олгодог ба энэхүү массив нь давхар объектууд агуулдаг. 
 
-For example, when working with horizontal scrolling gestures, you would do the following in order to map `event.nativeEvent.contentOffset.x` to `scrollX` (an `Animated.Value`):
+Жишээ нь хөндлөн гүйлгэх дохио хийх гэж байгаа бол та доорх маягаар `event.nativeEvent.contentOffset.x`-ыг `Animated.Value` болгоно: 
 
 ```javascript
  onScroll={Animated.event(
@@ -234,7 +236,7 @@ For example, when working with horizontal scrolling gestures, you would do the f
  )}
 ```
 
-When using `PanResponder`, you could use the following code to extract the x and y positions from `gestureState.dx` and `gestureState.dy`. We use a `null` in the first position of the array, as we are only interested in the second argument passed to the `PanResponder` handler, which is the `gestureState`.
+`PanResponder` ашиглаж байгаа үед та доорх кодыг ашиглан `gestureState.dx`, `gestureState.dy`-аас x болон y-ын байрлалыг гаргах боломжтой. Бид массивын эхний байрлалд `null` ашиглана. Яагаад гэвэл бид `gestureState` гэх  `PanResponder` -ын хоёр дахь параметрийг ашиглах сонирхолтой байгаа учраас. 
 
 ```javascript
 onPanResponderMove={Animated.event(
@@ -245,20 +247,20 @@ onPanResponderMove={Animated.event(
 ])}
 ```
 
-### Responding to the current animation value
+### Анимейшны одоогийн утгад хариу өгөх
 
-You may notice that there is no obvious way to read the current value while animating. This is because the value may only be known in the native runtime due to optimizations. If you need to run JavaScript in response to the current value, there are two approaches:
+Анимейшн хөдөлгөөн явагдаж байгаа үед утгыг унших боломж байхгүй гэдгийг та анзаарсан байх. Яагаад гэвэл оновчтой болгох үүднээс утга нь зөвхөн ажиллаж байгаа үед танигддаг. Хэрэв та одоогийн утгын хариу үйлдэл болгон JavaScript  ажиллуулах хэрэгтэй бол хоёр арга байна:
 
-- `spring.stopAnimation(callback)` will stop the animation and invoke `callback` with the final value. This is useful when making gesture transitions.
-- `spring.addListener(callback)` will invoke `callback` asynchronously while the animation is running, providing a recent value. This is useful for triggering state changes, for example snapping a bobble to a new option as the user drags it closer, because these larger state changes are less sensitive to a few frames of lag compared to continuous gestures like panning which need to run at 60 fps.
+- `spring.stopAnimation(callback)` нь анимейшныг зогсоон эцсийн утгыг `callback` хийдэг. Дохионы шилжилт хийж байгаа үед энэ хэрэг болдог. 
+- `spring.addListener(callback)` нь анимейшн ажиллаж байхад синхрон бусаар `callback` хийн, тухайн үеийн утгыг өгдөг. Төлөв өөрчлөх үед энэ нь хэрэг болдог. Тухайлбал хэрэглэгч шинэ сонголт дээр ойр чирэх үед томрох г.м. Энэ төрлийн төлөвийн томоохон өөрчлөлт нь 60 fps-ын дээр ажиллах үргэлжилсэн хөдөлгөөн болох гүйлгэх зэргийг бодвол бага зэрэг хожуу байхад үзүүлэх нөлөөлөл нь бага байдаг.
 
-`Animated` is designed to be fully serializable so that animations can be run in a high performance way, independent of the normal JavaScript event loop. This does influence the API, so keep that in mind when it seems a little trickier to do something compared to a fully synchronous system. Check out `Animated.Value.addListener` as a way to work around some of these limitations, but use it sparingly since it might have performance implications in the future.
+'Animated' нь бүрэн цуваалах боломжтой хийгдсэн бөгөөд ингэснээр энгийн Javascript event loop-аас тусдаа бие даан, сайн ажиллах боломжтой болох юм. Энэ нь API-д нөлөөлдөг ба бүрэн синхрон ажилладаг системтэй харьцуулахад ажиллахад бага зэрэг төвөгтэй гэдгийг анхаарна уу. Энэ мэт хязгаарлалттай хэрхэн ажиллах тухай `Animated.Value.addListener` гэснээс сонирхоно уу. Гэхдээ цаашид ажиллагаанд нөлөөлж магадгүй тул цөөн удаа ашиглахыг зөвлөе.
 
-### Using the native driver
+### Натив драйвер ашиглах 
 
-The `Animated` API is designed to be serializable. By using the [native driver](http://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html), we send everything about the animation to native before starting the animation, allowing native code to perform the animation on the UI thread without having to go through the bridge on every frame. Once the animation has started, the JS thread can be blocked without affecting the animation.
+`Animated` API нь цуваалах дизайнтай хийгдсэн. [Native driver](http://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html) ашиглан бид анимейшнтэй холбоотой бүхнийг натив болгож, натив код frame бүрт холбогдохгүйгээр хэрэглэгчийн интерфэйс дээр анимейшн эхлүүлэх боломж олгодог. Анимейшн нь эхэлсэн л бол JS thread хаагдаж, анимейшнд нөлөөлөх боломжгүй болдог.
 
-Using the native driver for normal animations is quite simple. Just add `useNativeDriver: true` to the animation config when starting it.
+Энгийн анимейшнд натив драйвер ашиглах нь их хялбар. Ердөө эхлүүлэхдээ анимейшны тохиргоо дээр `useNativeDriver: true` гэснийг нэмэхэд л хангалттай.
 
 ```javascript
 Animated.timing(this.state.animatedValue, {
@@ -268,9 +270,9 @@ Animated.timing(this.state.animatedValue, {
 }).start();
 ```
 
-Animated values are only compatible with one driver so if you use native driver when starting an animation on a value, make sure every animation on that value also uses the native driver.
+Хөдөлгөөнт утга нь зөвхөн нэг драйверт тохирсон байхаар хийгддэг. Хэрэв та анимейшнаа эхлүүлэхдээ натив драйвер ашиглах гэж байгаа бол тухайн утга дээр уг натив драйверыг бүх анимейшн ашиглаж байгаа эсэхийг нягтлаарай.
 
-The native driver also works with `Animated.event`. This is especially useful for animations that follow the scroll position as without the native driver, the animation will always run a frame behind the gesture due to the async nature of React Native.
+Натив драйвер нь `Animated.event`-тэй бас ажилладаг. React Native-ын зэрэгцээ бус ажиллах онцлогоос шалтгаалан натив драйвергүйгээр анимейшн нь цаанаа үргэлж frame ажиллуулж байдаг тул scroll хийх байрлал бүхий анимейшн хийхэд тохиромжтой.
 
 ```javascript
 <Animated.ScrollView // <-- Use the Animated ScrollView wrapper
@@ -289,17 +291,17 @@ The native driver also works with `Animated.event`. This is especially useful fo
 </Animated.ScrollView>
 ```
 
-You can see the native driver in action by running the [RNTester app](https://github.com/facebook/react-native/blob/master/RNTester/), then loading the Native Animated Example. You can also take a look at the [source code](https://github.com/facebook/react-native/blob/master/RNTester/js/NativeAnimationsExample.js) to learn how these examples were produced.
+Та [RNTester app](https://github.com/facebook/react-native/blob/master/RNTester/) ажиллуулан, натив хөдөлгөөнт жишээ ачаалан натив драйвер хэрхэн ажилладгийг харж болно.  Мөн жишээ болгон хийсэн зүйлс нь хэрхэн бүтдэг тухай [source code](https://github.com/facebook/react-native/blob/master/RNTester/js/NativeAnimationsExample.js) гэснээс хараарай.
 
-#### Caveats
+#### Санамж
 
-Not everything you can do with `Animated` is currently supported by the native driver. The main limitation is that you can only animate non-layout properties: things like `transform` and `opacity` will work, but flexbox and position properties will not. When using `Animated.event`, it will only work with direct events and not bubbling events. This means it does not work with `PanResponder` but does work with things like `ScrollView#onScroll`.
+`Animated` дээр хийсэн бүхнийг натив драйвер дэмжинэ гэж ойлгож болохгүй. Та зөвхөн non-layout properties буюу `transform`, `opacity`  зэргийг хөдөлгөөнт болгох боломжтой. Flexbox болон байрлал дээр бол ашиглаж болохгүй. `Animated.event` ашиглаж байгаа үед зөвхөн шууд хийх боломжтой үйлдэлд ашиглагдах ба &&. Энэ нь `PanResponder`-тай бол ажиллахгүй, харин `ScrollView#onScroll` гэх мэттэй ажиллана гэсэн үг юм.
 
-When an animation is running, it can prevent `VirtualizedList` components from rendering more rows. If you need to run a long or looping animation while the user is scrolling through a list, you can use `isInteraction: false` in your animation's config to prevent this issue.
+Анимейшн явж байх үед `VirtualizedList` компонентыг нэмж эгнээ рендэр хийхээс сэргийлдэг. Хэрэв та хэрэглэгч жагсаалт гүйлгэж байх үед урт, давталттай анимейшн ажиллуулахыг хүсвэл анимейшны тохиргоо хийхдээ `isInteraction: false` ашиглаж, үүнээс зайлсхийх боломжтой.
 
-### Bear in mind
+### Анхаарах
 
-While using transform styles such as `rotateY`, `rotateX`, and others ensure the transform style `perspective` is in place. At this time some animations may not render on Android without it. Example below.
+`rotateY`, `rotateX` болон бусад шилжилтийн хэв маягийг ашиглаж байгаа үед `perspective` байрандаа байгаа эсэхийг шалгаарай. Одоогоор Android дээр энэ байхгүй бол зарим анимейшн рендэр хийхгүй байгаад байгаа. Жишээг доор харууллаа.
 
 ```javascript
 <Animated.View
@@ -313,20 +315,20 @@ While using transform styles such as `rotateY`, `rotateX`, and others ensure the
 />
 ```
 
-### Additional examples
+### Нэмэлт жишээнүүд
 
-The RNTester app has various examples of `Animated` in use:
+RNTester аппаас `Animated` ашигласан олон янзын жишээ харж болно:
 
 - [AnimatedGratuitousApp](https://github.com/facebook/react-native/tree/master/RNTester/js/AnimatedGratuitousApp)
 - [NativeAnimationsExample](https://github.com/facebook/react-native/blob/master/RNTester/js/NativeAnimationsExample.js)
 
 ## `LayoutAnimation` API
 
-`LayoutAnimation` allows you to globally configure `create` and `update` animations that will be used for all views in the next render/layout cycle. This is useful for doing flexbox layout updates without bothering to measure or calculate specific properties in order to animate them directly, and is especially useful when layout changes may affect ancestors, for example a "see more" expansion that also increases the size of the parent and pushes down the row below which would otherwise require explicit coordination between the components in order to animate them all in sync.
+`LayoutAnimation`-ыг ашиглан дараагийн рендэр,  layout мөчлөгт бүгдэд нь харагдах анимейшнаа  `create` , `update` хийх боломжтой. Шууд хөдөлгөөнд оруулахын тулд нарийн хэмжиж, тооцоолохгүйгээр flexbod layout-шинэчлэхэд хэрэг болох ба layout-д хийсэн өөрчлөлт нь удамшил авсан зүйлдээ нөлөөлөх магадлалтай. Жишээ нь, "see more"  өргөтгөл нь эцгийнхээ хэмжээг нэмэн, доод мөрийг шахдаг. Тэгэхгүй бол бүгдийг нэг зэрэг хөдөлгөөнт оруулахад компонентуудад тодорхой зохицуулалт шаардлагатай болно.
 
-Note that although `LayoutAnimation` is very powerful and can be quite useful, it provides much less control than `Animated` and other animation libraries, so you may need to use another approach if you can't get `LayoutAnimation` to do what you want.
+`LayoutAnimation` нь их чадалтай, хэрэгтэй ч гэсэн `Animated` болон бусад анимейншны сантай харьцуулахад удирдах чадал нь тааруу гэдгийг анхаарна уу. Тиймээс `LayoutAnimation` ашиглан хүссэн зүйлээ хийхийн тулд  өөр арга хайх хэрэгтэй. 
 
-Note that in order to get this to work on **Android** you need to set the following flags via `UIManager`:
+**Android**  дээр үүнийг ажиллуулахын тулд та `UIManager` ашиглан доорх тохиргоог хийх шаардлагатай:
 
 ```javascript
 UIManager.setLayoutAnimationEnabledExperimental &&
@@ -398,19 +400,18 @@ const styles = StyleSheet.create({
   },
 });
 ```
+Энэ жишээнд утга нь өмнө нь өгөгдсөн байгаа. Та анимейшнаа хүссэнээрээ өөрчлөлт болно. [LayoutAnimation.js](https://github.com/facebook/react-native/blob/master/Libraries/LayoutAnimation/LayoutAnimation.js)-аас дэлгэрэнгүй мэдээллийг харна уу.
 
-This example uses a preset value, you can customize the animations as you need, see [LayoutAnimation.js](https://github.com/facebook/react-native/blob/master/Libraries/LayoutAnimation/LayoutAnimation.js) for more information.
-
-## Additional notes
+## Нэмэлт тэмдэглэл
 
 ### `requestAnimationFrame`
 
-`requestAnimationFrame` is a polyfill from the browser that you might be familiar with. It accepts a function as its only argument and calls that function before the next repaint. It is an essential building block for animations that underlies all of the JavaScript-based animation APIs. In general, you shouldn't need to call this yourself - the animation APIs will manage frame updates for you.
+`requestAnimationFrame` нь хөтөч дээр байдаг polyfill гэдгийг та мэдэх байх. Энэ нь ямарваа үйлдлийг цор ганц параметр гэж үзэн дараагийн дахин зурах явцаас өмнө дууддаг. Анимейшн хийхэд тун чухал зүйл бөгөөд Javascript дээр суурилсан анимейшны бүх API-уудын үндэс нь болдог. Ерөнхийдөө та өөрөө дуудах хэрэггүй. Анимейшны API-ууд нь frame шинэчлэлийг хийчихнэ. 
 
 ### `setNativeProps`
 
-As mentioned [in the Direct Manipulation section](direct-manipulation.md), `setNativeProps` allows us to modify properties of native-backed components (components that are actually backed by native views, unlike composite components) directly, without having to `setState` and re-render the component hierarchy.
+[Direct Manipulation](direct-manipulation.md) хэсэгт дурдсанчлан`setNativeProps` нь натив суурьтай компонентуудын (холимог компонентуудыг бодвол жинхэнээсээ натив үзэлтээр баталгаажсан) тохиргоог `setState`-гүйгээр, компонентын шатлалыг дахин рендэр хийхгүйгээр шууд хийхэд ашиглагддаг. 
 
-We could use this in the Rebound example to update the scale - this might be helpful if the component that we are updating is deeply nested and hasn't been optimized with `shouldComponentUpdate`.
+Бид үүнийг Rebound-ын жишээ дээр ашиглаж, scale-ыг шинэчлэх боломжтой. Бидний шинэчилж байгаа компонент нь өөр нэг компонентын дотор агуулагдсан,  `shouldComponentUpdate` ашиглан тодорхойлогдоогүй бол энэ арга нь тун хэрэгтэй байх болно.
 
-If you find your animations with dropping frames (performing below 60 frames per second), look into using `setNativeProps` or `shouldComponentUpdate` to optimize them. Or you could run the animations on the UI thread rather than the JavaScript thread [with the useNativeDriver option](http://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html). You may also want to defer any computationally intensive work until after animations are complete, using the [InteractionManager](interactionmanager.md). You can monitor the frame rate by using the In-App Developer Menu "FPS Monitor" tool.
+Хэрэв таны анимейшны frame нь унаад (секундэд 60-аас доош frame ажиллуулах) байх юм бол `setNativeProps` эсвэл `shouldComponentUpdate` ашиглан оновчтой тохируулж өгөх хэрэгтэй. Эсвэл та [NativeDriver](http://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html) ашиглан JavaScript thread дээр биш UI thread дээр анимейшнаа ажиллуулж болно. Анимейшн гүйцэт болох хүртэл та [InteractionManager](interactionmanager.md) ашиглан тооцоолох ажлыг хойшлуулж болно. Апп дээр хөгжүүлэгчийн цэсийн "FPS Monitor" -ыг ашиглан frame rate-ыг хянах боломжтой.
