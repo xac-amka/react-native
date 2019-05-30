@@ -1,227 +1,458 @@
 ---
+
 id: accessibility
-title: Accessibility
+
+title: Хүртээмж
+
 ---
 
-## Native App Accessibility (iOS and Android)
 
-Both iOS and Android provide APIs for making apps accessible to people with disabilities. In addition, both platforms provide bundled assistive technologies, like the screen readers VoiceOver (iOS) and TalkBack (Android) for the visually impaired. Similarly, in React Native we have included APIs designed to provide developers with support for making apps more accessible. Take note, iOS and Android differ slightly in their approaches, and thus the React Native implementations may vary by platform.
 
-In addition to this documentation, you might find [this blog post](https://code.facebook.com/posts/435862739941212/making-react-native-apps-accessible/) about React Native accessibility to be useful.
+## Натив аппын хүртээмж (iOS and Android)
 
-## Making Apps Accessible
 
-### Accessibility properties
 
-#### accessible (iOS, Android)
+iOS, Android аль аль нь аппыг хөгжлийн бэрхшээлтэй хүмүүс ашиглах боломжийг олгодог API-тай байдаг. Мөн хараагүй хүмүүст зориулсан iOS дээр VoiceOver, Android дээр API гэх дэлгэц дээрхийг уншигч гэх мэт технологитой. Энэ мэтчилэн React Native-т байх аппыг илүү хүртээмжтэй болгох зорилготой API-уудыг хөгжүүлэгчид ашиглаж болно. iOS, Android хоёр бага зэрэг өөр байдаг тул тухайн платформоос шалтгаалан React Native-ын ажиллагаа нь ялгаатай гэдгийг анхаарна уу. 
 
-When `true`, indicates that the view is an accessibility element. When a view is an accessibility element, it groups its children into a single selectable component. By default, all touchable elements are accessible.
 
-On Android, `accessible={true}` property for a react-native View will be translated into native `focusable={true}`.
+
+Та мөн [энэхүү блогийн нийтлэлээс](https://code.facebook.com/posts/435862739941212/making-react-native-apps-accessible/) React Native-ийн хүртээмжийн талаар мэдээлэл авах боломжтой. 
+
+
+
+## Аппыг хүртээмжтэй болгох
+
+
+
+### Хүртээмжийн онцлог
+
+
+
+#### Хүртээмж (iOS, Android)
+
+
+
+`true` гэдэг нь харагдац нь хүртээмжтэй элемент гэдгийг илтгэж байгаа юм. Харагдац нь хүртээмжтэй элемент мөн бол энэ нь children-ээ нэг компонентод хамааруулдаг. Анхны тохиргоогоор бол дарж болох бүх элемент нь хүртээмжтэйд тооцогддог.
+
+
+
+Android дээр `accessible={true}` react-native-ын Харагдац (View) нь `focusable={true}` гэсэн байдаг.
+
+
 
 ```javascript
+
 <View accessible={true}>
+
   <Text>text one</Text>
+
   <Text>text two</Text>
+
 </View>
+
 ```
 
-In the above example, we can't get accessibility focus separately on 'text one' and 'text two'. Instead we get focus on a parent view with 'accessible' property.
+
+
+Дээрх жишээ дээр бид 'text one' болон 'text two' гэсэн дээр хүртээмжийг тусад нь авч үзэх боломжгүй. Оронд нь бид хүртээмжтэй шинж бүхий эцгийнх нь харагдацыг онцолж үзнэ.
+
+
+
+
 
 #### accessibilityLabel (iOS, Android)
 
-When a view is marked as accessible, it is a good practice to set an accessibilityLabel on the view, so that people who use VoiceOver know what element they have selected. VoiceOver will read this string when a user selects the associated element.
 
-To use, set the `accessibilityLabel` property to a custom string on your View, Text or Touchable:
+
+Харагдац нь хүртээмжтэй гэж тэмдэглэгдсэн бол accessibilityLabel ашиглах нь зүйтэй. Тэгвэл VoiceOver ашигладаг хүмүүс ямар элемент сонгосноо мэдэх боломжтой болох юм. Хэрэглэгч тухай элементийг сонгох үед VoiceOver уншиж өгнө.
+
+
+
+Ингэхийн тулд View, Text эсвэл Touchable дээрээ `accessibilityLabel`-ыг тохируулж өгөх хэрэгтэй:
+
+
 
 ```javascript
+
 <TouchableOpacity
+
   accessible={true}
+
   accessibilityLabel="Tap me!"
+
   onPress={this._onPress}>
+
   <View style={styles.button}>
+
     <Text style={styles.buttonText}>Press me!</Text>
+
   </View>
+
 </TouchableOpacity>
+
 ```
 
-In the above example, the `accessibilityLabel` on the TouchableOpacity element would default to "Press me!". The label is constructed by concatenating all Text node children separated by spaces.
+
+
+Дээрх жишээ дээр TouchableOpacity элемент дээр `accessibilityLabel` нь цаанаасаа "Press me!" гэж байхаар бичсэн байна. Тэмдэглэгээ нь зайгаар тусгаарлагдсан текстийг нийлүүлэн гарсан үг юм.
+
+
 
 #### accessibilityHint (iOS, Android)
 
-An accessibility hint helps users understand what will happen when they perform an action on the accessibility element when that result is not obvious from the accessibility label.
 
-To use, set the `accessibilityHint` property to a custom string on your View, Text or Touchable:
+
+Хүртээмжийн тухай тэмдэглэгээнээс ямар үр дүнд хүрэх гэсэн нь тодорхой биш байх үед хүртээмжтэй холбоотой ямар нэг үйлдэл хийх үед accessibility hint тус болдог. 
+
+
+
+Ингэхийн тулд View, Text эсвэл Touchable дээрээ `accessibilityHint`-ыг тохируулж өгнө:
+
+
 
 ```javascript
+
 <TouchableOpacity
+
   accessible={true}
+
   accessibilityLabel="Go back"
+
   accessibilityHint="Navigates to the previous screen"
+
   onPress={this._onPress}>
+
   <View style={styles.button}>
+
     <Text style={styles.buttonText}>Back</Text>
+
   </View>
+
 </TouchableOpacity>
+
 ```
 
-iOS In the above example, VoiceOver will read the hint after the label, if the user has hints enabled in the device's VoiceOver settings. Read more about guidelines for accessibilityHint in the [iOS Developer Docs](https://developer.apple.com/documentation/objectivec/nsobject/1615093-accessibilityhint)
 
-Android In the above example, Talkback will read the hint after the label. At this time, hints cannot be turned off on Android.
+
+Дээрх жишээнд iOS дээр хэрэглэгч VoiceOver-ыг идэвхжүүлсэн бол тухайн hint буюу санал зөвлөгөө нь юу гэж байгааг уншиж өгнө. accessibilityHint-тэй холбоотой нэмэлт мэдээллийг [iOS Хөгжүүлэгчийн Док](https://developer.apple.com/documentation/objectivec/nsobject/1615093-accessibilityhint)-оос уншаарай.
+
+
+
+Дээрх жишээнд Android хэрэглэгчид Talkback нь санал зөвлөгөөг уншиж өгнө. Одоогоор Android дээр hint өгөх функцийг унтраах боломжгүй байгаа. 
+
+
 
 #### accessibilityIgnoresInvertColors(iOS)
 
-Inverting screen colors is an Accessibility feature that makes the iPhone and iPad easier on the eyes for some people with a sensitivity to brightness, easier to distinguish for some people with color blindness, and easier to make out for some people with low vision. However, sometimes you have views such as photos that you don't want to be inverted. In this case, you can set this property to be false so that these specific views won't have their colors inverted.
+
+
+Гэрэлд хэт мэдрэг хүмүүсийн нүдэнд таатай байлгах үүднээс дэлгэцийн өнгийг өөрчилдөг функц Accessibility дотор байдаг. Энэ нь ялгадаггүй хүмүүст болон хараа муутай хүмүүст таатай байдаг. Гэхдээ та зураг гэх мэт зүйлийн өнгийг та өөрчлөхийг хүсэхгүй байж болно. Энэ үед та тухайн харагдацад өнгийг нь өөрчлөхгүй гэсэн тохиргоог хийж өгөх боломжтой.
+
+
 
 #### accessibilityRole (iOS, Android)
 
-Accessibility Role tells a person using either VoiceOver on iOS or TalkBack on Android the type of element that is focused on. To use, set the `accessibilityRole` property to one of the following strings:
 
-- **none** Used when the element has no role.
-- **button** Used when the element should be treated as a button.
-- **link** Used when the element should be treated as a link.
-- **search** Used when the text field element should also be treated as a search field.
-- **image** Used when the element should be treated as an image. Can be combined with button or link, for example.
-- **keyboardkey** Used when the element acts as a keyboard key.
-- **text** Used when the element should be treated as static text that cannot change.
-- **adjustable** Used when an element can be "adjusted" (e.g. a slider).
-- **imagebutton** Used when the element should be treated as a button and is also an image.
-- **header** Used when an element acts as a header for a content section (e.g. the title of a navigation bar).
-- **summary** Used when an element can be used to provide a quick summary of current conditions in the app when the app first launches.
+
+Accessibility Role нь iOS-ын VoiceOver эсвэл Android-ын TalkBack ашиглаж байгаа хүнд ямар төрлийн элемент ашиглаж байгааг нь хэлж өгдөг. Ашиглахын тулд доорхоос хүсс`accessibilityRole`-ыг нь тохируулж:
+
+
+
+- **none** Тухайн элемент ямар нэг үүрэггүй бол ашиглана.
+
+- **button** Тухайн элементийг товч гэж үзэх бол ашиглана. 
+
+- **link** Тухайн элементийг холбоос гэж үзэх бол ашиглана. 
+
+- **search** Текс хэсгийн элементийг хайлтын хэсэг гэж үзэх бол ашиглана.
+
+- **image** Тухайн элементийг зураг гэж үзвэл ашиглана. Товч эсвэл холбоостой хослуулан ашиглах боломжтой.
+
+- **keyboardkey** Тухайн элемент keyboard товч шиг ажиллах бол ашиглана. 
+
+- **text** Тухайн элементийг өөрчлөлт оруулах боломжгүй байнгын текст гэж үзвэл ашиглана. 
+
+- **adjustable** Аливаа элементэд "өөрчлөлт"(слайдер г.м) оруулах боломжтой бол ашиглана.
+
+- **imagebutton** Тухайн элементийг товч болон зураг гэж үзэх бол ашиглана.
+
+- **header** Аливаа элемент контент хэсгийн толгой болж байвал ашиглана (навигацийн гарчиг г.м)
+
+- **summary** Аливаа элемент апп нээгдэн ажиллах үед одоогийн нөхцөлийн талаар товч мэдээлэл өгөх зорилгоор ашиглана.
+
+
 
 #### accessibilityStates (iOS, Android)
 
-Accessibility State tells a person using either VoiceOver on iOS or TalkBack on Android the state of the element currently focused on. The state of the element can be set either to `selected` or `disabled` or both:
 
-- **selected** Used when the element is in a selected state. For example, a button is selected.
-- **disabled** Used when the element is disabled and cannot be interacted with.
 
-To use, set the `accessibilityStates` to an array containing either `selected`, `disabled`, or both.
+Accessibility State нь  iOS дээр VoiceOver эсвэл Android дээр TalkBack ашиглан одоогийн ашиглаж буй элементийн төлөвийг хэлж өгдөг. Элементийн төлөвийг `selected`, `disabled` эсвэл хоёуланг дээр нь тохируулж болно:
+
+
+
+- **selected** Элемент тухайн сонгогдсон төлөвт байгаа үед ашиглана. Жишээ нь нэг товчийг дарж сонгох.
+
+- **disabled** Элементийг идэвхгүй болгосон, хэрэглэж болохгүй үед ашиглана. 
+
+
+
+Ашиглахын тулд `selected`, `disabled` эсвэл хоёуланг дээр нь тохируулсан гэснийг агуулсан массивт `accessibilityStates`  гэж тохируулна. 
+
+
 
 #### accessibilityViewIsModal (iOS)
 
-A Boolean value indicating whether VoiceOver should ignore the elements within views that are siblings of the receiver.
 
-For example, in a window that contains sibling views `A` and `B`, setting `accessibilityViewIsModal` to `true` on view `B` causes VoiceOver to ignore the elements in the view `A`. On the other hand, if view `B` contains a child view `C` and you set `accessibilityViewIsModal` to `true` on view `C`, VoiceOver does not ignore the elements in view `A`.
+
+Хүлээн авагчаас хамааралтай харагдац доторх тухайн элементүүдийг VoiceOver үл хэрэгсэх эсэхийг бүүлийн итгэ илэрхийлдэг.
+
+Жишээ нь, `A` болн `B` гэсэн хамаарал бүхий хоёрыг агуулсан цонхонд `accessibilityViewIsModal`  нь `B`  харагдац дээр `true` гэж тохируулсанаар VoiceOver нь `A` харагдац доторх элементийг тоохгүй орхих юм. Нөгөө талаас `B`  харагдац нь `C` гэсэн  child харагдацтай бол та `accessibilityViewIsModal`-ыг `C` харагдац дээр `true` гэж тохируулна. VoiceOver  нь `A` харагдац доторх элементийг тоохгүй орхино гэж байдаггүй. 
+
+
 
 #### accessibilityElementsHidden (iOS)
 
-A Boolean value indicating whether the accessibility elements contained within this accessibility element are hidden.
 
-For example, in a window that contains sibling views `A` and `B`, setting `accessibilityElementsHidden` to `true` on view `B` causes VoiceOver to ignore the elements in the view `B`. This is similar to the Android property `importantForAccessibility="no-hide-descendants"`.
+
+Уг хүртээмжийн элементийг хүртээмжийн элементүүд агуулагдсан эсэхийг илэрхийлж буй бүүлийн утга нь далд байна. 
+
+Жишээ нь, хоорондоо хамаарал бүхий `A`, `B` харагдацыг агуулсан цонхонд `B` харагдац дээр `accessibilityElementsHidden`-ыг `true`  гэж тохируулснаар `B` харагдац дахь элементүүдийг VoiceOver тоохгүй орхиход хүргэдэг. Android-ын `importantForAccessibility="no-hide-descendants"` ч мөн адил. 
+
+
 
 #### onAccessibilityTap (iOS)
 
-Use this property to assign a custom function to be called when someone activates an accessible element by double tapping on it while it's selected.
+
+
+Хүртээмжтэй элемент дээр хоёр товшиж идэвхжүүлэхэд онцгой нэг функцийг ажиллуулах бол үүнийг ашиглана. 
+
+
 
 #### onMagicTap (iOS)
 
-Assign this property to a custom function which will be called when someone performs the "magic tap" gesture, which is a double-tap with two fingers. A magic tap function should perform the most relevant action a user could take on a component. In the Phone app on iPhone, a magic tap answers a phone call, or ends the current one. If the selected element does not have an `onMagicTap` function, the system will traverse up the view hierarchy until it finds a view that does.
+
+
+Хоёр хуруугаараа товших "magic tap" үйлдэл хийж байгаа үед онцгой нэг функцийг дуудаж ажиллуулах бол үүнийг ашиглана. Magic tap функц нь тухайн компонент дээр хэрэглэгчийн хийх боломжтой хамгийн зохимжтой үйлдлийг хийдэг. iPhone дээрх Phone апп дээр magic tap нь утасны дуудлагад ирэхэд хариу өгөх эсвэл ярьж буй дуудлагыг тасалдаг. Хэрэв тухайн сонгосон элементэд `onMagicTap` функц байхгүй бол байгаа харагдацыг олох хүртэл систем нь харагдацын бүх шатлалыг дамжин шалгадаг. 
+
+
 
 #### onAccessibilityEscape (iOS)
 
-Assign this property to a custom function which will be called when someone performs the "escape" gesture, which is a two finger Z shaped gesture. An escape function should move back hierarchically in the user interface. This can mean moving up or back in a navigation hierarchy or dismissing a modal user interface. If the selected element does not have an `onAccessibilityEscape` function, the system will attempt to traverse up the view hierarchy until it finds a view that does or bonk to indicate it was unable to find one.
+
+
+Хоёр хуруугаараа Z үсэг зурж буй мэтээр "escape" үйлдэл хийж байгаа үед онцгой нэг функцийг дуудаж ажиллуулах бол үүнийг ашиглана. Escape функц нь хэрэглэгчийн интерфэйсийн дараагийнх руу нь буцдаг. Энэ нь юу гэсэн үг вэ гэхээр навигаци хийхдээ дээш, доош шилжих эсвэл modal хэрэглэгчийн интерфэйсийг хаана гэсэн үг. Хэрэв сонгосон элемент нь `onAccessibilityEscape` функцгүй бол байгаа харагдацыг олох хүртэл систем нь харагдацын бүх шатлалыг дамжин шалгадаг эсвэл олох боломжгүй байна гэж харуулдаг. 
+
+
 
 #### accessibilityLiveRegion (Android)
 
-When components dynamically change, we want TalkBack to alert the end user. This is made possible by the ‘accessibilityLiveRegion’ property. It can be set to ‘none’, ‘polite’ and ‘assertive’:
 
-- **none** Accessibility services should not announce changes to this view.
-- **polite** Accessibility services should announce changes to this view.
-- **assertive** Accessibility services should interrupt ongoing speech to immediately announce changes to this view.
+
+Компонентууд динамикаар өөрчлөгдөх үед TalkBack-ыг хэрэглэгчид анхааруулга өгдөг байх нь бидэнд хэрэгтэй. Ингэхийн тулд 
+
+‘accessibilityLiveRegion’ ашиглана.   ‘none’, ‘polite’ болон ‘assertive’ гэж тохируулах боломжтой:
+
+
+
+- **none** Энэхүү харагдац дээр хийсэн өөрчлөлтийн тухай мэдээлэхгүй. 
+
+- **polite** Энэхүү харагдац дээр хийсэн өөрчлөлтийн тухай мэдээлэх хэрэгтэй.
+
+- **assertive** Энэхүү харагдац дээр өөрчлөлт орсон даруйд одоогийн яриаг таслан мэдээлэх хэрэгтэй. 
+
+
 
 ```javascript
+
 <TouchableWithoutFeedback onPress={this._addOne}>
+
   <View style={styles.embedded}>
+
     <Text>Click me</Text>
+
   </View>
+
 </TouchableWithoutFeedback>
+
 <Text accessibilityLiveRegion="polite">
+
   Clicked {this.state.count} times
+
 </Text>
+
 ```
 
-In the above example method \_addOne changes the state.count variable. As soon as an end user clicks the TouchableWithoutFeedback, TalkBack reads text in the Text view because of its 'accessibilityLiveRegion=”polite”' property.
+
+
+Дээрх жишээ дээр \_addOne нь state.count  хувьсагчийг өөрчилж байна. Хэрэглэгч TouchableWithoutFeedback дээр дармагц TalkBack Text гэсэн харагдац доторх текстийг уншина.  'accessibilityLiveRegion=”polite”'  байгаа учраас.
+
+
+
+
 
 #### importantForAccessibility (Android)
 
-In the case of two overlapping UI components with the same parent, default accessibility focus can have unpredictable behavior. The ‘importantForAccessibility’ property will resolve this by controlling if a view fires accessibility events and if it is reported to accessibility services. It can be set to ‘auto’, ‘yes’, ‘no’ and ‘no-hide-descendants’ (the last value will force accessibility services to ignore the component and all of its children).
+
+
+Нэг эцэгтэй хоёр UI компонент давхцаад байгаа үед хүртээмжийн хувьд урьдчилан тааварлах боломжгүй нөхцөл байдал үүсэх боломжтой. Харагдац нь accessibility events үүсгэх эсвэл хүртээмжтэй холбоотой үйлчилгээ гэж бүртгэгдсэн тохиолдолд ‘importantForAccessibility’ арга хэмжээ авч үүнийг зохицуулдаг. ‘auto’, ‘yes’, ‘no’ , ‘no-hide-descendants’ гэж тохируулах боломжтой (сүүлийн утга нь хүртээмжийн үйлчилгээ уг компонентыг бол бүх children-ийг тоохгүй орхиход хүргэнэ.
+
+
 
 ```javascript
+
 <View style={styles.container}>
+
   <View style={{position: 'absolute', left: 10, top: 10, right: 10, height: 100,
+
     backgroundColor: 'green'}} importantForAccessibility=”yes”>
+
     <Text> First layout </Text>
+
   </View>
+
   <View style={{position: 'absolute', left: 10, top: 10, right: 10, height: 100,
+
     backgroundColor: 'yellow'}} importantForAccessibility=”no-hide-descendants”>
+
     <Text> Second layout </Text>
+
   </View>
+
 </View>
+
 ```
 
-In the above example, the yellow layout and its descendants are completely invisible to TalkBack and all other accessibility services. So we can easily use overlapping views with the same parent without confusing TalkBack.
 
-### Checking if a Screen Reader is Enabled
 
-The `AccessibilityInfo` API allows you to determine whether or not a screen reader is currently active. See the [AccessibilityInfo documentation](accessibilityinfo.md) for details.
+Дээрх жишээ дээр шар layout болон түүний дагаврууд нь TalkBack болон бусад хүртээмжтэй холбоотой үйлчилгээнд огт харагдахгүй. 
 
-### Sending Accessibility Events (Android)
+Тийм болохоор бид TalkBack-т эргэлзээ үүсгэхгүйгээр ижил эцэгтэй харагдацуудыг давхар ашиглаж болно. 
 
-Sometimes it is useful to trigger an accessibility event on a UI component (i.e. when a custom view appears on a screen or a custom radio button has been selected). Native UIManager module exposes a method ‘sendAccessibilityEvent’ for this purpose. It takes two arguments: view tag and a type of an event.
+
+
+### Дэлгэц уншигчийг идэвхжүүлсэн эсэхийг шалгах
+
+
+
+`AccessibilityInfo` API нь дэлгэц уншигч идэвхтэй байгаа эсэхийг шалгахад тусалдаг.  Дэлгэрэнгүй мэдээллийг [AccessibilityInfo documentation](accessibilityinfo.md)-аас харна уу.
+
+
+
+### Accessibility Events илгээх (Android)
+
+
+
+Заримдаа accessibility event-ийг UI компонент дээр үүсгэх нь дөхөм байдаг (дэлгэц дээр тусгай харагдац байх эсвэл тусгай радио товчийг сонгосон үед). Native UIManager модуль нь энэ зорилгоор ‘sendAccessibilityEvent’ -ыг ашигладаг. Тааг харах, тухайн event-ийн төрлийг харах гэсэн хоёр сонголттой.
+
+
 
 ```javascript
+
 import { UIManager, findNodeHandle } from 'react-native';
 
+
+
 _onPress: function() {
+
   const radioButton = this.state.radioButton === 'radiobutton_checked' ?
+
     'radiobutton_unchecked' : 'radiobutton_checked'
 
+
+
   this.setState({
+
     radioButton: radioButton
+
   });
 
+
+
   if (radioButton === 'radiobutton_checked') {
+
     UIManager.sendAccessibilityEvent(
+
       findNodeHandle(this),
+
       UIManager.AccessibilityEventTypes.typeViewClicked);
+
   }
+
 }
 
+
+
 <CustomRadioButton
+
   accessibilityComponentType={this.state.radioButton}
+
   onPress={this._onPress}/>
-```
-
-In the above example we've created a custom radio button that now behaves like a native one. More specifically, TalkBack now correctly announces changes to the radio button selection.
-
-## Testing VoiceOver Support (iOS)
-
-To enable VoiceOver, go to the Settings app on your iOS device (it's not available for simulator). Tap General, then Accessibility. There you will find many tools that people use to make their devices more usable, such as bolder text, increased contrast, and VoiceOver.
-
-To enable VoiceOver, tap on VoiceOver under "Vision" and toggle the switch that appears at the top.
-
-At the very bottom of the Accessibility settings, there is an "Accessibility Shortcut". You can use this to toggle VoiceOver by triple clicking the Home button.
-
-## Testing TalkBack Support (Android)
-
-To enable TalkBack, go to the Settings app on your Android device or emulator. Tap Accessibility, then TalkBack. Toggle the "Use service" switch to enable or disable it.
-
-P.S. Android emulator doesn’t have TalkBack by default. To install it:
-
-1. Download TalkBack file here: https://google-talkback.en.uptodown.com/android
-2. Drag the downloaded `.apk` file into the emulator
-
-You can use the volume key shortcut to toggle TalkBack. To turn on the volume key shortcut, go to the Settings app, then Accessibility. At the top, turn on Volume key shortcut.
-
-To use the volume key shortcut, press both volume keys for 3 seconds to start an accessibility tool.
-
-Additionally, if you prefer, you can toggle TalkBack via command line with:
 
 ```
+
+
+
+Дээрх жишээ дээр бид тусгай радио товчийг үүсгэсэн. Одоо натив шиг ажиллана. Тодруулж хэлбэл TalkBack одооноос радио товчийн сонголтод гарсан өөрчлөлтийг зөв мэдээлэх юм. 
+
+
+
+## VoiceOver Support-ыг шалгаж үзэх (iOS)
+
+
+
+VoiceOver-ыг идэвхжүүлэхийн тулд iOS төхөөрөмж дээрээ Settings апп руу орж (Симялаторт байхгүй), General гэсэн дээр дараад тэгээд Accessibility гэснийг сонгоно. Тэндээс текс тодруулах, ялгарал сайжруулах, Voiceover гэх мэт хэрэглэгч төхөөрөмжөө илүү сайн ашиглах боломжтой болно.
+
+
+
+VoiceOver-ыг идэвхжүүлэхийн тулд  "Vision" гэсний доор VoiceOver гэсэн дээр даран дээр харагдаж буй товчийг чирж идэвхжүүлнэ. 
+
+
+
+Accessibility тохиргооны хамгийн доор нь "Accessibility Shortcut" гэж бий. Та Home товч дээр гурав дарахад VoiceOver гарч ирдэг байхыг хүсвэл үүнийг ашиглаарай.
+
+
+
+## TalkBack Support-ыг шалгах (Android)
+
+
+
+TalkBack-ыг идэвхжүүлэхийн тулд Android төхөөрөмж дээрээ эсвэл эмулятор дээрээ Settings апп руу орно. Accessibility гэсэн дээр дараад TalkBack-ыг сонгоно. Тэгээд "Use service" гэснийг асааж, унтраах маягаар идэвхжүүлэх эсвэл унтраах боломжтой. 
+
+
+
+Сануулж хэлэхэд, Android эмулятор нь цаанаасаа TalkBack-тай ирдэггүй. Суулгахын тулд:
+
+
+
+1. TalkBack файл эндээс татах: https://google-talkback.en.uptodown.com/android
+
+2. Татсан файлаа эмуляторын `.apk`  файл руу чирэх 
+
+
+
+Та TalkBack-ыг ажиллуулахын тулд дуу нэмж хасах товчийг ашиглах боломжтой. Идэвхжүүлэхийн тулд Settings цэс, Accessibility гэж ороод дээд хэсэгт байгаа Volume key shortcut гэснийг идэвхжүүлнэ.
+
+
+
+Уг товчийг 3 секунд дарахад accessibilty tools гарч ирнэ.
+
+
+
+Хэрэв та хүсвэл command line ашиглан та Talkback-ыг идэвхжүүлэх боломжтой:
+
+
+
+```
+
 # disable
+
 adb shell settings put secure enabled_accessibility_services com.android.talkback/com.google.android.marvin.talkback.TalkBackService
 
+
+
 # enable
+
 adb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService
+
 ```
+
