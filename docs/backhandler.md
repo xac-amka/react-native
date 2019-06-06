@@ -3,20 +3,23 @@ id: backhandler
 title: BackHandler
 ---
 
-Detect hardware button presses for back navigation.
+Буцах үйлдлийг хийхийн тулд төхөөрөмжийн товчлуурыг дарах event-ийг илрүүлэх
 
-Android: Detect hardware back button presses, and programmatically invoke the default back button functionality to exit the app if there are no listeners or if none of the listeners return true.
+Android: Төхөөрөмжөөс буцах товчлуур дарагдах үеийн event-ийг илрүүлэх. Энэ эвентийг сонсож байгаа сонсогч байхгүй эсвэл true утгийг буцаасан ямар ч listener байхгүй үед буцах товч дарагдахад угийн хийгддэг үйлдэл болох "аппаас гарах" үйлдлийг хийнэ.
 
-tvOS: Detect presses of the menu button on the TV remote. (Still to be implemented: programmatically disable menu button handling functionality to exit the app if there are no listeners or if none of the listeners return true.)
+tvOS: Телевизийн удирдлагын "цэс" товчлуурыг дарах event-ийг илрүүлэх. (Одоо хүртэл хийгдэж байгаа: Энэ эвентийг сонсож байгаа listener байхгүй эсвэл true утгийг буцаасан ямар ч listener байхгүй үед буцах товч дарагдахад хийгдэх "аппаас гарах" үйлдлийг болиулна.)
 
-iOS: Not applicable.
+ios: IOS дээр ажиллахгүй.
 
-The event subscriptions are called in reverse order (i.e. last registered subscription first), and if one subscription returns true then subscriptions registered earlier will not be called.
+Энэ event-ийн сонсогч нар нь сүүлд бүртгэгдсэнээсээ эхлэн дуудагддаг ба хэрвээ аль нэг нь true утга буцаавал өмнө нь бүртгэгдсэн сонсогчууд нь дуудагдахгүй.
 
-Example:
+Жишээ нь:
 
 ```javascript
 BackHandler.addEventListener('hardwareBackPress', function() {
+  // this.onMainScreen болон this.goBack нь зүгээр жишээ юм. Энд өөрийнхөө кодыг бичих хэрэгтэй
+  // Өмнөх төлөв рүү үсрэх үйлдлийг хийж болох юм.
+  
   // this.onMainScreen and this.goBack are just examples, you need to use your own implementation here
   // Typically you would use the navigator here to go to the last state.
 
@@ -27,8 +30,7 @@ BackHandler.addEventListener('hardwareBackPress', function() {
   return false;
 });
 ```
-
-Lifecycle example:
+React Native-ын амьдралын мөчлөгтэй холбосон жишээ:
 
 ```javascript
   componentDidMount() {
@@ -40,17 +42,17 @@ Lifecycle example:
   }
 
   handleBackPress = () => {
-    this.goBack(); // works best when the goBack is async
+    this.goBack(); // энэ goBack функц нь async функц бол илүү төгс ажиллана works best when the goBack is async
     return true;
   }
 ```
-
+React Native-ын амьдралын мөчлөгтэй холбосон бас нэг жишээ:
 Lifecycle alternative:
 
 ```javascript
   componentDidMount() {
     this.backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      this.goBack(); // works best when the goBack is async
+      this.goBack(); // энэ goBack функц нь async функц бол илүү төгс ажиллана
       return true;
     });
   }
