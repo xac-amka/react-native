@@ -1,54 +1,55 @@
 ---
 id: improvingux
-title: Improving User Experience
+title: Хэрэглэгчид таатай болгох
 ---
 
-## Configure text inputs
+## Текст оруулах тохиргоо
 
-Entering text on touch phone is a challenge - small screen, software keyboard. But based on what kind of data you need, you can make it easier by properly configuring the text inputs:
+Жижиг дэлгэцтэй, програмчилсан товчлууртай утсан дээр текс оруулах амаргүй. Хэдий тийм боловч та өөрт шаардлагатай өгөгдлөөс хамаарч текст оруулах явцыг илүү хялбар болгох боломжтой:
 
-- Focus the first field automatically
-- Use placeholder text as an example of expected data format
-- Enable or disable autocapitalization and autocorrect
-- Choose keyboard type (e.g. email, numeric)
-- Make sure the return button focuses the next field or submits the form
 
-Check out [`TextInput` docs](textinput.md) for more configuration options.
+- Эхний эгнээ хэсэг дээр шууд төвлөрдөг болгох 
+- Оруулж магадгүй хэлбэрийн текстийг урьдчилан байршуулах 
+- Автоматаар үг томоор бичих, алдаа засах функцийг идэвхжүүлэх эсвэл унтраах autocorrect
+- Товчлуурын төрлийг сонгох (имэйл, тоон г.м)
+- Буцах товч нь дараагийн талбар руу шилжих эсвэл форм илгээхээр тохиргоо хийгдсэн эсэхийг анзаарна уу.
+
+Тохиргооны талаар [`TextInput` docs](textinput.md) гэдгээс дэлгэрэнгүй уншина уу.
 
 <video src="/react-native/img/textinput.mp4" muted autoplay loop width="320" height="430"></video>
 
-[Try it on your phone](https://snack.expo.io/H1iGt2vSW)
+[Өөрийн утсан дээр хийж үзэх](https://snack.expo.io/H1iGt2vSW)
 
-## Manage layout when keyboard is visible
+## Товчлуур харагдаж байгаа үед layout-аа удирдах
 
-Software keyboard takes almost half of the screen. If you have interactive elements that can get covered by the keyboard, make sure they are still accessible by using the [`KeyboardAvoidingView` component](keyboardavoidingview.md).
+Програмчилсан товчлуур нь дэлгэцийн бараг тал зайг эзэлдэг. Хэрэв танд товчлуур ашиглан хийж болох интерактив элемент байгаа бол [`KeyboardAvoidingView` component](keyboardavoidingview.md) ашиглан орж болох эсэхийг шалгаарай.
 
 <video src="/react-native/img/keyboardavoidingview.mp4" muted autoplay loop width="320" height="448"></video>
 
-[Try it on your phone](https://snack.expo.io/ryxRkwnrW)
+[Өөрийн утсан дээр хийж үзэх](https://snack.expo.io/ryxRkwnrW)
 
-## Make tappable areas larger
+## Товших хэсгийг илүү том болгох
 
-On mobile phones it's hard to be very precise when pressing buttons. Make sure all interactive elements are 44x44 or larger. One way to do this is to leave enough space for the element, `padding`, `minWidth` and `minHeight` style values can be useful for that. Alternatively, you can use [`hitSlop` prop](touchablewithoutfeedback.md#hitslop) to increase interactive area without affecting the layout. Here's a demo:
+Гар утсан дээр товчлуур дарж байгаа үед яг онож дарахад хэцүү байдаг. Тийм болохоор интерактив элементүүдээ 44x44 юм у, үүнээс том байхаар хийгээрэй. Үүнийг шийдэх нэг арга бол тухайн элементэд хангалттай зай үлдээх юм. `padding`, `minWidth` болон `minHeight` хэв маягийг ашиглаж болно. Эсвэл [`hitSlop` prop](touchablewithoutfeedback.md#hitslop) ашиглан layout-д нөлөөлөхгүйгээр интерактив хэсгээ нэмж болно. Демо:
 
 <video src="/react-native/img/hitslop.mp4" muted autoplay loop width="320" height="120"></video>
 
-[Try it on your phone](https://snack.expo.io/rJPwCt4HZ)
+[Өөрийн утсан дээр хийж үзэх](https://snack.expo.io/rJPwCt4HZ)
 
-## Use Android Ripple
+## Android Ripple ашиглах
 
-Android API 21+ uses the material design ripple to provide user with feedback when they touch an interactable area on the screen. React Native exposes this through the [`TouchableNativeFeedback` component](touchablenativefeedback.md). Using this touchable effect instead of opacity or highlight will often make your app feel much more fitting on the platform. That said, you need to be careful when using it because it doesn't work on iOS or on Android API < 21, so you will need to fallback to using one of the other Touchable components on iOS. You can use a library like [react-native-platform-touchable](https://github.com/react-community/react-native-platform-touchable) to handle the platform differences for you.
+Android API 21+ нь хэрэглэгч дэлгэц дээрх интерактив хэсэг дээр хүрэх үед хариу өгдөг дизайнтай  React Native-т [`TouchableNativeFeedback` component](touchablenativefeedback.md) ашиглан үүнийг хийж болно. Бүдгэрэл, тодруулах функцийн оронд энэ эффектийг ашигласнаар апп тань тухайн платформд илүү таарч байгаа мэт санагдана. Ашиглахдаа болгоомжтой хандах хэрэгтэй. iOS болон Android API < 21 дээр ажиллахгүй учир iOS дээрх бусад Touchable компонентууд ашиглаж байгаа бол мэдээллээ хадгалах хэрэгтэй болно. Платформ хоорондын ялгаатай функцийг хэрхэн зохицуулах тухай [react-native-platform-touchable](https://github.com/react-community/react-native-platform-touchable) гэх сангаас уншаарай.
 
 <video src="/react-native/img/ripple.mp4" muted autoplay loop width="320"></video>
 
-[Try it on your phone](https://snack.expo.io/SJywqe3rZ)
+[Өөрийн утсан дээр хийж үзэх](https://snack.expo.io/SJywqe3rZ)
 
-## Screen orientation lock
+## Дэлгэцийн байрлал түгжих
 
-Multiple screen orientations should work fine by default unless you're using `Dimensions` API and don't handle orientation changes. If you don't want to support multiple screen orientations, you can lock the screen orientation to either portrait or landscape.
+Та `Dimensions` API ашиглаагүй эсвэл дэлгэцийн байрлалыг өөрчилж тохируулаагүй бол дэлгэцийн байрлалыг солигддог байхаар анхнаасаа тохиргоотой байдаг. Хэрэв та байрлал олон солилддог байхыг хүсэхгүй байгаа бол босоо эсвэл хэвтээ чиглэлд байхаар тохируулан түгжих боломжтой. 
 
-On iOS, in the General tab and Deployment Info section of Xcode enable the Device Orientation you want to support (ensure you have selected iPhone from the Devices menu when making the changes). For Android, open the AndroidManifest.xml file and within the activity element add `'android:screenOrientation="portrait"'` to lock to portrait or `'android:screenOrientation="landscape"'` to lock to landscape.
+iOS дээр General tab-руу орон Xcode-ийн Deployment Info хэсэг рүү орж хүссэн Device Orientation гэдгийг идэвхжүүлнэ (Өөрчлөлт хийх үедээ Төхөөрөмж цэсээс iPhone гэдгийг сонгосон эсэхээ шалгаарай). Android-ын хувьд AndroidManifest.xml файлыг нээгээд үйл ажиллагааны элемент дээр `'android:screenOrientation="portrait"'` гэдгийг нэмж дэлгэцийг босоо хэлбэрээр эсвэл `'android:screenOrientation="landscape"'` гэдгийг нэмж хэвтээ байхаар түгжих боломжтой. 
 
-# Learn more
+# Илүү дэлгэрэнгүйг
 
-[Material Design](https://material.io/) and [Human Interface Guidelines](https://developer.apple.com/ios/human-interface-guidelines/overview/design-principles/) are great resources for learning more about designing for mobile platforms.
+Гар утасны платформд зориулсан дизайн өөрчлөх тухай [Material Design](https://material.io/) болон [Human Interface Guidelines](https://developer.apple.com/ios/human-interface-guidelines/overview/design-principles/)-аас уншиж болно.
