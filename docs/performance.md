@@ -1,43 +1,50 @@
 ---
 id: performance
-title: Performance
+title: Ажиллагаа
 ---
 
-A compelling reason for using React Native instead of WebView-based tools is to achieve 60 frames per second and a native look and feel to your apps. Where possible, we would like for React Native to do the right thing and help you to focus on your app instead of performance optimization, but there are areas where we're not quite there yet, and others where React Native (similar to writing native code directly) cannot possibly determine the best way to optimize for you and so manual intervention will be necessary. We try our best to deliver buttery-smooth UI performance by default, but sometimes that just isn't possible.
+WebView дээр суурилсан аргууд байхад React Native ашиглах гол шалтгаан бол нэг секундэд 60 фрейм гаргаж, натив харагдаж, мэдрэгдэх апп хийж болдогт оршино.Бид та бүхнийг React Native-ыг ашиглан зөв зүйлээ хийгээд, ажиллагааг нь оновчтой болгох гэж биш аппдаа гол анхаарч ажиллахад тань туслахын төлөө хичээх болно. Гэхдээ бидний хараахан хөгжүүлж чадаагүй бас бус зүйлс бий. 
+React Native (шууд натив код бичихийн нэгэн адил) танд зориулж хамгийн оновчтой замыг зааж чадахгүй. Тиймдээ ч өөрөө хийж, тохируулахаас өөр аргагүй. Бид хэрэглэгч ашиглахад өөгүй сайхан ажиллагаатай байхаар анхнаасаа тохиргоотой байлгахын төлөө хичээдэг ч заримдаа энэ нь боломжгүй байх үе бий. 
 
-This guide is intended to teach you some basics to help you to [troubleshoot performance issues](performance.md#profiling), as well as discuss [common sources of problems and their suggested solutions](performance.md#common-sources-of-performance-problems).
+ [Ажиллагаатай холбоотой асуудлыг шийдэх](performance.md#profiling) тухай үндсэн ухагдахуун, мөн [асуудлын түгээмэл эх үүсвэр хийгээд зохих шийдлийн тухай](performance.md#common-sources-of-performance-problems) уншаарай.
 
-## What you need to know about frames
+## Фреймын тухай та юу мэдэх шаардлагатай вэ?
 
-Your grandparents' generation called movies ["moving pictures"](https://www.youtube.com/watch?v=F1i40rnpOsA) for a reason: realistic motion in video is an illusion created by quickly changing static images at a consistent speed. We refer to each of these images as frames. The number of frames that is displayed each second has a direct impact on how smooth and ultimately life-like a video (or user interface) seems to be. iOS devices display 60 frames per second, which gives you and the UI system about 16.67ms to do all of the work needed to generate the static image (frame) that the user will see on the screen for that interval. If you are unable to do the work necessary to generate that frame within the allotted 16.67ms, then you will "drop a frame" and the UI will appear unresponsive.
+Эмээ, өвөө чинь киног ["хөдөлгөөнт зураг"](https://www.youtube.com/watch?v=F1i40rnpOsA) гэж нэрлэдэг байсан нь учиртай.
+Видео бол бодит үнэндээ хөдөлгөөнгүй зургыг тогтмол хурдаар маш хурдан өөрчилж байгаа юм. Энэ зургуудыг фреймууд гэж ойлгох хэрэгтэй. Секунд бүрт хичнээн фрейм дэлгэц дээр гаргах нь тухайн видео нь өв тэгш, амьд болж чадах эсэхэд нөлөөлдөг. 
+iOS төхөөрөмж секундэд 60 фрейм харуулж чадах ба та болон хэрэглэгчийн интерфэйс 16.67 миллисекундэд тухайн хөдөлгөөнгүй зураг (фрейм) гарахад шаардлагатай бүх ажлыг хийж байж түүнийг чинь хэрэглэгч дэлгэц дээр харна. Хэрэв өгөгдсөн 16.67 миллисекундэд тухайн фреймыг боловсруулах ажлыг хийж чадахгүй бол  "drop a frame" буюу фреймыг хаягдах ба хэрэглэгчийн интерфэйс хариу үйлдэл хийхгүй, ажиллагаагүй болно. 
 
-Now to confuse the matter a little bit, open up the developer menu in your app and toggle `Show Perf Monitor`. You will notice that there are two different frame rates.
+Аппынхаа хөгжүүлэгчийн цэсийн `Show Perf Monitor` гэсэн дээр очоорой. Хоёр өөр төрлийн фреймын хурд байгааг та тэндээс харах болно. 
 
 ![](/react-native/docs/assets/PerfUtil.png)
 
-### JS frame rate (JavaScript thread)
+### JS фрейм хурд (JavaScript thread)
 
-For most React Native applications, your business logic will run on the JavaScript thread. This is where your React application lives, API calls are made, touch events are processed, etc... Updates to native-backed views are batched and sent over to the native side at the end of each iteration of the event loop, before the frame deadline (if all goes well). If the JavaScript thread is unresponsive for a frame, it will be considered a dropped frame. For example, if you were to call `this.setState` on the root component of a complex application and it resulted in re-rendering computationally expensive component subtrees, it's conceivable that this might take 200ms and result in 12 frames being dropped. Any animations controlled by JavaScript would appear to freeze during that time. If anything takes longer than 100ms, the user will feel it.
+Ихэнх React Native аппликейшнууд дээр JavaScript thread дотор гол логик нь явагдаж байдаг. Тэнд React аппликейшн чинь байж, API calls хийгдэж, хүрч мэдрэх үйлдүүд гэх мэт зүйлс хийгддэг... Натив артай харагдацад орсон шинэчлэлүүд нь бөөгнөрч, фреймын ногдсон хугацаа дуусахаас өмнө  event loop давталт бүрийн төгсгөл дэх натив тал руу илгээгддэг. 
+Хэрэв JavaScript thread ямар нэг фреймд хариу үйлдэл хийхгүй бол үүнийг хаягдсан фрейм гэж үзнэ. Жишээ нь, та цогц хийгдсэн нэг аппликейшны суурь компонент дээр `this.setState`-ыг дуудвал тооцооллын хувьд хохиролтой компонентын дэд модыг дахин рендэр хийх ба магадгүй 200 миллисекунд зарцуулж, 12 фрейм хаягдах болно. JavaScript дээр ажилладаг анимейшнууд энэ үед хөдөлгөөнгүй болно. 100 миллисекундээс удвал хэрэглэгч түүнийг анзаарч байдаг. 
 
-This often happens during `Navigator` transitions: when you push a new route, the JavaScript thread needs to render all of the components necessary for the scene in order to send over the proper commands to the native side to create the backing views. It's common for the work being done here to take a few frames and cause [jank](http://jankfree.org/) because the transition is controlled by the JavaScript thread. Sometimes components will do additional work on `componentDidMount`, which might result in a second stutter in the transition.
+Энэ явдал ихэвчлэн `Navigator` шилжилтийн үед болдог. Та шинэ зам push хийх үед тухайн харагдацыг хадгалах зорилгоор натив тал руу зөв команд явуулахын тулд JavaScript thread нь шаардлагатай бүх компонентыг рендэр хийх хэрэгтэй болно. 
+Хэдэн фрейм авч болчхоод [jank](http://jankfree.org/) болох нь бий. Учир нь шилжилт нь JavaScript thread-ээр зохицуулагдаж байгаа. Заримдаа компонентууд `componentDidMount` дээр нэмж ажиллах ба ингэснээр шилжилтийн үед хоёр дахь гацалт үүсэх шалтгаан болдог.
 
-Another example is responding to touches: if you are doing work across multiple frames on the JavaScript thread, you might notice a delay in responding to `TouchableOpacity`, for example. This is because the JavaScript thread is busy and cannot process the raw touch events sent over from the main thread. As a result, `TouchableOpacity` cannot react to the touch events and command the native view to adjust its opacity.
+Өөр нэг жишээ бол дэлгэцэд хүрэх үйлдлийн хариу үйлдлийн жишээ юм. Хэрэв та JavaScript thread дээр олон тоон фрейм дамнан ажиллаж байгаа бол `TouchableOpacity`-д хариу өгөхдөө удаан байгааг анзаарсан байх. Яагаад гэвэл  JavaScript thread  нь завгүй байгаа тул гол хэсгээс илгээсэн шинэ хүрэх үйлдлийг боловсруулж чадахгүй байгаа юм. Үр дүнд нь `TouchableOpacity` дэлгэцэд хүрэх үйлдэлд хариу үзүүлэхгүй, бүдгэрлийг тохируулах командыг натив харагдац руу илгээхгүй. 
 
-### UI frame rate (main thread)
 
-Many people have noticed that performance of `NavigatorIOS` is better out of the box than `Navigator`. The reason for this is that the animations for the transitions are done entirely on the main thread, and so they are not interrupted by frame drops on the JavaScript thread.
+### UI фрейм хурд (гол thread)
 
-Similarly, you can happily scroll up and down through a `ScrollView` when the JavaScript thread is locked up because the `ScrollView` lives on the main thread. The scroll events are dispatched to the JS thread, but their receipt is not necessary for the scroll to occur.
+`NavigatorIOS`-ын ажиллагаа нь `Navigator`-аас илүү болохыг олон хүн анзаарсан байдаг. Үүний учир нь шилжилтийн анимейшн нь гол thread дээр хийгдсэн байдагт оршино. Тиймдээ ч JavaScript thread дээрх фрейм хаягдах явдал тэдэнд садаа болдоггүй.
 
-## Common sources of performance problems
+Мөн та JavaScript thread түгжигдсэн үед `ScrollView` ашиглан чөлөөтэй дээш, доош гүйлгэж болдог. Яагаад гэхээр `ScrollView` нь мөн гол thread дээр байдаг юм. Гүйлгэх үйлдлийн тухай мэдээлэл JS thread рүү илгээгдэх ч гүйлгэх үйлдэл хийгдэхэд тухайн мэдээлэл хүрч очсон эсэх нь хамаагүй юм.
 
-### Running in development mode (`dev=true`)
 
-JavaScript thread performance suffers greatly when running in dev mode. This is unavoidable: a lot more work needs to be done at runtime to provide you with good warnings and error messages, such as validating propTypes and various other assertions. Always make sure to test performance in [release builds](running-on-device.md#building-your-app-for-production).
+## Ажиллагаатай холбоотой асуудлуудын түгээмэл шалтгаан
 
-### Using `console.log` statements
+### Хөгжүүлэгчийн горим дээр ажиллуулах (`dev=true`)
 
-When running a bundled app, these statements can cause a big bottleneck in the JavaScript thread. This includes calls from debugging libraries such as [redux-logger](https://github.com/evgenyrodionov/redux-logger), so make sure to remove them before bundling. You can also use this [babel plugin](https://babeljs.io/docs/plugins/transform-remove-console/) that removes all the `console.*` calls. You need to install it first with `npm i babel-plugin-transform-remove-console --save-dev`, and then edit the `.babelrc` file under your project directory like this:
+JavaScript thread-ын ажиллагаа нь хөгжүүлэгчийн горимд ажиллаж байгаа үед их саатдаг. Үүнээс зайлсхийх боломжгүй. Пропын төрлийг баталгаажуулах, өөр олон төрлийн баталгаажуулалт хийх гэх мэтчилэн анхааруулга, алдааны мессеж гаргахын тулд их ажил хийгдэх хэрэгтэй болдог. [release builds](running-on-device.md#building-your-app-for-production) дээр ажиллагаагаа үргэлж тест хийж байгаарай.
+
+### `console.log` ашиглах
+
+Багц апп хийж байгаа үед эдгээр мэдэгдэл нь JavaScript thread дээр түгжрэл үүсгэх магадлалтай. [redux-logger](https://github.com/evgenyrodionov/redux-logger) гэх мэт дибаг хийх сангаас дуудах хүртэл үүнд хамаатай. Тиймээс нэгтгэж багцлахын өмнө арилгах хэрэгтэй. Та [babel plugin](https://babeljs.io/docs/plugins/transform-remove-console/) ашиглан бүх `console.*` -уудыг арилгаж болно. Эхлээд та  `npm i babel-plugin-transform-remove-console --save-dev`-тай суулгаад тэгээд  үүн шиг `.babelrc` файлаа засварлана:
 
 ```javascripton
 {
@@ -48,46 +55,46 @@ When running a bundled app, these statements can cause a big bottleneck in the J
   }
 }
 ```
+Таны бэлэн эсвэл хийгдэж байгаа төслийн бүх `console.*`calls-ыг устах болно.
 
-This will automatically remove all `console.*` calls in the release (production) versions of your project.
+### `ListView` эхний рендэр хийхдээ хэт удаан эсвэл урт жагсаалтыг гүйлгэх ажиллагаа нь тааруу байх 
 
-### `ListView` initial rendering is too slow or scroll performance is bad for large lists
+Шинэ [`FlatList`](flatlist.md) эсвэл [`SectionList`](sectionlist.md) компонентыг оронд нь ашигла.  API-ыг энгийг болгохоос гадна шинэ жагсаалтын компонент нь ажиллагааг огцом сайжруулдаг. Гол нэг нь хэдэн ч эгнээ бүхий жагсаалтыг хадгалах байнгын санах ой болж өгдөг.
 
-Use the new [`FlatList`](flatlist.md) or [`SectionList`](sectionlist.md) component instead. Besides simplifying the API, the new list components also have significant performance enhancements, the main one being nearly constant memory usage for any number of rows.
+Хэрэв таны [`FlatList`](flatlist.md) рендэр хийхдээ удаан байвал [`getItemLayout`](https://facebook.github.io/react-native/docs/flatlist.html#getitemlayout) суулгасан эсэхээ шалгаарай. Энэ нь рендэр хийсэн зүйлийг хэмжих процессыг алгасдаг тулд рендэр хийх хурдыг нэмж өгдөг. 
 
-If your [`FlatList`](flatlist.md) is rendering slow, be sure that you've implemented [`getItemLayout`](https://facebook.github.io/react-native/docs/flatlist.html#getitemlayout) to optimize rendering speed by skipping measurement of the rendered items.
+### Бараг өөрчлөгддөггүй харагдацыг дахин рендэр хийх үед JS FPS (хурд) унах
 
-### JS FPS plunges when re-rendering a view that hardly changes
+Хэрэв та  ListView ашиглаж байгаа бол `rowHasChanged` функцийг ажиллуулах хэрэгтэй. Энэ нь аливаа эгнээг дахин рендэр хийх эсэхийг хурдан шийдсэнээр цаг хэмнэдэг. Хэрэв байнгын тогтмол өгөгдлийн бүтэц ашиглаж байгаа бол их амар байх болно.
+Үүний нэгэн адил та мөн  `shouldComponentUpdate` ажиллуулж яг ямар нөхцөлд компонентыг дахин рендэр хийхийг хүсэж буйгаа тодорхойлж өгч болно. Рендэр хийсний буцаах дүн нь пропс болон төлөвөөс бүрэн хамаарах ба шинэ компонент бичиж байгаа бол та PureComponent-ыг ашиглах боломжтой. Дахин сануулахад, өөрчлөгддөггүй байнгын өгөгдлийн бүтэц нь хурдтай ажиллахад нь тус болдог. Хэрэв та урт жагсаалт бүхий зүйл дээр ажиллах шаардлагатай бол компонентоо бүхэлд нь дахин рендэр хийх нь илүү хурдан байх болно. Код ч бага бичнэ. 
 
-If you are using a ListView, you must provide a `rowHasChanged` function that can reduce a lot of work by quickly determining whether or not a row needs to be re-rendered. If you are using immutable data structures, this would be as simple as a reference equality check.
 
-Similarly, you can implement `shouldComponentUpdate` and indicate the exact conditions under which you would like the component to re-render. If you write pure components (where the return value of the render function is entirely dependent on props and state), you can leverage PureComponent to do this for you. Once again, immutable data structures are useful to keep this fast -- if you have to do a deep comparison of a large list of objects, it may be that re-rendering your entire component would be quicker, and it would certainly require less code.
+### JavaScript thread дээр олон зүйл хийснээс болж JS thread-ын FPS унах
 
-### Dropping JS thread FPS because of doing a lot of work on the JavaScript thread at the same time
+"Slow Navigator transitions" нь үүний гол нотолгоо юм. Гэхдээ өөр үед ч бас тохиолдох боломжтой. InteractionManager ашиглах нь зөв арга ч гэлээ, анимейшны үед ажиллагаа саатах нь хэрэглэгчид таагүй гэж үзэж байвал та LayoutAnimation ашиглаж болно.
 
-"Slow Navigator transitions" is the most common manifestation of this, but there are other times this can happen. Using InteractionManager can be a good approach, but if the user experience cost is too high to delay work during an animation, then you might want to consider LayoutAnimation.
+Та [`useNativeDriver: true`](https://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html#how-do-i-use-this-in-my-app)-ыг тохируулахгүй бол Animated API нь JavaScript thread дээр нэн шаардлагатай гол фрейм бүрийг тооцоолдог. LayoutAnimation нь Core Animation-ыг дэмжин ажиллах ба JS thread болон гол thread-ын фрейм хаягдах эсэх нь үүнд нөлөөлдөггүй.   
 
-The Animated API currently calculates each keyframe on-demand on the JavaScript thread unless you [set `useNativeDriver: true`](https://facebook.github.io/react-native/blog/2017/02/14/using-native-driver-for-animated.html#how-do-i-use-this-in-my-app), while LayoutAnimation leverages Core Animation and is unaffected by JS thread and main thread frame drops.
 
-One case where I have used this is for animating in a modal (sliding down from top and fading in a translucent overlay) while initializing and perhaps receiving responses for several network requests, rendering the contents of the modal, and updating the view where the modal was opened from. See the Animations guide for more information about how to use LayoutAnimation.
+Үүнийг ашигласан нэг тохиолдол нь модалыг хөдөлгөөнт оруулсан (дээрээс гулган нэвт гэрэлтэх давхарга болон замхардаг) үйлдэл юм. Ажиллаж эхлээд, сүлжээний хэд хэдэн хариу хүлээн авч байх үедээ модалд агуулагдаж буй зүйлсийг рендэр хийн модал нээгдсэн харагдацыг нь шинэчилнэ. LayoutAnimation-ыг хэрхэн ашиглах тухай Анимейшн хэсгээс уншина уу.
 
-Caveats:
+Санамж:
 
-- LayoutAnimation only works for fire-and-forget animations ("static" animations) -- if it must be interruptible, you will need to use `Animated`.
+- LayoutAnimation-ыг ажиллуулаад орхих ("байнгын байх") анимейшнд л зөвхөн ашиглаж болно. Хэрэв өөрчлөгддөг байх бол та `Animated` ашиглах нь зүйтэй.
 
-### Moving a view on the screen (scrolling, translating, rotating) drops UI thread FPS
+### Дэлгэц дээр гарч буй зүйлийг солих (гүйлгэх, орчуулах, эргүүлэх) үед UI thread FPS унах
 
-This is especially true when you have text with a transparent background positioned on top of an image, or any other situation where alpha compositing would be required to re-draw the view on each frame. You will find that enabling `shouldRasterizeIOS` or `renderToHardwareTextureAndroid` can help with this significantly.
+Зураг дээр нэвт харагдах суурь дээр бичсэн текст эсвэл фрейм бүр дээр харагдацыг дахин зурах алфа үйлдэл хийх хэрэгтэй үед ийм зүйл түгээмэл тохиолддог. `shouldRasterizeIOS` эсвэл `renderToHardwareTextureAndroid`-ыг идэвхжүүлбэл их нэмэх болно.
 
-Be careful not to overuse this or your memory usage could go through the roof. Profile your performance and memory usage when using these props. If you don't plan to move a view anymore, turn this property off.
+Гэхдээ хэтрүүлж ашиглаж болохгүй, эс бөгөөс санах ойн хэрэглээ явж өгнө. Эдгээр пропсийг ашиглаж байгаа үед ажиллагаагаа хянаж, санах ойн хэрэглээгээ хянах хэрэгтэй. Харагдацыг дахин хөдөлгөх төлөвлөгөөгүй байгаа бол идэвхгүй болгож болно.
 
-### Animating the size of an image drops UI thread FPS
+### Зургийн хэмжээсийг хөдөлгөөнд оруулах үед UI thread FPS унах
 
-On iOS, each time you adjust the width or height of an Image component it is re-cropped and scaled from the original image. This can be very expensive, especially for large images. Instead, use the `transform: [{scale}]` style property to animate the size. An example of when you might do this is when you tap an image and zoom it in to full screen.
+iOS дээр та зургийн компонентын өргөн, өндрийг өөрчлөх бүрт ориг зураг нь дахин огтлогдож, хэмжээс нь өөрчлөгдөж байдаг. Энэ нь их төвөгтэй ажил. Ялангуяа том зурагны хувьд. Оронд нь  `transform: [{scale}]` ашиглаж хэмжээг нь хөдөлгөөнд оруулбал амар байх болно. Үүнийг ашиглаж болох нэг тохиолдол нь та нэг зураг дээр дарахад тухайн зураг дэлгэц дүүрэн гарч томрох үйлдэл юм.
 
-### My TouchableX view isn't very responsive
+### TouchableX хариу үйлдэл хийхгүй байна 
 
-Sometimes, if we do an action in the same frame that we are adjusting the opacity or highlight of a component that is responding to a touch, we won't see that effect until after the `onPress` function has returned. If `onPress` does a `setState` that results in a lot of work and a few frames dropped, this may occur. A solution to this is to wrap any action inside of your `onPress` handler in `requestAnimationFrame`:
+Заримдаа бүдгэрлийг тохируулах, дэлгэцэд хүрэх үед хариу үйлдэл хийх компонентыг тодруулах үйлдэл хийж байгаа нэг фреймдээ үйлдэл хийхэд `onPress` товч гарах хүртэл тухайн эффектийг харах боломжгүй байдаг. `onPress`  нь их ажилд үр дүнгээ өгч, цөөн фрейм хаях `setState` хийвэл ийм зүйл болно. Үүнийг шийдэх арга нь `requestAnimationFrame` доторх `onPress` -ын аливаа үйлдлийг дуусгах юм:
 
 ```javascript
 handleOnPress() {
@@ -97,171 +104,174 @@ handleOnPress() {
 }
 ```
 
-### Slow navigator transitions
+### Navigator шилжилт удаан байх 
 
-As mentioned above, `Navigator` animations are controlled by the JavaScript thread. Imagine the "push from right" scene transition: each frame, the new scene is moved from the right to left, starting offscreen (let's say at an x-offset of 320) and ultimately settling when the scene sits at an x-offset of
+Дээр дурдсанчлан,  `Navigator` анимейшныг JavaScript thread удирддаг. "баруунаас түлхэх" шилжилтийг төсөөл. Фрейм бүр дээр шинэ үзэгдэл баруунаас зүүн рүү шилжиж, дэлгэцээс илүү гарч байна үзье (x-offset of 320). Үзэгдэл x-offset 0 болох үед зогсож байна.  Энэхүү шилжилтийн фрейм бүрт JavaScript thread нь шинэ x-offset-ын тухайн мэдээллийг гол хэсэг рүү илгээдэг. Хэрэв JavaScript thread түгжигдсэн бол үүнийг хийж чадахгүй ба тухайн фрейм дээр ямар нэг шинэчлэл хийгдэхгүй, анимейшн гацна.  
 
-0. Each frame during this transition, the JavaScript thread needs to send a new x-offset to the main thread. If the JavaScript thread is locked up, it cannot do this and so no update occurs on that frame and the animation stutters.
+Үүний нэг шийдэл нь  JavaScript дээр суурилсан анимейшныг гол хэсэг рүү буулгадаг болгох юм. Хэрэв дээрх жишээ шиг ижил зүйлийг хийх байсан бол шилжилт эхлэх үеийн шинэ үзэгдлийн бүх x-offset жагсаалтыг тооцоолж, оновчтой ажиллуулахаар гол хэсэг рүү илгээнэ.   JavaScript thread нь үүргээс чөлөөлөгдсөн тул үзэгдлийг рендэр хийх үедээ цөөн хэдэн фрейм хаях нь тийм ч чухал биш болно. Та гоё шилжилтийг хараад үүнийг анзаарах ч үгүй байх. 
 
-One solution to this is to allow for JavaScript-based animations to be offloaded to the main thread. If we were to do the same thing as in the above example with this approach, we might calculate a list of all x-offsets for the new scene when we are starting the transition and send them to the main thread to execute in an optimized way. Now that the JavaScript thread is freed of this responsibility, it's not a big deal if it drops a few frames while rendering the scene -- you probably won't even notice because you will be too distracted by the pretty transition.
+Шинэ [React Navigation](navigation.md)сангийн гол зорилгуудын нэг нь үүнийг шийдэх юм. React Navigation-ын харагдац нь натив компонентууд болон [`Animated`](animated.md) сан ашиглаж, native thread дээр секундэд 60 фрейм ажиллуулж чадна. 
 
-Solving this is one of the main goals behind the new [React Navigation](navigation.md) library. The views in React Navigation use native components and the [`Animated`](animated.md) library to deliver 60 FPS animations that are run on the native thread.
 
-## Profiling
+## Мэдээлэгч
 
-Use the built-in profiler to get detailed information about work done in the JavaScript thread and main thread side-by-side. Access it by selecting Perf Monitor from the Debug menu.
+Цаанаас суулгасан мэдээлэгчийг ашиглан JavaScript thread болон гол thread дээр хийсэн ажлын талаар дэлгэрэнгүй мэдээллийг эгнүүлэн харах боломжтой. Debug цэсний Perf Monitor гэдгийг сонгож орно. 
 
-For iOS, Instruments is an invaluable tool, and on Android you should learn to use [`systrace`](performance.md#profiling-android-ui-performance-with-systrace).
+iOS дээр бол Instruments их хэрэг болдог. Android дээр бол [`systrace`](performance.md#profiling-android-ui-performance-with-systrace) ашиглана.
 
-But first, [**make sure that Development Mode is OFF!**](performance.md#running-in-development-mode-dev-true) You should see `__DEV__ === false, development-level warning are OFF, performance optimizations are ON` in your application logs.
+Гэхдээ эхлээд [**Хөгжүүлэгчийн горим унтраастай эсэхийг шалгаарай!**](performance.md#running-in-development-mode-dev-true) Танд аппикейшны лоог дээр `__DEV__ === false, development-level warning are OFF, performance optimizations are ON` гэж харагдана.
 
-Another way to profile JavaScript is to use the Chrome profiler while debugging. This won't give you accurate results as the code is running in Chrome but will give you a general idea of where bottlenecks might be. Run the profiler under Chrome's `Performance` tab. A flame graph will appear under `User Timing`. To view more details in tabular format, click at the `Bottom Up` tab below and then select `DedicatedWorker Thread` at the top left menu.
+JavaScript-ын мэдээлэл авах өөр нэг арга нь дибаг хийж байх үедээ Chrome profiler ашиглах юм. Код Chrome дээр ачаалж байгаа учраас зөв үр дүн харуулахгүй ч хаана "түгжрэл" үүсээд байгаа тухай ерөнхий мэдээллийг өгч чадна. Chrome's `Performance`  доорх profiler гэснийг ажиллуулна. `User Timing` гэсэн дээр гал асч буй зураг гарна. Хүснэгт хэлбэрээр дэлгэрэнгүй харахыг хүсвэл `Bottom Up` гэсэн дээр дарж, зүүн дээд цэсээс `DedicatedWorker Thread`-ыг сонгоорой. 
 
-### Profiling Android UI Performance with `systrace`
+###  Android UI ажиллагааны тухай `systrace` ашиглан мэдээлэл авах
 
-Android supports 10k+ different phones and is generalized to support software rendering: the framework architecture and need to generalize across many hardware targets unfortunately means you get less for free relative to iOS. But sometimes, there are things you can improve -- and many times it's not native code's fault at all!
+Android нь 10k+ гаруй төрлийн утас дээр ажилладаг ба програм рендэрийн хувьд ерөнхий ажиллагаатай байдаг. Ажиллах хүрээний бүтцээс шалтгаалж, мөн олон янзын төхөөрөмж дээр ажилладаг байхаар хийгдсэн байдаг тул iOS-тай харьцуулахад хязгаарлагдмал байдаг. Заримдаа сайжруулах шаардлагатай зүйлс гарах ба ихэнхдээ тэд нар нь натив кодны алдаа биш байдаг!
 
-The first step for debugging this jank is to answer the fundamental question of where your time is being spent during each 16ms frame. For that, we'll be using a standard Android profiling tool called `systrace`.
+Энэ jank-ыг дибаг хийх эхний алхам бол 16 миллисекундийн фреймын хугацаанд таны цаг хаана нь зарцуулагдаж байгаа вэ гэдэгт хариулах юм.  Үүний тулд бид Android дээр `systrace` гэх хэрэгсэл ашиглана.
 
-`systrace` is a standard Android marker-based profiling tool (and is installed when you install the Android platform-tools package). Profiled code blocks are surrounded by start/end markers which are then visualized in a colorful chart format. Both the Android SDK and React Native framework provide standard markers that you can visualize.
+`systrace` нь тэмдэглэгчтэй мэдээлэгч хэрэгсэл юм (Android платформын багцыг суулгах үед давхар суудаг). Мэдээлэл авах код хэсгийн эхлэл/төгсгөлийг тэмдэглэж болох ба өнгийн чарт хэлбэрээр харагддаг. 
+Android SDK болон React Native нь стандарт тэмдэглэгчийн сонголттой байдаг. 
 
-#### 1. Collecting a trace
+#### 1. Алдааны тэмдэглэгээг олох
 
-First, connect a device that exhibits the stuttering you want to investigate to your computer via USB and get it to the point right before the navigation/animation you want to profile. Run `systrace` as follows:
+Эхлээд гацаад байгаа төхөөрөмжөө USB ашиглан компьютертойгоо холбоно. Тэгээд мэдээлэл авах навигаци/анимейшн хэсгийн өмнө аваачаад доорх маягаар `systrace` ажиллуулна:
 
 ```
 $ <path_to_android_sdk>/platform-tools/systrace/systrace.py --time=10 -o trace.html sched gfx view -a <your_package_name>
 ```
 
-A quick breakdown of this command:
+Энэхүү командыг тайлбарлавал:
 
-- `time` is the length of time the trace will be collected in seconds
-- `sched`, `gfx`, and `view` are the android SDK tags (collections of markers) we care about: `sched` gives you information about what's running on each core of your phone, `gfx` gives you graphics info such as frame boundaries, and `view` gives you information about measure, layout, and draw passes
-- `-a <your_package_name>` enables app-specific markers, specifically the ones built into the React Native framework. `your_package_name` can be found in the `AndroidManifest.xml` of your app and looks like `com.example.app`
+- `time` нь секундээр илэрхийлсэн тэмдэглэгээ хамрах хугацаа
+- `sched`, `gfx`, болон `view` нь бидэнд хэрэгтэй android SDK таагууд юм (хураасан тэмдэглэгээнүүд. `sched`  нь утасны core бүрт юу ажиллаж байгаа тухай мэдээлэл өгнө. `gfx` нь фреймын хил хязгаар гэхчлэн график мэдээлэл өгөх бол `view`  нь хэмжээ, layout, зургийн тухай мэдээлэл өгнө. 
 
-Once the trace starts collecting, perform the animation or interaction you care about. At the end of the trace, systrace will give you a link to the trace which you can open in your browser.
+- `-a <your_package_name>` нь тухайн аппд зориулсан тэмдэглэгчийг идэвхжүүлнэ. Тэр дундаа React Native framework-т хийгдсэнүүдийг нь. `Your_package_name` -ыг аппын  `AndroidManifest.xml` хэсгээс олох ба `com.example.app` гэсэн байна.
 
-#### 2. Reading the trace
+Алдааны тэмдэглэгээг хайж эхлэх үед хэрэгтэй анимейшн, харилцан үйлдлээ хийгээд үзээрэй. Алдаа хайх процесс дууссаны дараа  systrace нь хөтөч дээр нээх холбоосыг танд өгнө. 
 
-After opening the trace in your browser (preferably Chrome), you should see something like this:
+#### 2. Алдааны тэмдэглэгээг унших 
 
-![Example](/react-native/docs/assets/SystraceExample.png)
+Алдааны тэмдэглэгээг хөтөч дээр нээсний дараа (Chrome ашиглахыг зөвлөе) үүн шиг харагдана:
 
-> **HINT**: Use the WASD keys to strafe and zoom
+![Жишээ](/react-native/docs/assets/SystraceExample.png)
 
-If your trace .html file isn't opening correctly, check your browser console for the following:
+> **Сануулга**:  WASD товчлууруудыг ашиглаж томруулж, устгаарай. 
+
+Хэрэв алдааны .html файл зөв нээгдэхгүй бол хөтчийнхөө console хэсгээс үүнийг хараарай:
 
 ![ObjectObserveError](/react-native/docs/assets/ObjectObserveError.png)
 
-Since `Object.observe` was deprecated in recent browsers, you may have to open the file from the Google Chrome Tracing tool. You can do so by:
+`Object.observe` нь хүлээн зөвшөөрөгдөөгүй тул үүнийг та Google Chrome Tracing tool-ээр нээнэ. Үүний тулд:
 
-- Opening tab in chrome chrome://tracing
-- Selecting load
-- Selecting the html file generated from the previous command.
+- chrome дээр тааб нээнэ chrome://tracing
+- ачаална
+- Өмнө командаас гарсан html файлаа сонгоно. 
 
-> **Enable VSync highlighting**
+> **VSync тодруулагчийг идэвхжүүлэх**
 >
-> Check this checkbox at the top right of the screen to highlight the 16ms frame boundaries:
+> Дэлгэцийн баруун дээд буланд болох цонхыг зөвлөж, фреймын захыг 16 мс болгож тодруулаарай. 
+
+> ![ VSync Highlighting идэвхжүүлэх](/react-native/docs/assets/SystraceHighlightVSync.png)
 >
-> ![Enable VSync Highlighting](/react-native/docs/assets/SystraceHighlightVSync.png)
->
-> You should see zebra stripes as in the screenshot above. If you don't, try profiling on a different device: Samsung has been known to have issues displaying vsyncs while the Nexus series is generally pretty reliable.
+> Та дээрх шиг хар цагаан зураастай хэсгийг хаана. Хэрэв харагдахгүй бол та өөр төхөөрөмж дээр үзээрэй. Samsung утас vsyncs ажиллуулахад асуудал гарч байсан бол Nexus-ын хувьд харьцангуй гайгүй байдаг.
 
-#### 3. Find your process
+#### 3. Явцаа шинжих
 
-Scroll until you see (part of) the name of your package. In this case, I was profiling `com.facebook.adsmanager`, which shows up as `book.adsmanager` because of silly thread name limits in the kernel.
+Пакэжийнхаа нэрийг олох хүртэл гүйлгэнэ. Миний хувьд `com.facebook.adsmanager`-д анализ хийж байна. `book.adsmanager`  гэж харагдаж байгаа учир нь нэр оруулах хэсэг нь үгийн тоог хязгаарлачихсан юм. 
 
-On the left side, you'll see a set of threads which correspond to the timeline rows on the right. There are a few threads we care about for our purposes: the UI thread (which has your package name or the name UI Thread), `mqt_js`, and `mqt_native_modules`. If you're running on Android 5+, we also care about the Render Thread.
+Та баруун талын timeline-тай хорших олон thread-үүд зүүн талд байгааг харж байна.  Таны хэрэгтэй цөөн хэдэн thread байгаа нь UI thread (таны пакэжны нэр эсвэл хэрэглэгчийн интерфэйсийн нэрээрээ), `mqt_js`, болон `mqt_native_modules`. Хэрэв та Android 5+ ажиллаж байгаа бол Render Thread мөн хэрэг болно.
 
-- **UI Thread.** This is where standard android measure/layout/draw happens. The thread name on the right will be your package name (in my case book.adsmanager) or UI Thread. The events that you see on this thread should look something like this and have to do with `Choreographer`, `traversals`, and `DispatchUI`:
+- **UI Thread.** Энд android-ын хэмжээс/layout/зурах үйлдэл байна. Нэр нь таны пакэжийн нэр (Миний жишээ дээр бол book.adsmanager) эсвэл UI Thread-ын нэр нь байна. Энд харж байгаа эвентүүд нь үүн шиг харагдах ба `Choreographer`, `traversals` болон `DispatchUI` оролцоно:
 
-  ![UI Thread Example](/react-native/docs/assets/SystraceUIThreadExample.png)
+  ![UI Thread example](/react-native/docs/assets/SystraceUIThreadExample.png)
 
-- **JS Thread.** This is where JavaScript is executed. The thread name will be either `mqt_js` or `<...>` depending on how cooperative the kernel on your device is being. To identify it if it doesn't have a name, look for things like `JSCall`, `Bridge.executeJSCall`, etc:
+- **JS Thread.** Энд Javascipt ажиллаж эхэлнэ. Thread нэр нь таны төхөөрөмжөөс хамаарч `mqt_js` эсвэл `<...>` байна. Нэр байхгүй эсэхийг олж мэдэхийн тулд `JSCall`, `Bridge.executeJSCall` гэсэн бичгийг хайгаарай:
 
-  ![JS Thread Example](/react-native/docs/assets/SystraceJSThreadExample.png)
+  ![JS Thread example](/react-native/docs/assets/SystraceJSThreadExample.png)
 
-- **Native Modules Thread.** This is where native module calls (e.g. the `UIManager`) are executed. The thread name will be either `mqt_native_modules` or `<...>`. To identify it in the latter case, look for things like `NativeCall`, `callJavaModuleMethod`, and `onBatchComplete`:
+- **Native Modules Thread.** Натив модуль энд дуудагдаж ажилладаг(`UIManager` г.м). Thread нэр нь `mqt_native_modules` эсвэл `<...>` гэсэн байна.  Нэр байхгүй эсэхийг олж мэдэхийн тулд `NativeCall`, `callJavaModuleMethod` болон `onBatchComplete` гэсэн зүйлийг хайгаарай:
 
   ![Native Modules Thread Example](/react-native/docs/assets/SystraceNativeModulesThreadExample.png)
 
-- **Bonus: Render Thread.** If you're using Android L (5.0) and up, you will also have a render thread in your application. This thread generates the actual OpenGL commands used to draw your UI. The thread name will be either `RenderThread` or `<...>`. To identify it in the latter case, look for things like `DrawFrame` and `queueBuffer`:
+- **Бонус: Render Thread.** Хэрэв та Android L (5.0) болон түүнээс дээш хувилбарын төхөөрөмж ашиглаж байгаа бол та аппликейшндаа Render Thread-тэй байна. Энэхүү thread нь жинхэнээсээ OpenGL команд өгч, хэрэглэгчийн интерфэйсийг гаргахад тусална. Thread нэр нь `RenderThread` юм уу `<...>` байна. Нэр байхгүй эсэхийг олж мэдэхийн тулд `DrawFrame` болон `queueBuffer` гэсэн зүйлийг хайгаарай:
 
   ![Render Thread Example](/react-native/docs/assets/SystraceRenderThreadExample.png)
 
-#### Identifying a culprit
+#### Буруутныг олох
 
-A smooth animation should look something like the following:
+Өв тэгш ажиллах анимейшн үүн шиг харагдана:
 
 ![Smooth Animation](/react-native/docs/assets/SystraceWellBehaved.png)
 
-Each change in color is a frame -- remember that in order to display a frame, all our UI work needs to be done by the end of that 16ms period. Notice that no thread is working close to the frame boundary. An application rendering like this is rendering at 60 FPS.
+Өнгө өөрчлөгдөж байгаа бүхэн нь фрейм юм. Фрейм гаргахын тулд таны UI-гийн бүх ажил нь 16 миллисекундийн хугацаанд хийгдсэн байх ёстой гэдгийг анхаарна уу. Фреймийн заагтай ойр ямар ч thread ажиллахгүй байгааг анзаарна уу. Үүн шиг рендэр хийж байгаа аппликейшн бол 60 FPS хурдтай рендэр хийж байна гэсэн үг.
 
-If you noticed chop, however, you might see something like this:
+Үүн шиг харагдаж байвал харин тасарсан байна гэсэн үг:
 
 ![Choppy Animation from JS](/react-native/docs/assets/SystraceBadJS.png)
 
-Notice that the JS thread is executing basically all the time, and across frame boundaries! This app is not rendering at 60 FPS. In this case, **the problem lies in JS**.
+JS thread нь ер нь бол байнга ажиллаж байгааг анзаарна уу. Фреймын заагийг дамнан ажиллаж байна!  Энэ апп нь 60 FPS хурдтай рендэр хийхгүй байна. Ийм тохиолдолд, **Асуудал нь JS-т байна гэсэн үг**.
 
-You might also see something like this:
+Мөн ийм зүйл харагдаж болно:
 
 ![Choppy Animation from UI](/react-native/docs/assets/SystraceBadUI.png)
 
-In this case, the UI and render threads are the ones that have work crossing frame boundaries. The UI that we're trying to render on each frame is requiring too much work to be done. In this case, **the problem lies in the native views being rendered**.
+Энэ тохиолдолд UI болон render threads нь фрейм дамнан ажиллаж байна гэсэн үг. Фрейм бүр дээр бидний рендэр хийх гээд байгаа хэрэглэгчийн интерфэйс нь хэт их ачаалж байна. Энэ тохиолдолд **асуудал нь рендэр хийж буй натив харагдацад байна гэсэн үг**.
 
-At this point, you'll have some very helpful information to inform your next steps.
+Та дараа дараагийн шатанд юу хийх ёстой талаар тодорхой мэдээлэлтэй боллоо. 
 
-#### Resolving JavaScript issues
+#### JavaScript асуудлыг шийдэх
 
-If you identified a JS problem, look for clues in the specific JS that you're executing. In the scenario above, we see `RCTEventEmitter` being called multiple times per frame. Here's a zoom-in of the JS thread from the trace above:
+Хэрэв та JS алдаа олж таньсан бол ажиллуулж байгаа JS-тай холбоотой алдаатай байж болох сэжүүр хайгаарай. Дээр жишээ дээр бол бид фрейм бүрт `RCTEventEmitter` олонтаа дуудагдаж байгааг харж байна. Дээрх алдааны тэмдэглэгээнээс JS thread-ыг томруулж харвал:
 
 ![Too much JS](/react-native/docs/assets/SystraceBadJS2.png)
 
-This doesn't seem right. Why is it being called so often? Are they actually different events? The answers to these questions will probably depend on your product code. And many times, you'll want to look into [shouldComponentUpdate](https://facebook.github.io/react/component-specs.md#updating-shouldcomponentupdate).
+Энд ямар нэг зүйл буруу байх шиг байна. Яагаад ийм олон дуудсан байна? Өөр эвентүүд юм уу? Хариулт нь таны кодоос хамаарна. 
+Инэнх тохиолдолд та [shouldComponentUpdate](https://facebook.github.io/react/component-specs.md#updating-shouldcomponentupdate) гэдгийг унших хэрэгтэй болно.
 
-#### Resolving native UI Issues
+#### Native UI асуудлыг шийдэх
 
-If you identified a native UI problem, there are usually two scenarios:
+Хэрэв та натив UI-тай холбоотой асуудал олсон бол үндсэндээ хоёр сценари байна:
 
-1. the UI you're trying to draw each frame involves too much work on the GPU, or
-2. You're constructing new UI during the animation/interaction (e.g. loading in new content during a scroll).
+1. Фрейм тус бүрт зурах гээд байгаа UI тань GPU буюу График боловсруулах нэгжид хэт их ачаалал өгч байна эсвэл
+2. Та анимейшн/харилцан үйлдлийн үед шинээр хэрэглэгчийн интерфэйс үүсгээд байна (гүйлгэх үед шинэ контент ачаалах г.м).
 
-##### Too much GPU work
+##### GPU хэт ачаалал
 
-In the first scenario, you'll see a trace that has the UI thread and/or Render Thread looking like this:
+Эхний сценари дээр бол та UI thread эсвэл Render Thread-тэй холбоотой алдааны тэмдэглэгээ нь үүн шиг харагдана:
 
 ![Overloaded GPU](/react-native/docs/assets/SystraceBadUI.png)
 
-Notice the long amount of time spent in `DrawFrame` that crosses frame boundaries. This is time spent waiting for the GPU to drain its command buffer from the previous frame.
+Фреймын заагийг давсан `DrawFrame` нь их хугацаа эзэлж байгааг анзаарна уу. Энэ нь GPU-ыг команд гүйцэтгэхийг хүлээж буй хугацаа юм.
 
-To mitigate this, you should:
+Үүнээс зайлсхийхийн тулд:
 
-- investigate using `renderToHardwareTextureAndroid` for complex, static content that is being animated/transformed (e.g. the `Navigator` slide/alpha animations)
-- make sure that you are **not** using `needsOffscreenAlphaCompositing`, which is disabled by default, as it greatly increases the per-frame load on the GPU in most cases.
+- Олон хэсгээс бүрдсэн, хөдөлгөөнгүй контентыг хөдөлгөөнд оруулж эсвэл шилжүүлж байгаа бол 'renderToHardwareTextureAndroid' ашиглан шинжлэх (`Navigator` слайд/алфа анимейшн)
+- Цаанаас идэвхгүй тохиргоотой байдаг ч `needsOffscreenAlphaCompositing`-ыг та  **ашиглаагүй** гэдгээ нэг шалгаарай. Энэ нь GPU дээр фрейм бүрийн ачааллыг инэнх тохиолдолд нэмдэг. 
 
-If these don't help and you want to dig deeper into what the GPU is actually doing, you can check out [Tracer for OpenGL ES](http://developer.android.com/tools/help/gltracer.html).
+Хэрэв эдгээр нь танд туслахгүй бол GPU яг юу хийгээд байгааг нарийн шинжилж болно. [Tracer for OpenGL ES](http://developer.android.com/tools/help/gltracer.html)-ыг уншаарай.
 
-##### Creating new views on the UI thread
+#####  UI thread дээр шинээр харагдац үүсгэх
 
-In the second scenario, you'll see something more like this:
+Хоёр дахь сценари дээр бол танд үүн шиг зүйл харагдана:
 
 ![Creating Views](/react-native/docs/assets/SystraceBadCreateUI.png)
 
-Notice that first the JS thread thinks for a bit, then you see some work done on the native modules thread, followed by an expensive traversal on the UI thread.
-
-There isn't an easy way to mitigate this unless you're able to postpone creating new UI until after the interaction, or you are able to simplify the UI you're creating. The react native team is working on an infrastructure level solution for this that will allow new UI to be created and configured off the main thread, allowing the interaction to continue smoothly.
+Эхний JS thread бага зэрэг ажиллаж байгаад натив модулийн thread дээр ажиллаад дараа нь UI thread дээр огцом шилжсэнийг харж байна.
+Та дараагийн харилцан үйлдэл хүртэл шинэ UI үүсгэхийг хойшлуулах эсвэл та хийж байгаа хэрэглэгчийн интерфэйсээ энгийн болгохоос нааш үүнийг засах амаргүй. React native-ийн баг үүнийг шийдэх дэд бүтцийн шийдэл олохоор ажиллаж байгаа бөгөөд шинээр UI үүсэж, гол thread-ын гадна тохиргоо хийгддэг болох юм. Ингэснээр харилцан үйлдэл нь алдаагүй зөв явагдана. 
 
 ## RAM bundles + inline requires
 
-If you have a large app you may want to consider the Random Access Modules (RAM) bundle format, and using inline requires. This is useful for apps that have a large number of screens which may not ever be opened during a typical usage of the app. Generally it is useful to apps that have large amounts of code that are not needed for a while after startup. For instance the app includes complicated profile screens or lesser used features, but most sessions only involve visiting the main screen of the app for updates. We can optimize the loading of the bundle by using the RAM format and requiring those features and screens inline (when they are actually used).
+Хэрэв апп тань том хэмжээтэй бол Random Access Modules (RAM) bundle format болон inline requires-ийг ашиглах нь зүйтэй. Аппыг энгийн ашиглах үед төдийлөн нээгддэггүй олон дэлгэц бүхий апп хийж байгаа бол үүнийг ашиглах хэрэгтэй. Ерөнхийдөө, ажиллуулж эхэлснээс хойш бараг ашиглагдахгүй код ихтэй апп бол үүнийг ашиглана. Жишээ нь түвэгтэй олон профайл дэлгэцтэй, ашиглалт бага апп дээр бол ихэвчлэн аппын гол дэлгэцийг л хүмүүс ашиглах болно. RAM формат ашиглаж, тэдгээр функц, дэлгэцийг хэрэгтэй үед нь ашигладаг болгох боломжтой.
 
-### Loading JavaScript
+### JavaScript ачаалах
 
-Before react-native can execute JS code, that code must be loaded into memory and parsed. With a standard bundle if you load a 50mb bundle, all 50mb must be loaded and parsed before any of it can be executed. The optimization behind RAM bundles is that you can load only the portion of the 50mb that you actually need at startup, and progressively load more of the bundle as those sections are needed.
+
+React-native нь JS кодыг ажиллуулдаг. Код нь санах ойд ачаалж, танигдах ёстой. Хэрэв та 50мб bundle ачааллаа гэж бодоход ажиллахын өмнө 50мб нь ачаалж, танигдсан байх ёстой. RAM bundles-ын оновчтой болгосон нэг функц нь 50мб-аас ажиллуулж эхлэх үед хэрэгтэй хэсгээ ачаалах боломж олгодог ба дараа нь шаардлагатай үед нэмж ачаалах боломжтой байдаг. 
+
 
 ### Inline Requires
 
-Inline requires delay the requiring of a module or file until that file is actually needed. A basic example would look like this:
+Inline requires нь модуль эсвэл файлыг хэрэгтэй үе хүртэл нь шаардах үйлдлийг хойшлуулахад хэрэг болдог.  Энгийн жишээ нь нэг иймэрхүү харагдана:
 
 #### VeryExpensive.js
 
@@ -315,13 +325,14 @@ export default class Optimized extends Component {
 }
 ```
 
-Even without the RAM format, inline requires can lead to startup time improvements, because the code within VeryExpensive.js will only execute once it is required for the first time.
+RAM format байхгүй байсан нь inline requires нь апп эхлүүлэх цагт нэмэр болдог. Учир нь VeryExpensive.js доторх код нь анх удаа шаардлагатай бол л ажилладаг. 
 
-### Enable the RAM format
+### RAM format-ыг идэвхжүүлэх
 
-On iOS using the RAM format will create a single indexed file that react native will load one module at a time. On Android, by default it will create a set of files for each module. You can force Android to create a single file, like iOS, but using multiple files can be more performant and requires less memory.
+iOS дээр RAM format ашиглах нь дан индекс бүхий файл үүсгэх ба react native нь модулийг нэг нэгээр нь ачаална. Android дээр цаанаасаа модуль бүрт шинэ файлууд үүсгэх тохиргоотой байна. Та Android дээр iOS шиг нэг файл үүсгэдэг байхаар албаар тохируулж болно.  Гэхдээ олон файл ашиглавал илүү дээр ажиллах ба санах ой бага эзэлнэ. 
 
-Enable the RAM format in Xcode by editing the build phase "Bundle React Native code and images". Before `../node_modules/react-native/scripts/react-native-xcode.sh` add `export BUNDLE_COMMAND="ram-bundle"`:
+Xcode дотор RAM format-ыг идэвхжүүлэхийн тулд "Bundle React Native code and images" үүсгэнэ. 
+`../node_modules/react-native/scripts/react-native-xcode.sh` гэсний өмнө `export BUNDLE_COMMAND="ram-bundle"` нэмнэ:
 
 ```
 export BUNDLE_COMMAND="ram-bundle"
@@ -329,15 +340,14 @@ export NODE_BINARY=node
 ../node_modules/react-native/scripts/react-native-xcode.sh
 ```
 
-On Android enable the RAM format by editing your `android/app/build.gradle` file. Before the line `apply from: "../../node_modules/react-native/react.gradle"` add or amend the `project.ext.react` block:
+Android дээр RAM format-ыг идэвхжүүлэхдээ `android/app/build.gradle` файлдаа өөрчлөлт хийнэ. Line-ийн өмнө `apply from: "../../node_modules/react-native/react.gradle"`  `project.ext.react` блокийг нэмэх эсвэл өөрчилж өгнө:
 
 ```
 project.ext.react = [
   bundleCommand: "ram-bundle",
 ]
 ```
-
-Use the following lines on Android if you want to use a single indexed file:
+Хэрэв та дан индекс бүхий файл Android дээр ашиглах хүсэлтэй байгаа бол доорх кодыг ашиглаарай:
 
 ```
 project.ext.react = [
@@ -346,13 +356,13 @@ project.ext.react = [
 ]
 ```
 
-### Configure Preloading and Inline Requires
+### Урьдчилан ачаалах үйлдлийг тохируулах 
 
-Now that we have a RAM bundle, there is overhead for calling `require`. `require` now needs to send a message over the bridge when it encounters a module it has not loaded yet. This will impact startup the most, because that is where the largest number of require calls are likely to take place while the app loads the initial module. Luckily we can configure a portion of the modules to be preloaded. In order to do this, you will need to implement some form of inline require.
+Бид одоо RAM bundle-тай болсон болохоор хараахан ачаалж амжаагүй байгаа модуль тааралдах бүрт `require`. `require` гэсэн мессеж харагдах болно. Энэ нь ажиллуулж эхлэх үед их нөлөөлдөг. Яагаад гэвэл энэ үед аппаа эхлээд ажиллах үед хамгийн их require calls ирдэг. Аз болоход бидэнд урьдчилан ачаалах модулийн хэмжээг тохируулах боломж байдаг. Үүний тулд та ямар нэг хэлбэрийн inline require ажиллуулах хэрэгтэй.
 
-### Adding a packager config file
+### Тохиргооны файлд пакэжир нэмэх
 
-Create a folder in your project called packager, and create a single file named config.js. Add the following:
+Өөрийн төсөлдөө пакэжир нэртэй хавтас үүсгээд config.js гэсэн дан файл үүсгэнэ. Ингээд доорх кодыг нэмнэ:
 
 ```
 const config = {
@@ -368,7 +378,7 @@ const config = {
 module.exports = config;
 ```
 
-In Xcode, in the build phase, include `export BUNDLE_CONFIG="packager/config.js"`.
+Xcode-д `export BUNDLE_CONFIG="packager/config.js"` гэдгийг оруулна.
 
 ```
 export BUNDLE_COMMAND="ram-bundle"
@@ -377,7 +387,7 @@ export NODE_BINARY=node
 ../node_modules/react-native/scripts/react-native-xcode.sh
 ```
 
-Edit your android/app/build.gradle file to include `bundleConfig: "packager/config.js",`.
+android/app/build.gradle файлдаа `bundleConfig: "packager/config.js",` оруулна.
 
 ```
 project.ext.react = [
@@ -386,15 +396,15 @@ project.ext.react = [
 ]
 ```
 
-Finally, you can update "start" under "scripts" on your package.json to use the config:
+Эцэст нь та package.json доторх "scripts"  гэсний доор байгаа "start"-ыг шинэчилнэ:
 
 `"start": "yarn react-native start --config packager/config.js",`
 
-Start your package server with `npm start`. Note that when the dev packager is automatically launched via xcode and `react-native run-android`, etc, it does not use `npm start`, so it won't use the config.
+Пакэжаа `npm start` ашиглан ажиллуулна. xcode болон `react-native run-android` гэх мэтээс шалтгаална dev packager нь автоматаар ажиллана гэдгийг анхаарна уу. Энэ нь `npm start`-ыг ашиглаагүй тулд тохиргоо хэрэггүй. 
 
-### Investigating the Loaded Modules
+### Ачаалсан модулийг шинжлэх нь 
 
-In your root file (index.(ios|android).js) you can add the following after the initial imports:
+Үндсэн файл дотроо (index.(ios|android).js) та эхний импортыг хийсний дараа доорхыг нэмж болно:
 
 ```
 const modules = require.getModules();
@@ -418,7 +428,7 @@ console.log(
 console.log(`module.exports = ${JSON.stringify(loadedModuleNames.sort())};`);
 ```
 
-When you run your app, you can look in the console and see how many modules have been loaded, and how many are waiting. You may want to read the moduleNames and see if there are any surprises. Note that inline requires are invoked the first time the imports are referenced. You may need to investigate and refactor to ensure only the modules you want are loaded on startup. Note that you can change the Systrace object on require to help debug problematic requires.
+Аппаа ажиллуулах үед console дотроос хичнээн модуль ачаалж, хичнээн нь хүлээгдэж байгаа вэ гэдгийг хараарай. Та moduleNames гэснийг уншаад ямар нэг анхаарал татах зүйлс байгаа эсэхийг шалгаарай. Inline requires нь импорт хийх үед анх удаа дуудагддаг гэдгийг анхаарна уу. Та апп ажиллаж эхлэх үед зөвхөн хэрэгтэй модуль ачаалж байгаа эсэхийг шинжих хэрэгтэй. Systrace-т өөрчлөлт хийж, асуудалтай requires-ийн алдааг олж болно.
 
 ```
 require.Systrace.beginEvent = (message) => {
@@ -427,12 +437,12 @@ require.Systrace.beginEvent = (message) => {
   }
 }
 ```
+Апп бүр өөр хэдий ч эхний нүүрэнд хэрэгтэй модулийг ачаалах нь зүйтэй гэдэг нь ойлгомжтой биз. Хэрэв та сэтгэл дүүрэн байвал `packager/modulePaths.js` гэсэн файл руу loadedModuleNames-аа хийнэ. 
 
-Every app is different, but it may make sense to only load the modules you need for the very first screen. When you are satisified, put the output of the loadedModuleNames into a file named `packager/modulePaths.js`.
 
-### Updating the config.js
+###  config.js шинэчлэх
 
-Returning to packager/config.js we should update it to use our newly generated modulePaths.js file.
+Шинээр үүсгэсэн modulePaths.js файлаа ашиглахын тулд бид  packager/config.js буцаж очин шинэчлэх шаардлагатай.
 
 ```
 const modulePaths = require('./modulePaths');
@@ -463,8 +473,11 @@ const config = {
 module.exports = config;
 ```
 
-The `preloadedModules` entry in the config indicates which modules should be marked as preloaded when building a RAM bundle. When the bundle is loaded, those modules are immediately loaded, before any requires have even executed. The blacklist entry indicates that those modules should not be required inline. Because they are preloaded, there is no performance benefit from using an inline require. In fact the javascript spends extra time resolving the inline require every time the imports are referenced.
+RAM bundle үүсгэж байгаа үед тохиргоо дахь `preloadedModules` нь аль модуль нь урьдчилан ачаалсан вэ гэсэн тэмдэглээ хийгддэг. Requires ажиллаж эхлэхээс өмнө Bundle ачаалсан үед requires ажиллаж эхлэхээс өмнө тухайн модулиуд тэр дороо ачаалдаг.  Хар жагсаалтад байгаа зүйлс нь  inline-ад шаардлагагүй модулиудыг илэрхийлж байгаа юм. Учир нь тэднийг урьдчилан ачаалах нь ямар ч ашиггүй. Импорт үүсгэх үед inline require-тай холбоотойгоор javascript  нь илүү цаг зарж байдаг. 
 
-### Test and Measure Improvements
 
-You should now be ready to build your app using the RAM format and inline requires. Make sure you measure the before and after startup times.
+### Сайжруулалтыг хэмжих, тест хийх 
+
+Та одоо RAM format болон inline requires ашиглан аппаа хийж чадахаар боллоо. Ажиллуулахын өмнө нь болон дараа нь хэмжилт хийхээ мартуузай. 
+
+
