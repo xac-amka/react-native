@@ -6,7 +6,7 @@
     "tagline": "A framework for building native apps using React",
     "docs": {
       "accessibility": {
-        "title": "Accessibility"
+        "title": "Хүртээмж"
       },
       "accessibilityinfo": {
         "title": "AccessibilityInfo"
@@ -33,7 +33,7 @@
         "title": "AnimatedValueXY"
       },
       "animations": {
-        "title": "Animations"
+        "title": "Анимейшн"
       },
       "app-extensions": {
         "title": "App Extensions"
@@ -81,7 +81,7 @@
         "title": "Communication between native and React Native"
       },
       "components-and-apis": {
-        "title": "Components and APIs"
+        "title": "Компонент ба API"
       },
       "contributing": {
         "title": "How to Contribute"
@@ -99,7 +99,7 @@
         "title": "DatePickerIOS"
       },
       "debugging": {
-        "title": "Debugging"
+        "title": "Алдаа засах"
       },
       "dimensions": {
         "title": "Dimensions"
@@ -129,16 +129,16 @@
         "title": "Эхлэх"
       },
       "handling-text-input": {
-        "title": "Handling Text Input"
+        "title": "Текст оруулах"
       },
       "handling-touches": {
-        "title": "Handling Touches"
+        "title": "Дэлгэцэд хүрэхийг зохицуулах"
       },
       "headless-js-android": {
         "title": "Headless JS"
       },
       "height-and-width": {
-        "title": "Height and Width"
+        "title": "Өндөр ба өргөн"
       },
       "image-style-props": {
         "title": "Image Style Props"
@@ -156,13 +156,13 @@
         "title": "ImagePickerIOS"
       },
       "images": {
-        "title": "Images"
+        "title": "Зураг"
       },
       "imagestore": {
         "title": "ImageStore"
       },
       "improvingux": {
-        "title": "Improving User Experience"
+        "title": "Хэрэглэгчид таатай болгох"
       },
       "inputaccessoryview": {
         "title": "InputAccessoryView"
@@ -210,7 +210,7 @@
         "title": "Modal"
       },
       "more-resources": {
-        "title": "More Resources"
+        "title": "Нэмэлт мэдээлэл"
       },
       "native-components-android": {
         "title": "Native UI Components"
@@ -228,7 +228,7 @@
         "title": "Native Modules Setup"
       },
       "navigation": {
-        "title": "Navigating Between Screens"
+        "title": "Дэлгэц хооронд шилжих"
       },
       "navigator": {
         "title": "Navigator (Legacy Custom Component)"
@@ -246,7 +246,7 @@
         "title": "PanResponder"
       },
       "performance": {
-        "title": "Performance"
+        "title": "Ажиллагаа"
       },
       "permissionsandroid": {
         "title": "PermissionsAndroid"
@@ -267,7 +267,7 @@
         "title": "PixelRatio"
       },
       "platform-specific-code": {
-        "title": "Platform Specific Code"
+        "title": "Тухайн платформд зориулсан код"
       },
       "progressbarandroid": {
         "title": "ProgressBarAndroid"
@@ -336,7 +336,7 @@
         "title": "StatusBarIOS"
       },
       "style": {
-        "title": "Style"
+        "title": "Хэв маяг"
       },
       "stylesheet": {
         "title": "StyleSheet"
@@ -363,7 +363,7 @@
         "title": "TimePickerAndroid"
       },
       "timers": {
-        "title": "Timers"
+        "title": "Цаг тоолуур"
       },
       "toastandroid": {
         "title": "ToastAndroid"
@@ -396,10 +396,10 @@
         "title": "Upgrading to new React Native versions"
       },
       "using-a-listview": {
-        "title": "Using List Views"
+        "title": "List Views ашиглах"
       },
       "using-a-scrollview": {
-        "title": "Using a ScrollView"
+        "title": "ScrollView ашиглах"
       },
       "vibration": {
         "title": "Vibration"
