@@ -1,66 +1,67 @@
 ---
 id: gesture-responder-system
-title: Gesture Responder System
+title: Дохио үйлдэлд хариу өгөх систем
 ---
 
-The gesture responder system manages the lifecycle of gestures in your app. A touch can go through several phases as the app determines what the user's intention is. For example, the app needs to determine if the touch is scrolling, sliding on a widget, or tapping. This can even change during the duration of a touch. There can also be multiple simultaneous touches.
+Дохио үйлдэлд хариу өгөх систем нь таны аппын бүх дохио үйлдлийг зохицуулдаг. Дэлгэцэнд нэг хүрэхэд л хэрэглэгч ямар үйлдэл хийх гэж буй тухай апп таньж, хэд хэдэн дамжлага явагдаж хариу өгдөг. Жишээ нь хуруугаа дээш доош гүйлгэж буй эсэх эсвэл хөндлөн гүйлгэх, товшиж байгаа эсэхийг апп таних хэрэгтэй. Хүрэх үйлдэл бүрт энэхүү таних үйлдэл нь өөр өөр байдаг. Хэд хэдэн хуруугаар зэрэг дарж байж ч болох.
 
-The touch responder system is needed to allow components to negotiate these touch interactions without any additional knowledge about their parent or child components.
+Эдгээр дэлгэцэнд хүрч буй үйлдлийг эцэг эсвэл хүүхэд компонент нь юу болохоос үл хамааран зохицуулахад дохио үйлдэлд хариу өгөх систем тусалдаг.
 
-### Best Practices
+### Шилдэг туршлага
 
-To make your app feel great, every action should have the following attributes:
+Аппаа гайхалтай байлгахын тулд үйлдэл бүрт доорх аттрибут байх хэрэгтэй:
 
-- Feedback/highlighting- show the user what is handling their touch, and what will happen when they release the gesture
-- Cancel-ability- when making an action, the user should be able to abort it mid-touch by dragging their finger away
+-Feedback/highlighting- хэрэглэгчийн хүрсэн үйлдлийг юу хүлээж авч байгааг харуулах ба тухайн үйлдлээ хийвэл юу болохыг таниулдаг
+- Cancel-ability- ямарваа нэг үйлдэл хийж байх үедээ хэрэглэгч хуруугаа авч, хөнгөн чирэх үед үйлдэл цуцлагддаг
 
-These features make users more comfortable while using an app, because it allows people to experiment and interact without fear of making mistakes.
+Эдгээр нь хэрэглэгчийг апп ашиглахад илүү тохиромжтой болгодог. Яагаад гэвэл хүмүүс алдаа гаргачих нь гэж санаа зоволгүйгээр өөрөө туршиж, оролдож үзэх боломжийг олгодог. 
 
 ### TouchableHighlight and Touchable\*
 
-The responder system can be complicated to use. So we have provided an abstract `Touchable` implementation for things that should be "tappable". This uses the responder system and allows you to easily configure tap interactions declaratively. Use `TouchableHighlight` anywhere where you would use a button or link on web.
+Хариу өгөх систем нь зарим үед ашиглахад төвөгтэй байх нь бий. Тиймээс товшиж болох болох зүйлс бүрт зориулсан `Touchable` гэх зүйлийг  гаргасан. Энэ хариу өгөх системийг ашигладаг ба товших үйлдлийг хялбар таньж чаддаг. `TouchableHighlight`-ыг вэб дээр товч эсвэл холбоос гэх мэт зүйлс дээр ашиглах боломжтой.
 
-## Responder Lifecycle
+## Хариу өгөгчийн хугацаа
 
-A view can become the touch responder by implementing the correct negotiation methods. There are two methods to ask the view if it wants to become responder:
+Зөв хариу үйлдэл үзүүлэн таньж чадвал харагдац нь тухайн хүрсэн үйлдэлд хариу илэрхийлнэ. Харагдаж хариу өгөх эсэхийг мэдэх хоёр арга байдаг:
 
-- `View.props.onStartShouldSetResponder: (evt) => true,` - Does this view want to become responder on the start of a touch?
-- `View.props.onMoveShouldSetResponder: (evt) => true,` - Called for every touch move on the View when it is not the responder: does this view want to "claim" touch responsiveness?
+- `View.props.onStartShouldSetResponder: (evt) => true,` - Дэлгэцэнд хүрэх үед энэхүү харагдац нь хариу өгөх үү?
+- `View.props.onMoveShouldSetResponder: (evt) => true,` - Хариу өгөхгүй бол харагдац бүр дээр дуудах: энэхүү харагдац нь хариу өгөхийг шаардах уу?
 
-If the View returns true and attempts to become the responder, one of the following will happen:
+Хэрэв харагдац нь үнэн гээд хариу өгөхөөр оролдвол доорхийн аль нэг нь биелнэ:
 
-- `View.props.onResponderGrant: (evt) => {}` - The View is now responding for touch events. This is the time to highlight and show the user what is happening
-- `View.props.onResponderReject: (evt) => {}` - Something else is the responder right now and will not release it
+- `View.props.onResponderGrant: (evt) => {}` - Харагдац нь дэлгэцэнд хүрэх үйлдэлд одоо хариу өгч байна. Одоо тодруулж, хэрэглэгчид юу болж байгааг харуулна
+- `View.props.onResponderReject: (evt) => {}` - Өөр зүйл хариу өгч байгаа бөгөөд чөлөөлөхгүй байна
 
-If the view is responding, the following handlers can be called:
+Хэрэв харагдац нь хариу өгч байгаа бол доорхыг дуудна:
 
-- `View.props.onResponderMove: (evt) => {}` - The user is moving their finger
-- `View.props.onResponderRelease: (evt) => {}` - Fired at the end of the touch, ie "touchUp"
-- `View.props.onResponderTerminationRequest: (evt) => true` - Something else wants to become responder. Should this view release the responder? Returning true allows release
-- `View.props.onResponderTerminate: (evt) => {}` - The responder has been taken from the View. Might be taken by other views after a call to `onResponderTerminationRequest`, or might be taken by the OS without asking (happens with control center/ notification center on iOS)
+- `View.props.onResponderMove: (evt) => {}` - Хэрэглэгч хуруугаа хөдөлгөж байна
+- `View.props.onResponderRelease: (evt) => {}` - Хүрэх үйлдэл төгсөх үед ажиллаж эхэлсэн "touchUp"
+- `View.props.onResponderTerminationRequest: (evt) => true` - Өөр зүйл хариу өгөх гээд байна. Энэхүү харагдац нь хариу өгөхийг зөвшөөрөх үү? Үнэн гэвэл зөвшөөрнө
+- `View.props.onResponderTerminate: (evt) => {}` - Харагдац хариу үйлдэл хийж байна. `onResponderTerminationRequest`-ыг дуудсаны дараа өөр харагдац үйлдэл хийж байх боломжтой эсвэл OS нь зөвшөөрөлгүйгээр үйлдэл хийж байна (iOS дээр control center/ notification)
 
-`evt` is a synthetic touch event with the following form:
+`evt` нь доорх хэлбэр бүхий дэлгэцэнд хүрэх хиймэл үйлдэл юм:
 
 - `nativeEvent`
-  - `changedTouches` - Array of all touch events that have changed since the last event
-  - `identifier` - The ID of the touch
-  - `locationX` - The X position of the touch, relative to the element
-  - `locationY` - The Y position of the touch, relative to the element
-  - `pageX` - The X position of the touch, relative to the root element
-  - `pageY` - The Y position of the touch, relative to the root element
-  - `target` - The node id of the element receiving the touch event
-  - `timestamp` - A time identifier for the touch, useful for velocity calculation
-  - `touches` - Array of all current touches on the screen
+  - `changedTouches` - Сүүлийн эвентээс хойш өөрчлөгдсөн бүх хүрэх эвентийн массив
+  - `identifier` - Хүрэх үйлдлийн ID 
+  - `locationX` - Элементтэй хамаарал бүхий хүрэх үйлдлийн  X байрлал 
+  - `locationY` - Элементтэй хамаарал бүхий хүрэх үйлдлийн  Y байрлал 
+  - `pageX` - Рүүт элементтэй хамаарал бүхий хүрэх үйлдлийн  X байрлал
+  - `pageY` - Рүүт элементтэй хамаарал бүхий хүрэх үйлдлийн  Y байрлалt
+  - `target` - Хүрэх эвентийг хүлээн авч буй элементийн node id 
+  - `timestamp` - Хүрэх үйлдлийн цагийг танигч, давтамжийг танихад тустай 
+  - `touches` - Дэлгэц одоо хүрч буй бүх үйлдлийн массив 
 
 ### Capture ShouldSet Handlers
 
-`onStartShouldSetResponder` and `onMoveShouldSetResponder` are called with a bubbling pattern, where the deepest node is called first. That means that the deepest component will become responder when multiple Views return true for `*ShouldSetResponder` handlers. This is desirable in most cases, because it makes sure all controls and buttons are usable.
 
-However, sometimes a parent will want to make sure that it becomes responder. This can be handled by using the capture phase. Before the responder system bubbles up from the deepest component, it will do a capture phase, firing `on*ShouldSetResponderCapture`. So if a parent View wants to prevent the child from becoming responder on a touch start, it should have a `onStartShouldSetResponderCapture` handler which returns true.
+`onStartShouldSetResponder` болон `onMoveShouldSetResponder` нь хамгийн цаадах node-ийг хамгийн түрүүнд дууддаг.  Энэ нь `*ShouldSetResponder` дээр олон харагдац байх үед хамгийн цаадах компонент нь хариу өгнө гэсэн үг.  Бүх удирдагч, товчийг ашигладаг тул ихэнхдээ хэрэгтэй байдаг. 
+
+Гэхдээ заримдаа эцэг нь өөрөө хариу өгөхийг хүсэх нь бий. Хариу өгөх систем нь хамгийн цаадах компонентыг дуудахаас өмнө `on*ShouldSetResponderCapture`-ыг ажиллуулдаг. Тэгэхээр дэлгэцэнд хүрэх үйлдэл хийгдэх үед эцэг харагдац нь хүүхдээ хариу өгөхийг хүсэхгүй байгаа бол `onStartShouldSetResponderCapture` нь үнэн байх хэрэгтэй болно.
 
 - `View.props.onStartShouldSetResponderCapture: (evt) => true,`
 - `View.props.onMoveShouldSetResponderCapture: (evt) => true,`
 
 ### PanResponder
 
-For higher-level gesture interpretation, check out [PanResponder](panresponder.md).
+Дохио үйлдэл ахисан түвшинд таньдаг тухай уншихыг хүсвэл  [PanResponder](panresponder.md)-ыг харна уу.
