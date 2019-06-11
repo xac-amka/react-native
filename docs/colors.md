@@ -1,13 +1,13 @@
 ---
 id: colors
-title: Color Reference
+title: Өнгө сонголт
 ---
 
-Components in React Native are [styled using JavaScript](style.md). Color properties usually match how [CSS works on the web](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
+React Native-ын компонентуудын [ хэв маяг нь JavaScript ашигладаг](style.md). Өнгө нь [вэб дээр CSS хэрхэн ажилладагтай төстэй](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value).
 
-### Red-green-blue
+### Улаан-ногоон-цэнхэр
 
-React Native supports `rgb()` and `rgba()` in both hexadecimal and functional notation:
+React Native нь `rgb()` болн `rgba()` нарыг 16-тын систем болон ажиллагааны тэмдэглээг дэмждэг:
 
 - `'#f0f'` (#rgb)
 - `'#ff00ff'` (#rrggbb)
@@ -18,22 +18,22 @@ React Native supports `rgb()` and `rgba()` in both hexadecimal and functional no
 - `'#f0ff'` (#rgba)
 - `'#ff00ff00'` (#rrggbbaa)
 
-### Hue-saturation-lightness
+### Өнгө-нэвтрэлт-цайралт
 
-`hsl()` and `hsla()` is supported in functional notation:
+`hsl()` болон `hsla()` нар нь ажиллагааны тэмдэглэгээнд дэмжигддэг:
 
 - `'hsl(360, 100%, 100%)'`
 - `'hsla(360, 100%, 100%, 1.0)'`
 
-### `transparent`
+### `тунгалаг`
 
-This is a shortcut for `rgba(0,0,0,0)`:
+Товчилсон нэр нь `rgba(0,0,0,0)`:
 
 - `'transparent'`
 
-### Named colors
+### Өнгөний нэр
 
-You can also use color names as values. React Native follows the [CSS3 specification](http://www.w3.org/TR/css3-color/#svg-color):
+Та өнгөний нэрийг тоо, үсгээр ашиглаж болно. React Native нь [CSS3-ын тодорхойлолтыг ашигладаг](http://www.w3.org/TR/css3-color/#svg-color):
 
 - ![#f0f8ff](https://placehold.it/15/f0f8ff/000000?text=+) <color aliceblue /> aliceblue (#f0f8ff)
 - ![#faebd7](https://placehold.it/15/faebd7/000000?text=+) <color antiquewhite /> antiquewhite (#faebd7)
