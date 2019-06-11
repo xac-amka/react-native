@@ -1,24 +1,27 @@
 ---
 id: javascript-environment
-title: JavaScript Environment
+title: JavaScript Орчин
 ---
 
-## JavaScript Runtime
+## JavaScript ажиллах хугацаа
 
-When using React Native, you're going to be running your JavaScript code in two environments:
+React Native ашиглахдаа та JavaScript кодоо хоёр орчинд ажиллуулна:
 
-- In most cases, React Native will use [JavaScriptCore](http://trac.webkit.org/wiki/JavaScriptCore), the JavaScript engine that powers Safari. Note that on iOS, JavaScriptCore does not use JIT due to the absence of writable executable memory in iOS apps.
-- When using Chrome debugging, all JavaScript code runs within Chrome itself, communicating with native code via WebSockets. Chrome uses [V8](https://code.google.com/p/v8/) as its JavaScript engine.
+- Ихэнх тохиолдолд React Native нь [JavaScriptCore](http://trac.webkit.org/wiki/JavaScriptCore)-ыг ашиглана. 
+Safari-ыг дэмждэг JavaScript хөдөлгүүр юм. iOS дээр бичиж болох санах ой байхгүй үед iOS дээр JavaScriptCore нь JIT ашигладаггүй. 
 
-While both environments are very similar, you may end up hitting some inconsistencies. We're likely going to experiment with other JavaScript engines in the future, so it's best to avoid relying on specifics of any runtime.
+-  Chrome дибаг ашиглаж байгаа үед бүх JavaScript код нь Chrome дотроо ажиллах WebSockets-оор дамжуулан натив кодтойгоо харьцдаг. Chrome нь [V8](https://code.google.com/p/v8/)-ыг өөрийн JavaScript хөдөлгүүр болгон ашигладаг.
 
-## JavaScript Syntax Transformers
+Хоёр орчин нь хоорондоо их төстэй ч зарим үл нийцсэн, харшлах зүйлс гардаг. Бид цаашдаа JavaScript-ын өөр хөдөлгүүр туршиж үзэж магадгүй байгаа. Тийм болохоор ажиллуулах хугацаанд хэт найдан, хамааралтай болох хэрэггүй. 
 
-Syntax transformers make writing code more enjoyable by allowing you to use new JavaScript syntax without having to wait for support on all interpreters.
+## JavaScript синтакс шилжүүлэгч
 
-React Native ships with the [Babel JavaScript compiler](https://babeljs.io). Check [Babel documentation](https://babeljs.io/docs/plugins/#transform-plugins) on its supported transformations for more details.
+Бүр процесийг танихыг хүлээлгүй шинээр Javascript синтакс ашиглах боломжийг танд олгодог болохоор синтакс шилжүүлэгч нь код бичих ажлыг тааламжтай болгодог. 
 
-A full list of React Native's enabled transformations can be found in [metro-react-native-babel-preset](https://github.com/facebook/metro/tree/master/packages/metro-react-native-babel-preset).
+React Native нь [Babel JavaScript compiler](https://babeljs.io)-ыг ашигладаг. Ямар шилжүүлэгчийг дэмждэг тухай [Babel documentation](https://babeljs.io/docs/plugins/#transform-plugins)-аас уншаарай.
+
+
+React Native дээр ажиллах шилжүүлэгчийн тухай мэдээллийг [metro-react-native-babel-preset](https://github.com/facebook/metro/tree/master/packages/metro-react-native-babel-preset) гэснээс хараарай.
 
 ES5
 
@@ -45,24 +48,24 @@ ES8
 - [Function Trailing Comma](https://github.com/jeffmo/es-trailing-function-commas): `function f(a, b, c,) {};`
 - [Async Functions](https://github.com/tc39/ecmascript-asyncawait): `async function doStuffAsync() { const foo = await doOtherStuffAsync(); };`
 
-Stage 3
+Үе 3
 
 - [Object Spread](https://github.com/sebmarkbage/ecmascript-rest-spread): `var extended = { ...obj, a: 10 };`
 
-Stage 1
+Үе 1
 
 - [Optional Chaining](https://github.com/tc39/proposal-optional-chaining): `var name = obj.user?.name;`
 
-Specific
+Тодорхой
 
 - [JSX](https://reactjs.org/docs/jsx-in-depth.html): `<View style={{color: 'red'}} />`
 - [Flow](http://flowtype.org/): `function foo(x: ?number): string {};`
 
 ## Polyfills
 
-Many standards functions are also available on all the supported JavaScript runtimes.
+Javascript ажиллах хугацааг дэмждэг олон стандарт функцууд байдаг. 
 
-Browser
+Хөтөч
 
 - [console.{log, warn, error, info, trace, table, group, groupEnd}](https://developer.chrome.com/devtools/docs/console-api)
 - [CommonJS require](https://nodejs.org/docs/latest/api/modules.html)
