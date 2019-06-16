@@ -3,11 +3,11 @@ id: keyboard
 title: Keyboard
 ---
 
-`Keyboard` module to control keyboard events.
+`Keyboard` модуль нь нь удирдах товчлуурт ирсэн үйлдлийг зохицуулдаг. 
 
-### Usage
+### Хэрэглээ
 
-The Keyboard module allows you to listen for native events and react to them, as well as make changes to the keyboard, like dismissing it.
+Удирдах товчлуурын модулийн тусламжтай та натив эвентүүдийг хүлээн авч, хариу үйлдэл хийхийн сацуу товчлуурт ирсэн дохиог үл харгалзан орхих гэх мэтээр өөрчлөлтийг хийх боломжтой. 
 
 ```javascript
 import React, {Component} from 'react';
@@ -44,7 +44,7 @@ class Example extends Component {
 }
 ```
 
-### Methods
+### Аргачлал
 
 - [`addListener`](keyboard.md#addlistener)
 - [`removeListener`](keyboard.md#removelistener)
@@ -53,9 +53,9 @@ class Example extends Component {
 
 ---
 
-# Reference
+# Тайлбар
 
-## Methods
+## Аргууд
 
 ### `addListener()`
 
@@ -63,11 +63,12 @@ class Example extends Component {
 static addListener(eventName, callback)
 ```
 
-The `addListener` function connects a JavaScript function to an identified native keyboard notification event.
+`addListener` функц нь JavaScript функцийг удирдах товчлуурт ирсэн танигдсан натив үйлдэлтэй холбож өгдөг. 
 
-This function then returns the reference to the listener.
+Энэхүү функц нь тухайн тайлбарыг үйлдэл хийсэн сонсогчид эргээд хүргэдэг. 
 
-@param {string} eventName The `nativeEvent` is the string that identifies the event you're listening for. This can be any of the following:
+
+@param {string} eventName `nativeEvent` гэдэг нь хүлээн авч буй үйлдлийг таньдаг стринг юм. Доорхын аль нэг нь байх боломжтой:
 
 - `keyboardWillShow`
 - `keyboardDidShow`
@@ -76,9 +77,10 @@ This function then returns the reference to the listener.
 - `keyboardWillChangeFrame`
 - `keyboardDidChangeFrame`
 
-Note that if you set `android:windowSoftInputMode` to `adjustResize` or `adjustNothing`, only `keyboardDidShow` and `keyboardDidHide` events will be available on Android. `keyboardWillShow` as well as `keyboardWillHide` are generally not available on Android since there is no native corresponding event.
+Хэрэв та `android:windowSoftInputMode`-ыг `adjustResize` эсвэл `adjustNothing` гэдэг дээр тохируулбал зөвхөн `keyboardDidShow` болон `keyboardDidHide` гэсэн эвентүүд Android дээр харагдах болно. Хариу үйлдэлх хийх натив эвент байхгүй тул `keyboardWillShow` , `keyboardWillHide` нар нь ерөнхийдөө Android дээр байдаггүй.
 
-@param {function} callback function to be called when the event fires.
+
+@param {function} гэдэг нь эвент эхлэх үед дуудагддаг эргэн дуудах функц юм. 
 
 ---
 
@@ -88,9 +90,11 @@ Note that if you set `android:windowSoftInputMode` to `adjustResize` or `adjustN
 static removeListener(eventName, callback)
 ```
 
-Removes a specific listener.
+Тодорхой нэг сонсогчийг арилгах.
 
-@param {string} eventName The `nativeEvent` is the string that identifies the event you're listening for. @param {function} callback function to be called when the event fires.
+
+@param {string} eventName The `nativeEvent` нь таны сонсож байгаа эвентийг танихад тусалдаг стринг юм. 
+@param {function} нь эвент эхлэх үед дуудагддаг эргэн дуудах функц юм. 
 
 ---
 
@@ -99,10 +103,9 @@ Removes a specific listener.
 ```javascript
 static removeAllListeners(eventName)
 ```
+Тодорхой нэг төрлийн эвентийн бүх сонсогчийг арилгах.
 
-Removes all listeners for a specific event type.
-
-@param {string} eventType The native event string listeners are watching which will be removed.
+@param {string} eventType натив эвентийн харж буй сонсогчыг устгах болно. 
 
 ---
 
@@ -112,4 +115,5 @@ Removes all listeners for a specific event type.
 static dismiss()
 ```
 
-Dismisses the active keyboard and removes focus.
+Удирдах товчлуурын идэвхтэй үйлдлийг үл харгалзан, төвлөрөхгүй байлгана.
+
