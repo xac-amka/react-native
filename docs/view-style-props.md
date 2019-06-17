@@ -1,9 +1,9 @@
 ---
 id: view-style-props
-title: View Style Props
+title: Харагдацын хэв маяг пропс
 ---
 
-### Props
+### Пропс
 
 - [Layout Props](layout-props.md#props)
 - [Shadow Props](shadow-props.md#props)
@@ -43,210 +43,212 @@ title: View Style Props
 
 ### `borderRightColor`
 
-| Type               | Required |
+| Төрөл            |  Шаардлагатай эсэх  |
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](colors.md) | Үгүй       |
 
 ---
 
 ### `backfaceVisibility`
 
-| Type                      | Required |
+|Төрөл                      |  Шаардлагатай эсэх |
 | ------------------------- | -------- |
-| enum('visible', 'hidden') | No       |
+| enum('visible', 'hidden') |  Үгүй         |
 
 ---
 
 ### `borderBottomColor`
 
-| Type               | Required |
+| Төрөл                | Шаардлагатай эсэх |
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](colors.md) | Үгүй         |
 
 ---
 
 ### `borderBottomEndRadius`
 
-| Type   | Required |
+| Төрөл     |Шаардлагатай эсэх |
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй       |
 
 ---
 
 ### `borderBottomLeftRadius`
 
-| Type   | Required |
+| Төрөл      | Шаардлагатай эсэх |
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй        |
 
 ---
 
 ### `borderBottomRightRadius`
 
-| Type   | Required |
+| Төрөл      | Шаардлагатай эсэх|
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй       |
 
 ---
 
 ### `borderBottomStartRadius`
 
-| Type   | Required |
+|Төрөл     |  Шаардлагатай эсэх  |
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй         |
 
 ---
 
 ### `borderBottomWidth`
 
-| Type   | Required |
+| Төрөл     |  Шаардлагатай эсэх |
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй        |
 
 ---
 
 ### `borderColor`
 
-| Type               | Required |
+|Төрөл       |  Шаардлагатай эсэх  |
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](colors.md) |  Үгүй        |
 
 ---
 
 ### `borderEndColor`
 
-| Type               | Required |
+|Төрөл               | Required|
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](colors.md) |  Үгүй       |
 
 ---
 
 ### `borderLeftColor`
 
-| Type               | Required |
+| Төрөл                | Шаардлагатай эсэх |
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](colors.md) | Үгүй         |
 
 ---
 
 ### `borderLeftWidth`
 
-| Type   | Required |
+| Төрөл    | Шаардлагатай эсэх|
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй        |
 
 ---
 
 ### `borderRadius`
 
-If the rounded border is not visible, try applying `overflow: 'hidden'` as well.
 
-| Type   | Required |
+Хэрэв дугуй хүрээ нь харагдахгүй бол  `overflow: 'hidden'` гэж оруулна.
+
+| Төрөл    |Шаардлагатай эсэх|
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй     |
 
 ---
 
 ### `backgroundColor`
 
-| Type               | Required |
+| Төрөл                | Шаардлагатай эсэх|
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](colors.md) |  Үгүй         |
 
 ---
 
 ### `borderRightWidth`
 
-| Type   | Required |
+| Төрөл   | Шаардлагатай эсэх |
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй        |
 
 ---
 
 ### `borderStartColor`
 
-| Type               | Required |
+|Төрөл              | Шаардлагатай эсэх |
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](colors.md) |  Үгүй         |
 
 ---
 
 ### `borderStyle`
 
-| Type                              | Required |
+|Төрөл                               |Шаардлагатай эсэх |
 | --------------------------------- | -------- |
-| enum('solid', 'dotted', 'dashed') | No       |
+| enum('solid', 'dotted', 'dashed') | Үгүй        |
 
 ---
 
 ### `borderTopColor`
 
-| Type               | Required |
+| Төрөл               | Шаардлагатай эсэх |
 | ------------------ | -------- |
-| [color](colors.md) | No       |
+| [color](colors.md) |  Үгүй        |
 
 ---
 
 ### `borderTopEndRadius`
 
-| Type   | Required |
+| Төрөл     | Шаардлагатай эсэх|
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй       |
 
 ---
 
 ### `borderTopLeftRadius`
 
-| Type   | Required |
+| Төрөл     |Шаардлагатай эсэх |
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй         |
 
 ---
 
 ### `borderTopRightRadius`
 
-| Type   | Required |
+| Төрөл    | Шаардлагатай эсэх |
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй         |
 
 ---
 
 ### `borderTopStartRadius`
 
-| Type   | Required |
+|Төрөл     | Шаардлагатай эсэх |
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй      |
 
 ---
 
 ### `borderTopWidth`
 
-| Type   | Required |
+|Төрөл     | Шаардлагатай эсэх |
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй   |
 
 ---
 
 ### `borderWidth`
 
-| Type   | Required |
+|Төрөл    | Шаардлагатай эсэх |
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй         |
 
 ---
 
 ### `opacity`
 
-| Type   | Required |
+| Төрөл     | Шаардлагатай эсэх|
 | ------ | -------- |
-| number | No       |
+| number |  Үгүй          |
 
 ---
 
 ### `elevation`
 
-(Android-only) Sets the elevation of a view, using Android's underlying [elevation API](https://developer.android.com/training/material/shadows-clipping.html#Elevation). This adds a drop shadow to the item and affects z-order for overlapping views. Only supported on Android 5.0+, has no effect on earlier versions.
+(Зөвхөн Android) Харагдацын [elevation API](https://developer.android.com/training/material/shadows-clipping.html#Elevation)-ыг тодорхойлно. Зөвхөн Android 5.0+ дээр ажиллах ба өмнөх хувилбаруудад ажиллахгүй.
 
-| Type   | Required | Platform |
+
+| Төрөл | Шаардлагатай эсэх |Платформ|
 | ------ | -------- | -------- |
-| number | No       | Android  |
+| number |  Үгүй          | Android  |
