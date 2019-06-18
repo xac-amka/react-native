@@ -260,18 +260,6 @@
         </author>
     </entry>
     <entry>
-        <title type="html"><![CDATA[idx: The Existential Function]]></title>
-        <id>https://react-mongolia.github.io/react-native/blog/2017/03/13/idx-the-existential-function.html</id>
-        <link href="https://react-mongolia.github.io/react-native/blog/2017/03/13/idx-the-existential-function.html">
-        </link>
-        <updated>2017-03-13T06:00:00Z</updated>
-        <summary type="html"><![CDATA[<p>At Facebook, we often need to access deeply nested values in data structures fetched with GraphQL. On the way to accessing these deeply nested values, it is common for one or more intermediate fields to be nullable. These intermediate fields may be n...</p>]]></summary>
-        <author>
-            <name>Timothy Yung</name>
-            <uri>https://github.com/yungsters</uri>
-        </author>
-    </entry>
-    <entry>
         <title type="html"><![CDATA[Better List Views in React Native]]></title>
         <id>https://react-mongolia.github.io/react-native/blog/2017/03/13/better-list-views.html</id>
         <link href="https://react-mongolia.github.io/react-native/blog/2017/03/13/better-list-views.html">
@@ -281,6 +269,18 @@
         <author>
             <name>Spencer Ahrens</name>
             <uri>https://github.com/sahrens</uri>
+        </author>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[idx: The Existential Function]]></title>
+        <id>https://react-mongolia.github.io/react-native/blog/2017/03/13/idx-the-existential-function.html</id>
+        <link href="https://react-mongolia.github.io/react-native/blog/2017/03/13/idx-the-existential-function.html">
+        </link>
+        <updated>2017-03-13T06:00:00Z</updated>
+        <summary type="html"><![CDATA[<p>At Facebook, we often need to access deeply nested values in data structures fetched with GraphQL. On the way to accessing these deeply nested values, it is common for one or more intermediate fields to be nullable. These intermediate fields may be n...</p>]]></summary>
+        <author>
+            <name>Timothy Yung</name>
+            <uri>https://github.com/yungsters</uri>
         </author>
     </entry>
     <entry>
