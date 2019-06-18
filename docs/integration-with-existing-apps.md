@@ -1,6 +1,6 @@
 ---
 id: integration-with-existing-apps
-title: Integration with Existing Apps
+title: Бэлэн апптай нэгтгэх
 ---
 
 <style>
@@ -67,9 +67,9 @@ title: Integration with Existing Apps
   }
 </style>
 
-React Native is great when you are starting a new mobile app from scratch. However, it also works well for adding a single view or user flow to existing native applications. With a few steps, you can add new React Native based features, screens, views, etc.
+Цоо шинээр гар утасны апп эхнээс нь хийх гэж байгаа бол React Native тун тохиромжтой. Гэсэн та мөн бэлэн натив аппликейшнд дан харагдац болон хэрэглэгчийн дамжлага зэргийг нэмэх зорилгоор бас ашиглаж болно. Цөөн хэдэн зүйл хийгээд л та React Native дээр суурилсан шинэ үйлдэл, нүүр, харагдацтай болох боломжтой. 
 
-The specific steps are different depending on what platform you're targeting.
+Ямар платформ дээр ашиглахаас хамаарах хийх арга нь өөр өөр байна.
 
 <div class="toggler">
   <ul role="tablist" >
@@ -87,55 +87,54 @@ The specific steps are different depending on what platform you're targeting.
 
 <block class="objc swift android" />
 
-## Key Concepts
+## Гол агуулга
 
 <block class="objc swift" />
 
-The keys to integrating React Native components into your iOS application are to:
+React Native компонентуудыг iOS аппликейшндаа нэгтгэхэд хэрэгтэй алхам:
 
-1. Set up React Native dependencies and directory structure.
-2. Understand what React Native components you will use in your app.
-3. Add these components as dependencies using CocoaPods.
-4. Develop your React Native components in JavaScript.
-5. Add a `RCTRootView` to your iOS app. This view will serve as the container for your React Native component.
-6. Start the React Native server and run your native application.
-7. Verify that the React Native aspect of your application works as expected.
-
+1. React Native хамаарах тохиргоо, чиглэлийн бүтцийг /directory structure/ хийх.
+2. Аппдаа ашиглах React Native компонентууд нь ямар үүрэгтэйг ойлгох.
+3. CocoaPods ашиглан эдгээр компонентуудаа dependencies гэж нэмэх.
+4. JavaScript дотор React Native компонентуудаа хөгжүүлэх.
+5. iOS апп дотроо `RCTRootView`-ыг нэмэх. Энэ нь React Native компонентууд чинь байрлах контейнер нь болох юм. 
+6. React Native серверээ ажиллуулан, натив аппликейшнаа ажиллуулна.
+7. Аппликейшны чинь React Native талаасаа хүссэнээр чинь ажиллаж байгаа эсэхийг нягтлах. 
 <block class="android" />
 
-The keys to integrating React Native components into your Android application are to:
+React Native компонентуудыг Android аппликейшн руу нэгтгэхэд хэрэгтэй алхам:
 
-1. Set up React Native dependencies and directory structure.
-2. Develop your React Native components in JavaScript.
-3. Add a `ReactRootView` to your Android app. This view will serve as the container for your React Native component.
-4. Start the React Native server and run your native application.
-5. Verify that the React Native aspect of your application works as expected.
+1. React Native хамаарах тохиргоо, чиглэлийн бүтцийг хийх.
+2. JavaScript дотор React Native компонентуудаа хөгжүүлэх.
+3. Android апп дотроо `ReactRootView`-ыг нэмэх. Энэ нь React Native компонентууд чинь байрлах контейнер нь болох юм. 
+4. React Native серверээ ажиллуулан, натив аппликейшнаа ажиллуулна.
+5. Аппликейшны чинь React Native талаасаа хүссэнээр чинь ажиллаж байгаа эсэхийг нягтлах. 
 
 <block class="objc swift android" />
 
-## Prerequisites
+## Урьдчилсан тохиргоо
 
 <block class="objc swift" />
 
-Follow the instructions for building apps with native code from the [Getting Started guide](getting-started.md) to configure your development environment for building React Native apps for iOS.
+[Эхлэх зөвлөмж](getting-started.md)-өөс натив код ашиглан апп хэрхэн бүтээх тухай уншиж, iOS-т зориулсан React Native апп хийх хөгжүүлэлтийн орчныг хэрхэн бий болгох вэ гэдэгтээ танилцаарай. 
 
-### 1. Set up directory structure
+### 1. Чиглэлийн бүтцийг тохируулах
 
-To ensure a smooth experience, create a new folder for your integrated React Native project, then copy your existing iOS project to a `/ios` subfolder.
+Эмх цэгцтэй ажиллахын тулд эхлээд React Native-ын нэгтгэсэн төсөлдөө зориулан шинээр фолдер үүсгэнэ. Тэгээд бэлэн байгаа iOS  төслөө `/ios` гэсэн дэд фолдерт хийнэ. 
 
 <block class="android" />
 
-Follow the instructions for building apps with native code from the [Getting Started guide](getting-started.md) to configure your development environment for building React Native apps for Android.
+[Эхлэх зөвлөмж](getting-started.md)-өөс натив код ашиглан апп хэрхэн бүтээх тухай уншиж, Android-д зориулсан React Native апп хийх хөгжүүлэлтийн орчныг хэрхэн бий болгох вэ гэдэгтээ танилцаарай. 
 
-### 1. Set up directory structure
+### 1. Чиглэлийн бүтцийг тохируулах
 
-To ensure a smooth experience, create a new folder for your integrated React Native project, then copy your existing Android project to an `/android` subfolder.
+Эмх цэгцтэй ажиллахын тулд эхлээд React Native-ын нэгтгэсэн төсөлдөө зориулан шинээр фолдер үүсгэнэ. Тэгээд бэлэн байгаа Android  төслөө `/android`  гэсэн дэд фолдерт хийнэ. 
 
 <block class="objc swift android" />
 
-### 2. Install JavaScript dependencies
+### 2. JavaScript dependencies суулгах
 
-Go to the root directory for your project and create a new `package.json` file with the following contents:
+Төслийнхөө үндсэн чиглэл рүү очоод `package.json` гэсэн шинэ файл үүсгэнэ. Үүндээ доорх кодыг хуулна:
 
 ```
 {
@@ -148,77 +147,76 @@ Go to the root directory for your project and create a new `package.json` file w
 }
 ```
 
-Next, make sure you have [installed the yarn package manager](https://yarnpkg.com/lang/en/docs/install/).
+Дараа нь [yarn package manager суулгасан](https://yarnpkg.com/lang/en/docs/install/) байгаа эсэхийг шалгана.
 
-Install the `react` and `react-native` packages. Open a terminal or command prompt, then navigate to the directory with your `package.json` file and run:
+
+`react` болон `react-native` пакэж суулгана. Терминал эсвэл command prompt-оо нээгээд `package.json` гэсэн файл бүхий хэсгийг олж ажиллуулна:
 
 ```
 $ yarn add react-native
 ```
 
-This will print a message similar to the following (scroll up in the yarn output to see it):
+Ингэхэд доорхтой төстэй мессеж гарах учиртай (дээш нь гүйлгэж байж харна):
 
 > warning "react-native@0.52.2" has unmet peer dependency "react@16.2.0".
 
-This is OK, it means we also need to install React:
+Ийм бол зүгээр гэсэн үг ба бид одоо React-аа суулгах хэрэгтэй:
 
 ```
 $ yarn add react@version_printed_above
 ```
 
-Yarn has created a new `/node_modules` folder. This folder stores all the JavaScript dependencies required to build your project.
+Yarn нь шинээр `/node_modules` гэсэн фолдер үүсгэнэ. Энэхүү фолдер нь апп хийхэд чинь хэрэгтэй бүх Javascript dependencies-ыг хадгална. 
 
-Add `node_modules/` to your `.gitignore` file.
+`.gitignore` файл дээрээ `node_modules/`-ыг нэмнэ. 
 
 <block class="objc swift" />
 
-### 3. Install CocoaPods
+### 3. CocoaPods суулгах
 
-[CocoaPods](http://cocoapods.org) is a package management tool for iOS and macOS development. We use it to add the actual React Native framework code locally into your current project.
-
-We recommend installing CocoaPods using [Homebrew](http://brew.sh/).
+[CocoaPods](http://cocoapods.org) нь iOS болон macOS-ын хөгжүүлэлтэнд зориулсан пакэж менежмент хийх хэрэгсэл юм.
+Бид үүнийг ашиглан одоогийн төсөл дээрээ жинхэнэ React Native framework кодыг нэмнэ. 
+[Homebrew](http://brew.sh/) ашиглан CocoaPods суулгахыг танд санал болгож байна. 
 
 ```
 $ brew install cocoapods
 ```
 
-> It is technically possible not to use CocoaPods, but that would require manual library and linker additions that would overly complicate this process.
+> CocoaPods-ыг ашиглахгүйгээр хийх нь техникийн хувьд боломжгүй бөгөөд ингэхийн тулд тусгай сан үүсгэж, холбоос бүхий нэмэлт ажил хийх ба энэ нь их төвөгтэй байх болно. 
 
 <block class="objc swift" />
 
-## Adding React Native to your app
-
+## React Native-ыг өөрийн аппдаа нэмэх 
 <block class="objc" />
 
-Assume the [app for integration](https://github.com/JoelMarcey/iOS-2048) is a [2048](https://en.wikipedia.org/wiki/2048_%28video_game%29) game. Here is what the main menu of the native application looks like without React Native.
+[Нэгтгэх апп](https://github.com/JoelMarcey/iOS-2048) нь [2048](https://en.wikipedia.org/wiki/2048_%28video_game%29) гэдэг тоглоом байлаа гэж бодъё.  React Native-гүйгээр натив аппликейшны гол зэс нь ингэж харагдана. 
 
 <block class="swift" />
 
-Assume the [app for integration](https://github.com/JoelMarcey/swift-2048) is a [2048](https://en.wikipedia.org/wiki/2048_%28video_game%29) game. Here is what the main menu of the native application looks like without React Native.
-
+[Нэгтгэх апп](https://github.com/JoelMarcey/swift-2048) нь [2048](https://en.wikipedia.org/wiki/2048_%28video_game%29) гэдэг тоглоом байлаа гэж бодъё. React Native-гүйгээр натив аппликейшны гол цэс нь ингэж харагдана. 
 <block class="objc swift" />
 
 ![Before RN Integration](/react-native/docs/assets/react-native-existing-app-integration-ios-before.png)
 
-### Command Line Tools for Xcode
+###  Xcode-д зориулсан Command Line tools 
 
-Install the Command Line Tools. Choose "Preferences..." in the Xcode menu. Go to the Locations panel and install the tools by selecting the most recent version in the Command Line Tools dropdown.
+Command Line Tools суулгана. Xcode цэс дэх "Preferences..." гэснийг сонгоно. Locations гэсэн панел дээр очин Command Line хэрэгслүүд гэсэн рүү ороод хамгийн сүүлийн хувилбаруудыг нь сонгон суулгана. 
 
 ![Xcode Command Line Tools](/react-native/docs/assets/GettingStartedXcodeCommandLineTools.png)
 
-### Configuring CocoaPods dependencies
+### CocoaPods dependencies-ыг тохируулах 
 
-Before you integrate React Native into your application, you will want to decide what parts of the React Native framework you would like to integrate. We will use CocoaPods to specify which of these "subspecs" your app will depend on.
+React Native-ыг аппликейшнтайгаа нэгтгэхийн өмнө та React Native framework-ын аль хэсгийг нь нэгтгэх вэ гэдгээ шийдэх хэрэгтэй. Бид CocoaPods ашиглан аль "subspecs"-ээс апп тань хамаарахыг тодорхойлно. 
 
-The list of supported `subspec`s is available in [`/node_modules/react-native/React.podspec`](https://github.com/facebook/react-native/blob/master/React.podspec). They are generally named by functionality. For example, you will generally always want the `Core` `subspec`. That will get you the `AppRegistry`, `StyleSheet`, `View` and other core React Native libraries. If you want to add the React Native `Text` library (e.g., for `<Text>` elements), then you will need the `RCTText` `subspec`. If you want the `Image` library (e.g., for `<Image>` elements), then you will need the `RCTImage` `subspec`.
+Дэмждэг `subspec`-ын жагсаалтыг [`/node_modules/react-native/React.podspec`](https://github.com/facebook/react-native/blob/master/React.podspec) гэдгээс харна уу. Эдгээр нь ажиллагаанаас хамааран ерөнхийдөө нэр нь өгөгдсөн байгаа. Тухайлбал,`Core` `subspec` танд байнга хэрэг болох болно. Эндээс та `AppRegistry`, `StyleSheet`, `View`  болон React Native-ын бусад сан руу очих боломжтой. Хэрэв та React Native-ын  `Text` сан (жишээ нь `<Text>` элементүүд) нэмэхийг хүсвэл `RCTText` `subspec` хэрэг болно. Хэрэв та `Image` сан (жишээ нь `<Image>` элементүүд) нэмэхийг хүсвэл `RCTImage` `subspec` хэрэг болно. 
 
-You can specify which `subspec`s your app will depend on in a `Podfile` file. The easiest way to create a `Podfile` is by running the CocoaPods `init` command in the `/ios` subfolder of your project:
+Та аппын аль `subspec` нь `Podfile` файлаас хамаарах вэ гэдгийг тодорхойлж өгөх боломжтой. `Podfile` файл үүсгэх хамгийн хялбар арга бол `/ios` дэд фолдер дахь CocoaPods `init` командыг ашиглах юм:
 
 ```
 $ pod init
 ```
 
-The `Podfile` will contain a boilerplate setup that you will tweak for your integration purposes. In the end, `Podfile` should look something similar to this:
+`Podfile` нь таны нэгтгэх ажилд туслах boilerplate буюу давтамж бүхий тохиргоог агуулдаг. Эцэстээ `Podfile` үүнтэй төстэй харагдана:
 
 <block class="objc" />
 
@@ -285,13 +283,13 @@ end
 
 <block class="objc swift" />
 
-After you have created your `Podfile`, you are ready to install the React Native pod.
+ `Podfile`-аа үүсгэсний дараа та React Native pod-ыг суулгахад бэлэн боллоо гэсэн үг.
 
 ```
 $ pod install
 ```
 
-You should see output such as:
+Ийм үр дүн гарна:
 
 ```
 Analyzing dependencies
@@ -304,31 +302,32 @@ Sending stats
 Pod installation complete! There are 3 dependencies from the Podfile and 1 total pod installed.
 ```
 
-> If this fails with errors mentioning `xcrun`, make sure that in Xcode in Preferences > Locations the Command Line Tools are assigned.
+> Хэрэв `xcrun` гэсэн алдаа заавал  Preferences > Locations доторх  Xcode-ын Command Line Tools нь өгөгдсөн эсэхийг шалгаарай. 
 
 <block class="swift" />
 
-> If you get a warning such as "_The `swift-2048 [Debug]` target overrides the `FRAMEWORK_SEARCH_PATHS` build setting defined in `Pods/Target Support Files/Pods-swift-2048/Pods-swift-2048.debug.xcconfig`. This can lead to problems with the CocoaPods installation_", then make sure the `Framework Search Paths` in `Build Settings` for both `Debug` and `Release` only contain `$(inherited)`.
+> Хэрэв "_The `swift-2048 [Debug]`  гэхчлэн анхааруулга гарч ирвэл `Pods/Target Support Files/Pods-swift-2048/Pods-swift-2048.debug.xcconfig`-т тодорхойлсон `FRAMEWORK_SEARCH_PATHS` -ыг дарж ажиллана. Ингэснээр CocoaPods installation_" -д асуудал үүсэх тул  `Build Settings`  дахь `Framework Search Paths`  нь  `Debug` болон `Release`-т аль аль нь зөвхөн `$(inherited)` агуулсан байх хэрэгтэй.
 
 <block class="objc swift" />
 
-### Code integration
+### Код нэгтгэх
 
-Now we will actually modify the native iOS application to integrate React Native. For our 2048 sample app, we will add a "High Score" screen in React Native.
+Одоо бид натив iOS аппликейшны өөрчилж React Native-тай нийлүүлэх юм.  Жишээ болгон хийж буй 2048 апп хийхдээ бид React Native дээр "High Score" нүүрийг нэмж өгөх болно. 
 
-#### The React Native component
+#### React Native компонент
 
-The first bit of code we will write is the actual React Native code for the new "High Score" screen that will be integrated into our application.
+Бидний хамгийн эхэнд бичих код бол шинэ "High Score"-ыг дэлгэцэнд харуулах код ба үүнийгээ аппликейшндээ нэгтгэх хэрэгтэй. 
 
-##### 1. Create a `index.js` file
 
-First, create an empty `index.js` file in the root of your React Native project.
+##### 1. `index.js` файл үүсгэх
 
-`index.js` is the starting point for React Native applications, and it is always required. It can be a small file that `require`s other file that are part of your React Native component or application, or it can contain all the code that is needed for it. In our case, we will just put everything in `index.js`.
+Эхлээд React Native төсөлдөө  `index.js` гэсэн хоосон файл үүсгэнэ. 
 
-##### 2. Add your React Native code
+`index.js` нь React Native аппликейшны эхлэх цэг нь байх бөгөөд үргэлж байх шаардлагатай. Жижиг файл React Native-ын компонент эсвэл аппликейшнд хамаарах бусад файлыг `require` шаардах эсвэл бүх хэрэгтэй кодыг өөртөө хадгалах боломжтой байна. Бидний хуьд бүгдийг нь `index.js` дотроо хийчихнэ.
 
-In your `index.js`, create your component. In our sample here, we will add simple `<Text>` component within a styled `<View>`
+##### 2. React Native кодоо нэмэх
+
+`index.js` дотроо өөрийн компонентоо үүсгэнэ.  Бидний жишээ дээр `<Text>` компонентоо хэв маягийг тодорхойлсон `<View>` буюу харагдац дээрээ нэмнэ.
 
 ```javascript
 import React from 'react';
@@ -376,35 +375,38 @@ AppRegistry.registerComponent('RNHighScores', () => RNHighScores);
 
 > `RNHighScores` is the name of your module that will be used when you add a view to React Native from within your iOS application.
 
-#### The Magic: `RCTRootView`
+#### Ид шид: `RCTRootView`
 
-Now that your React Native component is created via `index.js`, you need to add that component to a new or existing `ViewController`. The easiest path to take is to optionally create an event path to your component and then add that component to an existing `ViewController`.
+`index.js` ашиглан React Native компонент үүссэн учир та одоо шинэ эсвэл хуучин `ViewController` дээрээ уг компонентоо нэмнэ. Хамгийн хялбар арга нь компонентдоо зориулсан эвент зам үүсгээд, тухайн компонентоо хуучин `ViewController` дээрээ нэмнэ. 
 
-We will tie our React Native component with a new native view in the `ViewController` that will actually host it called `RCTRootView` .
+Бид React Native компонентоо `ViewController` дахь шинэ натив харагдацтай холбох ба үүнийг `RCTRootView` гэж нэрлэдэг. 
 
-##### 1. Create an Event Path
 
-You can add a new link on the main game menu to go to the "High Score" React Native page.
+##### 1. Шинэ эвентийн зам үүсгэх
+
+Та React Native хуудас дээрх "High Score" гэсэн дээрээс тоглоомын үндсэн цэс дээр шинэ холбоос нэмж болно. 
 
 ![Event Path](/react-native/docs/assets/react-native-add-react-native-integration-link.png)
 
-##### 2. Event Handler
+##### 2. Эвент зохицуулагч
 
-We will now add an event handler from the menu link. A method will be added to the main `ViewController` of your application. This is where `RCTRootView` comes into play.
+Одоо тэгээд цэсний холбоо дээрээс event handler-аа нэмнэ. Аппликейшны тань гол `ViewController` дээр нэмэгдэх болно. Ингэснээр `RCTRootView` нь ажиллана. 
 
-When you build a React Native application, you use the React Native packager to create an `index.bundle` that will be served by the React Native server. Inside `index.bundle` will be our `RNHighScore` module. So, we need to point our `RCTRootView` to the location of the `index.bundle` resource (via `NSURL`) and tie it to the module.
+React Native аппликейшн хийх үед та React Native пакэж ашиглан `index.bundle` үүсгэнэ. Энэ нь React Native-ын серверийг ашигладаг. `index.bundle`  дотор бидний `RNHighScore` модуль байна. Тийм болохоор `NSURL`-ыг ашиглан `RCTRootView`-т `index.bundle`-ын байрлалыг зааж өгч, модультай холбоно. 
 
-We will, for debugging purposes, log that the event handler was invoked. Then, we will create a string with the location of our React Native code that exists inside the `index.bundle`. Finally, we will create the main `RCTRootView`. Notice how we provide `RNHighScores` as the `moduleName` that we created [above](#the-react-native-component) when writing the code for our React Native component.
+Дибаг хийх зорилгоор дуудагдсан эвент зохицуулагчийг нь лог хийнэ. Тэгээд `index.bundle` дотор байх React Native кодын байрлал бүхий стринг бүтээнэ. Эцэст нь бид гол `RCTRootView`-ээ хийнэ. React Native компонентынхоо кодыг бичихдээ [дээр](#the-react-native-component) үүсгэсэн `moduleName` шигээ `RNHighScores`-ыг гаргаж өгч байгааг анзаарна уу. 
+
 
 <block class="objc" />
 
-First `import` the `RCTRootView` header.
+Эхлээд `RCTRootView`-ыг `import` хийнэ.
 
 ```objectivec
 #import <React/RCTRootView.h>
 ```
 
-> The `initialProperties` are here for illustration purposes so we have some data for our high score screen. In our React Native component, we will use `this.props` to get access to that data.
+> `initialProperties` нь илүү тодорхой харуулах зорилготой ба өндөр онооны дэлгэцийн мэдээллийг авах боломжтой болно. 
+ React Native компонентдоо бид `this.props` ашиглан энэхүү мэдээллийг авах боломжтой.  
 
 ```objectivec
 - (IBAction)highScoreButtonPressed:(id)sender {
@@ -434,17 +436,20 @@ First `import` the `RCTRootView` header.
 }
 ```
 
-> Note that `RCTRootView initWithURL` starts up a new JSC VM. To save resources and simplify the communication between RN views in different parts of your native app, you can have multiple views powered by React Native that are associated with a single JS runtime. To do that, instead of using `[RCTRootView alloc] initWithURL`, use [`RCTBridge initWithBundleURL`](https://github.com/facebook/react-native/blob/master/React/Base/RCTBridge.h#L93) to create a bridge and then use `RCTRootView initWithBridge`.
+> `RCTRootView initWithURL` нь шинэ JSC VM үүсгэж буйг анзаарна уу. Натив аппынхаа өөр өөр хэсэг дахь RN хоорондох харилцааг илүү энгийн болгож, хадгалахын тулд та нэг удаад JS ажиллах  React Native-ын олон харагдацтай байх функцыг ашиглаж боломжтой. 
+Үүний тулд `[RCTRootView alloc] initWithURL`-ыг биш, [`RCTBridge initWithBundleURL`](https://github.com/facebook/react-native/blob/master/React/Base/RCTBridge.h#L93) ашиглан bridge үүсгээд  `RCTRootView initWithBridge` ашиглаарай. 
 
 <block class="swift" />
 
-First `import` the `React` library.
+Эхлээд `React` сангаа `import`хийнэ.
 
 ```javascript
 import React
 ```
 
-> The `initialProperties` are here for illustration purposes so we have some data for our high score screen. In our React Native component, we will use `this.props` to get access to that data.
+> `initialProperties` нь илүү тодорхой харуулах зорилготой ба өндөр онооны дэлгэцийн мэдээллийг бид авах боломжтой болно. 
+ React Native компонентдоо бид `this.props` ашиглан энэхүү мэдээллийг авах боломжтой.  
+ 
 
 ```swift
 @IBAction func highScoreButtonTapped(sender : UIButton) {
@@ -469,33 +474,36 @@ import React
 }
 ```
 
-> Note that `RCTRootView bundleURL` starts up a new JSC VM. To save resources and simplify the communication between RN views in different parts of your native app, you can have multiple views powered by React Native that are associated with a single JS runtime. To do that, instead of using `RCTRootView bundleURL`, use [`RCTBridge initWithBundleURL`](https://github.com/facebook/react-native/blob/master/React/Base/RCTBridge.h#L89) to create a bridge and then use `RCTRootView initWithBridge`.
+> `RCTRootView bundleURL` нь шинэ JSC VM үүсгэж буйг анзаарна уу. Натив аппынхаа өөр өөр хэсэг дэх RN хоорондох харилцааг илүү энгийн болгож, хадгалахын тулд та нэг удаад JS ажиллах React Native-ын олон харагдацтай байх функцыг ашиглаж боломжтой. 
+Үүний тулд `RCTRootView bundleURL`-ны оронд [`RCTBridge initWithBundleURL`](https://github.com/facebook/react-native/blob/master/React/Base/RCTBridge.h#L89) ашиглан bridge үүсгээд, `RCTRootView initWithBridge` ашиглаарай. 
 
 <block class="objc" />
 
-> When moving your app to production, the `NSURL` can point to a pre-bundled file on disk via something like `[[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];`. You can use the `react-native-xcode.sh` script in `node_modules/react-native/scripts/` to generate that pre-bundled file.
+> Аппаа боловсруулж бэлэн болох үед `NSURL` нь `[[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];` -тай төстэй зүйлийг ашиглан диск дээрх урьдаар bundle хийсэн файлыг зааж өгөх болно. Та `node_modules/react-native/scripts/` доторх  `react-native-xcode.sh`-ыг ашиглан урьдаар bundle хийсэн файлаа гаргана.
 
 <block class="swift" />
 
-> When moving your app to production, the `NSURL` can point to a pre-bundled file on disk via something like `let mainBundle = NSBundle(URLForResource: "main" withExtension:"jsbundle")`. You can use the `react-native-xcode.sh` script in `node_modules/react-native/scripts/` to generate that pre-bundled file.
+> Аппаа боловсруулж бэлэн болох үед `NSURL` нь `let mainBundle = NSBundle(URLForResource: "main" withExtension:"jsbundle")` -тай төстэй зүйлийг ашиглан диск дээрх урьдаар bundle хийсэн файлыг зааж өгөх болно. Та `node_modules/react-native/scripts/` доторх  `react-native-xcode.sh`-ыг ашиглан урьдаар bundle хийсэн файлаа гаргана.
 
 <block class="objc swift" />
 
-##### 3. Wire Up
+##### 3. Холбох 
 
-Wire up the new link in the main menu to the newly added event handler method.
+ Үндсэн цэс дэх шин холбоосыг шинээр нэмсэн эвент зохицуулагчтай холбоно.
 
 ![Event Path](/react-native/docs/assets/react-native-add-react-native-integration-wire-up.png)
 
-> One of the easier ways to do this is to open the view in the storyboard and right click on the new link. Select something such as the `Touch Up Inside` event, drag that to the storyboard and then select the created method from the list provided.
+> Үүнийг хийх нэг хялбар арга нь storyboard дээрээ харагдацыг нээн, шинэ холбоос дээр маус 2-оо дарна. `Touch Up Inside`-ыг даран  storyboard руу чирээд байгаа жагсаалтнаас сонголтоо хийнэ.
 
-### Test your integration
+### Нэгтгэсэн үйлдлээ тест хийх
 
-You have now done all the basic steps to integrate React Native with your current application. Now we will start the React Native packager to build the `index.bundle` package and the server running on `localhost` to serve it.
+Та React Native-ыг бэлэн аппликейшнтэйгээ холбох үндсэн алхмуудыг хийж дууслаа. Одоо бид React Native packager ажиллуулан `index.bundle` пакэжийг үүсгээд `localhost` ажиллуулах серверээ хийнэ. 
 
-##### 1. Add App Transport Security exception
+##### 1. Апп шилжүүлэх аюулгүй байдлын өргөтгөлийг нэмэх 
 
-Apple has blocked implicit cleartext HTTP resource loading. So we need to add the following our project's `Info.plist` (or equivalent) file.
+
+Apple далд хэлбэрийн энгийн HTTP ачаалахыг хориглосон байдаг. Тиймээс бид `Info.plist` эсвэл үүнтэй ижил файлыг нэмж өгөх хэрэгтэй.
+
 
 ```xml
 <key>NSAppTransportSecurity</key>
@@ -511,54 +519,55 @@ Apple has blocked implicit cleartext HTTP resource loading. So we need to add th
 </dict>
 ```
 
-> App Transport Security is good for your users. Make sure to re-enable it prior to releasing your app for production.
+> Апп шилжүүлэх аюулгүй байдлын функц нь хэрэглэгчдэд тустай. Аппаа бэлэн болгож гаргахаасаа өмнө дахин идэвхжүүлэхээ мартаж болохгүй. 
 
-##### 2. Run the packager
 
-To run your app, you need to first start the development server. To do this, simply run the following command in the root directory of your React Native project:
+##### 2. Packager ажиллуулах
+
+Аппаа ажиллуулахын тулд та эхлээд хөгжүүлэлтийн серверээ эхлүүлэх хэрэгтэй. Ингэхийн тул React Native төслийнхөө root directory  дотор доорх командыг өгнө:
 
 ```
 $ npm start
 ```
 
-##### 3. Run the app
+##### 3. Апп ажиллуулах
 
-If you are using Xcode or your favorite editor, build and run your native iOS application as normal. Alternatively, you can run the app from the command line using:
+Хэрэв та Xcode юм уу эсвэл өөрийн дуртай нэг засагчийг ашиглаж байгаа бол натив iOS аппликейшнаа энгийн ажиллуулдаг шигээ ажиллуулж хийнэ. Өөрөөр та доорх командыг ашиглан аппаа ажиллуулах боломжтой:
 
 ```
 # From the root of your project
 $ react-native run-ios
 ```
 
-In our sample application, you should see the link to the "High Scores" and then when you click on that you will see the rendering of your React Native component.
+Жишээ болгож хийсэн аппликейшн дээр та "High Scores"-ыг заасан холбоос байгаа. Та дээр нь дарахад React Native компонент рендэр хийнэ. 
 
-Here is the _native_ application home screen:
+ _native_ application дэлгэц:
 
 ![Home Screen](/react-native/docs/assets/react-native-add-react-native-integration-example-home-screen.png)
 
-Here is the _React Native_ high score screen:
+_React Native_ өндөр онооны дэлгэц:
 
 ![High Scores](/react-native/docs/assets/react-native-add-react-native-integration-example-high-scores.png)
 
-> If you are getting module resolution issues when running your application please see [this GitHub issue](https://github.com/facebook/react-native/issues/4968) for information and possible resolution. [This comment](https://github.com/facebook/react-native/issues/4968#issuecomment-220941717) seemed to be the latest possible resolution.
+> Хэрэв таныг аппликейшнээ ажиллуулж байхад модультай холбоотой асуудал үүсвэл [GitHub](https://github.com/facebook/react-native/issues/4968) дээр хэрхэн шийдсэн болохыг нь уншаарай.  [Энэ хариулт](https://github.com/facebook/react-native/issues/4968#issuecomment-220941717) дээр хамгийн сүүлийн үеийн боломжит шийдлийг бичсэн байна.
 
-### See the Code
+### Кодоо харах
 
 <block class="objc" />
 
-You can examine the code that added the React Native screen to our sample app on [GitHub](https://github.com/JoelMarcey/iOS-2048/commit/9ae70c7cdd53eb59f5f7c7daab382b0300ed3585).
+Жишээ болгон хийсэн аппынхаа React Native  дэлгэц дээр хийсэн кодоо [GitHub](https://github.com/JoelMarcey/iOS-2048/commit/9ae70c7cdd53eb59f5f7c7daab382b0300ed3585) дээрээс та харж болно. 
 
 <block class="swift" />
 
-You can examine the code that added the React Native screen to our sample app on [GitHub](https://github.com/JoelMarcey/swift-2048/commit/13272a31ee6dd46dc68b1dcf4eaf16c1a10f5229).
+Жишээ болгон хийсэн аппынхаа React Native  дэлгэц дээр хийсэн кодоо [GitHub](https://github.com/JoelMarcey/swift-2048/commit/13272a31ee6dd46dc68b1dcf4eaf16c1a10f5229) дээрээс та харж болно. 
 
 <block class="android" />
 
-## Adding React Native to your app
+## Апп дээрээ React Native нэмэх 
 
-### Configuring maven
+### Maven тохиргоо хийх
 
-Add the React Native dependency to your app's `build.gradle` file:
+React Native dependency-ыг аппынхаа `build.gradle` файл дээр нэм:
 
 ```gradle
 dependencies {
@@ -568,9 +577,9 @@ dependencies {
 }
 ```
 
-> If you want to ensure that you are always using a specific React Native version in your native build, replace `+` with an actual React Native version you've downloaded from `npm`.
+> Хэрэв та үргэлж React Native-ын нэг хувилбарыг ашиглахыг хүсвэл `+` тэмдгийг `npm`-ээс татсан React Native  хувилбараараа орлуулаарай. 
 
-Add an entry for the local React Native maven directory to `build.gradle`. Be sure to add it to the "allprojects" block, above other maven repositories:
+React Native maven directory-даа `build.gradle`-ыг нэмнэ. Ингэхдээ бусдын дээр нь байх "allprojects" блок дээрээ нэмээрэй:
 
 ```gradle
 allprojects {
@@ -585,25 +594,25 @@ allprojects {
 }
 ```
 
-> Make sure that the path is correct! You shouldn’t run into any “Failed to resolve: com.facebook.react:react-native:0.x.x" errors after running Gradle sync in Android Studio.
+> Замаа зөв зааж өгсөн эсэхээ шалгаарай! Android Studio дээр Gradle sync ажиллуулахад “Failed to resolve: com.facebook.react:react-native:0.x.x" гэх мэт алдаа гарах учиргүй.
 
-### Configuring permissions
+### Зөвшөөрлийн тохиргоо хийх
 
-Next, make sure you have the Internet permission in your `AndroidManifest.xml`:
+Дараа нь `AndroidManifest.xml` дотор интернэт зөвшөөрөл байгаа эсэхийг шалгаарай:
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-If you need to access to the `DevSettingsActivity` add to your `AndroidManifest.xml`:
+Хэрэв та `DevSettingsActivity`-руу холбогдох хэрэгтэй бол `AndroidManifest.xml` дээрээ нэмээрэй:
 
     <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
 
-This is only used in dev mode when reloading JavaScript from the development server, so you can strip this in release builds if you need to.
+Хөгжүүлэлтийн серверээс JavaScript дахин ачаалах үед хөгжүүлэлтийн горимд байгаа үед ашиглах боломжтой. Тийм болохоор та хэрэгтэй үедээ бэлэн болсон үед нь хандаж болно.
 
 ### Cleartext Traffic (API level 28+)
 
-> Starting with Android 9 (API level 28), cleartext traffic is disabled by default; this prevents your application from connecting to the React Native packager. The changes below allow cleartext traffic in debug builds.
+> Android 9 (API level 28)-аас хойш хувилбарт цаанаасаа кодлогдоогүй мэдээлэл солилцох боломжийг хаасан байдаг. Энэ нь таны аппликейшныг the React Native packager-тай холбогдоход саад болдог.  Дибагийн үед кодлоогүй мэдээллийг хэрхэн нэвтрүүлэх тухай доороос уншина уу. 
 
-#### 1. Apply the `usesCleartextTraffic` option to your Debug `AndroidManifest.xml`
+#### 1. `AndroidManifest.xml`-тээ `usesCleartextTraffic` сонголтыг нэмэх 
 
 ```xml
 <!-- ... -->
@@ -613,28 +622,27 @@ This is only used in dev mode when reloading JavaScript from the development ser
 </application>
 <!-- ... -->
 ```
+Апп бэлэн болж, гаргахад энэ нь заавал байх шаардлагагүй.
 
-This is not required for Release builds.
+Сүлжээний аюулгүй байдлыг тохиргоо болон кодлоогүй мэдээллийн тухай дэлгэрэнгүй мэдэхийг хүсвэл [энэ холбоос](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted) руу орно уу.
 
-To learn more about Network Security Config and the cleartext traffic policy [see this link](https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted).
+### Кодоо нэгтгэх
 
-### Code integration
+Одоо бид натив Android аппликейшнаа React Native-тай нэгтгэнэ. 
 
-Now we will actually modify the native Android application to integrate React Native.
+#### React Native компонент
 
-#### The React Native component
+Эхлээд бид аппликейшнтайгаа нэгтгэх "High Score" нүүрээ бичих React Native кодоо бичих хэрэгтэй. 
 
-The first bit of code we will write is the actual React Native code for the new "High Score" screen that will be integrated into our application.
+##### 1. `index.js` файл үүсгэ.
 
-##### 1. Create a `index.js` file
+Эхлээд React Native төслийн голд хоосон `index.js` файл үүсгэнэ. 
 
-First, create an empty `index.js` file in the root of your React Native project.
+React Native  аппликейшн хийх үед `index.js`-ээс эхлэх ба байнга байх шаардлагатай. React Native компонент эсвэл аппликейшны чинь хэрэг болсон өөр бусад файлыг `require` хийх жижиг файл байж болно. Эсвэл шаардлагатай бүх кодыг агуулсан байж болно. Бидний хувьд бүгдийг нь `index.js` дотроо хийнэ.
 
-`index.js` is the starting point for React Native applications, and it is always required. It can be a small file that `require`s other file that are part of your React Native component or application, or it can contain all the code that is needed for it. In our case, we will just put everything in `index.js`.
+##### 2. React Native кодоо нэмэх
 
-##### 2. Add your React Native code
-
-In your `index.js`, create your component. In our sample here, we will add simple `<Text>` component within a styled `<View>`:
+`index.js` дотроо өөрийн компонентоо үүсгэнэ.  Бидний жишээ дээр бол энгийн `<Text>` компонентыг `<View>` дээр хэв маягийг тодорхойлон хийнэ гэсэн үг:
 
 ```javascript
 import React from 'react';
@@ -664,9 +672,9 @@ var styles = StyleSheet.create({
 AppRegistry.registerComponent('MyReactNativeApp', () => HelloWorld);
 ```
 
-##### 3. Configure permissions for development error overlay
+##### 3. Хөгжүүлэлтийн алдаа давхцахад зориулсан зөвшөөрөл өгөх процессын тохиргоо хийх
 
-If your app is targeting the Android `API level 23` or greater, make sure you have the permission `android.permission.SYSTEM_ALERT_WINDOW` enabled for the development build. You can check this with `Settings.canDrawOverlays(this);`. This is required in dev builds because React Native development errors must be displayed above all the other windows. Due to the new permissions system introduced in the API level 23 (Android M), the user needs to approve it. This can be achieved by adding the following code to your Activity's in `onCreate()` method.
+Хэрэв та аппаа Android `API level 23` юм уу түүнээс дээш хувилбарт зориулж хийж байгаа бол хөгжүүлэлтийн тохиргоондоо `android.permission.SYSTEM_ALERT_WINDOW`-ыг идэвхжүүлсэн эсэхээ шалгаарай. Та `Settings.canDrawOverlays(this);`-ыг ашиглан шалгах боломжтой. React Native хөгжүүлэлтийн алдаа нь бусад бүх цонхны дээр харагдах учир үүнийг хөгжүүлэлтийн горимд байхад нь шалгах хэрэгтэй. API level 23 (Android M) дээр зөвшөөрлийн шинэ системтэй болсон тул хэрэглэгч үүнийг баталгаажуулах хэрэгтэй болсон. Үүний тулд доорх кодыг `onCreate()` дахь Activity гэсэн дээр нэмэхэд болно. 
 
 ```java
 private final int OVERLAY_PERMISSION_REQ_CODE = 1;  // Choose any value
@@ -682,7 +690,7 @@ if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 }
 ```
 
-Finally, the `onActivityResult()` method (as shown in the code below) has to be overridden to handle the permission Accepted or Denied cases for consistent UX. Also, for integrating Native Modules which use `startActivityForResult`, we need to pass the result to the `onActivityResult` method of our `ReactInstanceManager` instance.
+Эцэст нь UX буюу хэрэглэгчийн ашиглалтад нийцүүлэн зөвшөөрөл Хүлээн зөвшөөрсөн эсвэл Няцаасан тохиолдолд `onActivityResult()` (доор кодыг нь харуулсан) дарагдаж бичигдэнэ. Бид гарсан дүнг `ReactInstanceManager`-ынхаа `onActivityResult`-д дамжуулах хэрэгтэй. 
 
 ```java
 @Override
@@ -698,11 +706,12 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 }
 ```
 
-#### The Magic: `ReactRootView`
+#### Ид шид: `ReactRootView`
 
-Let's add some native code in order to start the React Native runtime and tell it to render our JS component. To do this, we're going to create an `Activity` that creates a `ReactRootView`, starts a React application inside it and sets it as the main content view.
+ React Native ажиллах хугацааг эхлүүлэхийн тул бид натив код нэмэх хэрэгтэй бөгөөд JS компонентыг рендэр хийх даалгавар өгнө. Ингэхийн тулд бид дотроо React аппликейшныг ажиллуулж, гол харагдац болгодог `ReactRootView` үүсгэх `Activity` гаргана.. 
 
-> If you are targetting Android version <5, use the `AppCompatActivity` class from the `com.android.support:appcompat` package instead of `Activity`.
+
+> Хэрэв та  Android <5 хувилбарт зориулж хийж байгаа бол `Activity`-ын оронд `com.android.support:appcompat`  пакэжийн `AppCompatActivity` классийг ашиглаарай. 
 
 ```java
 public class MyReactActivity extends Activity implements DefaultHardwareBackBtnHandler {
@@ -737,11 +746,12 @@ public class MyReactActivity extends Activity implements DefaultHardwareBackBtnH
 }
 ```
 
-> If you are using a starter kit for React Native, replace the "HelloWorld" string with the one in your index.js file (it’s the first argument to the `AppRegistry.registerComponent()` method).
+> Хэрэв та React Native-т зориулсан анхлан суралцагчдад зориулсан багцыг ашиглаж байгаа бол "HelloWorld"  стрингийг index.js  файл доторх нэгээр солиорой (`AppRegistry.registerComponent()` аргын нэг аргумент нь энэ).
 
-If you are using Android Studio, use `Alt + Enter` to add all missing imports in your MyReactActivity class. Be careful to use your package’s `BuildConfig` and not the one from the `facebook` package.
+Хэрэв та Android Studio ашиглаж байгаа бол `Alt + Enter` ашиглан MyReactActivity класс дотроо дутуу байгаа бүх импортуудаа нэмээрэй. Пакэжийнхаа `BuildConfig`-ыг ашиглахдаа болгоомжтой хандаарай. `facebook` пакэжныг ашиглаж болохгүй. 
 
-We need set the theme of `MyReactActivity` to `Theme.AppCompat.Light.NoActionBar` because some React Native UI components rely on this theme.
+Хэрэглэгчийн интерфэйсийн зарим компонентууд нь энэ theme-ээс хамаарах тул `Theme.AppCompat.Light.NoActionBar` дээр `MyReactActivity`-ын theme-ыг тохируулж өгөх шаардлагатай. 
+
 
 ```xml
 <activity
@@ -751,9 +761,10 @@ We need set the theme of `MyReactActivity` to `Theme.AppCompat.Light.NoActionBar
 </activity>
 ```
 
-> A `ReactInstanceManager` can be shared by multiple activities and/or fragments. You will want to make your own `ReactFragment` or `ReactActivity` and have a singleton _holder_ that holds a `ReactInstanceManager`. When you need the `ReactInstanceManager` (e.g., to hook up the `ReactInstanceManager` to the lifecycle of those Activities or Fragments) use the one provided by the singleton.
+> `ReactInstanceManager`-ыг олон үйлдэл, хэсэг ашиглаж болно. Та өөрийн `ReactFragment` эсвэл `ReactActivity` үүсгэн `ReactInstanceManager`-ыг агуулах дан _holder_ эзэмших болно. `ReactInstanceManager` хэрэгтэй үед 
+(жишээлбэл, `ReactInstanceManager`-ыг тэдгээр үйлдэл, хэсгийн мөчлөгт холбох) энэ ганцыгаа ашиглах боломжтой. 
 
-Next, we need to pass some activity lifecycle callbacks to the `ReactInstanceManager` and `ReactRootView`:
+Дараа нь бид `ReactInstanceManager` болон `ReactRootView`-т зарим үйлдлийн мөчлөгийг эргэн дуудан дамжуулах хэрэгтэй:
 
 ```java
 @Override
@@ -786,8 +797,7 @@ protected void onDestroy() {
     }
 }
 ```
-
-We also need to pass back button events to React Native:
+Бид мөн буцах товчлуурын эвентийг React Native-т дамжуулна:
 
 ```java
 @Override
@@ -799,10 +809,9 @@ We also need to pass back button events to React Native:
     }
 }
 ```
+Энэ нь хэрэглэгч буцах товчийг дарах үед JavaScript-ыг удирдах зорилготой (жишээ нь навигаци хийх).  JavaScript буцаах товч дарах үйлдлийг зохицуулахгүй бол  `invokeDefaultOnBackPressed` аргыг дуудна. Цаанаасаа уг функц нь таны `Activity`-ыг дуусгавар болгоно.
 
-This allows JavaScript to control what happens when the user presses the hardware back button (e.g. to implement navigation). When JavaScript doesn't handle the back button press, your `invokeDefaultOnBackPressed` method will be called. By default this simply finishes your `Activity`.
-
-Finally, we need to hook up the dev menu. By default, this is activated by (rage) shaking the device, but this is not very useful in emulators. So we make it show when you press the hardware menu button (use `Ctrl + M` if you're using Android Studio emulator):
+Эцэст нь бид хөгжүүлэгчийн цэсийг холбох хэрэгтэй. Төхөөрөмжийг сэгсрэх үед идэвхжүүлэх тохиргоо цаанаас хийгдсэн байдаг ч эмуляторт бол энэ нь төдийлөн үр дүнтэй байж чаддаггүй. Цэсний товчийг дарах үед юу болохыг харуулдаг( Android Studio эмулятор ашиглаж байгаа бол `Ctrl + M` дар):
 
 ```java
 @Override
@@ -814,46 +823,45 @@ public boolean onKeyUp(int keyCode, KeyEvent event) {
     return super.onKeyUp(keyCode, event);
 }
 ```
+Одоо таны үйлдэл Javascript кодтой ажиллахад бэлэн боллоо. 
 
-Now your activity is ready to run some JavaScript code.
+### Нэгтгэсэн эсэхээ шалгах
 
-### Test your integration
+Бид React Native-ыг бэлэн аппликейшнтай холбох үндсэн алхмуудыг мэддэг боллоо. Одоо бид React Native packager ашиглан `index.bundle` пакэж болон ажиллуулах серверийг үүсгэнэ.
 
-You have now done all the basic steps to integrate React Native with your current application. Now we will start the React Native packager to build the `index.bundle` package and the server running on localhost to serve it.
+##### 1. Packager ажиллуулах 
 
-##### 1. Run the packager
-
-To run your app, you need to first start the development server. To do this, simply run the following command in the root directory of your React Native project:
+Аппаа ажиллуулахын тулд та эхлээд хөгжүүлэгчийн серверээ ажиллуулах хэрэгтэй. Ингэхийн тулд React Native төслийнхөө голд доорх командыг өгнө:
 
 ```
 $ yarn start
 ```
 
-##### 2. Run the app
+##### 2. Аппаа ажиллуулах
 
-Now build and run your Android app as normal.
+Одоо Android аппаа зүгээр л энгийн үед ажиллуулдаг шигээ ажилуулна. 
 
-Once you reach your React-powered activity inside the app, it should load the JavaScript code from the development server and display:
+Апп дотор  React-ын нөлөөтэй үйлдэлд хүрэх үед хөгжүүлэгчийн серверээс JavaScript код ачаалж, харуулна:
 
 ![Screenshot](/react-native/docs/assets/EmbeddedAppAndroid.png)
 
-### Creating a release build in Android Studio
+### Android Studio дотор бэлэн загвараа үүсгэх
 
-You can use Android Studio to create your release builds too! It’s as easy as creating release builds of your previously-existing native Android app. There’s just one additional step, which you’ll have to do before every release build. You need to execute the following to create a React Native bundle, which will be included with your native Android app:
+Та Android Studio ашиглан бэлэн загвараа үүсгэх боломжтой! Өмнөх натив Android апптай чинь адил бэлэн загварыг гаргахад хялбар байх болно. Ердөө ганцхан нэмэлт алхам бий. Үүнийг бэлэн загвараа гаргахаас өмнө хийх хэрэгтэй. Та доорх ажиллуулж, React Native bundle үүсгэнэ. Энэ нь натив Android апп дотор агуулагдана:
 
 ```
 $ react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/com/your-company-name/app-package-name/src/main/assets/index.android.bundle --assets-dest android/com/your-company-name/app-package-name/src/main/res/
 ```
 
-> Don’t forget to replace the paths with correct ones and create the assets folder if it doesn’t exist.
+> Замыг заахдаа зөвийг нь сонгож,  assets folder байхгүй бол нээгээрэй.
 
-Now just create a release build of your native app from within Android Studio as usual and you should be good to go!
+Одоо харин Android Studio-д натив апп хийдэг шигээ л бэлэн загвараа гаргана. Тэгээд л боллоо!
 
 <block class="objc swift android" />
 
-### Now what?
+### Одоо яах уу?
 
-At this point you can continue developing your app as usual. Refer to our [debugging](debugging.md) and [deployment](running-on-device.md) docs to learn more about working with React Native.
+Одоо та аппаа үргэлжлүүлэн хөгжүүлж болно. [debugging](debugging.md) болон [deployment](running-on-device.md) гэсэн хэсгээс   React Native-т хэрхэн ажиллах тухай дэлгэрэнгүй уншаарай.
 
 <script>
   function displayTab(type, value) {
