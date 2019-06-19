@@ -1,29 +1,30 @@
 ---
 id: upgrading
-title: Upgrading to new React Native versions
+title: React Native-ын шинэ хувилбарт шилжих
 ---
 
-Upgrading to new versions of React Native will give you access to more APIs, views, developer tools and other goodies. Upgrading requires a small amount of effort, but we try to make it easy for you.
+React Native-ын шинэ хувилбарт шилжсэнээр та илүү олон API, харагдац, хөгжүүлэгчийн хэрэгслүүд болон бусад зүйлсийг ашиглах боломжтой болно. Шинэ хувилбарт шилжихэд амар бөгөөд бид ч үүнийг аль болох хялбархан байхаар хийж өгсөн.
 
-## Expo projects
+## Expo төслүүд
 
-Upgrading your Expo project to a new version of React Native requires updating the `react-native`, `react`, and `expo` package versions in your `package.json` file. Please refer to [this list](https://docs.expo.io/versions/latest/sdk/#sdk-version) to find out what versions are supported. You will also need to set the correct `sdkVersion` in your `app.json` file.
+Expo төслөө React Native-ын шинэ хувилбарт шилжүүлэхийн тулд `package.json` файл дахь `react-native`, `react`, `expo` пакэжийн хувилбаруудаа шинэчлэх шаардлагатай. [Энэхүү жагсаалтаас](https://docs.expo.io/versions/latest/sdk/#sdk-version) ямар хувилбаруудыг дэмждэг болохыг хараарай. Мөн та `app.json`  файлдаа `sdkVersion`-ыг зөв тохируулж өгөх хэрэгтэй. 
 
-See the [Upgrading Expo SDK Walkthrough](https://docs.expo.io/versions/latest/workflow/upgrading-expo-sdk-walkthrough) for up-to-date information about upgrading your project.
+Хэрхэн төслөө шинэчлэх тухай сүүлийн үеийн мэдээллийг [SDK ашиглан Expo шинэчлэх](https://docs.expo.io/versions/latest/workflow/upgrading-expo-sdk-walkthrough) гэснээс уншаарай.
 
 ## React Native projects
 
-Because typical React Native projects are essentially made up of an Android project, an iOS project, and a JavaScript project, upgrading can be rather tricky. Here's what you need to do to upgrade from an older version of React Native.
+Ердийн React Native төслүүд нь Android, iOS болон JavaScript төслүүдийг агуулсан байдаг тул шинэчлэл хийхэд түвэгтэй байх нь бий. React Native-ыг хуучин хувилбарыг шинэчлэхийн тулд та эдгээрийг хийх хэрэгтэй. 
 
-### Upgrade based on Git
+### Git ашиглан шинэчлэх
 
-The [React Native CLI](https://github.com/react-native-community/react-native-cli) comes with `upgrade` command that provides a one-step operation to upgrade the source files with a minimum of conflicts, thanks to the [rn-diff-purge](https://github.com/react-native-community/rn-diff-purge) project.
+[React Native CLI](https://github.com/react-native-community/react-native-cli) нь `upgrade` командтай байх ба энэ нь эх файлыг  нэг үйлдлээр л шинэчлэх боломж олгодог. [rn-diff-purge](https://github.com/react-native-community/rn-diff-purge) үүнд тусалдаг.
 
-#### 1. Make sure your project uses Git
 
-> This step applies only to projects that don't use Git. Skip it if yours use it.
+#### 1. Төсөлдөө Git ашиглах
 
-While your project does not have to be handled by the Git versioning system -- you can use Mercurial, SVN, or nothing -- you will still need to [install Git](https://git-scm.com/downloads) on your system in order to use `react-native upgrade`. Git will also need to be available in the `PATH`. If your project doesn't use Git, initialize it and commit:
+> Git ашиглаагүй төслүүдэд л энэхүү алхам хамаатай болно. Хэрэв Git ашигладаг бол үүнийг алгасаарай. 
+Хэрэв таны төсөлд Git-ын хувилбарт систем ажилладаггүй бол Mercurial, SVN ашиглах эсвэл юу ч ашиглахгүй байж бас болно. Та гэхдээ `react-native upgrade` ашиглахын тулд систем дээрээ [Git суулгах](https://git-scm.com/downloads) шаардлагатай.
+Git нь `PATH` дээр мөн байх хэрэгтэй. Хэрэв төсөл тань Git ашигладаггүй бол эхлүүлээд commit хийгээрэй:
 
 ```sh
 git init
@@ -31,27 +32,27 @@ git add .
 git commit -m "upgrade RN"
 ```
 
-After the upgrade is done and conflicts resolved, you can remove the `.git` directory.
+Шинэчлэх процесс дуусаж, аливаа асуудалгүй болсны дараа та `.git`-ыг арилгаж болно. 
 
-#### 2. Run the `upgrade` command
+#### 2. `upgrade` командыг ажиллуулах
 
-Run the following command to start the process of upgrading to the latest version:
+Сүүлийн хувилбарт шилжихийн тулд доорх командыг өгөөрэй:
 
 ```sh
 react-native upgrade
 ```
 
-You may specify a React Native version by passing an argument, e.g. to upgrade to `0.59.0-rc.0` run:
+Та `0.59.0-rc.0` гэхчлэн React Native-ын тодорхой хувилбарт шинжлэхээ зааж өгөх боломжтой:
 
 ```sh
 react-native upgrade 0.59.0-rc.0
 ```
 
-The project is upgraded using `git apply` with 3-way merge. That's why it may happen you'll need to resolve some conflicts.
+Энэ төсөл нь `git apply`-ыг ашиглан 3 замт холболтоор шинэчлэгдэнэ. Тиймээс ямар асуудал зөрчил гарвал тэрийг нь засах хэрэгтэй.
 
-#### 4. Resolve the conflicts
+#### 4. Асуудал зөрчлийг шийдэх
 
-Conflicted files include delimiters which make very clear where the changes come from. For example:
+Асуудалтай файлууд нь өгөгдлийн хязгаарлагч агуулсан байх ба өөрчлөлт хаана байгааг тодорхой харуулдаг. Жишээлбэл:
 
 ```
 13B07F951A680F5B00A75B9A /* Release */ = {
@@ -76,17 +77,17 @@ Conflicted files include delimiters which make very clear where the changes come
     );
 ```
 
-You can think of "ours" as "your team" and "theirs" as "the React Native dev team".
+"Бидний" гэдэг нь "танай баг"-ийг харин "тэдний" гэдэг нь "React Native хөгжүүлэгчийн баг"-ийг хэлж байна гэж ойлгоорой. 
 
-### Alternative
+### Өөр арга
 
-Use this only in case the above didn't work.
+Зөвхөн дээрх арга болохгүй бол ашиглаарай.
 
-#### 1. Upgrade the `react-native` dependency
+#### 1. `react-native` dependency шинэчлэх
 
-Note the latest version of the `react-native` npm package [from here](https://www.npmjs.com/package/react-native) (or use `npm info react-native` to check).
+`react-native` npm пакэжийн сүүлийн хувилбарыг [эндээс](https://www.npmjs.com/package/react-native) шалгах (эсвэл`npm info react-native` ашиглаж шалгаарай).
 
-Now install that version of `react-native` in your project with `npm install --save`:
+Одоо `npm install --save` ашиглан `react-native` хувилбарыг суулгаарай:
 
 ```sh
 $ npm install --save react-native@X.Y
@@ -94,31 +95,32 @@ $ npm install --save react-native@X.Y
 npm WARN peerDependencies The peer dependency react@~R included from react-native...
 ```
 
-If you saw a warning about the peerDependency, also upgrade `react` by running:
+Хэрэв peerDependency-ын анхааруулга гарч ирвэл `react`-аа шинэчлээрэй:
 
 ```sh
 $ npm install --save react@R
 # where R is the new version of react from the peerDependency warning you saw
 ```
 
-#### 2. Upgrade your project templates
+#### 2. Төслийнхөө template-ыг шинэчлэх
 
-The new npm package may contain updates to the files that are normally generated when you run `react-native init`, like the iOS and the Android sub-projects.
+Шинэ npm пакэж нь `react-native init`-ыг ажиллуулахад гарч ирдэг файлуудын шинэ хувилбаруудыг агуулсан байдаг. Тухайлбал, iOS болон Android дэд төслүүд дээр.
 
-You may consult [rn-diff-purge](https://github.com/pvinis/rn-diff-purge) to see if there were changes in the project template files. In case there weren't any, simply rebuild the project and continue developing. In case of minor changes, you may update your project manually and rebuild.
+Та [rn-diff-purge](https://github.com/pvinis/rn-diff-purge)-руу орж template файлуудад өөрчлөлт орсон эсэхийг хараарай. 
+Ямар нэг өөрчлөлт байхгүй бол шууд төслөө хийж, хөгжүүлэлтээ үргэлжлүүлээрэй. Зарим нэг жижиг өөрчлөлт орсон бол та өөрөө шинэчлэн, дахин хийх хэрэгтэй болно. 
 
-If there were major changes, run this in a terminal to get these:
+Хэрэв их өөрчлөлт байх юм терминал дээр үүнийг ажиллуулаарай:
 
 ```sh
 $ react-native upgrade
 ```
+Энэ нь сүүлийн template-тай таны файлууд зохицож байгаа эсэхийг шалгаж, доорх үйлдлийг хийдэг:
 
-This will check your files against the latest template and perform the following:
+- Хэрэв template дотор шинэ файл байх юм бол шууд үүсгэнэ.
+- Хэрэв template дотор файлтай чинь төстэй файл байх юм бол алгасна. 
+- Хэрэв төсөл дэх файл чинь template-д байгаагаас өөр байх юм бол таныг файлаа хадгалах эсвэл тухайн template-ын хувилбараар сольж бичих сонголт өгнө. 
 
-- If there is a new file in the template, it is simply created.
-- If a file in the template is identical to your file, it is skipped.
-- If a file is different in your project than the template, you will be prompted; you have options to keep your file or overwrite it with the template version.
+## Өөрөө шинэчлэх
 
-## Manual Upgrades
+Зарим шинэчлэлийг заавал өөрөө  0.28-аас 0.29, эсвэл 0.56-аас 0.57 гэх мэтээр шинэчлэх хэрэгтэй болдог. Шинэ хувилбарт шилжих гэж байгаа бол [шинэ хувилбарын мэдээлэл](https://github.com/facebook/react-native/releases)-тэй танилцаж, таны төсөлд ямар өөрчлөлтийг өөрөө бичиж оруулах хэрэгтэй тухай уншаарай.
 
-Some upgrades require manual steps, e.g. 0.28 to 0.29, or 0.56 to 0.57. Be sure to check the [release notes](https://github.com/facebook/react-native/releases) when upgrading so that you can identify any manual changes your particular project may require.
