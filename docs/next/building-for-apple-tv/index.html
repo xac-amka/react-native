@@ -108,8 +108,8 @@
   .display-platform-android .android {
     display: block;
   }
-</style>
-<p>TV devices support has been implemented with the intention of making existing React Native applications &quot;just work&quot; on Apple TV and Android TV, with few or no changes needed in the JavaScript code for the applications.</p>
+</style> 
+<p>React Native аппликейшныг Apple TV болон Android TV дээр ажиллуулах зорилгоор TV төхөөрөмж дэмждэг болгосон байгаа. Тухайн аппликейшны Javascript кодонд цөөн өөрчлөлт хийх эсвэл бүр огт өөрчлөхгүйгээр ажиллуулах боломжтой.</p>
 <div class="toggler">
   <ul role="tablist" >
     <li id="ios" class="button-ios" aria-selected="false" role="tab" tabindex="0" aria-controls="iostab" onclick="displayTab('platform', 'ios')">
@@ -121,12 +121,12 @@
   </ul>
 </div>
 <p><block class="ios" /></p>
-<p>The RNTester app supports Apple TV; use the <code>RNTester-tvOS</code> build target to build for tvOS.</p>
-<h2><a class="anchor" aria-hidden="true" id="build-changes"></a><a href="#build-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build changes</h2>
+<p>RNTester апп нь Apple TV-ыг дэмждэг; tvOS-д зориулж хийхийн тулд <code>RNTester-tvOS</code> ашиглана уу.</p>
+<h2><a class="anchor" aria-hidden="true" id="өөрчлөлтийг-нэгтгэх"></a><a href="#өөрчлөлтийг-нэгтгэх" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Өөрчлөлтийг нэгтгэх</h2>
 <ul>
-<li><p><em>Native layer</em>: React Native Xcode projects all now have Apple TV build targets, with names ending in the string '-tvOS'.</p></li>
-<li><p><em>react-native init</em>: New React Native projects created with <code>react-native init</code> will have Apple TV target automatically created in their XCode projects.</p></li>
-<li><p><em>JavaScript layer</em>: Support for Apple TV has been added to <code>Platform.ios.js</code>. You can check whether code is running on AppleTV by doing</p></li>
+<li><p><em>Native layer</em>: React Native Xcode төслүүд нь одоо бүгд '-tvOS' гэсэн стрингээр төгссөн Apple TV файл ажиллуулдаг болсон.</p></li>
+<li><p><em>react-native init</em>: <code>react-native init</code>-аар хийгдсэн React Native шинэ төслүүд автоматаар XCode төсөл дотроо Apple TV файлтай байна.</p></li>
+<li><p><em>JavaScript layer</em>: <code>Platform.ios.js</code> дээр Apple TV дэмждэг болсон. Та AppleTV дээр код ажиллаж байгаа эсэхийг доорх маягаар шалгана:</p></li>
 </ul>
 <pre><code class="hljs css language-javascript"><span class="token keyword">var</span> Platform <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'Platform'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> running_on_tv <span class="token operator">=</span> Platform<span class="token punctuation">.</span>isTV<span class="token punctuation">;</span>
@@ -136,9 +136,9 @@
 <span class="token keyword">var</span> running_on_apple_tv <span class="token operator">=</span> Platform<span class="token punctuation">.</span>isTVOS<span class="token punctuation">;</span>
 </code></pre>
 <p><block class="android" /></p>
-<h2><a class="anchor" aria-hidden="true" id="build-changes-1"></a><a href="#build-changes-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Build changes</h2>
+<h2><a class="anchor" aria-hidden="true" id="өөрчлөлтийг-нэгтгэх-1"></a><a href="#өөрчлөлтийг-нэгтгэх-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Өөрчлөлтийг нэгтгэх</h2>
 <ul>
-<li><em>Native layer</em>: To run React Native project on Android TV make sure to make the following changes to <code>AndroidManifest.xml</code></li>
+<li><em>Native layer</em>: Android TV дээр React Native төслийг ажиллуулахын тулд <code>AndroidManifest.xml</code> дээр доорх өөрчлөлтийг хийнэ үү.</li>
 </ul>
 <pre><code class="hljs css language-xml">  <span class="hljs-comment">&lt;!-- Add custom banner image to display as Android TV launcher icon --&gt;</span>
  <span class="hljs-tag">&lt;<span class="hljs-name">application</span>
@@ -155,40 +155,38 @@
   <span class="hljs-tag">&lt;/<span class="hljs-name">application</span>&gt;</span>
 </code></pre>
 <ul>
-<li><em>JavaScript layer</em>: Support for Android TV has been added to <code>Platform.android.js</code>. You can check whether code is running on Android TV by doing</li>
+<li><em>JavaScript layer</em>: <code>Platform.android.js</code> нь Android TV дэмждэг болсон. Код нь Android TV дээр ажиллаж байгаа эсэхийг шалгахын тулд:</li>
 </ul>
 <pre><code class="hljs css language-js"><span class="token keyword">var</span> Platform <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'Platform'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword">var</span> running_on_android_tv <span class="token operator">=</span> Platform<span class="token punctuation">.</span>isTV<span class="token punctuation">;</span>
 </code></pre>
 <p><block class="ios android" /></p>
-<h2><a class="anchor" aria-hidden="true" id="code-changes"></a><a href="#code-changes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Code changes</h2>
+<h2><a class="anchor" aria-hidden="true" id="код-өөрчлөлт"></a><a href="#код-өөрчлөлт" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Код өөрчлөлт</h2>
 <p><block class="ios" /></p>
 <ul>
-<li><p><em>General support for tvOS</em>: Apple TV specific changes in native code are all wrapped by the TARGET_OS_TV define. These include changes to suppress APIs that are not supported on tvOS (e.g. web views, sliders, switches, status bar, etc.), and changes to support user input from the TV remote or keyboard.</p></li>
-<li><p><em>Common codebase</em>: Since tvOS and iOS share most Objective-C and JavaScript code in common, most documentation for iOS applies equally to tvOS.</p></li>
-<li><p><em>Access to touchable controls</em>: When running on Apple TV, the native view class is <code>RCTTVView</code>, which has additional methods to make use of the tvOS focus engine. The <code>Touchable</code> mixin has code added to detect focus changes and use existing methods to style the components properly and initiate the proper actions when the view is selected using the TV remote, so <code>TouchableWithoutFeedback</code>, <code>TouchableHighlight</code> and <code>TouchableOpacity</code> will &quot;just work&quot;. In particular:</p>
-<ul>
-<li><code>onFocus</code> will be executed when the touchable view goes into focus</li>
-<li><code>onBlur</code> will be executed when the touchable view goes out of focus</li>
-<li><code>onPress</code> will be executed when the touchable view is actually selected by pressing the &quot;select&quot; button on the TV remote.</li>
-</ul></li>
+<li><p><em>General support for tvOS</em>:Apple TV-ын натив код дахь тодорхой өөрчлөлтүүд нь TARGET_OS_TV-т байгаа. Үүнд tvOS дэмждэггүй API-уудыг хязгаарласан өөрчлөлтүүд (вэб харагдац, слайдерууд, switches, статус цонх г.м) болон TV удирдлага, гар товчлуур дээрээс оруулсан хэрэглэгчийн мэдээлэл дэх өөрчлөлтүүд багтана.</p></li>
+<li><p><em>Common codebase</em>: tvOS, iOS-уудын Objective-C болон JavaScript ихэнх код адилхан байдаг тул iOS-ын докууд tvOS-тай адилхан байна.</p></li>
+<li><p><em>Access to touchable controls</em>: Apple TV дээр натив харагдацын класс нь <code>RCTTVView</code> байна. Энэ нь tvOS-ын фокус төхөөрөмжийг ашиглах нэмэлт аргачлалтай. <code>Touchable</code>-т фокусын өөрчлөлтийг таних нэмэлт кодтой ба компонентуудын хэв маягыг зөв гаргах бэлэн аргачлалтай. TV удирдлага ашиглан нэг харагдац сонгоход зохих үйлдлийг эхлүүлдэг. Тэгэхээр <code>TouchableWithoutFeedback</code>, <code>TouchableHighlight</code> болон <code>TouchableOpacity</code> нь зүгээр ажиллана. Нарийвчилбал:</p></li>
 </ul>
-<p><block class="android" /></p>
 <ul>
-<li><p><em>Access to touchable controls</em>: When running on Android TV the Android framework will automatically apply a directional navigation scheme based on relative position of focusable elements in your views. The <code>Touchable</code> mixin has code added to detect focus changes and use existing methods to style the components properly and initiate the proper actions when the view is selected using the TV remote, so <code>TouchableWithoutFeedback</code>, <code>TouchableHighlight</code>, <code>TouchableOpacity</code> and <code>TouchableNativeFeedback</code> will &quot;just work&quot;. In particular:</p>
+<li><p>Дэлгэцэнд хүрэх хөдөлгөөнтэй харагдацад фокуслах бол <code>onFocus</code> ашиглана</p></li>
+<li><p>Дэлгэцэнд хүрэх хөдөлгөөнтэй харагдацад фокусгүй болвол <code>onBlur</code> ашиглана</p></li>
+<li><p>TV удирдлага дээр &quot;сонгох&quot; товчийг даран дэлгэцэнд хүрэх хөдөлгөөн бүхий харагдац сонгохдоо <code>onPress</code>-ыг ашиглана
+<block class="android" /></p></li>
+<li><p><em>Access to touchable controls</em>: Android TV дээр ажиллах үед Android framework нь автоматаар таны харагдац дээр фокус хийх элементүүдийн байрлалыг харгалзан навигаци хийх чиглэлийг тодорхойлдог. <code>Touchable</code> mixin нь фокус өөрчлөлтийг таних, компонентын хэв маягийг зөв гаргах, TV удирдлага ашиглан аливаа харагдацыг сонгох үед зохих үйлдлийг хийнэ. Тэгэхээр <code>TouchableWithoutFeedback</code>, <code>TouchableHighlight</code>, <code>TouchableOpacity</code> болон <code>TouchableNativeFeedback</code> нь зүгээр ажиллана. Нарийвчилбал:</p>
 <ul>
-<li><code>onFocus</code> will be executed when the touchable view goes into focus</li>
-<li><code>onBlur</code> will be executed when the touchable view goes out of focus</li>
-<li><code>onPress</code> will be executed when the touchable view is actually selected by pressing the &quot;select&quot; button on the TV remote.</li>
+<li>Дэлгэцэнд хүрэх хөдөлгөөнтэй харагдацад фокуслах бол <code>onFocus</code> ашиглана</li>
+<li>Дэлгэцэнд хүрэх хөдөлгөөнтэй харагдацад фокусгүй болбол <code>onBlur</code> ашиглана</li>
+<li>TV удирдлага дээр &quot;сонгох&quot; товчийг даран дэлгэцэнд хүрэх хөдөлгөөн бүхий харагдац сонгохдоо <code>onPress</code>-ыг ашиглана</li>
 </ul></li>
 </ul>
 <p><block class="ios" /></p>
 <ul>
-<li><em>TV remote/keyboard input</em>: A new native class, <code>RCTTVRemoteHandler</code>, sets up gesture recognizers for TV remote events. When TV remote events occur, this class fires notifications that are picked up by <code>RCTTVNavigationEventEmitter</code> (a subclass of <code>RCTEventEmitter</code>), that fires a JS event. This event will be picked up by instances of the <code>TVEventHandler</code> JavaScript object. Application code that needs to implement custom handling of TV remote events can create an instance of <code>TVEventHandler</code> and listen for these events, as in the following code:</li>
+<li><em>TV remote/keyboard input</em>: <code>RCTTVRemoteHandler</code> гэсэн шинэ натив класс нь TV удирдлагын үйлдэл танигчийг тохируулдаг. TV удирдлагад үйлдэл хийгдэх үед энэхүү класс нь <code>RCTTVNavigationEventEmitter</code>-ын хүлээн авсан сонордуулгыг харуулна (<code>RCTEventEmitter</code>-ын дэд класс). Энэ нь JS эвентийг үүсгэнэ. Энэхүү эвентийг <code>TVEventHandler</code> JavaScript object хүлээн авна. TV удирдлагын үйлдлийг зохицуулах аппликейшны код нь <code>TVEventHandler</code>-ын инстансийг үүсгэх ба доорх кодны дагуу үйлдлийг хүлээн авдаг. TV удирдлагын үйлдлийг зохицуулах аппликейшны код нь <code>TVEventHandler</code>-ын инстансийг үүсгэх ба доорх кодны дагуу үйлдлийг хүлээн авдаг:</li>
 </ul>
 <p><block class="android"></p>
 <ul>
-<li><em>TV remote/keyboard input</em>: A new native class, <code>ReactAndroidTVRootViewHelper</code>, sets up key events handlers for TV remote events. When TV remote events occur, this class fires a JS event. This event will be picked up by instances of the <code>TVEventHandler</code> JavaScript object. Application code that needs to implement custom handling of TV remote events can create an instance of <code>TVEventHandler</code> and listen for these events, as in the following code:</li>
+<li><em>TV remote/keyboard input</em>: <code>ReactAndroidTVRootViewHelper</code> гэх шинэ натив класс нь TV удирдлагын үйлдлийг зохицуулагчийг тохируулдаг. TV удирдлагад шинэ үйлдэл хийгдэх үед уг класс нь JS event үүсгэдэг. Энэхүү эвентийг <code>TVEventHandler</code> JavaScript объектын инстанс хүлээн авна. TV удирдлагын үйлдлийг зохицуулах аппликейшны код нь <code>TVEventHandler</code>-ын инстансийг үүсгэх ба доорх кодны дагуу үйлдлийг хүлээн авдаг:</li>
 </ul>
 <p><block class="ios android"></p>
 <pre><code class="hljs css language-javascript"><span class="token keyword">var</span> TVEventHandler <span class="token operator">=</span> <span class="token function">require</span><span class="token punctuation">(</span><span class="token string">'TVEventHandler'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -230,27 +228,32 @@
 </code></pre>
 <p><block class="ios" /></p>
 <ul>
-<li><p><em>Dev Menu support</em>: On the simulator, cmd-D will bring up the developer menu, just like on iOS. To bring it up on a real Apple TV device, make a long press on the play/pause button on the remote. (Please do not shake the Apple TV device, that will not work :) )</p></li>
-<li><p><em>TV remote animations</em>: <code>RCTTVView</code> native code implements Apple-recommended parallax animations to help guide the eye as the user navigates through views. The animations can be disabled or adjusted with new optional view properties.</p></li>
-<li><p><em>Back navigation with the TV remote menu button</em>: The <code>BackHandler</code> component, originally written to support the Android back button, now also supports back navigation on the Apple TV using the menu button on the TV remote.</p></li>
-<li><p><em>TabBarIOS behavior</em>: The <code>TabBarIOS</code> component wraps the native <code>UITabBar</code> API, which works differently on Apple TV. To avoid jittery rerendering of the tab bar in tvOS (see <a href="https://github.com/facebook/react-native/issues/15081">this issue</a>), the selected tab bar item can only be set from Javascript on initial render, and is controlled after that by the user through native code.</p></li>
+<li><em>Dev Menu support</em>: Симулятор дээр cmd-D нь iOS дээрх шиг хөгжүүлэгчийн цэсийг гаргаж ирнэ. Жинхэнэ Apple TV төхөөрөмжийг гаргахын тулд удирдлага дээр тоглуулах/зогсоох товчийг удаан дарах хэрэгтэй. (Apple TV төхөөрөмжийг сэгсрээд хэрэггүй. Энэ нь ямар ч үр дүнгүй)</li>
+</ul>
+<ul>
+<li><p><em>TV remote animations</em>: <code>RCTTVView</code> натив код нь хэрэглэгч өөр өөр харагдацыг гаргах гүйлгэх үед нүдийг чиглүүлэх Apple-аас санал болгодог parallax анимейшныг ажиллуулдаг. Анимейшныг идэвхгүй болгох эсвэл өөрчлөх боломжтой.</p></li>
+<li><p><em>Back navigation with the TV remote menu button</em>: <code>BackHandler</code> компонент нь Android-ын буцах товчийг дэмжих зорилготой байсан бол одоо TV удирдлагын цэсний товчийг ашиглан Apple TV  дээр навигаци хийх боломжтой болсон.</p></li>
+</ul>
+<ul>
+<li><em>TabBarIOS behavior</em>: <code>TabBarIOS</code> компонент нь натив <code>UITabBar</code> API-ыг ажиллуулдаг ба энэ Apple TV дээр арай өөр байдаг. tvOS дээр таб-ыг дахин рендэр хийхэд төвөг гарахаас сэргийлэхийн тулд (<a href="https://github.com/facebook/react-native/issues/15081">асуудал</a> гэснийг уншина уу) сонгосон таб дээр зүйл нь анхны рендэр хийх Javascript-ээр тодорхойлогддог бөгөөд хэрэглэгч натив код ашигласны дараа удирддаг болгож болно.</li>
 </ul>
 <p><block class="android" /></p>
 <ul>
-<li><em>Dev Menu support</em>: On the simulator, cmd-M will bring up the developer menu, just like on Android. To bring it up on a real Android TV device, press the menu button or long press the fast-forward button on the remote. (Please do not shake the Android TV device, that will not work :) )</li>
+<li><em>Dev Menu support</em>: Симулятор дээр cmd-M  нь Android дээрх шиг хөгжүүлэгчийн цэсийг гаргана. Жинхэнэ Android TV төхөөрөмжийг гаргаж ирэхийн тулд удирдлага дээрх ухраах товчийг удаан дарна. (Apple TV төхөөрөмжийг сэгсрээд хэрэггүй. Энэ нь ямар ч үр дүнгүй)</li>
 </ul>
 <p><block class="ios" /></p>
 <ul>
 <li><p><em>Known issues</em>:</p>
 <ul>
-<li><a href="https://github.com/facebook/react-native/issues/12793">ListView scrolling</a>. The issue can be easily worked around by setting <code>removeClippedSubviews</code> to false in ListView and similar components. For more discussion of this issue, see <a href="https://github.com/facebook/react-native/pull/12944">this PR</a>.</li>
+<li><a href="https://github.com/facebook/react-native/issues/12793">ListView scrolling</a>. ListView болон ижил төстэй компонент доторх <code>removeClippedSubviews</code>-ыг false болгож өөрчилснөөр энэ асуудлыг шийдэх боломжтой. Энэ тухай илүү дэлгэрэнгүй уншихыг хүсвэл<br>
+<a href="https://github.com/facebook/react-native/pull/12944">PR</a> гэснийг харна уу.</li>
 </ul></li>
 </ul>
 <p><block class="android" /></p>
 <ul>
 <li><p><em>Known issues</em>:</p>
 <ul>
-<li><code>InputText</code> components do not work for now (i.e. they cannot receive focus).</li>
+<li><code>InputText</code> компонент нь одоогоор ажиллахгүй байгаа (фокус хүлээн авахгүй).</li>
 </ul></li>
 </ul>
 <script>
