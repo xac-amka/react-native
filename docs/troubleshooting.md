@@ -1,54 +1,53 @@
 ---
 id: troubleshooting
-title: Troubleshooting
+title: Алдаа олох
 ---
 
-These are some common issues you may run into while setting up React Native. If you encounter something that is not listed here, try [searching for the issue in GitHub](https://github.com/facebook/react-native/issues/).
+React Native-ын тохиргоог хийх үед түгээмэл тохиолддог асуудлууд байдаг. Хэрэв танд доорх жагсаалтанд багтаагүй ямар нэг асуудал тохиолдвол [GitHub дээр тухайн асуудлаа хайгаад үзээрэй](https://github.com/facebook/react-native/issues/).
 
-### Port already in use
+### Портыг аль хэдийн ашиглаж байна
 
-The React Native packager runs on port 8081. If another process is already using that port, you can either terminate that process, or change the port that the packager uses.
+React Native нь 8081 порт дээр ажилладаг. Хэрэв өөр нэг нь уг портыг ашиглаж байвал та зогсоох эсвэл портоо солих арга хэмжээ авч болно. 
 
-#### Terminating a process on port 8081
+#### Порт 8081-г ашиглаж байгааг болиулах 
 
-Run the following command to find the id for the process that is listening on port 8081:
+Порт 8081-г ашиглаж байгаа үйлдлийн id-ыг олохын тулд доорх командыг өгнө:
 
 ```
 $ sudo lsof -i :8081
 ```
-
-Then run the following to terminate the process:
+Тэгээд  доорхыг ашиглан уг процессыг зогсооно:
 
 ```
 $ kill -9 <PID>
 ```
 
-On Windows you can find the process using port 8081 using [Resource Monitor](https://stackoverflow.com/questions/48198/how-can-you-find-out-which-process-is-listening-on-a-port-on-windows) and stop it using Task Manager.
+Windows дээр та [Resource Monitor](https://stackoverflow.com/questions/48198/how-can-you-find-out-which-process-is-listening-on-a-port-on-windows) ашиглан порт 8081 дээр үйлдлийг олох боломжтой ба Task Manager ашиглан зогсоож болно. 
 
-#### Using a port other than 8081
+#### 8081-ээс өөр порт ашиглах
 
-You can configure the packager to use a port other than 8081 by using the `port` parameter:
+Та 8081-ээс өөр порт ашиглахдаа `port` параметр ашиглана:
 
 ```
 $ react-native start --port=8088
 ```
 
-You will also need to update your applications to load the JavaScript bundle from the new port. If running on device from Xcode, you can do this by updating occurrences of `8081` to your chosen port in the `node_modules/react-native/React/React.xcodeproj/project.pbxproj` file.
+Шинээр сонгосон портноосоо Javascript багцаа ачаалахын тулд аппликейшнээ шинэчлэх шаардлагатай. Хэрвээ та Xcode-оос төхөөрөмж дээр ажиллуулж байгаа бол `node_modules/react-native/React/React.xcodeproj/project.pbxproj`  файл доторх `8081` гэснийг сонгосон портныхоороо болгож өөрчлөх шаардлагатай болно. 
 
-### NPM locking error
+### NPM түгжих алдаа
 
-If you encounter an error such as `npm WARN locking Error: EACCES` while using the React Native CLI, try running the following:
+Хэрэв React Native CLI ашиглаж байх үед  `npm WARN locking Error: EACCES` гэх мэт алдаа гарвал доорхыг ажиллуулаад үзээрэй:
 
 ```
 sudo chown -R $USER ~/.npm
 sudo chown -R $USER /usr/local/lib/node_modules
 ```
 
-### Missing libraries for React
+### React-ын сан олдохгүй байх
 
-If you added React Native manually to your project, make sure you have included all the relevant dependencies that you are using, like `RCTText.xcodeproj`, `RCTImage.xcodeproj`. Next, the binaries built by these dependencies have to be linked to your app binary. Use the `Linked Frameworks and Binaries` section in the Xcode project settings. More detailed steps are here: [Linking Libraries](linking-libraries-ios.md#content).
+Та төсөлдөө React Native-ыг дараа нь нэмсэн бол `RCTText.xcodeproj`, `RCTImage.xcodeproj` гэх мэт өөрийн ашиглаж буй холбогдох хамаарлуудыг нэмсэн эсэхээ шалгаарай. Эдгээрээс үүссэн binary-ууд нь таны аппын binary хэсэгтэй холбогдсон байх шаардлагатай. Xcode тохиргоо хэсэг дээрх `Linked Frameworks and Binaries` хэсгийг ашиглана уу. Нарийвчилсан зааврыг харах бол: [Сан холбох](linking-libraries-ios.md#content).
 
-If you are using CocoaPods, verify that you have added React along with the subspecs to the `Podfile`. For example, if you were using the `<Text />`, `<Image />` and `fetch()` APIs, you would need to add these in your `Podfile`:
+Хэрэв та  CocoaPods ашиглаж байгаа бол  React-ыг дэд -тай хамт `Podfile`-д нэмсэн эсэхээ нягтлаарай. Жишээ нь, та `<Text />`, `<Image />` болон `fetch()` API ашиглаж байгаа бол  `Podfile`.` дээрээ эдгээрийг нэмээрэй:
 
 ```
 pod 'React', :path => '../node_modules/react-native', :subspecs => [
@@ -59,51 +58,52 @@ pod 'React', :path => '../node_modules/react-native', :subspecs => [
 ]
 ```
 
-Next, make sure you have run `pod install` and that a `Pods/` directory has been created in your project with React installed. CocoaPods will instruct you to use the generated `.xcworkspace` file henceforth to be able to use these installed dependencies.
+Дараа нь React суулгасан төсөлдөө `pod install`-ыг өгч, `Pods/` үүсгэсэн эсэхээ шалгаарай. CocoaPods нь `.xcworkspace`  файлыг хэрхэн ашиглах зааврыг өгөх ба суулгасан хамаарлыг ашиглах боломжтой болох юм. 
 
-#### React Native does not compile when being used as a CocoaPod
+####  CocoaPod ашиглаж байгаа тохиолдолд React Native хөрвүүлдэггүй 
 
-There is a CocoaPods plugin called [cocoapods-fix-react-native](https://github.com/orta/cocoapods-fix-react-native) which handles any potential post-fixing of the source code due to differences when using a dependency manager.
+[cocoapods-fix-react-native](https://github.com/orta/cocoapods-fix-react-native) нэртэй CocoaPods plugin байдаг ба энэ нь хамаарлыг зохицуулахаас үүдэлтэй харилцан ялгаатай ажиллагааны улмаас эх кодыг дараа нь засахад тусалдаг.  
 
-#### Argument list too long: recursive header expansion failed
+#### Аргумент жагсаалт хэт урт байна: толгойн өргөтгөл дахин хийх нь амжилтгүй боллоо
 
-In the project's build settings, `User Search Header Paths` and `Header Search Paths` are two configs that specify where Xcode should look for `#import` header files specified in the code. For Pods, CocoaPods uses a default array of specific folders to look in. Verify that this particular config is not overwritten, and that none of the folders configured are too large. If one of the folders is a large folder, Xcode will attempt to recursively search the entire directory and throw above error at some point.
+Төслийн Build Settings дотор `User Search Header Paths`  болон `Header Search Paths` нар нь Xcode хаанаас тухайн кодод дурдсан толгой файлуудыг `#import` хийх вэ гэдгийг зааж өгдөг. Pods-ын хувьд CocoaPods нь хайх фолдеруудыг заасан цаанаас байдаг массивыг ашигладаг. Энэхүү тохиргоо нь алдагдаагүй эсэхийг шалгаарай. Тохиргоо хийсэн фолдеруудын аль нь ч хэмжээний хувьд хэт том биш эсэхийг нягтлаарай. Хэрэв нэг фолдер нь хэт том байх юм бол  Xcode нь бүхэлд нь дахин хайлт хийх гэж оролддог ба дээрх алдааг өгөөд байдаг. 
 
-To revert the `User Search Header Paths` and `Header Search Paths` build settings to their defaults set by CocoaPods - select the entry in the Build Settings panel, and hit delete. It will remove the custom override and return to the CocoaPod defaults.
+`User Search Header Paths`, `Header Search Paths` хоёрын тохиргоог CocoaPods-ын тохируулсан анхны хэлбэрт шилжүүлэхийн тулд Build Settings дотор оруулсан зүйлийг сонгоод устгах гэснийг дарна. Ингэснээр оруулсан өөрчлөлтийг арилгах ба CocoaPod анхны хэлбэртээ шилжинэ.
 
 ### No transports available
 
-React Native implements a polyfill for WebSockets. These [polyfills](https://github.com/facebook/react-native/blob/master/Libraries/Core/InitializeCore.js) are initialized as part of the react-native module that you include in your application through `import React from 'react'`. If you load another module that requires WebSockets, such as [Firebase](https://github.com/facebook/react-native/issues/3645), be sure to load/require it after react-native:
+React Native нь WebSockets-т polyfill ашигладаг. Эдгээр [polyfill](https://github.com/facebook/react-native/blob/master/Libraries/Core/InitializeCore.js) нь react-native модулийн нэг хэсэг болж эхэлдэг ба `import React from 'react'` ашиглан аппликейшндаа оруулдаг. Хэрэв [Firebase](https://github.com/facebook/react-native/issues/3645) гэх мэт WebSockets шаардах өөр модуль та ачаалах бол react-native ард үүнийг ачаалах/шаардах хэрэгтэй гэдгийг санаарай:
 
 ```
 import React from 'react';
 import Firebase from 'firebase';
 ```
 
-## Shell Command Unresponsive Exception
+## Shell команд хариу өгөхгүй байх тохиолдол
 
-If you encounter a ShellCommandUnresponsiveException exception such as:
+Хэрэв та энэ мэт ShellCommandUnresponsiveException-тэй таарвал:
 
 ```
 Execution failed for task ':app:installDebug'.
   com.android.builder.testing.api.DeviceException: com.android.ddmlib.ShellCommandUnresponsiveException
 ```
 
-Try [downgrading your Gradle version to 1.2.3](https://github.com/facebook/react-native/issues/2720) in `android/build.gradle`.
+`android/build.gradle` дотор [Gradle хувилбарыг 1.2.3 болгож бууруулаад](https://github.com/facebook/react-native/issues/2720) үзээрэй.
 
 ## react-native init hangs
 
-If you run into issues where running `react-native init` hangs in your system, try running it again in verbose mode and refering to [#2797](https://github.com/facebook/react-native/issues/2797) for common causes:
+Хэрэв та системдээ `react-native init` ажиллуулах үед алдаа гарвал [#2797](https://github.com/facebook/react-native/issues/2797) гэснийг харан verbose mode дээр дахин ажиллуулах гээд үзээрэй:
 
 ```
 react-native init --verbose
 ```
 
-## Unable to start react-native package manager (on Linux)
+## React-native package manager-ыг ажиллуулж эхлэх боломжгүй(Linux дээр)
 
-### Case 1: Error "code":"ENOSPC","errno":"ENOSPC"
+### Кэйс 1: Алдаа "код":"ENOSPC","errno":"ENOSPC"
 
-Issue caused by the number of directories [inotify](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers) (used by watchman on Linux) can monitor. To solve it, just run this command in your terminal window
+Хэд хэдэн директороос шалтгаалан үүсгэн алдааг[inotify](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers) (Linux дээр watchman  ашигладаг) хянах боломжтой. Үүнийг шийдэхийн тулд терминал дээрээ уг командыг өгнө.
+
 
 ```
 echo fs.inotify.max_user_watches=582222 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
