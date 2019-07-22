@@ -1,23 +1,24 @@
 ---
 id: native-modules-ios
-title: Native Modules
+title: Натив модулиуд
 ---
 
-Sometimes an app needs to access a platform API and React Native doesn't have a corresponding module yet. Maybe you want to reuse some existing Objective-C, Swift or C++ code without having to reimplement it in JavaScript, or write some high performance, multi-threaded code such as for image processing, a database, or any number of advanced extensions.
+Заримдаа апп нь React Native-ын зохих хариу өгөх модульгүйгээр платформ API-д хандах хэрэгтэй болдог. Магадгүй Javascript-руу дахин өөрчлөхгүйгээр бэлэн байгаа Objective-C, Swift эсвэл C++ код ашиглах эсвэл зураг процесс хийх, өгөгдлийн сан эсвэл ахисан түвшний өргөтгөл гэх мэтэд зориулсан ажиллагааг сайжруулах, олон процесст зориулсан код бичих хэрэг гарч болно.
 
-We designed React Native such that it is possible for you to write real native code and have access to the full power of the platform. This is a more advanced feature and we don't expect it to be part of the usual development process, however it is essential that it exists. If React Native doesn't support a native feature that you need, you should be able to build it yourself.
+Бид React Native-ыг хүн өөрөө натив код бичих боломжтой байхаар загварчилсан ба платформыг бүрэн ашиглах боломжийг та бүхэнд олгохыг хүссэн. Энэ нь илүү ахисан түвшний функц бөгөөд бид энгийн хөгжүүлэлтийн явцад төдийлөн ашиглагдахгүй байх гэж бодож байна. Гэхдээ байх нь чухал. Хэрэв React Native-т танд хэрэгтэй натив функц байхгүй бол та өөрөө хийх боломжтой юм. 
 
-This is a more advanced guide that shows how to build a native module. It assumes the reader knows Objective-C or Swift and core libraries (Foundation, UIKit).
+Натив модуль хэрхэн үүсгэх тухай ахисан түвшний заавар бий.  Objective-C эсвэл Swift болон гол сангуудын талаар (Foundation, UIKit) мэдлэгтэй хүмүүст зориулсан заавар байгаа. 
 
-## Native Module Setup
 
-Native modules are usually distributed as npm packages, except that for them to be native modules they will contain an Xcode library project. To get the basic scaffolding make sure to read [Native Modules Setup](native-modules-setup) guide first.
+## Натив модулийн тохиргоо
 
-## iOS Calendar Module Example
+Натив модулиуд нь ихэвчлэн npm пакэж хэлбэрээр байдаг. Энгийн javascript файлууд, зүйлсээс бусдаар бол тэд нь Android сангийн төслүүд агуулсан байна. Энэхүү төсөл нь NPM-ын талаас бол бусад медиа төрлийн зүйл байх юм. Энэ нь ямар нэг онцгой зүйлгүй гэсэн үг. Код автоматаар үүсгэх тухай үндсэн ойлголттой болохыг хүсвэл [Натив Модулийн Тохиргоо](native-modules-setup) гэснийг уншина уу.
 
-This guide will use the [iOS Calendar API](https://developer.apple.com/library/mac/documentation/DataManagement/Conceptual/EventKitProgGuide/Introduction/Introduction.html) example. Let's say we would like to be able to access the iOS calendar from JavaScript.
+## iOS Календар Модулийн жишээ 
 
-A native module is just an Objective-C class that implements the `RCTBridgeModule` protocol. If you are wondering, RCT is an abbreviation of ReaCT.
+Энэхүү зааварт [iOS Calendar API](https://developer.apple.com/library/mac/documentation/DataManagement/Conceptual/EventKitProgGuide/Introduction/Introduction.html)-ыг жишээ болгон ашигласан. Javascript-ээр iOS хуанли гаргадаг болгох гээд үзье.
+
+Натив модуль гэдэг нь `RCTBridgeModule` протокол бүхий нэг Objective-C класс юм. RCT нь ReaCT-ын товчлол юм шүү.  
 
 ```objectivec
 // CalendarManager.h
@@ -26,8 +27,8 @@ A native module is just an Objective-C class that implements the `RCTBridgeModul
 @interface CalendarManager : NSObject <RCTBridgeModule>
 @end
 ```
+`RCTBridgeModule`  протоколоос гадна классдаа `RCT_EXPORT_MODULE() макрог оруулах ёстой. Javascript кодоор хандах боломжтой модулийн нэрийг тодорхойлох сонголт бүхий аргументыг гаргадаг (Энэ талаар дараа дэлгэрэнгүй тайлбарлах болно). Хэрэв та нэр тодорхойлж өгөхгүй бол Javascript модулийн нэр нь Objective-C классын нэртэй адилхан байна. Хэрэв Objective-C классын нэр нь RCT гэж эхэлж байвал JavaScript модуль нь RCT гэсэн угтваргүй байна.
 
-In addition to implementing the `RCTBridgeModule` protocol, your class must also include the `RCT_EXPORT_MODULE()` macro. This takes an optional argument that specifies the name that the module will be accessible as in your JavaScript code (more on this later). If you do not specify a name, the JavaScript module name will match the Objective-C class name. If the Objective-C class name begins with RCT, the JavaScript module name will exclude the RCT prefix.
 
 ```objectivec
 // CalendarManager.m
@@ -44,7 +45,7 @@ RCT_EXPORT_MODULE();
 @end
 ```
 
-React Native will not expose any methods of `CalendarManager` to JavaScript unless explicitly told to. This is done using the `RCT_EXPORT_METHOD()` macro:
+Зориуд заагаагүй л бол React Native нь `CalendarManager`-ын ямар ч методыг Javascript руу хуулахгүй. Үүний тулд `RCT_EXPORT_METHOD()` макро ашиглана:
 
 ```objectivec
 #import "CalendarManager.h"
@@ -62,7 +63,7 @@ RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
 @end
 ```
 
-Now, from your JavaScript file you can call the method like this:
+Одоо Javascript файлаасаа та методоо дуудаж болно:
 
 ```javascript
 import {NativeModules} from 'react-native';
@@ -70,15 +71,17 @@ var CalendarManager = NativeModules.CalendarManager;
 CalendarManager.addEvent('Birthday Party', '4 Privet Drive, Surrey');
 ```
 
-> **NOTE**: JavaScript method names
->
-> The name of the method exported to JavaScript is the native method's name up to the first colon. React Native also defines a macro called `RCT_REMAP_METHOD()` to specify the JavaScript method's name. This is useful when multiple native methods are the same up to the first colon and would have conflicting JavaScript names.
+> **ТЭМДЭГЛЭЛ**: JavaScript метод нэрс
 
-The CalendarManager module is instantiated on the Objective-C side using a [CalendarManager new] call. The return type of bridge methods is always `void`. React Native bridge is asynchronous, so the only way to pass a result to JavaScript is by using callbacks or emitting events (see below).
+> Javascript руу оруулсан методын нр нь анхны колоны натив методын нэр байна. React Native-т`RCT_REMAP_METHOD()` гэх макро байх ба энэ н Javascript методын нэрийг тодорхойлж өгөх зорилготой юм. Эхний колонд олон тооны натив метод байгаа үед энэ нь тустай бөгөөд Javascript-ын нэрүүд нь холилдохоос сэргийлнэ.  
 
-## Argument Types
 
-`RCT_EXPORT_METHOD` supports all standard JSON object types, such as:
+CalendarManager модуль нь  [CalendarManager new] ашиглан Objective-C  дээр үүсдэг. Bridge method-ын буцах утга нь үргэлж `void` байна. React Native bridge нь асинхрон учраас Javascript руу үр дүнг дамжуулах ганц арга нь буцааж дуудах эсвэл эвент өгөх юм (доорхыг харна уу).
+is asynchronous, so the only way to pass a result to JavaScript is by using callbacks or emitting events (see below).
+
+## Аргументын төрлүүд
+
+`RCT_EXPORT_METHOD` нь бүх стандарт JSON объектын төрлийг дэмждэг.Үүнд:
 
 - string (`NSString`)
 - number (`NSInteger`, `float`, `double`, `CGFloat`, `NSNumber`)
@@ -87,9 +90,9 @@ The CalendarManager module is instantiated on the Objective-C side using a [Cale
 - object (`NSDictionary`) with string keys and values of any type from this list
 - function (`RCTResponseSenderBlock`)
 
-But it also works with any type that is supported by the `RCTConvert` class (see [`RCTConvert`](https://github.com/facebook/react-native/blob/master/React/Base/RCTConvert.h) for details). The `RCTConvert` helper functions all accept a JSON value as input and map it to a native Objective-C type or class.
+Гэхдээ бас `RCTConvert` класс дэмждэг ямар ч төрөлтэй ажилладаг([Дэлгэрэнгүйг `RCTConvert`-ээс уншина уу](https://github.com/facebook/react-native/blob/master/React/Base/RCTConvert.h)).  `RCTConvert` туслах бүх функц нь JSON утгыг хүлээн авч, натив Objective-C  төрөл эсвэл класс гэж мап хийдэг. 
 
-In our `CalendarManager` example, we need to pass the event date to the native method. We can't send JavaScript Date objects over the bridge, so we need to convert the date to a string or number. We could write our native function like this:
+Бидний `CalendarManager` жишээ дээр бид эвентийн огноог натив метод руу дамжуулах хэрэгтэй байгаа. JavaScript огноо заасан объектыг bridge-ээр илгээж чадахгүй учраас бид огноог стринг эсвэл тоонд шилжүүлэх хэрэгтэй. Натив функцийг ингэж бичих боломжтой:
 
 ```objectivec
 RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(nonnull NSNumber *)secondsSinceUnixEpoch)
@@ -98,7 +101,7 @@ RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(
 }
 ```
 
-or like this:
+эсвэл үүн шиг:
 
 ```objectivec
 RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(NSString *)ISO8601DateString)
@@ -106,8 +109,7 @@ RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(
   NSDate *date = [RCTConvert NSDate:ISO8601DateString];
 }
 ```
-
-But by using the automatic type conversion feature, we can skip the manual conversion step completely, and just write:
+Төрлийг автоматаар өөрчилдөг функцийг ашиглах боломжтой бөгөөд доорхыг бичихэд л хангалттай:
 
 ```objectivec
 RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(NSDate *)date)
@@ -116,7 +118,7 @@ RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(
 }
 ```
 
-You would then call this from JavaScript by using either:
+Тэгээд  JavaScript-ээс үүнийг дуудахдаа ингэнэ:
 
 ```javascript
 CalendarManager.addEvent(
@@ -126,7 +128,7 @@ CalendarManager.addEvent(
 ); // passing date as number of milliseconds since Unix epoch
 ```
 
-or
+эсвэл
 
 ```javascript
 CalendarManager.addEvent(
@@ -136,9 +138,10 @@ CalendarManager.addEvent(
 ); // passing date as ISO-8601 string
 ```
 
-And both values would get converted correctly to the native `NSDate`. A bad value, like an `Array`, would generate a helpful "RedBox" error message.
+Утгууд нь хоёулаа `NSDate` нативт зөв шилжинэ. `Array` гэхчлэн буруу утга байвал "Redbox" алдааны мессеж гарч ирнэ.
 
-As `CalendarManager.addEvent` method gets more and more complex, the number of arguments will grow. Some of them might be optional. In this case it's worth considering changing the API a little bit to accept a dictionary of event attributes, like this:
+`CalendarManager.addEvent` метод нь илүү арвин болох тусам аргументын тоо өснө. Зарим нэгийг нь сонгож оруулдаг байж болно. Энэ тохиолдолд API-г бага зэрэг өөрчилж, эвент аттрибутын dictionary-ыг хүлээн авах хэрэгтэй болно:
+
 
 ```objectivec
 #import <React/RCTConvert.h>
@@ -151,7 +154,7 @@ RCT_EXPORT_METHOD(addEvent:(NSString *)name details:(NSDictionary *)details)
 }
 ```
 
-and call it from JavaScript:
+тэгээд JavaScript-ээс дуудна:
 
 ```javascript
 CalendarManager.addEvent('Birthday Party', {
@@ -161,17 +164,17 @@ CalendarManager.addEvent('Birthday Party', {
 });
 ```
 
-> **NOTE**: About array and map
+> **Тэмдэглэл**: Массив болон мапийн тухай
 >
-> Objective-C doesn't provide any guarantees about the types of values in these structures. Your native module might expect an array of strings, but if JavaScript calls your method with an array containing numbers and strings, you'll get an `NSArray` containing a mix of `NSNumber` and `NSString`. For arrays, `RCTConvert` provides some typed collections you can use in your method declaration, such as `NSStringArray`, or `UIColorArray`. For maps, it is the developer's responsibility to check the value types individually by manually calling `RCTConvert` helper methods.
+> Objective-C нь эдгээр бүтцэд ямар төрлийн утга байх вэ гэдэгт баталгаа өгдөггүй. Натив модуль чинь стринг бүхий массив хүлээн авахаар байж болно. Хэрэв Javascript таны методыг дуудахдаа тоо, стринг агуулсан массив гээд дуудвал та `NSNumber` болон `NSString` агуулсан `NSArray` авна. Массивын тухайд `RCTConvert`  нь `NSStringArray`,  `UIColorArray` гэх мэт методоо зарлах үед ашиглаж болох зарим төрлийн коллекцыг өгдөг. Мапийн тухайд гэвэл `RCTConvert` туслах методыг зориуд өөрөө дуудан нэг бүрчлэн утгыг шалгах нь хөгжүүлэгчийн хийх ажил байдаг. 
 
 ## Callbacks
 
-> **WARNING**
+> **АНХААРУУЛГА**
 >
-> This section is more experimental than others because we don't have a solid set of best practices around callbacks yet.
+> Callbacks-тай холбоотой яг баттай туршлага хомс учраас энэ хэсэгтэй байгаа мэдээлэл нь илүүтэй туршилтын чанартай гэж ойлгож болно. 
 
-Native modules also supports a special kind of argument- a callback. In most cases it is used to provide the function call result to JavaScript.
+Натив модулиуд нь мөн callback гэх онцгой төрлийн аргументыг дэмждэг. Ихэнх тохиолдолд үр дүнг Javascript руу дуудахад ашигладаг.
 
 ```objectivec
 RCT_EXPORT_METHOD(findEvents:(RCTResponseSenderBlock)callback)
@@ -181,7 +184,7 @@ RCT_EXPORT_METHOD(findEvents:(RCTResponseSenderBlock)callback)
 }
 ```
 
-`RCTResponseSenderBlock` accepts only one argument - an array of parameters to pass to the JavaScript callback. In this case we use Node's convention to make the first parameter an error object (usually `null` when there is no error) and the rest are the results of the function.
+`RCTResponseSenderBlock` нь ганцхан аргумент хүлээн зөвшөөрдөг.  Энэ нь JavaScript callback-т дамжуулах параметруудын массив юм. Энэ тохиолдолд бид  Node-ын тогтсон ажиллагааг ашиглан эхний параметрийг алдаатай объект болгоно (ихэнхдээ алдаагүй үед `null`  байна). Бусад нь уг функцынхээ үр дүн байх юм. 
 
 ```javascript
 CalendarManager.findEvents((error, events) => {
@@ -192,16 +195,16 @@ CalendarManager.findEvents((error, events) => {
   }
 });
 ```
+Аливаа натив модуь нь callback-аа яг нэг удаа дуудана. Callback-ыг хадгалаад дараа нь дуудаж болдог. Энэхүү үйлдлийг делегат шаарддаг iOS API-уудыг врап хийхэд ашигладаг. Жишээ болгон [`RCTAlertManager`](https://github.com/facebook/react-native/blob/master/React/Modules/RCTAlertManager.m) гэснийг харна уу. Хэрэв callback-ыг хэзээ ч ажиллуулахгүй бол зарим санах ой нь алдагдана. Хэрэв  `onSuccess` болон `onFail` callback-ууд дамжсан бол та аль нэгийг нь л дуудаж ажиллуулах нь зүйтэй. 
 
-A native module should invoke its callback exactly once. It's okay to store the callback and invoke it later. This pattern is often used to wrap iOS APIs that require delegates - see [`RCTAlertManager`](https://github.com/facebook/react-native/blob/master/React/Modules/RCTAlertManager.m) for an example. If the callback is never invoked, some memory is leaked. If both `onSuccess` and `onFail` callbacks are passed, you should only invoke one of them.
-
-If you want to pass error-like objects to JavaScript, use `RCTMakeError` from [`RCTUtils.h`](https://github.com/facebook/react-native/blob/master/React/Base/RCTUtils.h). Right now this just passes an Error-shaped dictionary to JavaScript, but we would like to automatically generate real JavaScript `Error` objects in the future.
+Хэрэв та алдаа юм шиг объектыг  JavaScript руу дамжуулах бол [`RCTUtils.h`](https://github.com/facebook/react-native/blob/master/React/Base/RCTUtils.h)-аас `RCTMakeError`-ыг ашиглаарай.
+Одоогоор энэ нь JavaScript руу алдаа бүхий dictionary-ыг дамжуулж байгаа ч бид үүнийг автоматаар бодит JavaScript `Error` объектыг цаашид дамжуулдаг болгохоор зорьж байгаа. 
 
 ## Promises
 
-Native modules can also fulfill a promise, which can simplify your code, especially when using ES2016's `async/await` syntax. When the last parameters of a bridged native method are an `RCTPromiseResolveBlock` and `RCTPromiseRejectBlock`, its corresponding JS method will return a JS Promise object.
+Натив модуль promise гүйцэтгэдэг. Тиймдээ ч таны кодыг хялбарчилна. Ялангуяа ES2016-ын `async/await` синтакс ашиглаж байгаа үед. Холбоотой натив методын сүүлийн параметрууд нь  `RCTPromiseResolveBlock` , `RCTPromiseRejectBlock` байхад холбогдох JS метод нь JS Promise объект руу буцдаг.
 
-Refactoring the above code to use a promise instead of callbacks looks like this:
+Callback-ын оронд promise ашиглахаар дээрх кодыг өөрчилбөл:
 
 ```objectivec
 RCT_REMAP_METHOD(findEvents,
@@ -218,7 +221,7 @@ RCT_REMAP_METHOD(findEvents,
 }
 ```
 
-The JavaScript counterpart of this method returns a Promise. This means you can use the `await` keyword within an async function to call it and wait for its result:
+Энэхүү методын JavaScript хэсэг нь Promise-т очно.  Энэ нь юу гэсэн үг вэ гэхээр дараалал бүхий функц дотроо та `await` түлхүүр үгийг ашиглан дуудан, үр дүнг нь хүлээж болно гэсэн үг:
 
 ```javascript
 async function updateEvents() {
@@ -236,7 +239,7 @@ updateEvents();
 
 ## Threading
 
-The native module should not have any assumptions about what thread it is being called on. React Native invokes native modules methods on a separate serial GCD queue, but this is an implementation detail and might change. The `- (dispatch_queue_t)methodQueue` method allows the native module to specify which queue its methods should be run on. For example, if it needs to use a main-thread-only iOS API, it should specify this via:
+Натив модуль нь ямар салбар процесс дээр дуудагдаж байгаа тухай ямар нэг ойлголт авах учиргүй. React Native нь натив модулийн методыг тусдаа цурвал GCD дарааллаар дууддаг. Гэхдээ энэ нь ажиллагааны нэг хэсэг бөгөөд өөрчлөгдөх магадлалтай. `- (dispatch_queue_t)methodQueue`  метод нь натив модуль методуудаа ямар дарааллаар ажиллуулах вэ гэдгийг зааж өгөх боломж олгодог. Жишээлбэл, хэрэв зөвхөн thread дээр байх iOS API ашиглах хэрэгтэй бол ингэнэ:
 
 ```objectivec
 - (dispatch_queue_t)methodQueue
@@ -245,7 +248,7 @@ The native module should not have any assumptions about what thread it is being 
 }
 ```
 
-Similarly, if an operation may take a long time to complete, the native module should not block and can specify it's own queue to run operations on. For example, the `RCTAsyncLocalStorage` module creates its own queue so the React queue isn't blocked waiting on potentially slow disk access:
+Үүний нэгэн адил ажиллагаа удаад байвал натив модуль нь блок хийх хэрэггүй бөгөөд ажиллах дарааллаа тодорхойлох учиртай. Жишээ нь `RCTAsyncLocalStorage` модуль нь өөрийн дарааллыг үүсгэдэг тул дискны хандалтыг удаашруулан React-ын дарааллыг блок хийдэггүй:
 
 ```objectivec
 - (dispatch_queue_t)methodQueue
@@ -254,7 +257,8 @@ Similarly, if an operation may take a long time to complete, the native module s
 }
 ```
 
-The specified `methodQueue` will be shared by all of the methods in your module. If _just one_ of your methods is long-running (or needs to be run on a different queue than the others for some reason), you can use `dispatch_async` inside the method to perform that particular method's code on another queue, without affecting the others:
+
+ `methodQueue`-т юу гэж тодорхойлж өгнө тэр нь таны модулийн бүх методод хамаатай. Хэрэв  таны методуудаас _зөвхөн нэг_нь удаа н ажиллаад байвал (эсвэл ямар нэг шалтгаанаар бусдаас өөр дараалал дээр ажиллах хэрэгтэй бол), та метод дотроо `dispatch_async` ашиглан тухайн нэг методын кодыг бусдад нь нөлөөлүүлэхгүйгээр өөр дараалалд ажиллуулж болно:
 
 ```objectivec
 RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSenderBlock)callback)
@@ -268,15 +272,15 @@ RCT_EXPORT_METHOD(doSomethingExpensive:(NSString *)param callback:(RCTResponseSe
 }
 ```
 
-> **NOTE**: Sharing dispatch queues between modules
+> **ТЭМДЭГЛЭЛ**: Модуль хооронд илгээх дарааллыг хуваалцах
 >
-> The `methodQueue` method will be called once when the module is initialized, and then retained by the bridge, so there is no need to retain the queue yourself, unless you wish to make use of it within your module. However, if you wish to share the same queue between multiple modules then you will need to ensure that you retain and return the same queue instance for each of them; merely returning a queue of the same name for each won't work.
+>  Модуль эхлэх үед  `methodQueue` метод дуудагдана. Тэгээд bridge хүлээн авах болохоор модуль дотроо ашиглах гээгүй л бол дарааллыг тогтоох шаардлагагүй. Гэхдээ та олон модулиудыг нэг дараалал байлгахыг хүсвэл тус бүр нь нэг дарааллаар дуудагдаад, буцаж байгаа эсэхийг нягтлах хэрэгтэй. Нэг нэр бүхий дараалалд буцдаг байх нь хангалтгүй юм. 
 
 ## Dependency Injection
 
-The bridge initializes any registered RCTBridgeModules automatically, however you may wish to instantiate your own module instances (so you may inject dependencies, for example).
+Bridge нь бүртгэл бүхий бүх  RCTBridgeModules-ыг автоматаар эхлүүлдэг. Гэхдээ та өөрийн модуль instance-аа ажиллуулахыг хүсэж болно (хамаарал бүхий функц ажиллуулах жишээ нь).
 
-You can do this by creating a class that implements the RCTBridgeDelegate Protocol, initializing an RCTBridge with the delegate as an argument and initialising a RCTRootView with the initialized bridge.
+Та RCTBridgeDelegate Protocol-ыг ажиллуулах класс үүсгэж үүнийг хийнэ. RCTBridge-ыг делегатын хамт аргумент хэлбэрээр эхлүүлэн, эхний bridge-тэй RCTRootView ажиллуулна. 
 
 ```objectivec
 id<RCTBridgeDelegate> moduleInitialiser = [[classThatImplementsRCTBridgeDelegate alloc] init];
@@ -289,9 +293,9 @@ RCTRootView *rootView = [[RCTRootView alloc]
                      initialProperties:nil];
 ```
 
-## Exporting Constants
+## Constant (Тогтмол) экспорт хийх
 
-A native module can export constants that are immediately available to JavaScript at runtime. This is useful for communicating static data that would otherwise require a round-trip through the bridge.
+Натив модуль нь Javascript ажиллах хугацаанд тэр дороо бэлэн байх constant-уудыг экспорт хийдэг. Тогтмол өгөгдөл бүхий мэдээлэл солилцоход энэ нь тустай. 
 
 ```objectivec
 - (NSDictionary *)constantsToExport
@@ -300,17 +304,17 @@ A native module can export constants that are immediately available to JavaScrip
 }
 ```
 
-JavaScript can use this value right away, synchronously:
+JavaScript нь уг утгыг шууд зэрэгцэн ашиглаж чадна:
 
 ```javascript
 console.log(CalendarManager.firstDayOfTheWeek);
 ```
 
-Note that the constants are exported only at initialization time, so if you change `constantsToExport` values at runtime it won't affect the JavaScript environment.
+Constant-ууд нь эхлэх үед л экспорт хийгдэж байгаа гэдгийг санаарай. Ажиллаж эхлэх үед  `constantsToExport` утгыг өөрчилбөл Javascript-ын орчинд нөлөөлөхгүй. 
 
 ### Implementing `+ requiresMainQueueSetup`
 
-If you override `- constantsToExport` then you should also implement `+ requiresMainQueueSetup` to let React Native know if your module needs to be initialized on the main thread. Otherwise you will see a warning that in the future your module may be initialized on a background thread unless you explicitly opt out with `+ requiresMainQueueSetup`:
+Хэрэв та `- constantsToExport` дарж тодорхойлох юм бол та `+ requiresMainQueueSetup`-ыг ашиглан таны модуль гол thread дээр эхэлнэ гэдгийг React Native-т мэдэгдэх хэрэгтэй. Эс бөгөөс анхааруулга гарч ирэх бөгөөд `+ requiresMainQueueSetup` ашиглахгүй бол цаашдаа модуль чинь ар хэсэгт эхлээд байх болно:
 
 ```objectivec
 + (BOOL)requiresMainQueueSetup
@@ -319,13 +323,14 @@ If you override `- constantsToExport` then you should also implement `+ requires
 }
 ```
 
-If your module does not require access to UIKit, then you should respond to `+ requiresMainQueueSetup` with `NO`.
+Хэрэв модуль чинь UIKit хандахыг шаардахгүй бол та  `+ requiresMainQueueSetup`-т `NO` гэсэн хариу өгөх нь зүйтэй.
+
 
 ### Enum Constants
 
-Enums that are defined via `NS_ENUM` cannot be used as method arguments without first extending RCTConvert.
+`NS_ENUM`-ын Enum-уудыг эхлээд RCTConvert-т өргөтгөхгүйгээр метод аргументаар ашиглаж болохгүй. 
 
-In order to export the following `NS_ENUM` definition:
+Дараах `NS_ENUM` тодорхойлолтыг экспорт хийхийн тулд:
 
 ```objectivec
 typedef NS_ENUM(NSInteger, UIStatusBarAnimation) {
@@ -334,8 +339,7 @@ typedef NS_ENUM(NSInteger, UIStatusBarAnimation) {
     UIStatusBarAnimationSlide,
 };
 ```
-
-You must create a class extension of RCTConvert like so:
+Та RCTConvert-ын класс өргөтгөлийг ингэж үүсгэх ёстой:
 
 ```objectivec
 @implementation RCTConvert (StatusBarAnimation)
@@ -345,8 +349,7 @@ You must create a class extension of RCTConvert like so:
                       UIStatusBarAnimationNone, integerValue)
 @end
 ```
-
-You can then define methods and export your enum constants like this:
+Тэгээд та методуудаа тодорхойлж, enum constant-уудаа ингэж экспорт хийнэ:
 
 ```objectivec
 - (NSDictionary *)constantsToExport
@@ -360,11 +363,11 @@ RCT_EXPORT_METHOD(updateStatusBarAnimation:(UIStatusBarAnimation)animation
                                 completion:(RCTResponseSenderBlock)callback)
 ```
 
-Your enum will then be automatically unwrapped using the selector provided (`integerValue` in the above example) before being passed to your exported method.
+Экспортлосон метод руу чинь дамжуулагдахаас өмнө байгаа selector ашиглан enum нь автоматаар unwrap хийгддэг (дээрх жишээ дээр бол `integerValue`).
 
-## Sending Events to JavaScript
+## Эвентийг JavaScript руу илгээх
 
-The native module can signal events to JavaScript without being invoked directly. The preferred way to do this is to subclass `RCTEventEmitter`, implement `supportedEvents` and call `self sendEventWithName`:
+Натив модуль нь шууд дуудахгүйгээр Javascript-т эвентийн дохио өгч чаддаг. `RCTEventEmitter` дэд класс хийн, `supportedEvents`-ыг ажиллуулан `self sendEventWithName`-ыг дуудах нь хамгийн зүйтэй арга нь юм:
 
 ```objectivec
 // CalendarManager.h
@@ -398,7 +401,7 @@ RCT_EXPORT_MODULE();
 @end
 ```
 
-JavaScript code can subscribe to these events by creating a new `NativeEventEmitter` instance around your module.
+JavaScript код нь шинэ `NativeEventEmitter` үүсгэн эдгээр эвентийн талаар мэдээллийг хүлээн авч чадна. 
 
 ```javascript
 import { NativeEventEmitter, NativeModules } from 'react-native';
@@ -415,11 +418,11 @@ const subscription = calendarManagerEmitter.addListener(
 subscription.remove();
 ```
 
-For more examples of sending events to JavaScript, see [`RCTLocationObserver`](https://github.com/facebook/react-native/blob/master/Libraries/Geolocation/RCTLocationObserver.m).
+ JavaScript руу эвент илгээх нэмэлт жишээ харахыг хүсвэл [`RCTLocationObserver`](https://github.com/facebook/react-native/blob/master/Libraries/Geolocation/RCTLocationObserver.m) гэснийг уншина уу.
 
 ### Optimizing for zero listeners
 
-You will receive a warning if you expend resources unnecessarily by emitting an event while there are no listeners. To avoid this, and to optimize your module's workload (e.g. by unsubscribing from upstream notifications or pausing background tasks), you can override `startObserving` and `stopObserving` in your `RCTEventEmitter` subclass.
+Хэрэв эвентийн мэдээллийг хүлээн авах юу ч байхгүй байхад ямар ч шаардлагагүй эвент үүсгэн өргөтгөх юм бол та анхааруулга хүлээн авна. Үүнээс зайлсхийхийн тулд модулийнхаа ажлын ачааллыг оновчтой тодорхойлж өгөх хэрэгтэй (жишээ нь upstream-ын мэдээллийг хүлээн авахаа болиулах эсвэл арын даалгаврыг түр зогсоох). Та  `RCTEventEmitter` дэд класс дотроо `startObserving`, `stopObserving`-ыг дарж тодорхойлж болно.  
 
 ```objectivec
 @implementation CalendarManager
@@ -448,11 +451,11 @@ You will receive a warning if you expend resources unnecessarily by emitting an 
 }
 ```
 
-## Exporting Swift
+## Swift экспорт хийх
 
-Swift doesn't have support for macros so exposing it to React Native requires a bit more setup but works relatively the same.
+Swift нь макро дэмждэггүй учир React Native-тай ашиглахын тулд бага зэрэг тохиргоо хийх шаардлагатай. Ажиллахын хувьд бол бараг ялгаагүй. 
 
-Let's say we have the same `CalendarManager` but as a Swift class:
+Бидэн адилхан `CalendarManager` Swift классаар байлаа гэж бодъё:
 
 ```swift
 // CalendarManager.swift
@@ -473,9 +476,9 @@ class CalendarManager: NSObject {
 }
 ```
 
-> **NOTE**: It is important to use the @objc modifiers to ensure the class and functions are exported properly to the Objective-C runtime.
+> **ТЭМДЭГЛЭЛ**:  Objective-C ажиллах эхлэх үед класс, функцууд зөв экспортлогдсон эсэхийг шалгах зорилгоор @objc modifiers ашиглах нь чухал. 
 
-Then create a private implementation file that will register the required information with the React Native bridge:
+Тэгээд ажиллуулах хувийн файл үүсгэнэ. Энэ нь шаардлагатай мэдээллийг React Native bridge-т өгөх юм:
 
 ```objectivec
 // CalendarManagerBridge.m
@@ -488,13 +491,18 @@ RCT_EXTERN_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(
 @end
 ```
 
-For those of you new to Swift and Objective-C, whenever you [mix the two languages in an iOS project](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html), you will also need an additional bridging file, known as a bridging header, to expose the Objective-C files to Swift. Xcode will offer to create this header file for you if you add your Swift file to your app through the Xcode `File>New File` menu option. You will need to import `RCTBridgeModule.h` in this header file.
+Swift, Objective-C-т анхлан суралцаж байгаа хүмүүст хэлэхэд, [iOS төсөлд хоёр хэл хольж хэрэглэх бол](https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/BuildingCocoaApps/MixandMatch.html), Objective-C файлуудыг Swift-д өгөхийн тулд танд нэмэлт холбох файл буюу bridging header хэрэгтэй. 
+
+Та `File>New File`  цэсийг ашиглан Xcode-ооор аппдаа Swift файл нэмэх бол Xcode нь энэхүү header file-ыг үүсгэхэд тусална. 
 
 ```objectivec
 // CalendarManager-Bridging-Header.h
 #import <React/RCTBridgeModule.h>
 ```
 
-You can also use `RCT_EXTERN_REMAP_MODULE` and `_RCT_EXTERN_REMAP_METHOD` to alter the JavaScript name of the module or methods you are exporting. For more information see [`RCTBridgeModule`](https://github.com/facebook/react-native/blob/master/React/Base/RCTBridgeModule.h).
+Та мөн модулийнхаа Javascript нэрийг өөрчлөх эсвэл экспорт хийж буй методуудынхаа нэрийг өөрчлөхийг хүсвэл  `RCT_EXTERN_REMAP_MODULE`,  `_RCT_EXTERN_REMAP_METHOD` ашиглаж болно.
+Нэмэлт мэдээллийг [`RCTBridgeModule`](https://github.com/facebook/react-native/blob/master/React/Base/RCTBridgeModule.h) дээрээс харна уу.
 
-> **Important when making third party modules**: Static libraries with Swift are only supported in Xcode 9 and later. In order for the Xcode project to build when you use Swift in the iOS static library you include in the module, your main app project must contain Swift code and a bridging header itself. If your app project does not contain any Swift code, a workaround can be a single empty .swift file and an empty bridging header.
+> **Гуравдагч талын модуль үүсгэх үед анхаарах зүйлс**: 
+Swift кодтой статик сангуудыг Xcode 9 болон шинэ хувилбарууд нь дэмждэг. iOS статик санг модульд оруулан Swift ашиглах үед Xcode төсөл хийхдээ таны гол апп төсөл чинь Swift код, bridging header-ыг агуулсан байх учиртай. Хэрэв апп хийх төсөлд чинь Swift код байхгүй бол нэг арга нь дан хоосон .swift файл болон хоосон bridging header үүсгэх юм. 
+
